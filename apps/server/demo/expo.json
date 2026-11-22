@@ -1,0 +1,1307 @@
+{
+    "schemaVersion": 1,
+    "id": "8e0f4f7a-0037-4da8-aab2-8f17e9d63e51",
+    "name": "Expo Hall A",
+    "kind": "exhibition",
+    "units": "m",
+    "grid": {
+        "step": 1,
+        "snap": true
+    },
+    "levels": [
+        {
+            "id": "level-1",
+            "name": "Level 1",
+            "ordinal": 0,
+            "elevation": 0,
+            "height": 6,
+            "outline": {
+                "outer": [
+                    [0, 0],
+                    [60, 0],
+                    [60, 36],
+                    [0, 36]
+                ]
+            },
+            "wallNodes": [
+                {
+                    "id": "87d921cf-1977-44a6-b15b-7c1d9cca8b83",
+                    "position": [0, 0]
+                },
+                {
+                    "id": "00c3577c-6406-4df4-bcdc-3995d1f8407e",
+                    "position": [60, 0]
+                },
+                {
+                    "id": "3d76e4fc-88a9-431a-bbdd-690e611b5cc3",
+                    "position": [60, 36]
+                },
+                {
+                    "id": "c1a922d5-1f67-42f5-ada0-74bf4afcd650",
+                    "position": [0, 36]
+                },
+                {
+                    "id": "3049661b-9472-4d6e-bef3-a775599ca617",
+                    "position": [0, 28]
+                },
+                {
+                    "id": "aae75c41-4620-448a-bd8c-e08b745b7f41",
+                    "position": [12, 28]
+                },
+                {
+                    "id": "029dc1a1-41da-45ab-8f3c-39cb4aea0b33",
+                    "position": [12, 36]
+                }
+            ],
+            "walls": [
+                {
+                    "id": "ext-0",
+                    "a": "87d921cf-1977-44a6-b15b-7c1d9cca8b83",
+                    "b": "00c3577c-6406-4df4-bcdc-3995d1f8407e",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "ext-1",
+                    "a": "00c3577c-6406-4df4-bcdc-3995d1f8407e",
+                    "b": "3d76e4fc-88a9-431a-bbdd-690e611b5cc3",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "ext-2",
+                    "a": "3d76e4fc-88a9-431a-bbdd-690e611b5cc3",
+                    "b": "029dc1a1-41da-45ab-8f3c-39cb4aea0b33",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "c8b750b5-24c1-4795-9966-167639464f1f",
+                    "a": "029dc1a1-41da-45ab-8f3c-39cb4aea0b33",
+                    "b": "c1a922d5-1f67-42f5-ada0-74bf4afcd650",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "ext-3",
+                    "a": "c1a922d5-1f67-42f5-ada0-74bf4afcd650",
+                    "b": "3049661b-9472-4d6e-bef3-a775599ca617",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "89ef002d-30de-40fa-8060-ea7908bf670a",
+                    "a": "3049661b-9472-4d6e-bef3-a775599ca617",
+                    "b": "87d921cf-1977-44a6-b15b-7c1d9cca8b83",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "room-s",
+                    "a": "3049661b-9472-4d6e-bef3-a775599ca617",
+                    "b": "aae75c41-4620-448a-bd8c-e08b745b7f41",
+                    "thickness": 0.15
+                },
+                {
+                    "id": "room-e",
+                    "a": "aae75c41-4620-448a-bd8c-e08b745b7f41",
+                    "b": "029dc1a1-41da-45ab-8f3c-39cb4aea0b33",
+                    "thickness": 0.15
+                }
+            ],
+            "openings": [
+                {
+                    "id": "entrance-1",
+                    "kind": "entrance",
+                    "width": 4,
+                    "host": "wall",
+                    "wallId": "ext-0",
+                    "offset": 15
+                },
+                {
+                    "id": "entrance-2",
+                    "kind": "entrance",
+                    "width": 4,
+                    "host": "wall",
+                    "wallId": "ext-0",
+                    "offset": 45
+                },
+                {
+                    "id": "room-door",
+                    "kind": "door",
+                    "width": 1,
+                    "host": "wall",
+                    "wallId": "room-s",
+                    "offset": 9
+                }
+            ],
+            "zones": [
+                {
+                    "id": "meeting",
+                    "shape": {
+                        "outer": [
+                            [0, 28],
+                            [12, 28],
+                            [12, 36],
+                            [0, 36]
+                        ]
+                    },
+                    "label": "Meeting room",
+                    "category": "room",
+                    "labels": {
+                        "pl": "Sala konferencyjna",
+                        "uk": "Переговорна",
+                        "ru": "Переговорная"
+                    }
+                },
+                {
+                    "id": "A-1",
+                    "shape": {
+                        "outer": [
+                            [6, 6],
+                            [9, 6],
+                            [9, 9],
+                            [6, 9]
+                        ]
+                    },
+                    "label": "A-1",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "available"
+                    }
+                },
+                {
+                    "id": "A-2",
+                    "shape": {
+                        "outer": [
+                            [9, 6],
+                            [12, 6],
+                            [12, 9],
+                            [9, 9]
+                        ]
+                    },
+                    "label": "A-2",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "A-3",
+                    "shape": {
+                        "outer": [
+                            [12, 6],
+                            [15, 6],
+                            [15, 9],
+                            [12, 9]
+                        ]
+                    },
+                    "label": "A-3",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "reserved"
+                    }
+                },
+                {
+                    "id": "A-4",
+                    "shape": {
+                        "outer": [
+                            [15, 6],
+                            [18, 6],
+                            [18, 9],
+                            [15, 9]
+                        ]
+                    },
+                    "label": "A-4",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "A-5",
+                    "shape": {
+                        "outer": [
+                            [18, 6],
+                            [21, 6],
+                            [21, 9],
+                            [18, 9]
+                        ]
+                    },
+                    "label": "A-5",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "available"
+                    }
+                },
+                {
+                    "id": "A-6",
+                    "shape": {
+                        "outer": [
+                            [21, 6],
+                            [24, 6],
+                            [24, 9],
+                            [21, 9]
+                        ]
+                    },
+                    "label": "A-6",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "A-7",
+                    "shape": {
+                        "outer": [
+                            [24, 6],
+                            [27, 6],
+                            [27, 9],
+                            [24, 9]
+                        ]
+                    },
+                    "label": "A-7",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "available"
+                    }
+                },
+                {
+                    "id": "A-8",
+                    "shape": {
+                        "outer": [
+                            [27, 6],
+                            [30, 6],
+                            [30, 9],
+                            [27, 9]
+                        ]
+                    },
+                    "label": "A-8",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "A-9",
+                    "shape": {
+                        "outer": [
+                            [30, 6],
+                            [33, 6],
+                            [33, 9],
+                            [30, 9]
+                        ]
+                    },
+                    "label": "A-9",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "reserved"
+                    }
+                },
+                {
+                    "id": "A-10",
+                    "shape": {
+                        "outer": [
+                            [33, 6],
+                            [36, 6],
+                            [36, 9],
+                            [33, 9]
+                        ]
+                    },
+                    "label": "A-10",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "B-1",
+                    "shape": {
+                        "outer": [
+                            [6, 9],
+                            [9, 9],
+                            [9, 12],
+                            [6, 12]
+                        ]
+                    },
+                    "label": "B-1",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "available"
+                    }
+                },
+                {
+                    "id": "B-2",
+                    "shape": {
+                        "outer": [
+                            [9, 9],
+                            [12, 9],
+                            [12, 12],
+                            [9, 12]
+                        ]
+                    },
+                    "label": "B-2",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "B-3",
+                    "shape": {
+                        "outer": [
+                            [12, 9],
+                            [15, 9],
+                            [15, 12],
+                            [12, 12]
+                        ]
+                    },
+                    "label": "B-3",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "available"
+                    }
+                },
+                {
+                    "id": "B-4",
+                    "shape": {
+                        "outer": [
+                            [15, 9],
+                            [18, 9],
+                            [18, 12],
+                            [15, 12]
+                        ]
+                    },
+                    "label": "B-4",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "B-5",
+                    "shape": {
+                        "outer": [
+                            [18, 9],
+                            [21, 9],
+                            [21, 12],
+                            [18, 12]
+                        ]
+                    },
+                    "label": "B-5",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "reserved"
+                    }
+                },
+                {
+                    "id": "B-6",
+                    "shape": {
+                        "outer": [
+                            [21, 9],
+                            [24, 9],
+                            [24, 12],
+                            [21, 12]
+                        ]
+                    },
+                    "label": "B-6",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "B-7",
+                    "shape": {
+                        "outer": [
+                            [24, 9],
+                            [27, 9],
+                            [27, 12],
+                            [24, 12]
+                        ]
+                    },
+                    "label": "B-7",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "available"
+                    }
+                },
+                {
+                    "id": "B-8",
+                    "shape": {
+                        "outer": [
+                            [27, 9],
+                            [30, 9],
+                            [30, 12],
+                            [27, 12]
+                        ]
+                    },
+                    "label": "B-8",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "B-9",
+                    "shape": {
+                        "outer": [
+                            [30, 9],
+                            [33, 9],
+                            [33, 12],
+                            [30, 12]
+                        ]
+                    },
+                    "label": "B-9",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "available"
+                    }
+                },
+                {
+                    "id": "B-10",
+                    "shape": {
+                        "outer": [
+                            [33, 9],
+                            [36, 9],
+                            [36, 12],
+                            [33, 12]
+                        ]
+                    },
+                    "label": "B-10",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "C-1",
+                    "shape": {
+                        "outer": [
+                            [6, 18],
+                            [9, 18],
+                            [9, 21],
+                            [6, 21]
+                        ]
+                    },
+                    "label": "C-1",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "reserved"
+                    }
+                },
+                {
+                    "id": "C-2",
+                    "shape": {
+                        "outer": [
+                            [9, 18],
+                            [12, 18],
+                            [12, 21],
+                            [9, 21]
+                        ]
+                    },
+                    "label": "C-2",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "C-3",
+                    "shape": {
+                        "outer": [
+                            [12, 18],
+                            [15, 18],
+                            [15, 21],
+                            [12, 21]
+                        ]
+                    },
+                    "label": "C-3",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "available"
+                    }
+                },
+                {
+                    "id": "C-4",
+                    "shape": {
+                        "outer": [
+                            [15, 18],
+                            [18, 18],
+                            [18, 21],
+                            [15, 21]
+                        ]
+                    },
+                    "label": "C-4",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "C-5",
+                    "shape": {
+                        "outer": [
+                            [18, 18],
+                            [21, 18],
+                            [21, 21],
+                            [18, 21]
+                        ]
+                    },
+                    "label": "C-5",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "available"
+                    }
+                },
+                {
+                    "id": "C-6",
+                    "shape": {
+                        "outer": [
+                            [21, 18],
+                            [24, 18],
+                            [24, 21],
+                            [21, 21]
+                        ]
+                    },
+                    "label": "C-6",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "C-7",
+                    "shape": {
+                        "outer": [
+                            [24, 18],
+                            [27, 18],
+                            [27, 21],
+                            [24, 21]
+                        ]
+                    },
+                    "label": "C-7",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "reserved"
+                    }
+                },
+                {
+                    "id": "C-8",
+                    "shape": {
+                        "outer": [
+                            [27, 18],
+                            [30, 18],
+                            [30, 21],
+                            [27, 21]
+                        ]
+                    },
+                    "label": "C-8",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "C-9",
+                    "shape": {
+                        "outer": [
+                            [30, 18],
+                            [33, 18],
+                            [33, 21],
+                            [30, 21]
+                        ]
+                    },
+                    "label": "C-9",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "available"
+                    }
+                },
+                {
+                    "id": "C-10",
+                    "shape": {
+                        "outer": [
+                            [33, 18],
+                            [36, 18],
+                            [36, 21],
+                            [33, 21]
+                        ]
+                    },
+                    "label": "C-10",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "D-1",
+                    "shape": {
+                        "outer": [
+                            [6, 21],
+                            [9, 21],
+                            [9, 24],
+                            [6, 24]
+                        ]
+                    },
+                    "label": "D-1",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "available"
+                    }
+                },
+                {
+                    "id": "D-2",
+                    "shape": {
+                        "outer": [
+                            [9, 21],
+                            [12, 21],
+                            [12, 24],
+                            [9, 24]
+                        ]
+                    },
+                    "label": "D-2",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "D-3",
+                    "shape": {
+                        "outer": [
+                            [12, 21],
+                            [15, 21],
+                            [15, 24],
+                            [12, 24]
+                        ]
+                    },
+                    "label": "D-3",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "reserved"
+                    }
+                },
+                {
+                    "id": "D-4",
+                    "shape": {
+                        "outer": [
+                            [15, 21],
+                            [18, 21],
+                            [18, 24],
+                            [15, 24]
+                        ]
+                    },
+                    "label": "D-4",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "D-5",
+                    "shape": {
+                        "outer": [
+                            [18, 21],
+                            [21, 21],
+                            [21, 24],
+                            [18, 24]
+                        ]
+                    },
+                    "label": "D-5",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "available"
+                    }
+                },
+                {
+                    "id": "D-6",
+                    "shape": {
+                        "outer": [
+                            [21, 21],
+                            [24, 21],
+                            [24, 24],
+                            [21, 24]
+                        ]
+                    },
+                    "label": "D-6",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "D-7",
+                    "shape": {
+                        "outer": [
+                            [24, 21],
+                            [27, 21],
+                            [27, 24],
+                            [24, 24]
+                        ]
+                    },
+                    "label": "D-7",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "available"
+                    }
+                },
+                {
+                    "id": "D-8",
+                    "shape": {
+                        "outer": [
+                            [27, 21],
+                            [30, 21],
+                            [30, 24],
+                            [27, 24]
+                        ]
+                    },
+                    "label": "D-8",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "D-9",
+                    "shape": {
+                        "outer": [
+                            [30, 21],
+                            [33, 21],
+                            [33, 24],
+                            [30, 24]
+                        ]
+                    },
+                    "label": "D-9",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "reserved"
+                    }
+                },
+                {
+                    "id": "D-10",
+                    "shape": {
+                        "outer": [
+                            [33, 21],
+                            [36, 21],
+                            [36, 24],
+                            [33, 24]
+                        ]
+                    },
+                    "label": "D-10",
+                    "category": "booth",
+                    "walkAround": true,
+                    "data": {
+                        "status": "sold"
+                    }
+                },
+                {
+                    "id": "fire-lane",
+                    "shape": {
+                        "outer": [
+                            [0, 13.5],
+                            [60, 13.5],
+                            [60, 15.5],
+                            [0, 15.5]
+                        ]
+                    },
+                    "label": "Fire lane",
+                    "category": "aisle",
+                    "restricted": true,
+                    "labels": {
+                        "pl": "Droga pożarowa",
+                        "uk": "Пожежний проїзд",
+                        "ru": "Пожарный проезд"
+                    }
+                },
+                {
+                    "id": "cafe",
+                    "shape": {
+                        "outer": [
+                            [46, 26],
+                            [56, 26],
+                            [56, 33],
+                            [46, 33]
+                        ]
+                    },
+                    "label": "Café",
+                    "category": "cafe",
+                    "style": {
+                        "fill": "#f3d9c4",
+                        "stroke": "#b9845a"
+                    },
+                    "labels": {
+                        "pl": "Kawiarnia",
+                        "uk": "Кав’ярня",
+                        "ru": "Кафе"
+                    }
+                },
+                {
+                    "id": "sponsor",
+                    "shape": {
+                        "outer": [
+                            [40, 3],
+                            [48, 3],
+                            [48, 9],
+                            [40, 9]
+                        ]
+                    },
+                    "label": "Sponsor",
+                    "category": "sponsor",
+                    "labels": {
+                        "pl": "Sponsor",
+                        "uk": "Спонсор",
+                        "ru": "Спонсор"
+                    }
+                },
+                {
+                    "id": "partner",
+                    "shape": {
+                        "outer": [
+                            [50, 3],
+                            [58, 3],
+                            [58, 9],
+                            [50, 9]
+                        ]
+                    },
+                    "label": "Partner",
+                    "category": "sponsor",
+                    "labels": {
+                        "pl": "Partner",
+                        "uk": "Партнер",
+                        "ru": "Партнёр"
+                    }
+                }
+            ],
+            "obstacles": [
+                {
+                    "id": "col-0",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [15, 12.4],
+                            [15.6, 12.4],
+                            [15.6, 13],
+                            [15, 13]
+                        ]
+                    }
+                },
+                {
+                    "id": "col-1",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [30, 12.4],
+                            [30.6, 12.4],
+                            [30.6, 13],
+                            [30, 13]
+                        ]
+                    }
+                },
+                {
+                    "id": "col-2",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [45, 12.4],
+                            [45.6, 12.4],
+                            [45.6, 13],
+                            [45, 13]
+                        ]
+                    }
+                },
+                {
+                    "id": "col-3",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [15, 25],
+                            [15.6, 25],
+                            [15.6, 25.6],
+                            [15, 25.6]
+                        ]
+                    }
+                },
+                {
+                    "id": "col-4",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [30, 25],
+                            [30.6, 25],
+                            [30.6, 25.6],
+                            [30, 25.6]
+                        ]
+                    }
+                },
+                {
+                    "id": "col-5",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [45, 25],
+                            [45.6, 25],
+                            [45.6, 25.6],
+                            [45, 25.6]
+                        ]
+                    }
+                }
+            ],
+            "underlays": [],
+            "names": {
+                "pl": "Poziom 1",
+                "uk": "Рівень 1",
+                "ru": "Уровень 1"
+            }
+        },
+        {
+            "id": "gallery",
+            "name": "Gallery",
+            "ordinal": 1,
+            "elevation": 6,
+            "height": 4,
+            "outline": {
+                "outer": [
+                    [0, 18],
+                    [60, 18],
+                    [60, 36],
+                    [0, 36]
+                ]
+            },
+            "wallNodes": [],
+            "walls": [],
+            "openings": [],
+            "zones": [
+                {
+                    "id": "lounge",
+                    "shape": {
+                        "outer": [
+                            [4, 24],
+                            [24, 24],
+                            [24, 34],
+                            [4, 34]
+                        ]
+                    },
+                    "label": "VIP lounge",
+                    "category": "lounge"
+                }
+            ],
+            "obstacles": [],
+            "underlays": [],
+            "names": {
+                "pl": "Galeria",
+                "uk": "Галерея",
+                "ru": "Галерея"
+            }
+        },
+        {
+            "id": "services",
+            "name": "Services",
+            "ordinal": -1,
+            "elevation": -4,
+            "height": 4,
+            "outline": {
+                "outer": [
+                    [0, 0],
+                    [60, 0],
+                    [60, 36],
+                    [0, 36]
+                ]
+            },
+            "wallNodes": [],
+            "walls": [],
+            "openings": [],
+            "zones": [
+                {
+                    "id": "services-wc",
+                    "shape": {
+                        "outer": [
+                            [4, 26],
+                            [14, 26],
+                            [14, 34],
+                            [4, 34]
+                        ]
+                    },
+                    "label": "WC",
+                    "category": "wc"
+                },
+                {
+                    "id": "services-cafe",
+                    "shape": {
+                        "outer": [
+                            [17, 26],
+                            [27, 26],
+                            [27, 34],
+                            [17, 34]
+                        ]
+                    },
+                    "label": "Café",
+                    "category": "cafe"
+                },
+                {
+                    "id": "services-kitchen",
+                    "shape": {
+                        "outer": [
+                            [30, 26],
+                            [40, 26],
+                            [40, 34],
+                            [30, 34]
+                        ]
+                    },
+                    "label": "Kitchen",
+                    "category": "kitchen"
+                },
+                {
+                    "id": "services-stage",
+                    "shape": {
+                        "outer": [
+                            [43, 26],
+                            [53, 26],
+                            [53, 34],
+                            [43, 34]
+                        ]
+                    },
+                    "label": "Stage",
+                    "category": "stage"
+                },
+                {
+                    "id": "services-info",
+                    "shape": {
+                        "outer": [
+                            [4, 15],
+                            [14, 15],
+                            [14, 23],
+                            [4, 23]
+                        ]
+                    },
+                    "label": "Info",
+                    "category": "info"
+                },
+                {
+                    "id": "services-registration",
+                    "shape": {
+                        "outer": [
+                            [17, 15],
+                            [27, 15],
+                            [27, 23],
+                            [17, 23]
+                        ]
+                    },
+                    "label": "Registration",
+                    "category": "registration"
+                },
+                {
+                    "id": "services-first-aid",
+                    "shape": {
+                        "outer": [
+                            [30, 15],
+                            [40, 15],
+                            [40, 23],
+                            [30, 23]
+                        ]
+                    },
+                    "label": "First aid",
+                    "category": "first-aid"
+                },
+                {
+                    "id": "services-lounge",
+                    "shape": {
+                        "outer": [
+                            [43, 15],
+                            [53, 15],
+                            [53, 23],
+                            [43, 23]
+                        ]
+                    },
+                    "label": "Lounge",
+                    "category": "lounge"
+                },
+                {
+                    "id": "services-meeting-room",
+                    "shape": {
+                        "outer": [
+                            [4, 4],
+                            [14, 4],
+                            [14, 12],
+                            [4, 12]
+                        ]
+                    },
+                    "label": "Meeting room",
+                    "category": "meeting-room"
+                },
+                {
+                    "id": "services-checkout",
+                    "shape": {
+                        "outer": [
+                            [17, 4],
+                            [27, 4],
+                            [27, 12],
+                            [17, 12]
+                        ]
+                    },
+                    "label": "Checkout",
+                    "category": "checkout"
+                },
+                {
+                    "id": "services-fitting-room",
+                    "shape": {
+                        "outer": [
+                            [30, 4],
+                            [40, 4],
+                            [40, 12],
+                            [30, 12]
+                        ]
+                    },
+                    "label": "Fitting room",
+                    "category": "fitting-room"
+                },
+                {
+                    "id": "services-loading-dock",
+                    "shape": {
+                        "outer": [
+                            [43, 4],
+                            [53, 4],
+                            [53, 12],
+                            [43, 12]
+                        ]
+                    },
+                    "label": "Loading dock",
+                    "category": "loading-dock"
+                }
+            ],
+            "obstacles": [],
+            "underlays": [],
+            "names": {
+                "pl": "Usługi",
+                "uk": "Сервіси",
+                "ru": "Сервисы"
+            }
+        }
+    ],
+    "connections": [
+        {
+            "id": "lift",
+            "kind": "elevator",
+            "name": "Lift",
+            "stops": [
+                {
+                    "levelId": "services",
+                    "shape": {
+                        "outer": [
+                            [56.5, 30],
+                            [58.5, 30],
+                            [58.5, 32],
+                            [56.5, 32]
+                        ]
+                    }
+                },
+                {
+                    "levelId": "level-1",
+                    "shape": {
+                        "outer": [
+                            [56.5, 30],
+                            [58.5, 30],
+                            [58.5, 32],
+                            [56.5, 32]
+                        ]
+                    }
+                },
+                {
+                    "levelId": "gallery",
+                    "shape": {
+                        "outer": [
+                            [56.5, 30],
+                            [58.5, 30],
+                            [58.5, 32],
+                            [56.5, 32]
+                        ]
+                    }
+                }
+            ],
+            "bidirectional": true,
+            "accessible": true,
+            "names": {
+                "pl": "Winda",
+                "uk": "Ліфт",
+                "ru": "Лифт"
+            }
+        },
+        {
+            "id": "stairs",
+            "kind": "stairs",
+            "name": "Main stairs",
+            "stops": [
+                {
+                    "levelId": "level-1",
+                    "shape": {
+                        "outer": [
+                            [40, 16],
+                            [44, 16],
+                            [44, 19],
+                            [40, 19]
+                        ]
+                    }
+                },
+                {
+                    "levelId": "gallery",
+                    "shape": {
+                        "outer": [
+                            [40, 18],
+                            [44, 18],
+                            [44, 21],
+                            [40, 21]
+                        ]
+                    }
+                }
+            ],
+            "bidirectional": true,
+            "names": {
+                "pl": "Schody główne",
+                "uk": "Головні сходи",
+                "ru": "Главная лестница"
+            }
+        }
+    ],
+    "languages": {
+        "default": "en",
+        "others": ["pl", "uk", "ru"]
+    },
+    "names": {
+        "pl": "Hala Expo A",
+        "uk": "Виставкова зала A",
+        "ru": "Выставочный зал A"
+    }
+}

@@ -1,0 +1,52 @@
+{
+    "name": "@areaform/wayfinding",
+    "version": "0.0.0",
+    "private": true,
+    "license": "MIT",
+    "homepage": "https://github.com/areaform/areaform/tree/main/packages/wayfinding#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/areaform/areaform.git",
+        "directory": "packages/wayfinding"
+    },
+    "bugs": {
+        "url": "https://github.com/areaform/areaform/issues"
+    },
+    "type": "module",
+    "exports": {
+        ".": "./src/index.ts",
+        "./place": "./src/place.ts"
+    },
+    "files": [
+        "dist",
+        "LICENSE",
+        "THIRD-PARTY-NOTICES"
+    ],
+    "publishConfig": {
+        "exports": {
+            ".": {
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.js"
+            },
+            "./place": {
+                "types": "./dist/place.d.ts",
+                "default": "./dist/place.js"
+            }
+        }
+    },
+    "scripts": {
+        "test": "vitest run",
+        "typecheck": "tsc -p tsconfig.json",
+        "build": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\" && tsc -p tsconfig.build.json",
+        "bench": "node bench/run.ts"
+    },
+    "dependencies": {
+        "@areaform/core": "workspace:*",
+        "@countertype/clipper2-ts": "1.5.4",
+        "@kninnug/constrainautor": "4.1.0",
+        "delaunator": "5.1.0"
+    },
+    "devDependencies": {
+        "vitest": "^5.0.5"
+    }
+}

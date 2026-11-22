@@ -1,0 +1,15 @@
+name: Idea
+description: A feature or a change to the engine
+labels: [idea]
+body:
+    - type: textarea
+      id: problem
+      attributes:
+          label: What you are trying to do
+          description: The place, the people who use it, and what is in the way today.
+      validations:
+          required: true
+    - type: textarea
+      id: proposal
+      attributes:
+          label: What would help

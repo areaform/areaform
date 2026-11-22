@@ -1,0 +1,4555 @@
+{
+    "schemaVersion": 1,
+    "id": "1617a243-95b6-4747-a55b-4bd015707913",
+    "name": "Areaform Office",
+    "kind": "office",
+    "units": "m",
+    "grid": {
+        "step": 0.5,
+        "snap": true
+    },
+    "levels": [
+        {
+            "id": "4bd6d522-01fb-4885-a90a-1fc47b5cf9cf",
+            "name": "Ground floor",
+            "ordinal": 0,
+            "elevation": 0,
+            "height": 3,
+            "outline": {
+                "outer": [
+                    [0, 0],
+                    [20, 0],
+                    [28.37, 21.63],
+                    [51.98, 21.63],
+                    [60.47, 0],
+                    [80.47, 0],
+                    [64.89, 38.61],
+                    [51.4, 71.98],
+                    [29.07, 71.98],
+                    [15.58, 38.61]
+                ]
+            },
+            "wallNodes": [
+                {
+                    "id": "b65698e2-c335-4c8d-a5c7-d3501179a985",
+                    "position": [0, 0]
+                },
+                {
+                    "id": "76bd07f0-84e6-496d-85be-ae553aa9ad15",
+                    "position": [20, 0]
+                },
+                {
+                    "id": "0b5c2c71-b2d9-4599-baa0-a8ade2fcee95",
+                    "position": [28.37, 21.63]
+                },
+                {
+                    "id": "cd9be817-09e5-4263-a251-dee435abcea3",
+                    "position": [51.98, 21.63]
+                },
+                {
+                    "id": "d42672ae-0cd1-4b18-aaa2-d0dea47a05df",
+                    "position": [60.47, 0]
+                },
+                {
+                    "id": "a93b204c-45df-43c0-ac70-b1937ffc8b8d",
+                    "position": [80.47, 0]
+                },
+                {
+                    "id": "674b0fac-7c48-45d0-8c37-95691c7f9c3a",
+                    "position": [64.89, 38.61]
+                },
+                {
+                    "id": "58ccae63-c77f-41b5-be84-7a38728f713c",
+                    "position": [51.4, 71.98]
+                },
+                {
+                    "id": "7979e9de-e6f4-444f-ae93-120b1bd0e40f",
+                    "position": [40.12, 71.98]
+                },
+                {
+                    "id": "f5e32d16-86f5-406b-a154-2d91767eda52",
+                    "position": [29.07, 71.98]
+                },
+                {
+                    "id": "76a29b50-46c3-477e-835a-c48cfc65c369",
+                    "position": [15.58, 38.61]
+                },
+                {
+                    "id": "8eeed7dd-5fba-4f4a-ae79-8660f60e04f9",
+                    "position": [35.24, 38.61]
+                },
+                {
+                    "id": "55a290da-e64c-4db6-b580-fd2d0b63274b",
+                    "position": [45.12, 38.61]
+                },
+                {
+                    "id": "8ec26902-d3b8-4545-b192-b445d17d86a0",
+                    "position": [40.12, 50.47]
+                },
+                {
+                    "id": "c547108b-fc12-4a2d-8439-2729866ef9ea",
+                    "position": [22.58, 38.61]
+                },
+                {
+                    "id": "e115cd69-8374-4a28-b7b0-7b5616dfea80",
+                    "position": [25.971702127659576, 47]
+                },
+                {
+                    "id": "c3c08c71-908f-47a8-9aae-570719cae14c",
+                    "position": [29.205744680851062, 55]
+                },
+                {
+                    "id": "d918263e-fd5a-4262-a91e-afa9fcf68f0f",
+                    "position": [32.439787234042555, 63]
+                },
+                {
+                    "id": "48acb2c0-4974-4b5e-8342-edbb01b709bf",
+                    "position": [36.07, 71.98]
+                },
+                {
+                    "id": "19ee9acc-9fa4-472e-be51-7c54889381ae",
+                    "position": [18.971702127659576, 47]
+                },
+                {
+                    "id": "afea8ea5-3c4c-40d7-8317-30cfb433f5d8",
+                    "position": [22.205744680851062, 55]
+                },
+                {
+                    "id": "4f4a2d65-5acd-492b-8c89-7f03c2374050",
+                    "position": [25.43978723404255, 63]
+                },
+                {
+                    "id": "231fa9a5-ba05-4d49-9a72-a6e61bad131e",
+                    "position": [57.89, 38.61]
+                },
+                {
+                    "id": "9473a52c-e9ef-472d-9b3d-e10b90b2d699",
+                    "position": [54.90255319148936, 46]
+                },
+                {
+                    "id": "081b8831-b8e2-4568-b152-7f1f65bdddf3",
+                    "position": [52.072765957446805, 53]
+                },
+                {
+                    "id": "eb5b0ca8-71ba-4540-8b88-5c38f7eaa546",
+                    "position": [48.232340425531916, 62.5]
+                },
+                {
+                    "id": "64916c13-fba0-41bd-8f17-73daf6e6afa2",
+                    "position": [44.4, 71.98]
+                },
+                {
+                    "id": "3980f746-5313-4ca2-b2bd-32caa6e0145b",
+                    "position": [61.90255319148936, 46]
+                },
+                {
+                    "id": "b661380c-fe38-4435-bbdc-a48fabfae505",
+                    "position": [59.072765957446805, 53]
+                },
+                {
+                    "id": "6cb4fb02-aa74-49d7-ae6c-6bb33f87e3d9",
+                    "position": [55.232340425531916, 62.5]
+                },
+                {
+                    "id": "a7c2c5da-2cc6-4dc8-84d7-5bf7e7012a6a",
+                    "position": [8, 0]
+                },
+                {
+                    "id": "b0754e2f-5c82-4b10-8539-80aa58dc7932",
+                    "position": [11.833462833462834, 9.5]
+                },
+                {
+                    "id": "3c9a709f-7d69-4627-822f-47791207d549",
+                    "position": [15.666925666925668, 19]
+                },
+                {
+                    "id": "868bbd23-22fb-4b72-92fd-e89de9a70412",
+                    "position": [19.2986272986273, 28]
+                },
+                {
+                    "id": "ce544963-4ccb-4938-8fdb-6bb49f3858f7",
+                    "position": [23.580000000000002, 38.61]
+                },
+                {
+                    "id": "77057ec9-afc4-4a5d-b637-47957693620a",
+                    "position": [3.8334628334628333, 9.5]
+                },
+                {
+                    "id": "1910746d-428a-4ebc-b193-217b26737782",
+                    "position": [7.666925666925667, 19]
+                },
+                {
+                    "id": "6c279caa-f431-495e-8e28-3b7fa592f7e6",
+                    "position": [11.298627298627299, 28]
+                },
+                {
+                    "id": "b390c9b4-2539-4ad6-9737-0f6d5561e68b",
+                    "position": [72.47, 0]
+                },
+                {
+                    "id": "8d4b08d5-a216-483b-934b-00c70047b194",
+                    "position": [68.63653716653717, 9.5]
+                },
+                {
+                    "id": "f6c947f4-e659-435d-aa06-bcf13a8cf0fe",
+                    "position": [64.80307433307433, 19]
+                },
+                {
+                    "id": "ffeea966-a466-44ae-832e-533df3602cd6",
+                    "position": [61.171372701372704, 28]
+                },
+                {
+                    "id": "d1aa33f7-76b2-4069-9d1d-775415594c3a",
+                    "position": [56.89, 38.61]
+                },
+                {
+                    "id": "b3b51678-fd4c-4497-8f84-f7bedeb3fb88",
+                    "position": [76.63653716653717, 9.5]
+                },
+                {
+                    "id": "8f76dce7-1aa1-4db3-aca1-1e37319f17b1",
+                    "position": [72.80307433307433, 19]
+                },
+                {
+                    "id": "6c3572e4-8fa3-47c8-b812-5d91eb9f765d",
+                    "position": [69.1713727013727, 28]
+                },
+                {
+                    "id": "a62f0244-a39c-4e80-aad1-10499fc020fc",
+                    "position": [31.190017667844526, 28.6]
+                },
+                {
+                    "id": "a8a72e07-caa6-4809-ac71-4460b73a4615",
+                    "position": [40.17, 28.6]
+                },
+                {
+                    "id": "79f3aa61-3730-48f3-be59-1ddf41f44d6a",
+                    "position": [49.16408716136631, 28.6]
+                },
+                {
+                    "id": "2f281232-f0c9-4f82-a30f-bced9f46f9e8",
+                    "position": [40.17, 21.63]
+                },
+                {
+                    "id": "a635f713-af8a-4b16-9a03-99092ba0d01f",
+                    "position": [32.40379858657244, 31.6]
+                },
+                {
+                    "id": "0a1744d6-de26-4e8d-8f04-cc63b6ab49ac",
+                    "position": [38.7, 31.6]
+                },
+                {
+                    "id": "faf0a434-7dc4-40d5-b965-b3f4562056b8",
+                    "position": [38.7, 38.61]
+                },
+                {
+                    "id": "b3a773a1-8cc4-4b40-81e8-a6fbee5b4375",
+                    "position": [41.7, 31.6]
+                },
+                {
+                    "id": "957b3bc6-af4b-486f-997f-a98dc59b0bc7",
+                    "position": [47.95207302709069, 31.6]
+                },
+                {
+                    "id": "12ed0991-a734-44b5-924b-81f621169097",
+                    "position": [41.7, 38.61]
+                },
+                {
+                    "id": "7642f27c-954e-4806-a1da-c6711eda6877",
+                    "position": [36.6, 63]
+                },
+                {
+                    "id": "121aa0ba-27ad-4946-8da3-fe7c1d18c4f1",
+                    "position": [40.12, 63]
+                },
+                {
+                    "id": "129348da-24f8-4f2a-8d6b-fe14bed7ca41",
+                    "position": [43.64, 63]
+                },
+                {
+                    "id": "2cce5d59-ca77-42ba-a381-8666d96176c0",
+                    "position": [36.6, 68]
+                },
+                {
+                    "id": "14fba49b-6245-495f-8f2c-0bcccb0ee93e",
+                    "position": [36.6, 71.98]
+                },
+                {
+                    "id": "945ee899-0ba2-4fbf-9e8d-9ea66319072a",
+                    "position": [43.64, 68]
+                },
+                {
+                    "id": "39b60295-f243-4f59-a0e4-f28a5595f289",
+                    "position": [43.64, 71.98]
+                },
+                {
+                    "id": "a34de69a-71c8-42f0-a355-01f5ac65e159",
+                    "position": [40.12, 68]
+                }
+            ],
+            "walls": [
+                {
+                    "id": "wall-e1",
+                    "a": "b65698e2-c335-4c8d-a5c7-d3501179a985",
+                    "b": "a7c2c5da-2cc6-4dc8-84d7-5bf7e7012a6a",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "6344d022-4e0f-45fc-8df5-878d497d8d2d",
+                    "a": "a7c2c5da-2cc6-4dc8-84d7-5bf7e7012a6a",
+                    "b": "76bd07f0-84e6-496d-85be-ae553aa9ad15",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-e2",
+                    "a": "76bd07f0-84e6-496d-85be-ae553aa9ad15",
+                    "b": "0b5c2c71-b2d9-4599-baa0-a8ade2fcee95",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-e3",
+                    "a": "0b5c2c71-b2d9-4599-baa0-a8ade2fcee95",
+                    "b": "2f281232-f0c9-4f82-a30f-bced9f46f9e8",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "a0b741ec-a4a0-4e95-99e0-78240a85f121",
+                    "a": "2f281232-f0c9-4f82-a30f-bced9f46f9e8",
+                    "b": "cd9be817-09e5-4263-a251-dee435abcea3",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-e4",
+                    "a": "cd9be817-09e5-4263-a251-dee435abcea3",
+                    "b": "d42672ae-0cd1-4b18-aaa2-d0dea47a05df",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-e5",
+                    "a": "d42672ae-0cd1-4b18-aaa2-d0dea47a05df",
+                    "b": "b390c9b4-2539-4ad6-9737-0f6d5561e68b",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "0f15790a-f9a4-42af-91ae-f547180f2b30",
+                    "a": "b390c9b4-2539-4ad6-9737-0f6d5561e68b",
+                    "b": "a93b204c-45df-43c0-ac70-b1937ffc8b8d",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-e6",
+                    "a": "a93b204c-45df-43c0-ac70-b1937ffc8b8d",
+                    "b": "b3b51678-fd4c-4497-8f84-f7bedeb3fb88",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "c4bcd76a-2bb1-40e9-adfd-264b9459ef21",
+                    "a": "b3b51678-fd4c-4497-8f84-f7bedeb3fb88",
+                    "b": "8f76dce7-1aa1-4db3-aca1-1e37319f17b1",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "8117bfce-6784-498f-a178-e9cb56a219a8",
+                    "a": "8f76dce7-1aa1-4db3-aca1-1e37319f17b1",
+                    "b": "6c3572e4-8fa3-47c8-b812-5d91eb9f765d",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "cd9e8ecb-f5dc-4896-a66b-2131a4807cc6",
+                    "a": "6c3572e4-8fa3-47c8-b812-5d91eb9f765d",
+                    "b": "674b0fac-7c48-45d0-8c37-95691c7f9c3a",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-e7",
+                    "a": "674b0fac-7c48-45d0-8c37-95691c7f9c3a",
+                    "b": "3980f746-5313-4ca2-b2bd-32caa6e0145b",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "7f778a2a-2cd6-4664-97e1-a75dea10a742",
+                    "a": "3980f746-5313-4ca2-b2bd-32caa6e0145b",
+                    "b": "b661380c-fe38-4435-bbdc-a48fabfae505",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "31eb0c1b-5b1d-4123-9718-79ad436e8290",
+                    "a": "b661380c-fe38-4435-bbdc-a48fabfae505",
+                    "b": "6cb4fb02-aa74-49d7-ae6c-6bb33f87e3d9",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "1890734c-f9d3-47e5-8556-97b46bcc81de",
+                    "a": "6cb4fb02-aa74-49d7-ae6c-6bb33f87e3d9",
+                    "b": "58ccae63-c77f-41b5-be84-7a38728f713c",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-e8",
+                    "a": "58ccae63-c77f-41b5-be84-7a38728f713c",
+                    "b": "64916c13-fba0-41bd-8f17-73daf6e6afa2",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "d50a362d-b290-430a-832b-3d3475589e25",
+                    "a": "64916c13-fba0-41bd-8f17-73daf6e6afa2",
+                    "b": "39b60295-f243-4f59-a0e4-f28a5595f289",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "7b78e173-c4d2-418c-b878-dcbb12907e04",
+                    "a": "39b60295-f243-4f59-a0e4-f28a5595f289",
+                    "b": "7979e9de-e6f4-444f-ae93-120b1bd0e40f",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-e9",
+                    "a": "7979e9de-e6f4-444f-ae93-120b1bd0e40f",
+                    "b": "14fba49b-6245-495f-8f2c-0bcccb0ee93e",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "20cceac4-440f-4f17-aa6e-e5f5fab648db",
+                    "a": "14fba49b-6245-495f-8f2c-0bcccb0ee93e",
+                    "b": "48acb2c0-4974-4b5e-8342-edbb01b709bf",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "6cafc9f8-c90e-4eb9-ba19-47d535754e01",
+                    "a": "48acb2c0-4974-4b5e-8342-edbb01b709bf",
+                    "b": "f5e32d16-86f5-406b-a154-2d91767eda52",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-e10",
+                    "a": "f5e32d16-86f5-406b-a154-2d91767eda52",
+                    "b": "4f4a2d65-5acd-492b-8c89-7f03c2374050",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "e5af3bad-73ac-4448-9350-ddb7d13a8f22",
+                    "a": "4f4a2d65-5acd-492b-8c89-7f03c2374050",
+                    "b": "afea8ea5-3c4c-40d7-8317-30cfb433f5d8",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "6e922989-7e44-48f7-a696-075290b9d218",
+                    "a": "afea8ea5-3c4c-40d7-8317-30cfb433f5d8",
+                    "b": "19ee9acc-9fa4-472e-be51-7c54889381ae",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "ad5beaa4-bd9f-48bb-ba3d-b01362447722",
+                    "a": "19ee9acc-9fa4-472e-be51-7c54889381ae",
+                    "b": "76a29b50-46c3-477e-835a-c48cfc65c369",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-e11",
+                    "a": "76a29b50-46c3-477e-835a-c48cfc65c369",
+                    "b": "6c279caa-f431-495e-8e28-3b7fa592f7e6",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "2dbdb4c5-e759-4acc-84c6-4fba3ec9219a",
+                    "a": "6c279caa-f431-495e-8e28-3b7fa592f7e6",
+                    "b": "1910746d-428a-4ebc-b193-217b26737782",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "2ee21ee3-292e-4a5e-8b74-fc4449810bd6",
+                    "a": "1910746d-428a-4ebc-b193-217b26737782",
+                    "b": "77057ec9-afc4-4a5d-b637-47957693620a",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "3bea46bc-5560-47b1-8b0a-1f7bc65fb202",
+                    "a": "77057ec9-afc4-4a5d-b637-47957693620a",
+                    "b": "b65698e2-c335-4c8d-a5c7-d3501179a985",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-i1",
+                    "a": "76a29b50-46c3-477e-835a-c48cfc65c369",
+                    "b": "c547108b-fc12-4a2d-8439-2729866ef9ea",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "fdbea11e-7df6-47b8-ba95-bc5aa0e2277b",
+                    "a": "c547108b-fc12-4a2d-8439-2729866ef9ea",
+                    "b": "ce544963-4ccb-4938-8fdb-6bb49f3858f7",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "cc3acc75-324c-40fe-9398-88b0817a0cb3",
+                    "a": "ce544963-4ccb-4938-8fdb-6bb49f3858f7",
+                    "b": "8eeed7dd-5fba-4f4a-ae79-8660f60e04f9",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-i2",
+                    "a": "8eeed7dd-5fba-4f4a-ae79-8660f60e04f9",
+                    "b": "faf0a434-7dc4-40d5-b965-b3f4562056b8",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "67eedbed-312e-4900-b469-bbcee329444d",
+                    "a": "faf0a434-7dc4-40d5-b965-b3f4562056b8",
+                    "b": "12ed0991-a734-44b5-924b-81f621169097",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "7cee463b-4505-4383-a24a-a94ea2b1ff59",
+                    "a": "12ed0991-a734-44b5-924b-81f621169097",
+                    "b": "55a290da-e64c-4db6-b580-fd2d0b63274b",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-i3",
+                    "a": "55a290da-e64c-4db6-b580-fd2d0b63274b",
+                    "b": "d1aa33f7-76b2-4069-9d1d-775415594c3a",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "b515583d-8c23-42db-a4cc-ce0a63f2c779",
+                    "a": "d1aa33f7-76b2-4069-9d1d-775415594c3a",
+                    "b": "231fa9a5-ba05-4d49-9a72-a6e61bad131e",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "00bcfd1a-444c-4745-9003-5e5256a239cb",
+                    "a": "231fa9a5-ba05-4d49-9a72-a6e61bad131e",
+                    "b": "674b0fac-7c48-45d0-8c37-95691c7f9c3a",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-i4",
+                    "a": "7979e9de-e6f4-444f-ae93-120b1bd0e40f",
+                    "b": "a34de69a-71c8-42f0-a355-01f5ac65e159",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "8e0723e7-5f28-4b30-9ee6-e42f4e3a530a",
+                    "a": "a34de69a-71c8-42f0-a355-01f5ac65e159",
+                    "b": "121aa0ba-27ad-4946-8da3-fe7c1d18c4f1",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "d8891361-b3d0-453c-a9d8-13062297ed67",
+                    "a": "121aa0ba-27ad-4946-8da3-fe7c1d18c4f1",
+                    "b": "8ec26902-d3b8-4545-b192-b445d17d86a0",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-i5",
+                    "a": "8ec26902-d3b8-4545-b192-b445d17d86a0",
+                    "b": "8eeed7dd-5fba-4f4a-ae79-8660f60e04f9",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-i6",
+                    "a": "8ec26902-d3b8-4545-b192-b445d17d86a0",
+                    "b": "55a290da-e64c-4db6-b580-fd2d0b63274b",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-i7",
+                    "a": "8eeed7dd-5fba-4f4a-ae79-8660f60e04f9",
+                    "b": "a635f713-af8a-4b16-9a03-99092ba0d01f",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "abc7d801-4ee4-4f40-86bd-a5ba9f1f199b",
+                    "a": "a635f713-af8a-4b16-9a03-99092ba0d01f",
+                    "b": "a62f0244-a39c-4e80-aad1-10499fc020fc",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "510d677f-ce33-4ffc-b9b3-c6109d3010d3",
+                    "a": "a62f0244-a39c-4e80-aad1-10499fc020fc",
+                    "b": "0b5c2c71-b2d9-4599-baa0-a8ade2fcee95",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "wall-i8",
+                    "a": "55a290da-e64c-4db6-b580-fd2d0b63274b",
+                    "b": "957b3bc6-af4b-486f-997f-a98dc59b0bc7",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "746a5f3f-a87d-4af5-ba37-b0b9b853a903",
+                    "a": "957b3bc6-af4b-486f-997f-a98dc59b0bc7",
+                    "b": "79f3aa61-3730-48f3-be59-1ddf41f44d6a",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "6bb83613-c55d-4ce1-b80a-d53651baf47d",
+                    "a": "79f3aa61-3730-48f3-be59-1ddf41f44d6a",
+                    "b": "cd9be817-09e5-4263-a251-dee435abcea3",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "p1-front1",
+                    "a": "c547108b-fc12-4a2d-8439-2729866ef9ea",
+                    "b": "e115cd69-8374-4a28-b7b0-7b5616dfea80",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p1-front2",
+                    "a": "e115cd69-8374-4a28-b7b0-7b5616dfea80",
+                    "b": "c3c08c71-908f-47a8-9aae-570719cae14c",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p1-front3",
+                    "a": "c3c08c71-908f-47a8-9aae-570719cae14c",
+                    "b": "d918263e-fd5a-4262-a91e-afa9fcf68f0f",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p1-front4",
+                    "a": "d918263e-fd5a-4262-a91e-afa9fcf68f0f",
+                    "b": "48acb2c0-4974-4b5e-8342-edbb01b709bf",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p1-sep1",
+                    "a": "19ee9acc-9fa4-472e-be51-7c54889381ae",
+                    "b": "e115cd69-8374-4a28-b7b0-7b5616dfea80",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p1-sep2",
+                    "a": "afea8ea5-3c4c-40d7-8317-30cfb433f5d8",
+                    "b": "c3c08c71-908f-47a8-9aae-570719cae14c",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p1-sep3",
+                    "a": "4f4a2d65-5acd-492b-8c89-7f03c2374050",
+                    "b": "d918263e-fd5a-4262-a91e-afa9fcf68f0f",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p2-front1",
+                    "a": "231fa9a5-ba05-4d49-9a72-a6e61bad131e",
+                    "b": "9473a52c-e9ef-472d-9b3d-e10b90b2d699",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p2-front2",
+                    "a": "9473a52c-e9ef-472d-9b3d-e10b90b2d699",
+                    "b": "081b8831-b8e2-4568-b152-7f1f65bdddf3",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p2-front3",
+                    "a": "081b8831-b8e2-4568-b152-7f1f65bdddf3",
+                    "b": "eb5b0ca8-71ba-4540-8b88-5c38f7eaa546",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p2-front4",
+                    "a": "eb5b0ca8-71ba-4540-8b88-5c38f7eaa546",
+                    "b": "64916c13-fba0-41bd-8f17-73daf6e6afa2",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p2-sep1",
+                    "a": "3980f746-5313-4ca2-b2bd-32caa6e0145b",
+                    "b": "9473a52c-e9ef-472d-9b3d-e10b90b2d699",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p2-sep2",
+                    "a": "b661380c-fe38-4435-bbdc-a48fabfae505",
+                    "b": "081b8831-b8e2-4568-b152-7f1f65bdddf3",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p2-sep3",
+                    "a": "6cb4fb02-aa74-49d7-ae6c-6bb33f87e3d9",
+                    "b": "eb5b0ca8-71ba-4540-8b88-5c38f7eaa546",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p3-front1",
+                    "a": "a7c2c5da-2cc6-4dc8-84d7-5bf7e7012a6a",
+                    "b": "b0754e2f-5c82-4b10-8539-80aa58dc7932",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p3-front2",
+                    "a": "b0754e2f-5c82-4b10-8539-80aa58dc7932",
+                    "b": "3c9a709f-7d69-4627-822f-47791207d549",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p3-front3",
+                    "a": "3c9a709f-7d69-4627-822f-47791207d549",
+                    "b": "868bbd23-22fb-4b72-92fd-e89de9a70412",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p3-front4",
+                    "a": "868bbd23-22fb-4b72-92fd-e89de9a70412",
+                    "b": "ce544963-4ccb-4938-8fdb-6bb49f3858f7",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p3-sep1",
+                    "a": "77057ec9-afc4-4a5d-b637-47957693620a",
+                    "b": "b0754e2f-5c82-4b10-8539-80aa58dc7932",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p3-sep2",
+                    "a": "1910746d-428a-4ebc-b193-217b26737782",
+                    "b": "3c9a709f-7d69-4627-822f-47791207d549",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p3-sep3",
+                    "a": "6c279caa-f431-495e-8e28-3b7fa592f7e6",
+                    "b": "868bbd23-22fb-4b72-92fd-e89de9a70412",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p5-front1",
+                    "a": "b390c9b4-2539-4ad6-9737-0f6d5561e68b",
+                    "b": "8d4b08d5-a216-483b-934b-00c70047b194",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p5-front2",
+                    "a": "8d4b08d5-a216-483b-934b-00c70047b194",
+                    "b": "f6c947f4-e659-435d-aa06-bcf13a8cf0fe",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p5-front3",
+                    "a": "f6c947f4-e659-435d-aa06-bcf13a8cf0fe",
+                    "b": "ffeea966-a466-44ae-832e-533df3602cd6",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p5-front4",
+                    "a": "ffeea966-a466-44ae-832e-533df3602cd6",
+                    "b": "d1aa33f7-76b2-4069-9d1d-775415594c3a",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p5-sep1",
+                    "a": "b3b51678-fd4c-4497-8f84-f7bedeb3fb88",
+                    "b": "8d4b08d5-a216-483b-934b-00c70047b194",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p5-sep2",
+                    "a": "8f76dce7-1aa1-4db3-aca1-1e37319f17b1",
+                    "b": "f6c947f4-e659-435d-aa06-bcf13a8cf0fe",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p5-sep3",
+                    "a": "6c3572e4-8fa3-47c8-b812-5d91eb9f765d",
+                    "b": "ffeea966-a466-44ae-832e-533df3602cd6",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p4-front1",
+                    "a": "a62f0244-a39c-4e80-aad1-10499fc020fc",
+                    "b": "a8a72e07-caa6-4809-ac71-4460b73a4615",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p4-front2",
+                    "a": "a8a72e07-caa6-4809-ac71-4460b73a4615",
+                    "b": "79f3aa61-3730-48f3-be59-1ddf41f44d6a",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p4-sep1",
+                    "a": "2f281232-f0c9-4f82-a30f-bced9f46f9e8",
+                    "b": "a8a72e07-caa6-4809-ac71-4460b73a4615",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p4-front3",
+                    "a": "a635f713-af8a-4b16-9a03-99092ba0d01f",
+                    "b": "0a1744d6-de26-4e8d-8f04-cc63b6ab49ac",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p4-side3",
+                    "a": "0a1744d6-de26-4e8d-8f04-cc63b6ab49ac",
+                    "b": "faf0a434-7dc4-40d5-b965-b3f4562056b8",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p4-front4",
+                    "a": "b3a773a1-8cc4-4b40-81e8-a6fbee5b4375",
+                    "b": "957b3bc6-af4b-486f-997f-a98dc59b0bc7",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "p4-side4",
+                    "a": "b3a773a1-8cc4-4b40-81e8-a6fbee5b4375",
+                    "b": "12ed0991-a734-44b5-924b-81f621169097",
+                    "thickness": 0.12
+                },
+                {
+                    "id": "gf-core-s-w",
+                    "a": "7642f27c-954e-4806-a1da-c6711eda6877",
+                    "b": "121aa0ba-27ad-4946-8da3-fe7c1d18c4f1",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "gf-core-s-e",
+                    "a": "121aa0ba-27ad-4946-8da3-fe7c1d18c4f1",
+                    "b": "129348da-24f8-4f2a-8d6b-fe14bed7ca41",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "gf-core-w1",
+                    "a": "7642f27c-954e-4806-a1da-c6711eda6877",
+                    "b": "2cce5d59-ca77-42ba-a381-8666d96176c0",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "gf-core-w2",
+                    "a": "2cce5d59-ca77-42ba-a381-8666d96176c0",
+                    "b": "14fba49b-6245-495f-8f2c-0bcccb0ee93e",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "gf-core-e1",
+                    "a": "129348da-24f8-4f2a-8d6b-fe14bed7ca41",
+                    "b": "945ee899-0ba2-4fbf-9e8d-9ea66319072a",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "gf-core-e2",
+                    "a": "945ee899-0ba2-4fbf-9e8d-9ea66319072a",
+                    "b": "39b60295-f243-4f59-a0e4-f28a5595f289",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "gf-core-m-w",
+                    "a": "2cce5d59-ca77-42ba-a381-8666d96176c0",
+                    "b": "a34de69a-71c8-42f0-a355-01f5ac65e159",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "gf-core-m-e",
+                    "a": "a34de69a-71c8-42f0-a355-01f5ac65e159",
+                    "b": "945ee899-0ba2-4fbf-9e8d-9ea66319072a",
+                    "thickness": 0.2
+                }
+            ],
+            "openings": [
+                {
+                    "id": "door-b1-b2",
+                    "kind": "door",
+                    "width": 1,
+                    "host": "wall",
+                    "wallId": "d8891361-b3d0-453c-a9d8-13062297ed67",
+                    "offset": 1.769999999999996
+                },
+                {
+                    "id": "door-b1-b3",
+                    "kind": "door",
+                    "width": 1,
+                    "host": "wall",
+                    "wallId": "cc3acc75-324c-40fe-9398-88b0817a0cb3",
+                    "offset": 1.8299999999999992
+                },
+                {
+                    "id": "door-b2-b5",
+                    "kind": "door",
+                    "width": 1,
+                    "host": "wall",
+                    "wallId": "wall-i3",
+                    "offset": 9.88
+                },
+                {
+                    "id": "door-b3-b4",
+                    "kind": "door",
+                    "width": 1,
+                    "host": "wall",
+                    "wallId": "abc7d801-4ee4-4f40-86bd-a5ba9f1f199b",
+                    "offset": 1.5979805304714763
+                },
+                {
+                    "id": "door-b4-b5",
+                    "kind": "door",
+                    "width": 1,
+                    "host": "wall",
+                    "wallId": "746a5f3f-a87d-4af5-ba37-b0b9b853a903",
+                    "offset": 1.5995279492101409
+                },
+                {
+                    "id": "door-b1-garden",
+                    "kind": "door",
+                    "width": 1,
+                    "host": "wall",
+                    "wallId": "wall-i5",
+                    "offset": 6.41
+                },
+                {
+                    "id": "door-b2-garden",
+                    "kind": "door",
+                    "width": 1,
+                    "host": "wall",
+                    "wallId": "wall-i6",
+                    "offset": 6.43
+                },
+                {
+                    "id": "door-b4-garden",
+                    "kind": "door",
+                    "width": 1,
+                    "host": "wall",
+                    "wallId": "67eedbed-312e-4900-b469-bbcee329444d",
+                    "offset": 1.4799999999999995
+                },
+                {
+                    "id": "door-b1-z1",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p1-front1",
+                    "offset": 4.525
+                },
+                {
+                    "id": "door-b1-z2",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p1-front2",
+                    "offset": 4.314
+                },
+                {
+                    "id": "door-b1-z3",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p1-front3",
+                    "offset": 4.314
+                },
+                {
+                    "id": "door-b1-z4",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p1-front4",
+                    "offset": 4.843
+                },
+                {
+                    "id": "door-b2-z1",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p2-front1",
+                    "offset": 3.986
+                },
+                {
+                    "id": "door-b2-z2",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p2-front2",
+                    "offset": 3.775
+                },
+                {
+                    "id": "door-b2-z3",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p2-front3",
+                    "offset": 5.123
+                },
+                {
+                    "id": "door-b2-z4",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p2-front4",
+                    "offset": 5.113
+                },
+                {
+                    "id": "door-b3-z1",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p3-front1",
+                    "offset": 5.122
+                },
+                {
+                    "id": "door-b3-z2",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p3-front2",
+                    "offset": 5.122
+                },
+                {
+                    "id": "door-b3-z3",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p3-front3",
+                    "offset": 4.853
+                },
+                {
+                    "id": "door-b3-z4",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p3-front4",
+                    "offset": 5.721
+                },
+                {
+                    "id": "door-b5-z1",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p5-front1",
+                    "offset": 5.122
+                },
+                {
+                    "id": "door-b5-z2",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p5-front2",
+                    "offset": 5.122
+                },
+                {
+                    "id": "door-b5-z3",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p5-front3",
+                    "offset": 4.853
+                },
+                {
+                    "id": "door-b5-z4",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p5-front4",
+                    "offset": 5.721
+                },
+                {
+                    "id": "door-b4-z1",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p4-front1",
+                    "offset": 4.49
+                },
+                {
+                    "id": "door-b4-z2",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p4-front2",
+                    "offset": 4.497
+                },
+                {
+                    "id": "door-b4-z3",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p4-front3",
+                    "offset": 3.148
+                },
+                {
+                    "id": "door-b4-z4",
+                    "kind": "door",
+                    "width": 0.9,
+                    "host": "wall",
+                    "wallId": "p4-front4",
+                    "offset": 3.126
+                },
+                {
+                    "id": "gf-door-stair-a",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "gf-core-s-w",
+                    "offset": 1.76
+                },
+                {
+                    "id": "gf-door-stair-b",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "gf-core-s-e",
+                    "offset": 1.76
+                },
+                {
+                    "id": "gf-door-lift-a",
+                    "kind": "door",
+                    "width": 1.1,
+                    "host": "wall",
+                    "wallId": "gf-core-w2",
+                    "offset": 1.99
+                },
+                {
+                    "id": "gf-door-lift-b",
+                    "kind": "door",
+                    "width": 1.1,
+                    "host": "wall",
+                    "wallId": "gf-core-e2",
+                    "offset": 1.99
+                },
+                {
+                    "id": "door-entrance-a",
+                    "kind": "door",
+                    "width": 1.6,
+                    "host": "wall",
+                    "wallId": "6344d022-4e0f-45fc-8df5-878d497d8d2d",
+                    "offset": 1.5
+                },
+                {
+                    "id": "door-entrance-b",
+                    "kind": "door",
+                    "width": 1.6,
+                    "host": "wall",
+                    "wallId": "wall-e5",
+                    "offset": 10.5
+                }
+            ],
+            "zones": [
+                {
+                    "id": "garden",
+                    "label": "Garden",
+                    "category": "garden",
+                    "shape": {
+                        "outer": [
+                            [35.24, 38.61],
+                            [45.12, 38.61],
+                            [40.12, 50.47]
+                        ]
+                    }
+                },
+                {
+                    "id": "b1-z1",
+                    "label": "Meeting 1A",
+                    "category": "meeting-room",
+                    "shape": {
+                        "outer": [
+                            [15.6, 38.61],
+                            [22.58, 38.61],
+                            [25.97, 47],
+                            [18.99, 47]
+                        ]
+                    }
+                },
+                {
+                    "id": "b1-z2",
+                    "label": "Meeting 1B",
+                    "category": "meeting-room",
+                    "shape": {
+                        "outer": [
+                            [25.97, 47],
+                            [29.21, 55],
+                            [22.23, 55],
+                            [18.99, 47]
+                        ]
+                    }
+                },
+                {
+                    "id": "b1-z3",
+                    "label": "Room 1.1",
+                    "category": "room",
+                    "shape": {
+                        "outer": [
+                            [29.21, 55],
+                            [32.44, 63],
+                            [25.44, 63],
+                            [22.21, 55]
+                        ]
+                    }
+                },
+                {
+                    "id": "b1-z4",
+                    "label": "Room 1.2",
+                    "category": "room",
+                    "shape": {
+                        "outer": [
+                            [32.44, 63],
+                            [36.07, 71.98],
+                            [29.07, 71.98],
+                            [25.44, 63]
+                        ]
+                    }
+                },
+                {
+                    "id": "b1-open",
+                    "label": "Open space 1",
+                    "category": "open-space",
+                    "shape": {
+                        "outer": [
+                            [22.58, 38.61],
+                            [35.24, 38.61],
+                            [40.12, 50.47],
+                            [40.12, 63],
+                            [36.6, 63],
+                            [36.6, 71.98],
+                            [36.07, 71.98]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-z1",
+                    "label": "Kitchen 2",
+                    "category": "kitchen",
+                    "shape": {
+                        "outer": [
+                            [57.89, 38.61],
+                            [64.89, 38.61],
+                            [61.9, 46],
+                            [54.9, 46]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-z2",
+                    "label": "WC 2",
+                    "category": "wc",
+                    "shape": {
+                        "outer": [
+                            [61.9, 46],
+                            [59.07, 53],
+                            [52.07, 53],
+                            [54.9, 46]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-z3",
+                    "label": "Room 2.1",
+                    "category": "room",
+                    "shape": {
+                        "outer": [
+                            [59.07, 53],
+                            [55.23, 62.5],
+                            [48.23, 62.5],
+                            [52.07, 53]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-z4",
+                    "label": "Room 2.2",
+                    "category": "room",
+                    "shape": {
+                        "outer": [
+                            [55.23, 62.5],
+                            [51.4, 71.98],
+                            [44.4, 71.98],
+                            [48.23, 62.5]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-open",
+                    "label": "Open space 2",
+                    "category": "open-space",
+                    "shape": {
+                        "outer": [
+                            [45.12, 38.61],
+                            [57.89, 38.61],
+                            [44.4, 71.98],
+                            [43.64, 71.98],
+                            [43.64, 63],
+                            [40.12, 63],
+                            [40.12, 50.47]
+                        ]
+                    }
+                },
+                {
+                    "id": "b3-z1",
+                    "label": "Room 3.1",
+                    "category": "room",
+                    "shape": {
+                        "outer": [
+                            [0.02, 0],
+                            [8, 0],
+                            [11.83, 9.5],
+                            [3.85, 9.5]
+                        ]
+                    }
+                },
+                {
+                    "id": "b3-z2",
+                    "label": "Room 3.2",
+                    "category": "room",
+                    "shape": {
+                        "outer": [
+                            [11.83, 9.5],
+                            [15.67, 19],
+                            [7.69, 19],
+                            [3.85, 9.5]
+                        ]
+                    }
+                },
+                {
+                    "id": "b3-z3",
+                    "label": "Meeting 3A",
+                    "category": "meeting-room",
+                    "shape": {
+                        "outer": [
+                            [15.67, 19],
+                            [19.3, 28],
+                            [11.3, 28],
+                            [7.67, 19]
+                        ]
+                    }
+                },
+                {
+                    "id": "b3-z4",
+                    "label": "WC 3",
+                    "category": "wc",
+                    "shape": {
+                        "outer": [
+                            [19.3, 28],
+                            [23.58, 38.61],
+                            [15.58, 38.61],
+                            [11.3, 28]
+                        ]
+                    }
+                },
+                {
+                    "id": "b3-corridor",
+                    "label": "Corridor 3",
+                    "category": "corridor",
+                    "shape": {
+                        "outer": [
+                            [9.614, 4],
+                            [12.614, 4],
+                            [26.58, 38.61],
+                            [23.58, 38.61]
+                        ]
+                    }
+                },
+                {
+                    "id": "b3-open",
+                    "label": "Open space 3",
+                    "category": "open-space",
+                    "shape": {
+                        "outer": [
+                            [11, 0],
+                            [20, 0],
+                            [28.37, 21.63],
+                            [35.24, 38.61],
+                            [26.58, 38.61]
+                        ]
+                    }
+                },
+                {
+                    "id": "b5-z1",
+                    "label": "Room 5.1",
+                    "category": "room",
+                    "shape": {
+                        "outer": [
+                            [72.47, 0],
+                            [80.45, 0],
+                            [76.62, 9.5],
+                            [68.64, 9.5]
+                        ]
+                    }
+                },
+                {
+                    "id": "b5-z2",
+                    "label": "Room 5.2",
+                    "category": "room",
+                    "shape": {
+                        "outer": [
+                            [76.62, 9.5],
+                            [72.78, 19],
+                            [64.8, 19],
+                            [68.64, 9.5]
+                        ]
+                    }
+                },
+                {
+                    "id": "b5-z3",
+                    "label": "Meeting 5A",
+                    "category": "meeting-room",
+                    "shape": {
+                        "outer": [
+                            [72.8, 19],
+                            [69.17, 28],
+                            [61.17, 28],
+                            [64.8, 19]
+                        ]
+                    }
+                },
+                {
+                    "id": "b5-z4",
+                    "label": "Kitchen 5",
+                    "category": "kitchen",
+                    "shape": {
+                        "outer": [
+                            [69.17, 28],
+                            [64.89, 38.61],
+                            [56.89, 38.61],
+                            [61.17, 28]
+                        ]
+                    }
+                },
+                {
+                    "id": "b5-corridor",
+                    "label": "Corridor 5",
+                    "category": "corridor",
+                    "shape": {
+                        "outer": [
+                            [67.856, 4],
+                            [70.856, 4],
+                            [56.89, 38.61],
+                            [53.89, 38.61]
+                        ]
+                    }
+                },
+                {
+                    "id": "b5-open",
+                    "label": "Open space 5",
+                    "category": "open-space",
+                    "shape": {
+                        "outer": [
+                            [51.98, 21.63],
+                            [60.47, 0],
+                            [69.47, 0],
+                            [53.89, 38.61],
+                            [45.12, 38.61]
+                        ]
+                    }
+                },
+                {
+                    "id": "b4-corridor",
+                    "label": "Corridor 4",
+                    "category": "corridor",
+                    "shape": {
+                        "outer": [
+                            [31.19, 28.6],
+                            [49.16, 28.6],
+                            [47.95, 31.6],
+                            [41.7, 31.6],
+                            [41.7, 38.61],
+                            [38.7, 38.61],
+                            [38.7, 31.6],
+                            [32.4, 31.6]
+                        ]
+                    }
+                },
+                {
+                    "id": "b4-z1",
+                    "label": "Meeting 4A",
+                    "category": "meeting-room",
+                    "shape": {
+                        "outer": [
+                            [28.37, 21.63],
+                            [40.17, 21.63],
+                            [40.17, 28.6],
+                            [31.19, 28.6]
+                        ]
+                    }
+                },
+                {
+                    "id": "b4-z2",
+                    "label": "Meeting 4B",
+                    "category": "meeting-room",
+                    "shape": {
+                        "outer": [
+                            [40.17, 21.63],
+                            [51.98, 21.63],
+                            [49.16, 28.6],
+                            [40.17, 28.6]
+                        ]
+                    }
+                },
+                {
+                    "id": "b4-z3",
+                    "label": "Print room",
+                    "category": "room",
+                    "shape": {
+                        "outer": [
+                            [38.7, 38.61],
+                            [35.24, 38.61],
+                            [32.4, 31.6],
+                            [38.7, 31.6]
+                        ]
+                    }
+                },
+                {
+                    "id": "b4-z4",
+                    "label": "Kitchen 4",
+                    "category": "kitchen",
+                    "shape": {
+                        "outer": [
+                            [47.95, 31.6],
+                            [45.12, 38.61],
+                            [41.7, 38.61],
+                            [41.7, 31.6]
+                        ]
+                    }
+                },
+                {
+                    "id": "entrance-a",
+                    "label": "Entrance A",
+                    "shape": {
+                        "outer": [
+                            [8, 0],
+                            [11, 0],
+                            [12.614, 4],
+                            [9.614, 4]
+                        ]
+                    }
+                },
+                {
+                    "id": "entrance-b",
+                    "label": "Entrance B",
+                    "shape": {
+                        "outer": [
+                            [69.47, 0],
+                            [72.47, 0],
+                            [70.856, 4],
+                            [67.856, 4]
+                        ]
+                    }
+                }
+            ],
+            "obstacles": [],
+            "underlays": [
+                {
+                    "id": "import-source",
+                    "src": "sample-office-source.png",
+                    "scale": 0.11615384615384615,
+                    "position": [-1.29, 72.8509],
+                    "rotation": 0,
+                    "opacity": 0.5,
+                    "locked": true,
+                    "size": [715, 634]
+                }
+            ],
+            "viewpoints": [
+                {
+                    "id": "tour-1",
+                    "name": "Entrance A",
+                    "target": [15.32, 8.4],
+                    "bearing": 25,
+                    "tilt": 55,
+                    "distance": 71.94,
+                    "flight": 4,
+                    "pause": 2.5
+                },
+                {
+                    "id": "tour-2",
+                    "name": "Meeting rooms",
+                    "target": [40.17, 28.62],
+                    "bearing": 0,
+                    "tilt": 50,
+                    "distance": 46.01,
+                    "flight": 4,
+                    "pause": 2.5
+                },
+                {
+                    "id": "tour-3",
+                    "name": "Garden",
+                    "target": [40.69, 63.12],
+                    "bearing": 200,
+                    "tilt": 50,
+                    "distance": 69.32,
+                    "flight": 4,
+                    "pause": 2.5
+                },
+                {
+                    "id": "tour-4",
+                    "name": "The A from above",
+                    "target": [40, 36],
+                    "bearing": 0,
+                    "tilt": 0,
+                    "distance": 134.21,
+                    "flight": 4,
+                    "pause": 2.5
+                }
+            ]
+        },
+        {
+            "id": "level-p1",
+            "name": "P1 Parking",
+            "ordinal": -1,
+            "elevation": -3,
+            "height": 3,
+            "outline": {
+                "outer": [
+                    [0, 0],
+                    [80.47, 0],
+                    [64.89, 38.61],
+                    [51.4, 71.98],
+                    [29.07, 71.98],
+                    [15.58, 38.61]
+                ]
+            },
+            "wallNodes": [
+                {
+                    "id": "37017425-846a-460e-a20a-32109a7d64f6",
+                    "position": [0, 0]
+                },
+                {
+                    "id": "d944b4ed-be9b-4ad4-a503-b3f520075ddd",
+                    "position": [80.47, 0]
+                },
+                {
+                    "id": "098f0a69-2092-4904-98af-7f0e4ff5d376",
+                    "position": [64.89, 38.61]
+                },
+                {
+                    "id": "3e209b44-72ee-4434-b0b3-7254e185724b",
+                    "position": [51.4, 71.98]
+                },
+                {
+                    "id": "3b98ad7f-850a-4d03-8e6b-88bdc7aa9f1a",
+                    "position": [29.07, 71.98]
+                },
+                {
+                    "id": "d6c77f0c-cab7-4a86-8fed-8aad3798e602",
+                    "position": [15.58, 38.61]
+                },
+                {
+                    "id": "d1aa14f7-13cd-4aac-bb23-a00068af15a4",
+                    "position": [37, 0]
+                },
+                {
+                    "id": "de4360e4-622e-43a9-9b78-7e17a710998d",
+                    "position": [37, 19]
+                },
+                {
+                    "id": "7d846de8-7d84-482f-98ea-f4e48c1835cd",
+                    "position": [43.5, 0]
+                },
+                {
+                    "id": "99b4de5a-ea86-493b-832d-3435134c2119",
+                    "position": [43.5, 19]
+                },
+                {
+                    "id": "80746e97-e92c-4b11-bde7-928357f65b29",
+                    "position": [5.447552447552448, 13.5]
+                },
+                {
+                    "id": "e962989d-9720-4d1e-a561-4030751aa530",
+                    "position": [18.5, 13.5]
+                },
+                {
+                    "id": "ee384304-bb32-4270-8368-2d6fea43bd2f",
+                    "position": [37, 13.5]
+                },
+                {
+                    "id": "cf4fc9fa-fb00-49f2-8d85-cc2994b92cea",
+                    "position": [43.5, 13.5]
+                },
+                {
+                    "id": "92111936-178d-4048-b3e1-c96f6fe945ec",
+                    "position": [62, 13.5]
+                },
+                {
+                    "id": "e077a813-a077-4e15-a8fc-6c74f1531dbf",
+                    "position": [75.02244755244755, 13.5]
+                },
+                {
+                    "id": "bed48d0e-2339-401b-bbf5-4372948baea7",
+                    "position": [18.5, 0]
+                },
+                {
+                    "id": "768704e9-db87-4d80-8c75-9ff09b621295",
+                    "position": [62, 0]
+                },
+                {
+                    "id": "7e8ad4f7-df9c-426b-9d5e-896ea108cdb3",
+                    "position": [36.6, 63]
+                },
+                {
+                    "id": "6c4f7fe1-7db1-444c-b07a-122b09f87d5d",
+                    "position": [40.12, 63]
+                },
+                {
+                    "id": "f4205bb4-116c-419c-bf34-713be240c9c5",
+                    "position": [43.64, 63]
+                },
+                {
+                    "id": "0b4e5827-eafe-484a-bed9-cff0e9114c4b",
+                    "position": [40.12, 71.98]
+                },
+                {
+                    "id": "d6084a6c-2808-4546-8e3a-cfa138d3516e",
+                    "position": [36.6, 68]
+                },
+                {
+                    "id": "776234df-5fb9-4b6b-b1ae-114be1886af3",
+                    "position": [36.6, 71.98]
+                },
+                {
+                    "id": "b5f6e035-58fc-4b5b-8eb1-578d8d3401b7",
+                    "position": [43.64, 68]
+                },
+                {
+                    "id": "0a0d07cb-52be-474f-9e80-f578f404a389",
+                    "position": [43.64, 71.98]
+                },
+                {
+                    "id": "39abfa0e-b20e-4e8b-bc14-54313a832236",
+                    "position": [40.12, 68]
+                }
+            ],
+            "walls": [
+                {
+                    "id": "6866f442-6463-4786-9beb-a51ca2ea2091",
+                    "a": "37017425-846a-460e-a20a-32109a7d64f6",
+                    "b": "bed48d0e-2339-401b-bbf5-4372948baea7",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "b55585c6-cbd6-4a99-be38-76c6970fa611",
+                    "a": "bed48d0e-2339-401b-bbf5-4372948baea7",
+                    "b": "d1aa14f7-13cd-4aac-bb23-a00068af15a4",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "da4cf624-54e8-44d2-b49d-98a3c2330e4e",
+                    "a": "d1aa14f7-13cd-4aac-bb23-a00068af15a4",
+                    "b": "7d846de8-7d84-482f-98ea-f4e48c1835cd",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "d3f75a28-d73e-42ec-8545-c226047eacbf",
+                    "a": "7d846de8-7d84-482f-98ea-f4e48c1835cd",
+                    "b": "768704e9-db87-4d80-8c75-9ff09b621295",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "bbe2fed8-fb4b-4e77-b4b8-accd6fc853c6",
+                    "a": "768704e9-db87-4d80-8c75-9ff09b621295",
+                    "b": "d944b4ed-be9b-4ad4-a503-b3f520075ddd",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "d80a8327-414c-48a0-a1d2-8c608be457ae",
+                    "a": "d944b4ed-be9b-4ad4-a503-b3f520075ddd",
+                    "b": "e077a813-a077-4e15-a8fc-6c74f1531dbf",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "7c7a449d-266e-468e-ac02-0d1dd2fa9973",
+                    "a": "e077a813-a077-4e15-a8fc-6c74f1531dbf",
+                    "b": "098f0a69-2092-4904-98af-7f0e4ff5d376",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "813e7449-0a8f-4641-bab1-76f10b638782",
+                    "a": "098f0a69-2092-4904-98af-7f0e4ff5d376",
+                    "b": "3e209b44-72ee-4434-b0b3-7254e185724b",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "efc14531-8fbb-4d1f-bbb9-beb630d51cec",
+                    "a": "3e209b44-72ee-4434-b0b3-7254e185724b",
+                    "b": "0a0d07cb-52be-474f-9e80-f578f404a389",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "8b9c747c-74a2-4747-8199-ca26de07cc07",
+                    "a": "0a0d07cb-52be-474f-9e80-f578f404a389",
+                    "b": "0b4e5827-eafe-484a-bed9-cff0e9114c4b",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "09384625-67c7-4cc7-b0d0-1b57277d0798",
+                    "a": "0b4e5827-eafe-484a-bed9-cff0e9114c4b",
+                    "b": "776234df-5fb9-4b6b-b1ae-114be1886af3",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "670f4fb5-eb3a-4638-a382-b00e15108355",
+                    "a": "776234df-5fb9-4b6b-b1ae-114be1886af3",
+                    "b": "3b98ad7f-850a-4d03-8e6b-88bdc7aa9f1a",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "361bad49-365d-4e33-b8af-bfec49a1c95a",
+                    "a": "3b98ad7f-850a-4d03-8e6b-88bdc7aa9f1a",
+                    "b": "d6c77f0c-cab7-4a86-8fed-8aad3798e602",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "4b4c8117-9d4f-496d-a86f-32020ddffb3b",
+                    "a": "d6c77f0c-cab7-4a86-8fed-8aad3798e602",
+                    "b": "80746e97-e92c-4b11-bde7-928357f65b29",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "1203149f-30ff-45d3-bf4b-16f82fd9b933",
+                    "a": "80746e97-e92c-4b11-bde7-928357f65b29",
+                    "b": "37017425-846a-460e-a20a-32109a7d64f6",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "p1-ramp-w",
+                    "a": "d1aa14f7-13cd-4aac-bb23-a00068af15a4",
+                    "b": "ee384304-bb32-4270-8368-2d6fea43bd2f",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "98b0ce7b-7218-4f95-996d-a92950b57096",
+                    "a": "ee384304-bb32-4270-8368-2d6fea43bd2f",
+                    "b": "de4360e4-622e-43a9-9b78-7e17a710998d",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-ramp-e",
+                    "a": "7d846de8-7d84-482f-98ea-f4e48c1835cd",
+                    "b": "cf4fc9fa-fb00-49f2-8d85-cc2994b92cea",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "c46a0e5a-1e33-4608-a04c-f4f4ca5a35e3",
+                    "a": "cf4fc9fa-fb00-49f2-8d85-cc2994b92cea",
+                    "b": "99b4de5a-ea86-493b-832d-3435134c2119",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-st-l1",
+                    "a": "80746e97-e92c-4b11-bde7-928357f65b29",
+                    "b": "e962989d-9720-4d1e-a561-4030751aa530",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-st-l2",
+                    "a": "e962989d-9720-4d1e-a561-4030751aa530",
+                    "b": "ee384304-bb32-4270-8368-2d6fea43bd2f",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-st-r1",
+                    "a": "cf4fc9fa-fb00-49f2-8d85-cc2994b92cea",
+                    "b": "92111936-178d-4048-b3e1-c96f6fe945ec",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-st-r2",
+                    "a": "92111936-178d-4048-b3e1-c96f6fe945ec",
+                    "b": "e077a813-a077-4e15-a8fc-6c74f1531dbf",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-st-ld",
+                    "a": "bed48d0e-2339-401b-bbf5-4372948baea7",
+                    "b": "e962989d-9720-4d1e-a561-4030751aa530",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-st-rd",
+                    "a": "768704e9-db87-4d80-8c75-9ff09b621295",
+                    "b": "92111936-178d-4048-b3e1-c96f6fe945ec",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-core-s-w",
+                    "a": "7e8ad4f7-df9c-426b-9d5e-896ea108cdb3",
+                    "b": "6c4f7fe1-7db1-444c-b07a-122b09f87d5d",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-core-s-e",
+                    "a": "6c4f7fe1-7db1-444c-b07a-122b09f87d5d",
+                    "b": "f4205bb4-116c-419c-bf34-713be240c9c5",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-core-mid",
+                    "a": "6c4f7fe1-7db1-444c-b07a-122b09f87d5d",
+                    "b": "39abfa0e-b20e-4e8b-bc14-54313a832236",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "ca97ee12-0d06-4e99-a6b9-859373320044",
+                    "a": "39abfa0e-b20e-4e8b-bc14-54313a832236",
+                    "b": "0b4e5827-eafe-484a-bed9-cff0e9114c4b",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-core-w1",
+                    "a": "7e8ad4f7-df9c-426b-9d5e-896ea108cdb3",
+                    "b": "d6084a6c-2808-4546-8e3a-cfa138d3516e",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-core-w2",
+                    "a": "d6084a6c-2808-4546-8e3a-cfa138d3516e",
+                    "b": "776234df-5fb9-4b6b-b1ae-114be1886af3",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-core-e1",
+                    "a": "f4205bb4-116c-419c-bf34-713be240c9c5",
+                    "b": "b5f6e035-58fc-4b5b-8eb1-578d8d3401b7",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-core-e2",
+                    "a": "b5f6e035-58fc-4b5b-8eb1-578d8d3401b7",
+                    "b": "0a0d07cb-52be-474f-9e80-f578f404a389",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-core-m-w",
+                    "a": "d6084a6c-2808-4546-8e3a-cfa138d3516e",
+                    "b": "39abfa0e-b20e-4e8b-bc14-54313a832236",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "p1-core-m-e",
+                    "a": "39abfa0e-b20e-4e8b-bc14-54313a832236",
+                    "b": "b5f6e035-58fc-4b5b-8eb1-578d8d3401b7",
+                    "thickness": 0.2
+                }
+            ],
+            "openings": [
+                {
+                    "id": "p1-door-bike",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "p1-st-l1",
+                    "offset": 7.802
+                },
+                {
+                    "id": "p1-door-cages",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "p1-st-l2",
+                    "offset": 9.75
+                },
+                {
+                    "id": "p1-door-waste",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "p1-st-r1",
+                    "offset": 8.75
+                },
+                {
+                    "id": "p1-door-plant",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "p1-st-r2",
+                    "offset": 5.25
+                },
+                {
+                    "id": "p1-door-stair-a",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "p1-core-s-w",
+                    "offset": 1.76
+                },
+                {
+                    "id": "p1-door-stair-b",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "p1-core-s-e",
+                    "offset": 1.76
+                },
+                {
+                    "id": "p1-door-lift-a",
+                    "kind": "door",
+                    "width": 1.1,
+                    "host": "wall",
+                    "wallId": "p1-core-w2",
+                    "offset": 1.99
+                },
+                {
+                    "id": "p1-door-lift-b",
+                    "kind": "door",
+                    "width": 1.1,
+                    "host": "wall",
+                    "wallId": "p1-core-e2",
+                    "offset": 1.99
+                }
+            ],
+            "zones": [
+                {
+                    "id": "p1-bike",
+                    "label": "Bike storage",
+                    "category": "storage",
+                    "shape": {
+                        "outer": [
+                            [18.5, 0.02],
+                            [18.5, 13.5],
+                            [5.469, 13.5],
+                            [0.03, 0.02]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-cages",
+                    "label": "Storage cages",
+                    "category": "storage",
+                    "shape": {
+                        "outer": [
+                            [37, 0.02],
+                            [37, 13.5],
+                            [18.5, 13.5],
+                            [18.5, 0.02]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-waste",
+                    "label": "Waste room",
+                    "category": "technical",
+                    "shape": {
+                        "outer": [
+                            [62, 0.02],
+                            [62, 13.5],
+                            [43.5, 13.5],
+                            [43.5, 0.02]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-plant",
+                    "label": "Plant room",
+                    "category": "technical",
+                    "shape": {
+                        "outer": [
+                            [75.001, 13.5],
+                            [62, 13.5],
+                            [62, 0.02],
+                            [80.44, 0.02]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-aisle-1",
+                    "label": "Driveway 1",
+                    "category": "driveway",
+                    "shape": {
+                        "outer": [
+                            [70.159, 25.5],
+                            [10.311, 25.5],
+                            [7.688, 19],
+                            [72.782, 19]
+                        ]
+                    },
+                    "restricted": true
+                },
+                {
+                    "id": "p1-aisle-2",
+                    "label": "Driveway 2",
+                    "category": "driveway",
+                    "shape": {
+                        "outer": [
+                            [62.892, 43.5],
+                            [17.578, 43.5],
+                            [15.599, 38.603],
+                            [14.952, 37],
+                            [65.518, 37],
+                            [64.871, 38.603]
+                        ]
+                    },
+                    "restricted": true
+                },
+                {
+                    "id": "p1-aisle-3",
+                    "label": "Driveway 3",
+                    "category": "driveway",
+                    "shape": {
+                        "outer": [
+                            [55.615, 61.5],
+                            [24.855, 61.5],
+                            [22.227, 55],
+                            [58.243, 55]
+                        ]
+                    },
+                    "restricted": true
+                },
+                {
+                    "id": "p1-spine-1",
+                    "label": "Driveway spine",
+                    "category": "driveway",
+                    "shape": {
+                        "outer": [
+                            [37, 25.5],
+                            [43.5, 25.5],
+                            [43.5, 37],
+                            [37, 37]
+                        ]
+                    },
+                    "restricted": true
+                },
+                {
+                    "id": "p1-spine-2",
+                    "label": "Driveway spine",
+                    "category": "driveway",
+                    "shape": {
+                        "outer": [
+                            [37, 43.5],
+                            [43.5, 43.5],
+                            [43.5, 55],
+                            [37, 55]
+                        ]
+                    },
+                    "restricted": true
+                },
+                {
+                    "id": "p1-walk-bike",
+                    "label": "Walkway",
+                    "category": "walkway",
+                    "shape": {
+                        "outer": [
+                            [12, 13.5],
+                            [14.5, 13.5],
+                            [14.5, 19],
+                            [12, 19]
+                        ]
+                    },
+                    "restricted": true
+                },
+                {
+                    "id": "p1-walk-cages",
+                    "label": "Walkway",
+                    "category": "walkway",
+                    "shape": {
+                        "outer": [
+                            [27, 13.5],
+                            [29.5, 13.5],
+                            [29.5, 19],
+                            [27, 19]
+                        ]
+                    },
+                    "restricted": true
+                },
+                {
+                    "id": "p1-walk-waste",
+                    "label": "Walkway",
+                    "category": "walkway",
+                    "shape": {
+                        "outer": [
+                            [51, 13.5],
+                            [53.5, 13.5],
+                            [53.5, 19],
+                            [51, 19]
+                        ]
+                    },
+                    "restricted": true
+                },
+                {
+                    "id": "p1-walk-plant",
+                    "label": "Walkway",
+                    "category": "walkway",
+                    "shape": {
+                        "outer": [
+                            [66, 13.5],
+                            [68.5, 13.5],
+                            [68.5, 19],
+                            [66, 19]
+                        ]
+                    },
+                    "restricted": true
+                },
+                {
+                    "id": "p1-sp-001",
+                    "label": "P1-001",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [9.5, 14],
+                            [12, 14],
+                            [12, 19],
+                            [9.5, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-002",
+                    "label": "P1-002",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [14.5, 14],
+                            [17, 14],
+                            [17, 19],
+                            [14.5, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-003",
+                    "label": "P1-003",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [17, 14],
+                            [19.5, 14],
+                            [19.5, 19],
+                            [17, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-004",
+                    "label": "P1-004",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [19.5, 14],
+                            [22, 14],
+                            [22, 19],
+                            [19.5, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-005",
+                    "label": "P1-005",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [22, 14],
+                            [24.5, 14],
+                            [24.5, 19],
+                            [22, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-006",
+                    "label": "P1-006",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [24.5, 14],
+                            [27, 14],
+                            [27, 19],
+                            [24.5, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-007",
+                    "label": "P1-007",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [29.5, 14],
+                            [32, 14],
+                            [32, 19],
+                            [29.5, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-008",
+                    "label": "P1-008",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [32, 14],
+                            [34.5, 14],
+                            [34.5, 19],
+                            [32, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-009",
+                    "label": "P1-009",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [34.5, 14],
+                            [37, 14],
+                            [37, 19],
+                            [34.5, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-010",
+                    "label": "P1-010",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [43.5, 14],
+                            [46, 14],
+                            [46, 19],
+                            [43.5, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-011",
+                    "label": "P1-011",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [46, 14],
+                            [48.5, 14],
+                            [48.5, 19],
+                            [46, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-012",
+                    "label": "P1-012",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [48.5, 14],
+                            [51, 14],
+                            [51, 19],
+                            [48.5, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-013",
+                    "label": "P1-013",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [53.5, 14],
+                            [56, 14],
+                            [56, 19],
+                            [53.5, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-014",
+                    "label": "P1-014",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [56, 14],
+                            [58.5, 14],
+                            [58.5, 19],
+                            [56, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-015",
+                    "label": "P1-015",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [58.5, 14],
+                            [61, 14],
+                            [61, 19],
+                            [58.5, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-016",
+                    "label": "P1-016",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [61, 14],
+                            [63.5, 14],
+                            [63.5, 19],
+                            [61, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-017",
+                    "label": "P1-017",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [63.5, 14],
+                            [66, 14],
+                            [66, 19],
+                            [63.5, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-018",
+                    "label": "P1-018",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [68.5, 14],
+                            [71, 14],
+                            [71, 19],
+                            [68.5, 19]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-019",
+                    "label": "P1-019",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [14.5, 25.5],
+                            [17, 25.5],
+                            [17, 30.5],
+                            [14.5, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-020",
+                    "label": "P1-020",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [17, 25.5],
+                            [19.5, 25.5],
+                            [19.5, 30.5],
+                            [17, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-021",
+                    "label": "P1-021",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [19.5, 25.5],
+                            [22, 25.5],
+                            [22, 30.5],
+                            [19.5, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-022",
+                    "label": "P1-022",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [22, 25.5],
+                            [24.5, 25.5],
+                            [24.5, 30.5],
+                            [22, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-023",
+                    "label": "P1-023",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [24.5, 25.5],
+                            [27, 25.5],
+                            [27, 30.5],
+                            [24.5, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-024",
+                    "label": "P1-024",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [27, 25.5],
+                            [29.5, 25.5],
+                            [29.5, 30.5],
+                            [27, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-025",
+                    "label": "P1-025",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [29.5, 25.5],
+                            [32, 25.5],
+                            [32, 30.5],
+                            [29.5, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-026",
+                    "label": "P1-026",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [32, 25.5],
+                            [34.5, 25.5],
+                            [34.5, 30.5],
+                            [32, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-027",
+                    "label": "P1-027",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [34.5, 25.5],
+                            [37, 25.5],
+                            [37, 30.5],
+                            [34.5, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-028",
+                    "label": "P1-028",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [43.5, 25.5],
+                            [46, 25.5],
+                            [46, 30.5],
+                            [43.5, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-029",
+                    "label": "P1-029",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [46, 25.5],
+                            [48.5, 25.5],
+                            [48.5, 30.5],
+                            [46, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-030",
+                    "label": "P1-030",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [48.5, 25.5],
+                            [51, 25.5],
+                            [51, 30.5],
+                            [48.5, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-031",
+                    "label": "P1-031",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [51, 25.5],
+                            [53.5, 25.5],
+                            [53.5, 30.5],
+                            [51, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-032",
+                    "label": "P1-032",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [53.5, 25.5],
+                            [56, 25.5],
+                            [56, 30.5],
+                            [53.5, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-033",
+                    "label": "P1-033",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [56, 25.5],
+                            [58.5, 25.5],
+                            [58.5, 30.5],
+                            [56, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-034",
+                    "label": "P1-034",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [58.5, 25.5],
+                            [61, 25.5],
+                            [61, 30.5],
+                            [58.5, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-035",
+                    "label": "P1-035",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [61, 25.5],
+                            [63.5, 25.5],
+                            [63.5, 30.5],
+                            [61, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-036",
+                    "label": "P1-036",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [63.5, 25.5],
+                            [66, 25.5],
+                            [66, 30.5],
+                            [63.5, 30.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-037",
+                    "label": "P1-037",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [17, 32],
+                            [19.5, 32],
+                            [19.5, 37],
+                            [17, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-038",
+                    "label": "P1-038",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [19.5, 32],
+                            [22, 32],
+                            [22, 37],
+                            [19.5, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-039",
+                    "label": "P1-039",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [22, 32],
+                            [24.5, 32],
+                            [24.5, 37],
+                            [22, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-040",
+                    "label": "P1-040",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [24.5, 32],
+                            [27, 32],
+                            [27, 37],
+                            [24.5, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-041",
+                    "label": "P1-041",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [27, 32],
+                            [29.5, 32],
+                            [29.5, 37],
+                            [27, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-042",
+                    "label": "P1-042",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [29.5, 32],
+                            [32, 32],
+                            [32, 37],
+                            [29.5, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-043",
+                    "label": "P1-043",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [32, 32],
+                            [34.5, 32],
+                            [34.5, 37],
+                            [32, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-044",
+                    "label": "P1-044",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [34.5, 32],
+                            [37, 32],
+                            [37, 37],
+                            [34.5, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-045",
+                    "label": "P1-045",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [43.5, 32],
+                            [46, 32],
+                            [46, 37],
+                            [43.5, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-046",
+                    "label": "P1-046",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [46, 32],
+                            [48.5, 32],
+                            [48.5, 37],
+                            [46, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-047",
+                    "label": "P1-047",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [48.5, 32],
+                            [51, 32],
+                            [51, 37],
+                            [48.5, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-048",
+                    "label": "P1-048",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [51, 32],
+                            [53.5, 32],
+                            [53.5, 37],
+                            [51, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-049",
+                    "label": "P1-049",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [53.5, 32],
+                            [56, 32],
+                            [56, 37],
+                            [53.5, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-050",
+                    "label": "P1-050",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [56, 32],
+                            [58.5, 32],
+                            [58.5, 37],
+                            [56, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-051",
+                    "label": "P1-051",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [58.5, 32],
+                            [61, 32],
+                            [61, 37],
+                            [58.5, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-052",
+                    "label": "P1-052",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [61, 32],
+                            [63.5, 32],
+                            [63.5, 37],
+                            [61, 37]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-053",
+                    "label": "P1-053",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [22, 43.5],
+                            [24.5, 43.5],
+                            [24.5, 48.5],
+                            [22, 48.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-054",
+                    "label": "P1-054",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [24.5, 43.5],
+                            [27, 43.5],
+                            [27, 48.5],
+                            [24.5, 48.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-055",
+                    "label": "P1-055",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [27, 43.5],
+                            [29.5, 43.5],
+                            [29.5, 48.5],
+                            [27, 48.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-056",
+                    "label": "P1-056",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [29.5, 43.5],
+                            [32, 43.5],
+                            [32, 48.5],
+                            [29.5, 48.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-057",
+                    "label": "P1-057",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [32, 43.5],
+                            [34.5, 43.5],
+                            [34.5, 48.5],
+                            [32, 48.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-058",
+                    "label": "P1-058",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [34.5, 43.5],
+                            [37, 43.5],
+                            [37, 48.5],
+                            [34.5, 48.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-059",
+                    "label": "P1-059",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [43.5, 43.5],
+                            [46, 43.5],
+                            [46, 48.5],
+                            [43.5, 48.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-060",
+                    "label": "P1-060",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [46, 43.5],
+                            [48.5, 43.5],
+                            [48.5, 48.5],
+                            [46, 48.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-061",
+                    "label": "P1-061",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [48.5, 43.5],
+                            [51, 43.5],
+                            [51, 48.5],
+                            [48.5, 48.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-062",
+                    "label": "P1-062",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [51, 43.5],
+                            [53.5, 43.5],
+                            [53.5, 48.5],
+                            [51, 48.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-063",
+                    "label": "P1-063",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [53.5, 43.5],
+                            [56, 43.5],
+                            [56, 48.5],
+                            [53.5, 48.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-064",
+                    "label": "P1-064",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [56, 43.5],
+                            [58.5, 43.5],
+                            [58.5, 48.5],
+                            [56, 48.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-065",
+                    "label": "P1-065",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [24.5, 50],
+                            [27, 50],
+                            [27, 55],
+                            [24.5, 55]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-066",
+                    "label": "P1-066",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [27, 50],
+                            [29.5, 50],
+                            [29.5, 55],
+                            [27, 55]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-067",
+                    "label": "P1-067",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [29.5, 50],
+                            [32, 50],
+                            [32, 55],
+                            [29.5, 55]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-068",
+                    "label": "P1-068",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [32, 50],
+                            [34.5, 50],
+                            [34.5, 55],
+                            [32, 55]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-069",
+                    "label": "P1-069",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [34.5, 50],
+                            [37, 50],
+                            [37, 55],
+                            [34.5, 55]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-070",
+                    "label": "P1-070",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [43.5, 50],
+                            [46, 50],
+                            [46, 55],
+                            [43.5, 55]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-071",
+                    "label": "P1-071",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [46, 50],
+                            [48.5, 50],
+                            [48.5, 55],
+                            [46, 55]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-072",
+                    "label": "P1-072",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [48.5, 50],
+                            [51, 50],
+                            [51, 55],
+                            [48.5, 55]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-073",
+                    "label": "P1-073",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [51, 50],
+                            [53.5, 50],
+                            [53.5, 55],
+                            [51, 55]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-sp-074",
+                    "label": "P1-074",
+                    "category": "parking-space",
+                    "shape": {
+                        "outer": [
+                            [53.5, 50],
+                            [56, 50],
+                            [56, 55],
+                            [53.5, 55]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-acc-1",
+                    "label": "P1-A1",
+                    "category": "accessible-parking",
+                    "shape": {
+                        "outer": [
+                            [29.5, 61.5],
+                            [32, 61.5],
+                            [32, 66.5],
+                            [29.5, 66.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-acc-2",
+                    "label": "P1-A2",
+                    "category": "accessible-parking",
+                    "shape": {
+                        "outer": [
+                            [32, 61.5],
+                            [34.5, 61.5],
+                            [34.5, 66.5],
+                            [32, 66.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-acc-3",
+                    "label": "P1-A3",
+                    "category": "accessible-parking",
+                    "shape": {
+                        "outer": [
+                            [46, 61.5],
+                            [48.5, 61.5],
+                            [48.5, 66.5],
+                            [46, 66.5]
+                        ]
+                    },
+                    "walkAround": true
+                },
+                {
+                    "id": "p1-acc-4",
+                    "label": "P1-A4",
+                    "category": "accessible-parking",
+                    "shape": {
+                        "outer": [
+                            [48.5, 61.5],
+                            [51, 61.5],
+                            [51, 66.5],
+                            [48.5, 66.5]
+                        ]
+                    },
+                    "walkAround": true
+                }
+            ],
+            "obstacles": [
+                {
+                    "id": "p1-col-1",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [14.2, 30.95],
+                            [14.8, 30.95],
+                            [14.8, 31.55],
+                            [14.2, 31.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-col-2",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [21.7, 30.95],
+                            [22.3, 30.95],
+                            [22.3, 31.55],
+                            [21.7, 31.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-col-3",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [29.2, 30.95],
+                            [29.8, 30.95],
+                            [29.8, 31.55],
+                            [29.2, 31.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-col-4",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [50.7, 30.95],
+                            [51.3, 30.95],
+                            [51.3, 31.55],
+                            [50.7, 31.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-col-5",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [58.2, 30.95],
+                            [58.8, 30.95],
+                            [58.8, 31.55],
+                            [58.2, 31.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-col-6",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [65.7, 30.95],
+                            [66.3, 30.95],
+                            [66.3, 31.55],
+                            [65.7, 31.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-col-8",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [21.7, 48.95],
+                            [22.3, 48.95],
+                            [22.3, 49.55],
+                            [21.7, 49.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-col-9",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [29.2, 48.95],
+                            [29.8, 48.95],
+                            [29.8, 49.55],
+                            [29.2, 49.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-col-10",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [50.7, 48.95],
+                            [51.3, 48.95],
+                            [51.3, 49.55],
+                            [50.7, 49.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-col-11",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [58.2, 48.95],
+                            [58.8, 48.95],
+                            [58.8, 49.55],
+                            [58.2, 49.55]
+                        ]
+                    }
+                }
+            ],
+            "underlays": []
+        },
+        {
+            "id": "level-b2",
+            "name": "B2 Technical",
+            "ordinal": -2,
+            "elevation": -6.5,
+            "height": 3.5,
+            "outline": {
+                "outer": [
+                    [0, 0],
+                    [80.47, 0],
+                    [64.89, 38.61],
+                    [51.4, 71.98],
+                    [29.07, 71.98],
+                    [15.58, 38.61]
+                ]
+            },
+            "wallNodes": [
+                {
+                    "id": "0e609e77-1e50-4c00-a1ab-ca93c5f8409f",
+                    "position": [0, 0]
+                },
+                {
+                    "id": "8270a136-5cdb-4cee-9c03-b78ccd77f36d",
+                    "position": [80.47, 0]
+                },
+                {
+                    "id": "5627a83a-2c39-4a73-b454-a12de6475f4b",
+                    "position": [64.89, 38.61]
+                },
+                {
+                    "id": "ec52e32c-0bda-4a32-b2ac-4511da0b530b",
+                    "position": [51.4, 71.98]
+                },
+                {
+                    "id": "5da75221-0e1d-4552-afa9-848fd94cb8d9",
+                    "position": [29.07, 71.98]
+                },
+                {
+                    "id": "2c4aacc0-7c60-4710-8197-92103c564d5f",
+                    "position": [15.58, 38.61]
+                },
+                {
+                    "id": "7eee59ca-c9b0-4dbc-884c-bbf63584107a",
+                    "position": [36.6, 0]
+                },
+                {
+                    "id": "12442fa2-2457-4f46-8a92-22bca3a1bf8a",
+                    "position": [36.6, 13.5]
+                },
+                {
+                    "id": "7f706c50-4dfa-4fec-a5e3-add82b19dd2a",
+                    "position": [43.64, 0]
+                },
+                {
+                    "id": "9791dbe6-7607-44bd-bc48-f4e154903fa6",
+                    "position": [43.64, 13.5]
+                },
+                {
+                    "id": "b81e6603-9a9c-43dd-a790-5ba2bce9ec0a",
+                    "position": [36.6, 26]
+                },
+                {
+                    "id": "9bb73df1-f009-4aaa-b754-bfc236b9e5e9",
+                    "position": [43.64, 26]
+                },
+                {
+                    "id": "f4c484f0-2585-4974-b7b4-7f30e2da72e4",
+                    "position": [36.6, 38.61]
+                },
+                {
+                    "id": "734e32cf-4a28-4e1a-8b52-f2da6c3c9707",
+                    "position": [43.64, 38.61]
+                },
+                {
+                    "id": "cc045a79-9ff3-4e8d-9ded-fda2ba99564a",
+                    "position": [36.6, 52]
+                },
+                {
+                    "id": "77f62e19-493a-410c-8a79-39e8abd71045",
+                    "position": [43.64, 52]
+                },
+                {
+                    "id": "c77a233c-0167-48c1-9d04-8fd123e7b717",
+                    "position": [36.6, 63]
+                },
+                {
+                    "id": "b914b869-0ac8-4321-85e9-1c3bb18331b9",
+                    "position": [43.64, 63]
+                },
+                {
+                    "id": "d4603fb5-c1c0-4046-8df6-89d8709bc044",
+                    "position": [5.447552447552448, 13.5]
+                },
+                {
+                    "id": "29bb0a70-9d41-4edd-aa8a-90858362a52e",
+                    "position": [75.02244755244755, 13.5]
+                },
+                {
+                    "id": "fb99984a-59fe-45d1-a167-a1e368cbaef6",
+                    "position": [10.491582491582491, 26]
+                },
+                {
+                    "id": "90d86b35-dadd-4ebf-a079-2073cac1b9e0",
+                    "position": [69.97841750841751, 26]
+                },
+                {
+                    "id": "3ec3de6c-d06d-413c-8a28-cb6095c8e027",
+                    "position": [20.992978723404256, 52]
+                },
+                {
+                    "id": "1d92afee-1432-4bd6-9cd5-fe6728902d05",
+                    "position": [59.47702127659574, 52]
+                },
+                {
+                    "id": "a0c757e9-dc4c-418f-addd-80301b115b63",
+                    "position": [40.12, 63]
+                },
+                {
+                    "id": "bb68bed4-1b3d-4d3a-ab5e-0067a0666b5d",
+                    "position": [40.12, 71.98]
+                },
+                {
+                    "id": "8b8232bb-c240-46d4-9411-659bbcc58fbc",
+                    "position": [36.6, 68]
+                },
+                {
+                    "id": "5dfbd168-70d1-4f00-9cf4-12bc3ca6232a",
+                    "position": [36.6, 71.98]
+                },
+                {
+                    "id": "e21b20b0-83ed-444f-bdea-cf1ce359d364",
+                    "position": [43.64, 68]
+                },
+                {
+                    "id": "1564fe82-244a-4553-b327-9bd24bbaceab",
+                    "position": [43.64, 71.98]
+                },
+                {
+                    "id": "814318d4-c792-43b3-be45-a0340d907187",
+                    "position": [40.12, 68]
+                },
+                {
+                    "id": "2f9786bb-16e0-4d08-97b5-2761ff8f8652",
+                    "position": [33.6, 52]
+                },
+                {
+                    "id": "664da190-83e2-43a3-96aa-4e87eeea7fe8",
+                    "position": [33.6, 71.98]
+                },
+                {
+                    "id": "40615972-b85b-43f2-ae3b-f193ec0b04d4",
+                    "position": [46.64, 52]
+                },
+                {
+                    "id": "fedca316-2090-45b4-81bf-be2133030b2a",
+                    "position": [46.64, 71.98]
+                }
+            ],
+            "walls": [
+                {
+                    "id": "0e79583c-c412-4add-a98d-b65fcb5baafc",
+                    "a": "0e609e77-1e50-4c00-a1ab-ca93c5f8409f",
+                    "b": "7eee59ca-c9b0-4dbc-884c-bbf63584107a",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "3da52246-ffda-4ccd-a6a3-161eb90265a6",
+                    "a": "7eee59ca-c9b0-4dbc-884c-bbf63584107a",
+                    "b": "7f706c50-4dfa-4fec-a5e3-add82b19dd2a",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "f7d0897a-c0dd-4126-b64d-3ca24c82fcef",
+                    "a": "7f706c50-4dfa-4fec-a5e3-add82b19dd2a",
+                    "b": "8270a136-5cdb-4cee-9c03-b78ccd77f36d",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "5fd825aa-83fd-40d9-853a-3906ff0b5262",
+                    "a": "8270a136-5cdb-4cee-9c03-b78ccd77f36d",
+                    "b": "29bb0a70-9d41-4edd-aa8a-90858362a52e",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "ba534429-dd15-4639-a94e-8bb160e2d03b",
+                    "a": "29bb0a70-9d41-4edd-aa8a-90858362a52e",
+                    "b": "90d86b35-dadd-4ebf-a079-2073cac1b9e0",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "46f3dd28-43f9-4fb6-8d22-54445ff20a08",
+                    "a": "90d86b35-dadd-4ebf-a079-2073cac1b9e0",
+                    "b": "5627a83a-2c39-4a73-b454-a12de6475f4b",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "8f1df839-2ab7-42bd-9bf9-4474f68f6f1e",
+                    "a": "5627a83a-2c39-4a73-b454-a12de6475f4b",
+                    "b": "1d92afee-1432-4bd6-9cd5-fe6728902d05",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "305b0159-1528-44e7-a1e8-52d9798b035f",
+                    "a": "1d92afee-1432-4bd6-9cd5-fe6728902d05",
+                    "b": "ec52e32c-0bda-4a32-b2ac-4511da0b530b",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "2b8c886d-1588-46c3-904a-29a4407ae7fc",
+                    "a": "ec52e32c-0bda-4a32-b2ac-4511da0b530b",
+                    "b": "fedca316-2090-45b4-81bf-be2133030b2a",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "c09f3c95-9859-4c0f-88af-06266c64564e",
+                    "a": "fedca316-2090-45b4-81bf-be2133030b2a",
+                    "b": "1564fe82-244a-4553-b327-9bd24bbaceab",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "79ec340c-5952-4763-896a-6168a7b6106a",
+                    "a": "1564fe82-244a-4553-b327-9bd24bbaceab",
+                    "b": "bb68bed4-1b3d-4d3a-ab5e-0067a0666b5d",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "cc8a79b3-201a-4476-a4ff-93f75d88715b",
+                    "a": "bb68bed4-1b3d-4d3a-ab5e-0067a0666b5d",
+                    "b": "5dfbd168-70d1-4f00-9cf4-12bc3ca6232a",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "06d4efbc-1469-4831-a74f-ff0642d02af6",
+                    "a": "5dfbd168-70d1-4f00-9cf4-12bc3ca6232a",
+                    "b": "664da190-83e2-43a3-96aa-4e87eeea7fe8",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "41041c97-dabf-4ec6-90d4-8b88d8fd6882",
+                    "a": "664da190-83e2-43a3-96aa-4e87eeea7fe8",
+                    "b": "5da75221-0e1d-4552-afa9-848fd94cb8d9",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "60a27151-ee75-4713-812b-0a4cb52b77aa",
+                    "a": "5da75221-0e1d-4552-afa9-848fd94cb8d9",
+                    "b": "3ec3de6c-d06d-413c-8a28-cb6095c8e027",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "ea669dd5-f262-4e6e-9c06-ed5f73083cca",
+                    "a": "3ec3de6c-d06d-413c-8a28-cb6095c8e027",
+                    "b": "2c4aacc0-7c60-4710-8197-92103c564d5f",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "a06bfbbe-d197-4c23-afcb-53c2e542e76f",
+                    "a": "2c4aacc0-7c60-4710-8197-92103c564d5f",
+                    "b": "fb99984a-59fe-45d1-a167-a1e368cbaef6",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "895ccbe0-c02d-498f-9b87-c8e2b10fd164",
+                    "a": "fb99984a-59fe-45d1-a167-a1e368cbaef6",
+                    "b": "d4603fb5-c1c0-4046-8df6-89d8709bc044",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "d92fbee0-31d3-4337-8683-34dc9de5b630",
+                    "a": "d4603fb5-c1c0-4046-8df6-89d8709bc044",
+                    "b": "0e609e77-1e50-4c00-a1ab-ca93c5f8409f",
+                    "thickness": 0.3
+                },
+                {
+                    "id": "b2-sw-1",
+                    "a": "7eee59ca-c9b0-4dbc-884c-bbf63584107a",
+                    "b": "12442fa2-2457-4f46-8a92-22bca3a1bf8a",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-se-1",
+                    "a": "7f706c50-4dfa-4fec-a5e3-add82b19dd2a",
+                    "b": "9791dbe6-7607-44bd-bc48-f4e154903fa6",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-sw-2",
+                    "a": "12442fa2-2457-4f46-8a92-22bca3a1bf8a",
+                    "b": "b81e6603-9a9c-43dd-a790-5ba2bce9ec0a",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-se-2",
+                    "a": "9791dbe6-7607-44bd-bc48-f4e154903fa6",
+                    "b": "9bb73df1-f009-4aaa-b754-bfc236b9e5e9",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-sw-3",
+                    "a": "b81e6603-9a9c-43dd-a790-5ba2bce9ec0a",
+                    "b": "f4c484f0-2585-4974-b7b4-7f30e2da72e4",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-se-3",
+                    "a": "9bb73df1-f009-4aaa-b754-bfc236b9e5e9",
+                    "b": "734e32cf-4a28-4e1a-8b52-f2da6c3c9707",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-sw-4",
+                    "a": "f4c484f0-2585-4974-b7b4-7f30e2da72e4",
+                    "b": "cc045a79-9ff3-4e8d-9ded-fda2ba99564a",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-se-4",
+                    "a": "734e32cf-4a28-4e1a-8b52-f2da6c3c9707",
+                    "b": "77f62e19-493a-410c-8a79-39e8abd71045",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-sw-5",
+                    "a": "cc045a79-9ff3-4e8d-9ded-fda2ba99564a",
+                    "b": "c77a233c-0167-48c1-9d04-8fd123e7b717",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-se-5",
+                    "a": "77f62e19-493a-410c-8a79-39e8abd71045",
+                    "b": "b914b869-0ac8-4321-85e9-1c3bb18331b9",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-hw-1",
+                    "a": "d4603fb5-c1c0-4046-8df6-89d8709bc044",
+                    "b": "12442fa2-2457-4f46-8a92-22bca3a1bf8a",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-he-1",
+                    "a": "9791dbe6-7607-44bd-bc48-f4e154903fa6",
+                    "b": "29bb0a70-9d41-4edd-aa8a-90858362a52e",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-hw-2",
+                    "a": "fb99984a-59fe-45d1-a167-a1e368cbaef6",
+                    "b": "b81e6603-9a9c-43dd-a790-5ba2bce9ec0a",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-he-2",
+                    "a": "9bb73df1-f009-4aaa-b754-bfc236b9e5e9",
+                    "b": "90d86b35-dadd-4ebf-a079-2073cac1b9e0",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-hw-3",
+                    "a": "2c4aacc0-7c60-4710-8197-92103c564d5f",
+                    "b": "f4c484f0-2585-4974-b7b4-7f30e2da72e4",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-he-3",
+                    "a": "734e32cf-4a28-4e1a-8b52-f2da6c3c9707",
+                    "b": "5627a83a-2c39-4a73-b454-a12de6475f4b",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-hw-4",
+                    "a": "3ec3de6c-d06d-413c-8a28-cb6095c8e027",
+                    "b": "2f9786bb-16e0-4d08-97b5-2761ff8f8652",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "c3a5c88e-bb9f-44df-9c5f-24de83f02724",
+                    "a": "2f9786bb-16e0-4d08-97b5-2761ff8f8652",
+                    "b": "cc045a79-9ff3-4e8d-9ded-fda2ba99564a",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-he-4",
+                    "a": "77f62e19-493a-410c-8a79-39e8abd71045",
+                    "b": "40615972-b85b-43f2-ae3b-f193ec0b04d4",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "edca9fd5-9787-4641-b6d2-be08e91424de",
+                    "a": "40615972-b85b-43f2-ae3b-f193ec0b04d4",
+                    "b": "1d92afee-1432-4bd6-9cd5-fe6728902d05",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-core-s-w",
+                    "a": "c77a233c-0167-48c1-9d04-8fd123e7b717",
+                    "b": "a0c757e9-dc4c-418f-addd-80301b115b63",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-core-s-e",
+                    "a": "a0c757e9-dc4c-418f-addd-80301b115b63",
+                    "b": "b914b869-0ac8-4321-85e9-1c3bb18331b9",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-core-mid",
+                    "a": "a0c757e9-dc4c-418f-addd-80301b115b63",
+                    "b": "814318d4-c792-43b3-be45-a0340d907187",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "7bed18ea-a748-45a7-86fd-5c2c79c39888",
+                    "a": "814318d4-c792-43b3-be45-a0340d907187",
+                    "b": "bb68bed4-1b3d-4d3a-ab5e-0067a0666b5d",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-core-w1",
+                    "a": "c77a233c-0167-48c1-9d04-8fd123e7b717",
+                    "b": "8b8232bb-c240-46d4-9411-659bbcc58fbc",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-core-w2",
+                    "a": "8b8232bb-c240-46d4-9411-659bbcc58fbc",
+                    "b": "5dfbd168-70d1-4f00-9cf4-12bc3ca6232a",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-core-e1",
+                    "a": "b914b869-0ac8-4321-85e9-1c3bb18331b9",
+                    "b": "e21b20b0-83ed-444f-bdea-cf1ce359d364",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-core-e2",
+                    "a": "e21b20b0-83ed-444f-bdea-cf1ce359d364",
+                    "b": "1564fe82-244a-4553-b327-9bd24bbaceab",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-core-m-w",
+                    "a": "8b8232bb-c240-46d4-9411-659bbcc58fbc",
+                    "b": "814318d4-c792-43b3-be45-a0340d907187",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-core-m-e",
+                    "a": "814318d4-c792-43b3-be45-a0340d907187",
+                    "b": "e21b20b0-83ed-444f-bdea-cf1ce359d364",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-lobby-w",
+                    "a": "2f9786bb-16e0-4d08-97b5-2761ff8f8652",
+                    "b": "664da190-83e2-43a3-96aa-4e87eeea7fe8",
+                    "thickness": 0.2
+                },
+                {
+                    "id": "b2-lobby-e",
+                    "a": "40615972-b85b-43f2-ae3b-f193ec0b04d4",
+                    "b": "fedca316-2090-45b4-81bf-be2133030b2a",
+                    "thickness": 0.2
+                }
+            ],
+            "openings": [
+                {
+                    "id": "b2-door-w1",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "b2-sw-1",
+                    "offset": 6.75
+                },
+                {
+                    "id": "b2-door-e1",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "b2-se-1",
+                    "offset": 6.75
+                },
+                {
+                    "id": "b2-door-w2",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "b2-sw-2",
+                    "offset": 6.25
+                },
+                {
+                    "id": "b2-door-e2",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "b2-se-2",
+                    "offset": 6.25
+                },
+                {
+                    "id": "b2-door-w3",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "b2-sw-3",
+                    "offset": 6.305
+                },
+                {
+                    "id": "b2-door-e3",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "b2-se-3",
+                    "offset": 6.305
+                },
+                {
+                    "id": "b2-door-w4",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "b2-sw-4",
+                    "offset": 6.695
+                },
+                {
+                    "id": "b2-door-e4",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "b2-se-4",
+                    "offset": 6.695
+                },
+                {
+                    "id": "b2-door-w5",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "b2-sw-5",
+                    "offset": 5.5
+                },
+                {
+                    "id": "b2-door-e5",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "b2-se-5",
+                    "offset": 5.5
+                },
+                {
+                    "id": "b2-door-stair-a",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "b2-core-s-w",
+                    "offset": 1.76
+                },
+                {
+                    "id": "b2-door-stair-b",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "b2-core-s-e",
+                    "offset": 1.76
+                },
+                {
+                    "id": "b2-door-lift-a",
+                    "kind": "door",
+                    "width": 1.1,
+                    "host": "wall",
+                    "wallId": "b2-core-w2",
+                    "offset": 1.99
+                },
+                {
+                    "id": "b2-door-lift-b",
+                    "kind": "door",
+                    "width": 1.1,
+                    "host": "wall",
+                    "wallId": "b2-core-e2",
+                    "offset": 1.99
+                },
+                {
+                    "id": "b2-door-storage-w",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "b2-lobby-w",
+                    "offset": 9.99
+                },
+                {
+                    "id": "b2-door-storage-e",
+                    "kind": "door",
+                    "width": 1.2,
+                    "host": "wall",
+                    "wallId": "b2-lobby-e",
+                    "offset": 9.99
+                }
+            ],
+            "zones": [
+                {
+                    "id": "b2-w1",
+                    "label": "Water tanks",
+                    "category": "technical",
+                    "shape": {
+                        "outer": [
+                            [36.6, 0.02],
+                            [36.6, 13.5],
+                            [5.469, 13.5],
+                            [0.03, 0.02]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-e1",
+                    "label": "Heating plant",
+                    "category": "technical",
+                    "shape": {
+                        "outer": [
+                            [75.001, 13.5],
+                            [43.64, 13.5],
+                            [43.64, 0.02],
+                            [80.44, 0.02]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-w2",
+                    "label": "Sprinkler & pumps",
+                    "category": "technical",
+                    "shape": {
+                        "outer": [
+                            [36.6, 13.5],
+                            [36.6, 26],
+                            [10.513, 26],
+                            [5.469, 13.5]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-e2",
+                    "label": "Ventilation plant",
+                    "category": "technical",
+                    "shape": {
+                        "outer": [
+                            [69.957, 26],
+                            [43.64, 26],
+                            [43.64, 13.5],
+                            [75.001, 13.5]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-w3",
+                    "label": "Electrical room",
+                    "category": "technical",
+                    "shape": {
+                        "outer": [
+                            [36.6, 26],
+                            [36.6, 38.61],
+                            [15.602, 38.61],
+                            [15.599, 38.603],
+                            [10.513, 26]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-e3",
+                    "label": "Server room",
+                    "category": "technical",
+                    "shape": {
+                        "outer": [
+                            [64.868, 38.61],
+                            [43.64, 38.61],
+                            [43.64, 26],
+                            [69.957, 26],
+                            [64.871, 38.603]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-w4",
+                    "label": "Generator room",
+                    "category": "technical",
+                    "shape": {
+                        "outer": [
+                            [36.6, 38.61],
+                            [36.6, 52],
+                            [21.015, 52],
+                            [15.602, 38.61]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-e4",
+                    "label": "Storage units",
+                    "category": "storage",
+                    "shape": {
+                        "outer": [
+                            [59.455, 52],
+                            [43.64, 52],
+                            [43.64, 38.61],
+                            [64.868, 38.61]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-corridor",
+                    "label": "Service corridor",
+                    "category": "corridor",
+                    "shape": {
+                        "outer": [
+                            [36.6, 0.02],
+                            [43.64, 0.02],
+                            [43.64, 63],
+                            [36.6, 63]
+                        ]
+                    },
+                    "restricted": true
+                },
+                {
+                    "id": "b2-w5",
+                    "label": "Storage west",
+                    "category": "storage",
+                    "shape": {
+                        "outer": [
+                            [33.6, 52],
+                            [33.6, 71.96],
+                            [29.083, 71.96],
+                            [21.015, 52]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-e5",
+                    "label": "Storage east",
+                    "category": "storage",
+                    "shape": {
+                        "outer": [
+                            [46.64, 71.96],
+                            [46.64, 52],
+                            [59.455, 52],
+                            [51.387, 71.96]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-lobby-west",
+                    "label": "Lift lobby west",
+                    "category": "corridor",
+                    "shape": {
+                        "outer": [
+                            [36.6, 52],
+                            [36.6, 71.96],
+                            [33.6, 71.96],
+                            [33.6, 52]
+                        ]
+                    },
+                    "restricted": true
+                },
+                {
+                    "id": "b2-lobby-east",
+                    "label": "Lift lobby east",
+                    "category": "corridor",
+                    "shape": {
+                        "outer": [
+                            [46.64, 52],
+                            [46.64, 71.96],
+                            [43.64, 71.96],
+                            [43.64, 52]
+                        ]
+                    },
+                    "restricted": true
+                }
+            ],
+            "obstacles": [
+                {
+                    "id": "b2-tank-1",
+                    "kind": "other",
+                    "shape": {
+                        "outer": [
+                            [20, 2],
+                            [27, 2],
+                            [27, 9],
+                            [20, 9]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-tank-2",
+                    "kind": "other",
+                    "shape": {
+                        "outer": [
+                            [28.5, 2],
+                            [35.5, 2],
+                            [35.5, 9],
+                            [28.5, 9]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-generator",
+                    "kind": "other",
+                    "shape": {
+                        "outer": [
+                            [26, 41],
+                            [33, 41],
+                            [33, 46],
+                            [26, 46]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-server-racks",
+                    "kind": "other",
+                    "shape": {
+                        "outer": [
+                            [48, 29],
+                            [56, 29],
+                            [56, 33],
+                            [48, 33]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-col-1",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [14.2, 30.95],
+                            [14.8, 30.95],
+                            [14.8, 31.55],
+                            [14.2, 31.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-col-2",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [21.7, 30.95],
+                            [22.3, 30.95],
+                            [22.3, 31.55],
+                            [21.7, 31.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-col-3",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [29.2, 30.95],
+                            [29.8, 30.95],
+                            [29.8, 31.55],
+                            [29.2, 31.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-col-4",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [50.7, 30.95],
+                            [51.3, 30.95],
+                            [51.3, 31.55],
+                            [50.7, 31.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-col-5",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [58.2, 30.95],
+                            [58.8, 30.95],
+                            [58.8, 31.55],
+                            [58.2, 31.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-col-6",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [65.7, 30.95],
+                            [66.3, 30.95],
+                            [66.3, 31.55],
+                            [65.7, 31.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-col-8",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [21.7, 48.95],
+                            [22.3, 48.95],
+                            [22.3, 49.55],
+                            [21.7, 49.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-col-9",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [29.2, 48.95],
+                            [29.8, 48.95],
+                            [29.8, 49.55],
+                            [29.2, 49.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-col-10",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [50.7, 48.95],
+                            [51.3, 48.95],
+                            [51.3, 49.55],
+                            [50.7, 49.55]
+                        ]
+                    }
+                },
+                {
+                    "id": "b2-col-11",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [58.2, 48.95],
+                            [58.8, 48.95],
+                            [58.8, 49.55],
+                            [58.2, 49.55]
+                        ]
+                    }
+                }
+            ],
+            "underlays": []
+        }
+    ],
+    "connections": [
+        {
+            "id": "stair-a",
+            "kind": "stairs",
+            "name": "Stair A",
+            "stops": [
+                {
+                    "levelId": "4bd6d522-01fb-4885-a90a-1fc47b5cf9cf",
+                    "shape": {
+                        "outer": [
+                            [36.6, 63],
+                            [40.12, 63],
+                            [40.12, 68],
+                            [36.6, 68]
+                        ]
+                    },
+                    "entry": [38.36, 62.4]
+                },
+                {
+                    "levelId": "level-p1",
+                    "shape": {
+                        "outer": [
+                            [36.6, 63],
+                            [40.12, 63],
+                            [40.12, 68],
+                            [36.6, 68]
+                        ]
+                    },
+                    "entry": [38.36, 62.4]
+                },
+                {
+                    "levelId": "level-b2",
+                    "shape": {
+                        "outer": [
+                            [36.6, 63],
+                            [40.12, 63],
+                            [40.12, 68],
+                            [36.6, 68]
+                        ]
+                    },
+                    "entry": [38.36, 62.4]
+                }
+            ],
+            "bidirectional": true,
+            "accessible": false
+        },
+        {
+            "id": "stair-b",
+            "kind": "stairs",
+            "name": "Stair B",
+            "stops": [
+                {
+                    "levelId": "4bd6d522-01fb-4885-a90a-1fc47b5cf9cf",
+                    "shape": {
+                        "outer": [
+                            [40.12, 63],
+                            [43.64, 63],
+                            [43.64, 68],
+                            [40.12, 68]
+                        ]
+                    },
+                    "entry": [41.88, 62.4]
+                },
+                {
+                    "levelId": "level-p1",
+                    "shape": {
+                        "outer": [
+                            [40.12, 63],
+                            [43.64, 63],
+                            [43.64, 68],
+                            [40.12, 68]
+                        ]
+                    },
+                    "entry": [41.88, 62.4]
+                },
+                {
+                    "levelId": "level-b2",
+                    "shape": {
+                        "outer": [
+                            [40.12, 63],
+                            [43.64, 63],
+                            [43.64, 68],
+                            [40.12, 68]
+                        ]
+                    },
+                    "entry": [41.88, 62.4]
+                }
+            ],
+            "bidirectional": true,
+            "accessible": false
+        },
+        {
+            "id": "lift-a",
+            "kind": "elevator",
+            "name": "Lift A",
+            "stops": [
+                {
+                    "levelId": "4bd6d522-01fb-4885-a90a-1fc47b5cf9cf",
+                    "shape": {
+                        "outer": [
+                            [36.6, 68],
+                            [40.12, 68],
+                            [40.12, 71.98],
+                            [36.6, 71.98]
+                        ]
+                    },
+                    "entry": [36, 69.99]
+                },
+                {
+                    "levelId": "level-p1",
+                    "shape": {
+                        "outer": [
+                            [36.6, 68],
+                            [40.12, 68],
+                            [40.12, 71.98],
+                            [36.6, 71.98]
+                        ]
+                    },
+                    "entry": [36, 69.99]
+                },
+                {
+                    "levelId": "level-b2",
+                    "shape": {
+                        "outer": [
+                            [36.6, 68],
+                            [40.12, 68],
+                            [40.12, 71.98],
+                            [36.6, 71.98]
+                        ]
+                    },
+                    "entry": [36, 69.99]
+                }
+            ],
+            "bidirectional": true,
+            "accessible": true
+        },
+        {
+            "id": "lift-b",
+            "kind": "elevator",
+            "name": "Lift B",
+            "stops": [
+                {
+                    "levelId": "4bd6d522-01fb-4885-a90a-1fc47b5cf9cf",
+                    "shape": {
+                        "outer": [
+                            [40.12, 68],
+                            [43.64, 68],
+                            [43.64, 71.98],
+                            [40.12, 71.98]
+                        ]
+                    },
+                    "entry": [44.24, 69.99]
+                },
+                {
+                    "levelId": "level-p1",
+                    "shape": {
+                        "outer": [
+                            [40.12, 68],
+                            [43.64, 68],
+                            [43.64, 71.98],
+                            [40.12, 71.98]
+                        ]
+                    },
+                    "entry": [44.24, 69.99]
+                },
+                {
+                    "levelId": "level-b2",
+                    "shape": {
+                        "outer": [
+                            [40.12, 68],
+                            [43.64, 68],
+                            [43.64, 71.98],
+                            [40.12, 71.98]
+                        ]
+                    },
+                    "entry": [44.24, 69.99]
+                }
+            ],
+            "bidirectional": true,
+            "accessible": true
+        },
+        {
+            "id": "car-ramp",
+            "kind": "ramp",
+            "name": "Car ramp",
+            "stops": [
+                {
+                    "levelId": "4bd6d522-01fb-4885-a90a-1fc47b5cf9cf",
+                    "shape": {
+                        "outer": [
+                            [37.1, 0.2],
+                            [43.4, 0.2],
+                            [43.4, 19],
+                            [37.1, 19]
+                        ]
+                    },
+                    "entry": [40.25, -1]
+                },
+                {
+                    "levelId": "level-p1",
+                    "shape": {
+                        "outer": [
+                            [37.1, 0.2],
+                            [43.4, 0.2],
+                            [43.4, 19],
+                            [37.1, 19]
+                        ]
+                    },
+                    "entry": [40.25, 19.6]
+                }
+            ],
+            "bidirectional": true
+        }
+    ],
+    "meta": {
+        "import": {
+            "importedAt": "2026-11-02T14:15:16.689Z",
+            "scale": 0.11627906976744186,
+            "sourceSize": [714.23, 634],
+            "source": {
+                "kind": "figma",
+                "ref": "https://www.figma.com/design/P5TiBrbI4CMKdtxwnixTZv/Floorplan-round-trip-%E2%80%94-Hall-A?node-id=7-34"
+            },
+            "underlayId": "import-source",
+            "flags": []
+        }
+    }
+}

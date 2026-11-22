@@ -1,0 +1,73 @@
+name: CI
+
+on:
+    push:
+        branches: [main, next]
+    pull_request:
+    workflow_dispatch:
+        inputs:
+            update-snapshots:
+                description: Regenerate the Linux screenshot baselines and upload them as an artifact
+                type: boolean
+                default: false
+
+concurrency:
+    group: ci-${{ github.ref }}
+    cancel-in-progress: true
+
+permissions:
+    contents: read
+
+jobs:
+    check:
+        name: Lint, typecheck, unit tests
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4 # version from package.json "packageManager"
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 24
+                  cache: pnpm
+            - run: pnpm install --frozen-lockfile
+            - run: pnpm exec prettier --check .
+            - run: pnpm lint
+            - run: pnpm typecheck
+            - run: pnpm build
+            - run: pnpm coverage
+            # Warnings are errors: an exported API that refers to an unexported type fails here.
+            - run: pnpm docs:api
+
+    e2e:
+        name: End-to-end tests (Playwright, Chrome)
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 24
+                  cache: pnpm
+            - run: pnpm install --frozen-lockfile
+            # GitHub's Ubuntu runners come with Google Chrome, which the tests use (channel: chrome).
+            - name: Run Playwright
+              if: ${{ !inputs.update-snapshots }}
+              run: pnpm e2e
+            - name: Regenerate Linux screenshot baselines
+              if: ${{ inputs.update-snapshots }}
+              run: pnpm e2e --update-snapshots=all
+            - uses: actions/upload-artifact@v4
+              if: ${{ inputs.update-snapshots && !cancelled() }}
+              with:
+                  name: linux-snapshots
+                  path: apps/playground/e2e/*-snapshots/*-linux.png
+            - uses: actions/upload-artifact@v4
+              if: ${{ failure() }}
+              with:
+                  name: playwright-report
+                  path: |
+                      apps/playground/playwright-report/
+                      apps/playground/test-results/
+                  retention-days: 14

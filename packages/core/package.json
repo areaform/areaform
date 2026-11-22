@@ -1,0 +1,46 @@
+{
+    "name": "@areaform/core",
+    "version": "0.0.0",
+    "private": true,
+    "license": "MIT",
+    "homepage": "https://github.com/areaform/areaform/tree/main/packages/core#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/areaform/areaform.git",
+        "directory": "packages/core"
+    },
+    "bugs": {
+        "url": "https://github.com/areaform/areaform/issues"
+    },
+    "type": "module",
+    "exports": {
+        ".": "./src/index.ts",
+        "./testing": "./bench/stressSpace.ts",
+        "./schema/v1/document.json": "./schema/v1/document.json"
+    },
+    "files": [
+        "dist",
+        "schema",
+        "LICENSE"
+    ],
+    "publishConfig": {
+        "exports": {
+            ".": {
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.js"
+            },
+            "./schema/v1/document.json": "./schema/v1/document.json"
+        }
+    },
+    "scripts": {
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "typecheck": "tsc -p tsconfig.json",
+        "bench": "node bench/run.ts",
+        "build": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\" && tsc -p tsconfig.build.json"
+    },
+    "devDependencies": {
+        "ajv": "^8.20.0",
+        "vitest": "^5.0.5"
+    }
+}

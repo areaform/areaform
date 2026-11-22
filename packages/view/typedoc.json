@@ -1,0 +1,11 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "extends": ["../../typedoc.base.json"],
+    "entryPoints": [
+        "src/index.ts",
+        "src/react/index.ts",
+        "src/plugins/tooltip.ts",
+        "src/plugins/wayfinding.ts"
+    ],
+    "intentionallyNotExported": ["en", "Params", "BaseOf", "PluralBase", "PluralCategory"]
+}

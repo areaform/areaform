@@ -1,0 +1,21 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "name": "Areaform API",
+    "entryPointStrategy": "packages",
+    "entryPoints": [
+        "packages/core",
+        "packages/render-2d",
+        "packages/render-3d",
+        "packages/view",
+        "packages/wayfinding",
+        "packages/editor",
+        "packages/mcp"
+    ],
+    "out": "docs/api",
+    "readme": "none",
+    "favicon": "brand/favicon.svg",
+    "includeVersion": false,
+    "excludePrivate": true,
+    "excludeInternal": true,
+    "treatWarningsAsErrors": true
+}

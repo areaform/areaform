@@ -1,0 +1,60 @@
+{
+    "name": "@areaform/editor",
+    "version": "0.0.0",
+    "private": true,
+    "license": "BUSL-1.1",
+    "homepage": "https://github.com/areaform/areaform/tree/main/packages/editor#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/areaform/areaform.git",
+        "directory": "packages/editor"
+    },
+    "bugs": {
+        "url": "https://github.com/areaform/areaform/issues"
+    },
+    "type": "module",
+    "exports": {
+        ".": "./src/index.ts",
+        "./react": "./src/react/index.ts",
+        "./styles.css": "./src/react/styles.css"
+    },
+    "files": [
+        "dist",
+        "LICENSE"
+    ],
+    "publishConfig": {
+        "exports": {
+            ".": {
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.js"
+            },
+            "./react": {
+                "types": "./dist/react/index.d.ts",
+                "default": "./dist/react/index.js"
+            },
+            "./styles.css": "./dist/react/styles.css"
+        }
+    },
+    "scripts": {
+        "test": "vitest run",
+        "typecheck": "tsc -p tsconfig.json",
+        "build": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\" && tsc -p tsconfig.build.json && node -e \"require('fs').cpSync('src/react/styles.css', 'dist/react/styles.css')\""
+    },
+    "dependencies": {
+        "@areaform/core": "workspace:*",
+        "@areaform/render-2d": "workspace:*",
+        "@areaform/render-3d": "workspace:*",
+        "@areaform/view": "workspace:*",
+        "@areaform/wayfinding": "workspace:*"
+    },
+    "peerDependencies": {
+        "react": "^19.0.0"
+    },
+    "devDependencies": {
+        "@types/react": "^19.3.0",
+        "@types/react-dom": "^19.3.0",
+        "react": "^19.3.1",
+        "react-dom": "^19.3.1",
+        "vitest": "^5.0.5"
+    }
+}

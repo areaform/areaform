@@ -1,0 +1,395 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://areaform.app/schema/v1/document.json",
+    "title": "Areaform Document, schema version 1",
+    "description": "One Space: its Levels, Walls, Openings, Zones, Obstacles, Underlays and the Connections between Levels. Lengths are metres in a Y-up plane local to the Space; angles are radians, counter-clockwise from +X, except a Viewpoint's, which are compass degrees. Readers ignore properties they do not know, and new optional properties do not change the version; only a change an older reader would misread does. This schema checks the shape only: the rules between values (ids unique, references that name an existing Element, rings that do not cross themselves, at least two Stops on a Connection, a positive ceiling height) are checked by @areaform/core when the Document is loaded.",
+    "$comment": "Must agree with the checker in packages/core/src/schema.ts; packages/core/src/schemaJson.test.ts checks that it does.",
+    "type": "object",
+    "required": ["schemaVersion", "id", "name", "kind", "units", "grid", "levels", "connections"],
+    "properties": {
+        "$schema": {
+            "description": "This schema's address, `https://areaform.app/schema/v1/document.json`, for editors and validators. Readers ignore it, whatever its value."
+        },
+        "schemaVersion": {
+            "description": "The version of this format. A reader refuses a Document from a newer version rather than drop what it does not understand.",
+            "const": 1
+        },
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "names": {
+            "$ref": "#/$defs/translations",
+            "description": "`name` in other Content Languages."
+        },
+        "languages": {
+            "description": "The Content Languages the Space's own text is written in. `label` and `name` properties are in `default`. Absent in Documents made before Content Languages: the default language is then unknown.",
+            "type": "object",
+            "required": ["default"],
+            "properties": {
+                "default": { "$ref": "#/$defs/languageTag" },
+                "others": { "type": "array", "items": { "$ref": "#/$defs/languageTag" } }
+            }
+        },
+        "kind": {
+            "description": "The kind of place, which picks defaults such as Zone categories: `exhibition`, `office`, `store`, `warehouse`, `cafe`, `mall`, `flat`. Other values are allowed and get generic defaults.",
+            "type": "string"
+        },
+        "units": {
+            "description": "Always metres.",
+            "const": "m"
+        },
+        "grid": {
+            "description": "The editing grid.",
+            "type": "object",
+            "required": ["step", "snap"],
+            "properties": {
+                "step": { "type": "number", "description": "Metres." },
+                "snap": { "type": "boolean" }
+            }
+        },
+        "geo": {
+            "description": "Where the Space lies on Earth: the latitude and longitude, in degrees, of the plan's origin `[0, 0]`, and `bearing`, the compass direction of the plan's +Y axis in degrees clockwise from north (0: up on the plan is north; 90: east).",
+            "type": "object",
+            "required": ["origin", "bearing"],
+            "properties": {
+                "origin": {
+                    "type": "object",
+                    "required": ["lat", "lng"],
+                    "properties": {
+                        "lat": { "type": "number" },
+                        "lng": { "type": "number" }
+                    }
+                },
+                "bearing": { "type": "number" }
+            }
+        },
+        "levels": { "type": "array", "items": { "$ref": "#/$defs/level" } },
+        "connections": { "type": "array", "items": { "$ref": "#/$defs/connection" } },
+        "meta": {
+            "description": "Free-form data of the application that made the Document.",
+            "type": "object"
+        }
+    },
+    "$defs": {
+        "id": {
+            "description": "Unique within the Document.",
+            "type": "string"
+        },
+        "languageTag": {
+            "description": "A BCP 47 language tag, such as `pl` or `pt-BR`.",
+            "type": "string"
+        },
+        "translations": {
+            "description": "Texts in Content Languages other than the default, by BCP 47 tag, such as `{ \"pl\": \"Stoisko 1\" }`.",
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+        },
+        "vec2": {
+            "description": "A point `[x, y]` in metres.",
+            "type": "array",
+            "prefixItems": [{ "type": "number" }, { "type": "number" }],
+            "minItems": 2,
+            "maxItems": 2
+        },
+        "ring": {
+            "description": "A closed ring; the first point is not repeated at the end. Outer rings run counter-clockwise, holes clockwise.",
+            "type": "array",
+            "items": { "$ref": "#/$defs/vec2" }
+        },
+        "shape": {
+            "description": "A polygon with optional holes.",
+            "type": "object",
+            "required": ["outer"],
+            "properties": {
+                "outer": { "$ref": "#/$defs/ring" },
+                "holes": { "type": "array", "items": { "$ref": "#/$defs/ring" } }
+            }
+        },
+        "level": {
+            "description": "One horizontal storey of the Space, with its own elevation, ceiling height and Outline. All Levels share one coordinate system.",
+            "type": "object",
+            "required": [
+                "id",
+                "name",
+                "ordinal",
+                "elevation",
+                "height",
+                "outline",
+                "wallNodes",
+                "walls",
+                "openings",
+                "zones",
+                "obstacles",
+                "underlays"
+            ],
+            "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "name": { "type": "string" },
+                "names": {
+                    "$ref": "#/$defs/translations",
+                    "description": "`name` in other Content Languages."
+                },
+                "group": {
+                    "description": "Level Group: a display label that groups Levels in the level switcher when a Space has several buildings, such as `Pavilion A`.",
+                    "type": "string"
+                },
+                "ordinal": {
+                    "description": "The Level's place in the stack: 0 is the ground Level, higher numbers above it, negative ones below ground. Levels in different groups may share an ordinal.",
+                    "type": "number"
+                },
+                "elevation": { "type": "number", "description": "Metres." },
+                "height": { "type": "number", "description": "Ceiling height, metres." },
+                "outline": {
+                    "$ref": "#/$defs/shape",
+                    "description": "The footprint of the Level: the boundary of its area, possibly with holes such as an atrium. Independent of its Walls."
+                },
+                "wallNodes": { "type": "array", "items": { "$ref": "#/$defs/wallNode" } },
+                "walls": { "type": "array", "items": { "$ref": "#/$defs/wall" } },
+                "openings": { "type": "array", "items": { "$ref": "#/$defs/opening" } },
+                "zones": { "type": "array", "items": { "$ref": "#/$defs/zone" } },
+                "obstacles": { "type": "array", "items": { "$ref": "#/$defs/obstacle" } },
+                "underlays": {
+                    "description": "Bottom first.",
+                    "type": "array",
+                    "items": { "$ref": "#/$defs/underlay" }
+                },
+                "viewpoints": {
+                    "description": "Cameras saved on this Level for the 3D view, in the order a camera tour flies through them.",
+                    "type": "array",
+                    "items": { "$ref": "#/$defs/viewpoint" }
+                }
+            }
+        },
+        "wallNode": {
+            "description": "A point where Walls end or meet. Walls form a graph: Walls sharing a Node are joined.",
+            "type": "object",
+            "required": ["id", "position"],
+            "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "position": { "$ref": "#/$defs/vec2" }
+            }
+        },
+        "wall": {
+            "description": "A straight Wall along the centre line between two Wall Nodes.",
+            "type": "object",
+            "required": ["id", "a", "b", "thickness"],
+            "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "a": { "type": "string", "description": "The id of the Wall Node at one end." },
+                "b": {
+                    "type": "string",
+                    "description": "The id of the Wall Node at the other end."
+                },
+                "thickness": {
+                    "type": "number",
+                    "description": "Metres, centred on the centre line."
+                },
+                "height": {
+                    "type": "number",
+                    "description": "Metres; the Level's `height` when absent."
+                }
+            }
+        },
+        "opening": {
+            "description": "A door, entrance, passage or emergency exit: set in a Wall (`host: \"wall\"`) or standing free (`host: \"free\"`).",
+            "type": "object",
+            "required": ["host"],
+            "properties": {
+                "host": { "enum": ["wall", "free"] }
+            },
+            "oneOf": [{ "$ref": "#/$defs/hostedOpening" }, { "$ref": "#/$defs/freeOpening" }]
+        },
+        "openingBase": {
+            "type": "object",
+            "required": ["id", "kind", "width"],
+            "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "kind": { "enum": ["door", "entrance", "passage", "emergency-exit"] },
+                "width": { "type": "number", "description": "Metres." },
+                "hinge": {
+                    "description": "For doors, the jamb the leaf hangs from: `start` is the end nearer the Wall's `a` node (or, for a free Opening, the end behind its angle). Absent means `start`.",
+                    "enum": ["start", "end"]
+                },
+                "swing": {
+                    "description": "For doors, the side the leaf opens to, looking from `start` to `end`. Absent means `left`.",
+                    "enum": ["left", "right"]
+                }
+            }
+        },
+        "hostedOpening": {
+            "$ref": "#/$defs/openingBase",
+            "type": "object",
+            "required": ["host", "wallId", "offset"],
+            "properties": {
+                "host": { "const": "wall" },
+                "wallId": { "type": "string", "description": "The id of the Wall it is set in." },
+                "offset": {
+                    "type": "number",
+                    "description": "Metres from the Wall's `a` node to the Opening's centre."
+                }
+            }
+        },
+        "freeOpening": {
+            "$ref": "#/$defs/openingBase",
+            "type": "object",
+            "required": ["host", "position", "angle"],
+            "properties": {
+                "host": { "const": "free" },
+                "position": { "$ref": "#/$defs/vec2" },
+                "angle": { "type": "number", "description": "Radians, counter-clockwise from +X." }
+            }
+        },
+        "zone": {
+            "description": "A named, styled area on a Level that carries the owner's data: a booth, a department, a bookable desk area.",
+            "type": "object",
+            "required": ["id", "shape"],
+            "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "shape": { "$ref": "#/$defs/shape" },
+                "label": { "type": "string" },
+                "labels": {
+                    "$ref": "#/$defs/translations",
+                    "description": "`label` in other Content Languages."
+                },
+                "labelAnchor": {
+                    "$ref": "#/$defs/vec2",
+                    "description": "Where the label is drawn; inside the shape, far from its edges, when absent."
+                },
+                "labelSize": {
+                    "type": "number",
+                    "description": "Font height of the label in metres: the largest it is drawn; it shrinks to fit inside the Zone."
+                },
+                "labelColor": {
+                    "type": "string",
+                    "description": "Colour of the label text, a CSS colour; the renderer decides when absent."
+                },
+                "category": {
+                    "type": "string",
+                    "description": "Zone Category, such as `booth` or `aisle`: the owner's own vocabulary, used for the default look."
+                },
+                "restricted": {
+                    "type": "boolean",
+                    "description": "Walkable, but nothing may be placed there: an aisle, a fire lane."
+                },
+                "walkAround": {
+                    "type": "boolean",
+                    "description": "Visitors' routes go around the Zone, not through it."
+                },
+                "style": {
+                    "type": "object",
+                    "properties": {
+                        "fill": { "type": "string", "description": "A CSS colour." },
+                        "stroke": { "type": "string", "description": "A CSS colour." },
+                        "opacity": { "type": "number" }
+                    }
+                },
+                "data": {
+                    "description": "The owner's own data about the Zone, such as `{ \"boothId\": \"A-12\" }`; never interpreted by Areaform.",
+                    "type": "object"
+                }
+            }
+        },
+        "obstacle": {
+            "description": "Something nobody walks through: a column, a shaft that is not a Connection, a void.",
+            "type": "object",
+            "required": ["id", "shape", "kind"],
+            "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "shape": { "$ref": "#/$defs/shape" },
+                "kind": { "enum": ["column", "shaft", "void", "other"] }
+            }
+        },
+        "underlay": {
+            "description": "A reference image under the Level. Pixels grow right and down; a pixel `[x, y]` lies in the Space at `position + rotate(rotation) · [x · scale, −y · scale]`, so `position` is the image's top-left corner.",
+            "type": "object",
+            "required": ["id", "src", "position", "scale", "rotation", "opacity", "locked"],
+            "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "src": {
+                    "type": "string",
+                    "description": "A URL or an asset id the host application resolves; image data is never stored in the Document."
+                },
+                "position": { "$ref": "#/$defs/vec2" },
+                "scale": { "type": "number", "description": "Metres per image pixel." },
+                "rotation": { "type": "number", "description": "Radians, counter-clockwise." },
+                "opacity": { "type": "number" },
+                "locked": { "type": "boolean" },
+                "size": {
+                    "$ref": "#/$defs/vec2",
+                    "description": "Image size in pixels, recorded when the image is added."
+                }
+            }
+        },
+        "viewpoint": {
+            "description": "A camera saved on a Level for the 3D view: the floor point it looks at, from which side and how steeply, and how far away. Unlike the rest of the format, its angles are compass degrees, so it can be written by hand.",
+            "type": "object",
+            "required": ["id", "target", "bearing", "tilt", "distance"],
+            "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "name": {
+                    "type": "string",
+                    "description": "Shown in the Editor's list, such as `Entrance A`."
+                },
+                "target": {
+                    "$ref": "#/$defs/vec2",
+                    "description": "The point on the floor it looks at."
+                },
+                "bearing": {
+                    "type": "number",
+                    "description": "Degrees, the compass direction the camera looks towards: 0 north (+Y), 90 east (+X)."
+                },
+                "tilt": {
+                    "type": "number",
+                    "description": "Degrees from looking straight down (0) towards level with the floor, at most 87: the 3D view keeps the camera just above the floor."
+                },
+                "distance": {
+                    "type": "number",
+                    "description": "Metres from `target` to the camera."
+                },
+                "flight": {
+                    "type": "number",
+                    "description": "Seconds a tour takes to fly here; 3 when absent."
+                },
+                "pause": {
+                    "type": "number",
+                    "description": "Seconds a tour stays here; 2 when absent."
+                }
+            }
+        },
+        "connection": {
+            "description": "Stairs, an elevator, an escalator or a ramp between Levels, with a Stop on each Level it serves.",
+            "type": "object",
+            "required": ["id", "kind", "stops", "bidirectional"],
+            "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "kind": { "enum": ["stairs", "elevator", "escalator", "ramp"] },
+                "name": { "type": "string" },
+                "names": {
+                    "$ref": "#/$defs/translations",
+                    "description": "`name` in other Content Languages."
+                },
+                "stops": { "type": "array", "items": { "$ref": "#/$defs/stop" } },
+                "bidirectional": {
+                    "type": "boolean",
+                    "description": "False for a one-way Connection, such as an escalator: it runs from the first Stop to the last."
+                },
+                "accessible": {
+                    "type": "boolean",
+                    "description": "Usable by people with reduced mobility; step-free routes take only these."
+                }
+            }
+        },
+        "stop": {
+            "description": "The part of a Connection on one Level: its footprint there and its entry point.",
+            "type": "object",
+            "required": ["levelId", "shape"],
+            "properties": {
+                "levelId": { "type": "string", "description": "The id of the Level." },
+                "shape": { "$ref": "#/$defs/shape" },
+                "entry": {
+                    "$ref": "#/$defs/vec2",
+                    "description": "The entry point."
+                }
+            }
+        }
+    }
+}

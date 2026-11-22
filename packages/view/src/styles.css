@@ -1,0 +1,510 @@
+/* @areaform/view — override the --af-* variables to re-theme; the Editor uses them too. `af-theme`
+   gives the same defaults to any container, e.g. a host page using `af-button`. */
+.af-editor,
+.af-view,
+.af-theme {
+    --af-bg: #ffffff;
+    --af-panel: #f6f6f3;
+    --af-text: #232321;
+    --af-muted: #77776f;
+    --af-border: #deded8;
+    --af-accent: #2f6fdb;
+    --af-danger: #c0392b;
+    --af-radius: 6px;
+    --af-icon-size: 16px;
+    color: var(--af-text);
+    font:
+        14px/1.4 system-ui,
+        sans-serif;
+}
+
+.af-view {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.af-canvas {
+    position: absolute;
+    inset: 0;
+}
+
+.af-button {
+    padding: 4px 10px;
+    white-space: nowrap;
+    font: inherit;
+    color: inherit;
+    background: var(--af-bg);
+    border: 1px solid var(--af-border);
+    border-radius: var(--af-radius);
+    cursor: pointer;
+}
+
+.af-button[aria-pressed='true'] {
+    color: var(--af-accent);
+    border-color: var(--af-accent);
+}
+
+.af-button:disabled {
+    color: var(--af-muted);
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.af-icon {
+    display: block;
+    width: var(--af-icon-size, 16px);
+    height: var(--af-icon-size, 16px);
+}
+
+/* An icon-only button: square, as tall as a button with a line of text. */
+.af-icon-button {
+    display: inline-grid;
+    place-items: center;
+    box-sizing: border-box;
+    width: calc(1.4em + 10px);
+    height: calc(1.4em + 10px);
+    padding: 0;
+}
+
+/* The 2D / 3D switch, view buttons and Fit, stacked in the plan's bottom-right corner. */
+/* The "Made with Areaform" link, small and out of the way, as map libraries credit themselves. */
+.af-attribution {
+    position: absolute;
+    left: calc(8px + var(--af-inset-left, 0px));
+    bottom: 8px;
+    display: flex;
+    gap: 6px;
+    padding: 2px 6px;
+    font-size: 11px;
+    color: var(--af-muted);
+    background: rgb(255 255 255 / 0.8);
+    border-radius: 4px;
+}
+.af-attribution a {
+    color: inherit;
+}
+
+/* The Level switcher: names stacked in the top-left corner, folded into one button when narrow. */
+.af-view {
+    container-type: inline-size;
+}
+.af-level-switcher {
+    position: absolute;
+    top: 12px;
+    left: calc(12px + var(--af-inset-left, 0px));
+    display: grid;
+    gap: 6px;
+    max-height: calc(100% - 64px);
+    overflow: auto;
+}
+.af-level-switcher[hidden] {
+    display: none;
+}
+.af-level-list,
+.af-level-list [role='group'] {
+    display: grid;
+    gap: 2px;
+}
+.af-level-list {
+    gap: 8px;
+}
+.af-level-switcher .af-button {
+    text-align: left;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.15);
+}
+.af-level-switcher .af-level-button[aria-pressed='true'] {
+    color: #ffffff;
+    background: var(--af-accent);
+    border-color: var(--af-accent);
+}
+.af-level-group {
+    justify-self: start;
+    padding: 0 4px;
+    background: rgb(255 255 255 / 0.8);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--af-muted);
+}
+.af-level-toggle {
+    display: none;
+}
+@container (max-width: 480px) {
+    .af-level-toggle {
+        display: block;
+    }
+    .af-level-switcher:not(.af-open) .af-level-list {
+        display: none;
+    }
+}
+
+.af-plan-controls {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.af-plan-controls .af-button {
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.15);
+}
+
+.af-view-switch {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.af-view-switch .af-button {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Shown in place of a canvas that cannot be drawn, e.g. 3D without WebGL. */
+.af-canvas-message {
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    text-align: center;
+    color: var(--af-muted);
+    background: var(--af-panel);
+}
+
+/* A layer over the plan for Plugins' own elements; it lets the pointer through. */
+.af-overlay {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* Cooperative gestures: how to move the plan, after a scroll or a swipe went to the page. */
+.af-gesture-hint {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    padding-left: calc(24px + var(--af-inset-left, 0px));
+    text-align: center;
+    font:
+        600 16px/1.4 system-ui,
+        sans-serif;
+    color: #ffffff;
+    background: rgb(0 0 0 / 0.45);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 200ms ease;
+}
+.af-gesture-hint.af-shown {
+    opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+    .af-gesture-hint {
+        transition: none;
+    }
+}
+
+/* The tooltip Plugin's card, beside the pointer. */
+.af-tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    max-width: 240px;
+    padding: 6px 10px;
+    color: var(--af-text);
+    background: var(--af-bg);
+    border: 1px solid var(--af-border);
+    border-radius: var(--af-radius);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+}
+
+.af-tooltip[hidden] {
+    display: none;
+}
+
+.af-tooltip span {
+    color: var(--af-muted);
+    font-size: 12px;
+}
+
+/* The Wayfinding Plugin (ADR-0017): the route line, the pins, the place card and the route panel. */
+.af-route-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.af-route,
+.af-route-casing {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* A light edge under the dashes, so the line reads on any fill. */
+.af-route-casing {
+    stroke: var(--af-bg);
+    stroke-width: 9;
+    stroke-opacity: 0.85;
+}
+
+/* Dashes, not a solid stroke, so a route never reads as a Wall; they march toward the end. */
+.af-route {
+    stroke: var(--af-accent);
+    stroke-width: 5;
+    stroke-dasharray: 8 8;
+    animation: af-route-march 0.8s linear infinite;
+}
+
+/* The way on outside the building, straight from the door: dotted, thinner, and still, as it is
+   not a walked route, only the direction. */
+.af-route-beyond-casing {
+    stroke-width: 6;
+}
+
+.af-route-beyond {
+    fill: none;
+    stroke: var(--af-accent);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 0.1 7;
+    stroke-opacity: 0.8;
+}
+
+@keyframes af-route-march {
+    from {
+        stroke-dashoffset: 16;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .af-route {
+        animation: none;
+    }
+}
+
+.af-pin {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.af-pin[hidden] {
+    display: none;
+}
+
+/* In 3D, a pin or a Level-change marker behind a Wall: still there, but plainly behind. */
+.af-pin.af-behind,
+.af-route-change.af-behind {
+    opacity: 0.4;
+}
+
+/* "You are here": a dot with a ring, and its label above. */
+.af-pin-here {
+    width: 16px;
+    height: 16px;
+    translate: -50% -50%;
+    background: var(--af-accent);
+    border: 3px solid var(--af-bg);
+    border-radius: 50%;
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--af-accent) 25%, transparent);
+}
+
+.af-pin-here span {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    translate: -50% 0;
+    padding: 2px 8px;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--af-bg);
+    background: var(--af-accent);
+    border-radius: 999px;
+}
+
+/*
+ * The destination: a pin standing on its point. The element only moves (its transform places it);
+ * the teardrop is drawn turned on ::before, since turning the element would turn its position too.
+ */
+.af-pin-to {
+    width: 24px;
+    height: 24px;
+    translate: -50% -115%;
+}
+
+.af-pin-to::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--af-danger);
+    border: 3px solid var(--af-bg);
+    border-radius: 50% 50% 50% 0;
+    rotate: -45deg;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.3);
+}
+
+/* The place card: what was tapped, with Directions; it stands above the tapped point. */
+.af-place-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    translate: -50% calc(-100% - 12px);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px 8px;
+    align-items: center;
+    max-width: 240px;
+    padding: 8px 10px;
+    color: var(--af-text);
+    background: var(--af-bg);
+    border: 1px solid var(--af-border);
+    border-radius: var(--af-radius);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+    pointer-events: auto;
+}
+
+.af-place-card[hidden] {
+    display: none;
+}
+
+/* Step-free: a checkbox with its label, on its own line in the route panel. */
+.af-step-free {
+    display: flex;
+    flex-basis: 100%;
+    gap: 6px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.af-step-free input {
+    margin: 0;
+}
+
+/* A route between Levels: its steps in order, each showing the Level where it starts. */
+.af-route-steps {
+    display: grid;
+    flex-basis: 100%;
+    gap: 4px;
+    margin: 0;
+    padding-left: 20px;
+}
+
+.af-route-panel .af-route-steps button {
+    width: 100%;
+    text-align: start;
+}
+
+.af-route-panel .af-route-steps button[aria-current='step'] {
+    border-color: var(--af-accent);
+    box-shadow: inset 3px 0 0 var(--af-accent);
+}
+
+/* Where the route changes Level: a small button on the plan to the Level it goes on to. */
+.af-route-change {
+    position: absolute;
+    top: 0;
+    left: 0;
+    translate: -50% calc(-100% - 6px);
+    padding: 2px 8px;
+    font: 600 12px/1.4 inherit;
+    font-family: inherit;
+    white-space: nowrap;
+    color: var(--af-accent);
+    background: var(--af-bg);
+    border: 2px solid var(--af-accent);
+    border-radius: 999px;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.25);
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.af-route-change[hidden] {
+    display: none;
+}
+
+.af-place-card .af-primary {
+    grid-column: 1 / -1;
+}
+
+.af-place-card .af-close {
+    grid-row: 1;
+    grid-column: 2;
+    padding: 0 4px;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--af-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.af-route-panel {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    translate: -50% 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    align-items: center;
+    width: max-content;
+    max-width: min(420px, calc(100% - 16px));
+    padding: 8px 10px;
+    color: var(--af-text);
+    background: var(--af-bg);
+    border: 1px solid var(--af-border);
+    border-radius: var(--af-radius);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+    pointer-events: auto;
+}
+
+.af-route-panel[hidden] {
+    display: none;
+}
+
+.af-route-panel strong,
+.af-route-panel p {
+    flex-basis: 100%;
+    margin: 0;
+}
+
+/* A tap that set nothing: why. */
+.af-route-panel .af-note {
+    color: var(--af-danger);
+}
+
+.af-route-panel select {
+    flex: 1;
+    min-width: 0;
+}
+
+.af-place-card button:not(.af-close),
+.af-route-panel button {
+    padding: 4px 10px;
+    font: inherit;
+    color: var(--af-text);
+    background: var(--af-panel);
+    border: 1px solid var(--af-border);
+    border-radius: var(--af-radius);
+    cursor: pointer;
+}
+
+.af-place-card .af-primary {
+    font-weight: 600;
+    color: var(--af-bg);
+    background: var(--af-accent);
+    border-color: var(--af-accent);
+}

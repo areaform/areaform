@@ -1,0 +1,15 @@
+export {
+    categoryLabel,
+    createTranslator,
+    english,
+    kindLabel,
+    LOCALE_NAMES,
+    LOCALES,
+    type BuiltInLocale,
+    type EditorMessages,
+    type MessageArgs,
+    type MessageKey,
+    type Messages,
+    type PlainMessageKey,
+    type Translator,
+} from './translator.ts';

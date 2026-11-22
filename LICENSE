@@ -1,0 +1,44 @@
+Areaform is made of packages under different licences. Each package's own LICENSE file is the one
+that applies to it:
+
+  packages/core          MIT                      packages/core/LICENSE
+  packages/render-2d     MIT                      packages/render-2d/LICENSE
+  packages/render-3d     MIT                      packages/render-3d/LICENSE
+  packages/view          MIT                      packages/view/LICENSE
+  packages/wayfinding    MIT                      packages/wayfinding/LICENSE
+  packages/mcp           MIT                      packages/mcp/LICENSE
+  packages/editor        Business Source License  packages/editor/LICENSE
+                         1.1 with an Additional
+                         Use Grant; each version
+                         becomes MIT two years
+                         after it is published
+
+Everything else in this repository (the playground, documentation, configuration and scripts) is
+under the MIT License below.
+
+The name Areaform and its logo (brand/) are not licensed for use other than to refer to this
+project.
+
+-------------------------------------------------------------------------------
+
+MIT License
+
+Copyright (c) 2026 Semenov Ruslan Oleksiiovych
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

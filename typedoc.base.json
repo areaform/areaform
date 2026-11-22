@@ -1,0 +1,6 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "readme": "none",
+    "exclude": ["**/*.test.ts"],
+    "disableSources": true
+}

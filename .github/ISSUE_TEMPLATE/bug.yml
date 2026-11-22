@@ -1,0 +1,34 @@
+name: Bug
+description: Something in a package or the playground does not work as it should
+labels: [bug]
+body:
+    - type: dropdown
+      id: package
+      attributes:
+          label: Package
+          options: [core, render-2d, render-3d, view, wayfinding, editor, mcp, playground, not sure]
+      validations:
+          required: true
+    - type: input
+      id: version
+      attributes:
+          label: Version or commit
+          placeholder: 0.6.0, or the commit you built from
+    - type: textarea
+      id: steps
+      attributes:
+          label: What you did
+          description: Steps to reproduce. If a plan is needed, attach its JSON or a smaller one that shows the same.
+      validations:
+          required: true
+    - type: textarea
+      id: expected
+      attributes:
+          label: What you expected, and what happened instead
+      validations:
+          required: true
+    - type: input
+      id: environment
+      attributes:
+          label: Browser and OS
+          placeholder: Chrome 142 on macOS 26

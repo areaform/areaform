@@ -1,0 +1,10 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "types": ["node"],
+        // The DOM's types only: frame_viewpoint uses render-3d's framing maths, whose package
+        // also holds the browser renderers. Nothing of the DOM runs here.
+        "lib": ["ES2023", "DOM"]
+    },
+    "include": ["src", "eval/*.ts"]
+}

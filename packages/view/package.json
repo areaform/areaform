@@ -1,0 +1,72 @@
+{
+    "name": "@areaform/view",
+    "version": "0.0.0",
+    "private": true,
+    "license": "MIT",
+    "homepage": "https://github.com/areaform/areaform/tree/main/packages/view#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/areaform/areaform.git",
+        "directory": "packages/view"
+    },
+    "bugs": {
+        "url": "https://github.com/areaform/areaform/issues"
+    },
+    "type": "module",
+    "exports": {
+        ".": "./src/index.ts",
+        "./react": "./src/react/index.ts",
+        "./plugins/tooltip": "./src/plugins/tooltip.ts",
+        "./plugins/wayfinding": "./src/plugins/wayfinding.ts",
+        "./styles.css": "./src/styles.css"
+    },
+    "files": [
+        "dist",
+        "LICENSE"
+    ],
+    "publishConfig": {
+        "exports": {
+            ".": {
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.js"
+            },
+            "./react": {
+                "types": "./dist/react/index.d.ts",
+                "default": "./dist/react/index.js"
+            },
+            "./plugins/tooltip": {
+                "types": "./dist/plugins/tooltip.d.ts",
+                "default": "./dist/plugins/tooltip.js"
+            },
+            "./plugins/wayfinding": {
+                "types": "./dist/plugins/wayfinding.d.ts",
+                "default": "./dist/plugins/wayfinding.js"
+            },
+            "./styles.css": "./dist/styles.css"
+        }
+    },
+    "scripts": {
+        "test": "vitest run",
+        "typecheck": "tsc -p tsconfig.json",
+        "build": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\" && tsc -p tsconfig.build.json && node -e \"require('fs').cpSync('src/styles.css', 'dist/styles.css')\""
+    },
+    "dependencies": {
+        "@areaform/core": "workspace:*",
+        "@areaform/render-2d": "workspace:*",
+        "@areaform/render-3d": "workspace:*",
+        "@areaform/wayfinding": "workspace:*"
+    },
+    "peerDependencies": {
+        "react": "^19.0.0"
+    },
+    "peerDependenciesMeta": {
+        "react": {
+            "optional": true
+        }
+    },
+    "devDependencies": {
+        "@types/react": "^19.3.0",
+        "react": "^19.3.1",
+        "vitest": "^5.0.5"
+    }
+}

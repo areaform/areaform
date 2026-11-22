@@ -1,0 +1,44 @@
+{
+    "name": "areaform",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/areaform/areaform.git"
+    },
+    "type": "module",
+    "packageManager": "pnpm@12.15.0",
+    "engines": {
+        "node": ">=24"
+    },
+    "scripts": {
+        "dev": "pnpm --filter @areaform/playground dev",
+        "test": "pnpm -r test",
+        "typecheck": "pnpm -r typecheck",
+        "lint": "eslint .",
+        "format": "prettier --write .",
+        "e2e": "pnpm --filter @areaform/playground e2e",
+        "coverage": "vitest run --coverage",
+        "build": "pnpm -r build",
+        "docs:api": "typedoc",
+        "prepare": "husky"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@vitest/coverage-v8": "5.0.5",
+        "eslint": "^10.13.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^17.6.0",
+        "prettier": "^3.9.10",
+        "typedoc": "0.28.20",
+        "typescript": "~6.0.3",
+        "typescript-eslint": "^8.71.2",
+        "vitest": "5.0.5"
+    },
+    "lint-staged": {
+        "*.{ts,tsx}": [
+            "eslint --fix --no-warn-ignored",
+            "prettier --write"
+        ],
+        "!(*.ts|*.tsx)": "prettier --write --ignore-unknown"
+    }
+}

@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+    - name: A question
+      url: https://github.com/areaform/areaform/discussions
+      about: '"How do I …?" and anything that is not a bug or an idea.'
+    - name: Your account or plan on areaform.app
+      url: mailto:support@areaform.app
+      about: The hosted product's support, not the engine.
+    - name: A security problem
+      url: https://github.com/areaform/areaform/security/advisories/new
+      about: Report it privately, never in a public issue.

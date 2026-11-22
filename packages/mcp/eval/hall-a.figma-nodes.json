@@ -1,0 +1,1557 @@
+{
+    "nodes": {
+        "1:2": {
+            "document": {
+                "id": "1:2",
+                "name": "Hall A — floor plan",
+                "type": "FRAME",
+                "relativeTransform": [
+                    [1, 0, 100],
+                    [0, 1, 100]
+                ],
+                "size": { "x": 1320, "y": 920 },
+                "fillGeometry": [
+                    { "path": "M0 0L1320 0L1320 920L0 920L0 0Z", "windingRule": "NONZERO" }
+                ],
+                "children": [
+                    {
+                        "id": "1:3",
+                        "name": "Floor",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 60],
+                            [0, 1, 60]
+                        ],
+                        "size": { "x": 1200, "y": 800 }
+                    },
+                    {
+                        "id": "1:4",
+                        "name": "Fire lane",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 70],
+                            [0, 1, 440]
+                        ],
+                        "size": { "x": 1180, "y": 60 }
+                    },
+                    {
+                        "id": "1:5",
+                        "name": "Fire lane label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 631.5],
+                            [0, 1, 461.5]
+                        ],
+                        "size": { "x": 57, "y": 17 },
+                        "characters": "Fire lane"
+                    },
+                    {
+                        "id": "1:6",
+                        "name": "Registration",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 560],
+                            [0, 1, 740]
+                        ],
+                        "size": { "x": 200, "y": 80 }
+                    },
+                    {
+                        "id": "1:7",
+                        "name": "Registration label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 628.5],
+                            [0, 1, 773.5]
+                        ],
+                        "size": { "x": 63, "y": 13 },
+                        "characters": "Registration"
+                    },
+                    {
+                        "id": "1:8",
+                        "name": "Booth A1",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 140],
+                            [0, 1, 640]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:9",
+                        "name": "Booth A1 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 163.5],
+                            [0, 1, 663.5]
+                        ],
+                        "size": { "x": 13, "y": 13 },
+                        "characters": "A1"
+                    },
+                    {
+                        "id": "1:10",
+                        "name": "Booth A2",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 200],
+                            [0, 1, 640]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:11",
+                        "name": "Booth A2 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 222.5],
+                            [0, 1, 663.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "A2"
+                    },
+                    {
+                        "id": "1:12",
+                        "name": "Booth A3",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 260],
+                            [0, 1, 640]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:13",
+                        "name": "Booth A3 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 282.5],
+                            [0, 1, 663.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "A3"
+                    },
+                    {
+                        "id": "1:14",
+                        "name": "Booth A4",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 320],
+                            [0, 1, 640]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:15",
+                        "name": "Booth A4 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 342.5],
+                            [0, 1, 663.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "A4"
+                    },
+                    {
+                        "id": "1:16",
+                        "name": "Booth A5",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 380],
+                            [0, 1, 640]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:17",
+                        "name": "Booth A5 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 402.5],
+                            [0, 1, 663.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "A5"
+                    },
+                    {
+                        "id": "1:18",
+                        "name": "Booth A6",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 440],
+                            [0, 1, 640]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:19",
+                        "name": "Booth A6 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 462.5],
+                            [0, 1, 663.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "A6"
+                    },
+                    {
+                        "id": "1:20",
+                        "name": "Booth A7",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 500],
+                            [0, 1, 640]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:21",
+                        "name": "Booth A7 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 523],
+                            [0, 1, 663.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "A7"
+                    },
+                    {
+                        "id": "1:22",
+                        "name": "Booth B1",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 140],
+                            [0, 1, 580]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:23",
+                        "name": "Booth B1 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 163.5],
+                            [0, 1, 603.5]
+                        ],
+                        "size": { "x": 13, "y": 13 },
+                        "characters": "B1"
+                    },
+                    {
+                        "id": "1:24",
+                        "name": "Booth B2",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 200],
+                            [0, 1, 580]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:25",
+                        "name": "Booth B2 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 223],
+                            [0, 1, 603.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "B2"
+                    },
+                    {
+                        "id": "1:26",
+                        "name": "Booth B3",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 260],
+                            [0, 1, 580]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:27",
+                        "name": "Booth B3 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 282.5],
+                            [0, 1, 603.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "B3"
+                    },
+                    {
+                        "id": "1:28",
+                        "name": "Booth B4",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 320],
+                            [0, 1, 580]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:29",
+                        "name": "Booth B4 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 342.5],
+                            [0, 1, 603.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "B4"
+                    },
+                    {
+                        "id": "1:30",
+                        "name": "Booth B5",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 380],
+                            [0, 1, 580]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:31",
+                        "name": "Booth B5 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 403],
+                            [0, 1, 603.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "B5"
+                    },
+                    {
+                        "id": "1:32",
+                        "name": "Booth B6",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 440],
+                            [0, 1, 580]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:33",
+                        "name": "Booth B6 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 462.5],
+                            [0, 1, 603.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "B6"
+                    },
+                    {
+                        "id": "1:34",
+                        "name": "Booth B7",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 500],
+                            [0, 1, 580]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:35",
+                        "name": "Booth B7 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 523],
+                            [0, 1, 603.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "B7"
+                    },
+                    {
+                        "id": "1:36",
+                        "name": "Booth C1",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 760],
+                            [0, 1, 640]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:37",
+                        "name": "Booth C1 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 783],
+                            [0, 1, 663.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "C1"
+                    },
+                    {
+                        "id": "1:38",
+                        "name": "Booth C2",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 820],
+                            [0, 1, 640]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:39",
+                        "name": "Booth C2 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 842.5],
+                            [0, 1, 663.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "C2"
+                    },
+                    {
+                        "id": "1:40",
+                        "name": "Booth C3",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 880],
+                            [0, 1, 640]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:41",
+                        "name": "Booth C3 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 902],
+                            [0, 1, 663.5]
+                        ],
+                        "size": { "x": 16, "y": 13 },
+                        "characters": "C3"
+                    },
+                    {
+                        "id": "1:42",
+                        "name": "Booth C4",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 940],
+                            [0, 1, 640]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:43",
+                        "name": "Booth C4 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 962],
+                            [0, 1, 663.5]
+                        ],
+                        "size": { "x": 16, "y": 13 },
+                        "characters": "C4"
+                    },
+                    {
+                        "id": "1:44",
+                        "name": "Booth C5",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1000],
+                            [0, 1, 640]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:45",
+                        "name": "Booth C5 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 1022.5],
+                            [0, 1, 663.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "C5"
+                    },
+                    {
+                        "id": "1:46",
+                        "name": "Booth C6",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1060],
+                            [0, 1, 640]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:47",
+                        "name": "Booth C6 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 1082.5],
+                            [0, 1, 663.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "C6"
+                    },
+                    {
+                        "id": "1:48",
+                        "name": "Booth C7",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1120],
+                            [0, 1, 640]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:49",
+                        "name": "Booth C7 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 1142.5],
+                            [0, 1, 663.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "C7"
+                    },
+                    {
+                        "id": "1:50",
+                        "name": "Booth D1",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 760],
+                            [0, 1, 580]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:51",
+                        "name": "Booth D1 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 783],
+                            [0, 1, 603.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "D1"
+                    },
+                    {
+                        "id": "1:52",
+                        "name": "Booth D2",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 820],
+                            [0, 1, 580]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:53",
+                        "name": "Booth D2 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 842.5],
+                            [0, 1, 603.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "D2"
+                    },
+                    {
+                        "id": "1:54",
+                        "name": "Booth D3",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 880],
+                            [0, 1, 580]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:55",
+                        "name": "Booth D3 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 902.5],
+                            [0, 1, 603.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "D3"
+                    },
+                    {
+                        "id": "1:56",
+                        "name": "Booth D4",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 940],
+                            [0, 1, 580]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:57",
+                        "name": "Booth D4 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 962.5],
+                            [0, 1, 603.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "D4"
+                    },
+                    {
+                        "id": "1:58",
+                        "name": "Booth D5",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1000],
+                            [0, 1, 580]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:59",
+                        "name": "Booth D5 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 1022.5],
+                            [0, 1, 603.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "D5"
+                    },
+                    {
+                        "id": "1:60",
+                        "name": "Booth D6",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1060],
+                            [0, 1, 580]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:61",
+                        "name": "Booth D6 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 1082.5],
+                            [0, 1, 603.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "D6"
+                    },
+                    {
+                        "id": "1:62",
+                        "name": "Booth D7",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1120],
+                            [0, 1, 580]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:63",
+                        "name": "Booth D7 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 1142.5],
+                            [0, 1, 603.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "D7"
+                    },
+                    {
+                        "id": "1:64",
+                        "name": "Booth E1",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 140],
+                            [0, 1, 300]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:65",
+                        "name": "Booth E1 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 164],
+                            [0, 1, 323.5]
+                        ],
+                        "size": { "x": 12, "y": 13 },
+                        "characters": "E1"
+                    },
+                    {
+                        "id": "1:66",
+                        "name": "Booth E2",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 200],
+                            [0, 1, 300]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:67",
+                        "name": "Booth E2 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 223],
+                            [0, 1, 323.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "E2"
+                    },
+                    {
+                        "id": "1:68",
+                        "name": "Booth E3",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 260],
+                            [0, 1, 300]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:69",
+                        "name": "Booth E3 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 283],
+                            [0, 1, 323.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "E3"
+                    },
+                    {
+                        "id": "1:70",
+                        "name": "Booth E4",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 320],
+                            [0, 1, 300]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:71",
+                        "name": "Booth E4 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 343],
+                            [0, 1, 323.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "E4"
+                    },
+                    {
+                        "id": "1:72",
+                        "name": "Booth E5",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 380],
+                            [0, 1, 300]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:73",
+                        "name": "Booth E5 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 403],
+                            [0, 1, 323.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "E5"
+                    },
+                    {
+                        "id": "1:74",
+                        "name": "Booth E6",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 440],
+                            [0, 1, 300]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:75",
+                        "name": "Booth E6 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 463],
+                            [0, 1, 323.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "E6"
+                    },
+                    {
+                        "id": "1:76",
+                        "name": "Booth E7",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 500],
+                            [0, 1, 300]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:77",
+                        "name": "Booth E7 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 523.5],
+                            [0, 1, 323.5]
+                        ],
+                        "size": { "x": 13, "y": 13 },
+                        "characters": "E7"
+                    },
+                    {
+                        "id": "1:78",
+                        "name": "Booth F1",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 140],
+                            [0, 1, 240]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:79",
+                        "name": "Booth F1 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 164],
+                            [0, 1, 263.5]
+                        ],
+                        "size": { "x": 12, "y": 13 },
+                        "characters": "F1"
+                    },
+                    {
+                        "id": "1:80",
+                        "name": "Booth F2",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 200],
+                            [0, 1, 240]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:81",
+                        "name": "Booth F2 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 223],
+                            [0, 1, 263.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "F2"
+                    },
+                    {
+                        "id": "1:82",
+                        "name": "Booth F3",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 260],
+                            [0, 1, 240]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:83",
+                        "name": "Booth F3 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 283],
+                            [0, 1, 263.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "F3"
+                    },
+                    {
+                        "id": "1:84",
+                        "name": "Booth F4",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 320],
+                            [0, 1, 240]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:85",
+                        "name": "Booth F4 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 343],
+                            [0, 1, 263.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "F4"
+                    },
+                    {
+                        "id": "1:86",
+                        "name": "Booth F5",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 380],
+                            [0, 1, 240]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:87",
+                        "name": "Booth F5 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 403],
+                            [0, 1, 263.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "F5"
+                    },
+                    {
+                        "id": "1:88",
+                        "name": "Booth F6",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 440],
+                            [0, 1, 240]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:89",
+                        "name": "Booth F6 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 463],
+                            [0, 1, 263.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "F6"
+                    },
+                    {
+                        "id": "1:90",
+                        "name": "Booth F7",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 500],
+                            [0, 1, 240]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:91",
+                        "name": "Booth F7 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 523.5],
+                            [0, 1, 263.5]
+                        ],
+                        "size": { "x": 13, "y": 13 },
+                        "characters": "F7"
+                    },
+                    {
+                        "id": "1:92",
+                        "name": "Booth G1",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 760],
+                            [0, 1, 300]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:93",
+                        "name": "Booth G1 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 783],
+                            [0, 1, 323.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "G1"
+                    },
+                    {
+                        "id": "1:94",
+                        "name": "Booth G2",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 820],
+                            [0, 1, 300]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:95",
+                        "name": "Booth G2 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 842.5],
+                            [0, 1, 323.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "G2"
+                    },
+                    {
+                        "id": "1:96",
+                        "name": "Booth G3",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 880],
+                            [0, 1, 300]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:97",
+                        "name": "Booth G3 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 902],
+                            [0, 1, 323.5]
+                        ],
+                        "size": { "x": 16, "y": 13 },
+                        "characters": "G3"
+                    },
+                    {
+                        "id": "1:98",
+                        "name": "Booth G4",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 940],
+                            [0, 1, 300]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:99",
+                        "name": "Booth G4 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 962],
+                            [0, 1, 323.5]
+                        ],
+                        "size": { "x": 16, "y": 13 },
+                        "characters": "G4"
+                    },
+                    {
+                        "id": "1:100",
+                        "name": "Booth G5",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1000],
+                            [0, 1, 300]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:101",
+                        "name": "Booth G5 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 1022.5],
+                            [0, 1, 323.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "G5"
+                    },
+                    {
+                        "id": "1:102",
+                        "name": "Booth G6",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1060],
+                            [0, 1, 300]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:103",
+                        "name": "Booth G6 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 1082],
+                            [0, 1, 323.5]
+                        ],
+                        "size": { "x": 16, "y": 13 },
+                        "characters": "G6"
+                    },
+                    {
+                        "id": "1:104",
+                        "name": "Booth G7",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1120],
+                            [0, 1, 300]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:105",
+                        "name": "Booth G7 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 1142.5],
+                            [0, 1, 323.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "G7"
+                    },
+                    {
+                        "id": "1:106",
+                        "name": "Booth H1",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 760],
+                            [0, 1, 240]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:107",
+                        "name": "Booth H1 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 783],
+                            [0, 1, 263.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "H1"
+                    },
+                    {
+                        "id": "1:108",
+                        "name": "Booth H2",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 820],
+                            [0, 1, 240]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:109",
+                        "name": "Booth H2 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 842.5],
+                            [0, 1, 263.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "H2"
+                    },
+                    {
+                        "id": "1:110",
+                        "name": "Booth H3",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 880],
+                            [0, 1, 240]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:111",
+                        "name": "Booth H3 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 902],
+                            [0, 1, 263.5]
+                        ],
+                        "size": { "x": 16, "y": 13 },
+                        "characters": "H3"
+                    },
+                    {
+                        "id": "1:112",
+                        "name": "Booth H4",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 940],
+                            [0, 1, 240]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:113",
+                        "name": "Booth H4 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 962],
+                            [0, 1, 263.5]
+                        ],
+                        "size": { "x": 16, "y": 13 },
+                        "characters": "H4"
+                    },
+                    {
+                        "id": "1:114",
+                        "name": "Booth H5",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1000],
+                            [0, 1, 240]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:115",
+                        "name": "Booth H5 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 1022.5],
+                            [0, 1, 263.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "H5"
+                    },
+                    {
+                        "id": "1:116",
+                        "name": "Booth H6",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1060],
+                            [0, 1, 240]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:117",
+                        "name": "Booth H6 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 1082],
+                            [0, 1, 263.5]
+                        ],
+                        "size": { "x": 16, "y": 13 },
+                        "characters": "H6"
+                    },
+                    {
+                        "id": "1:118",
+                        "name": "Booth H7",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1120],
+                            [0, 1, 240]
+                        ],
+                        "size": { "x": 60, "y": 60 }
+                    },
+                    {
+                        "id": "1:119",
+                        "name": "Booth H7 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 1142.5],
+                            [0, 1, 263.5]
+                        ],
+                        "size": { "x": 15, "y": 13 },
+                        "characters": "H7"
+                    },
+                    {
+                        "id": "1:120",
+                        "name": "Booth I1",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 600],
+                            [0, 1, 580]
+                        ],
+                        "size": { "x": 120, "y": 120 }
+                    },
+                    {
+                        "id": "1:121",
+                        "name": "Booth I1 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 655.5],
+                            [0, 1, 633.5]
+                        ],
+                        "size": { "x": 9, "y": 13 },
+                        "characters": "I1"
+                    },
+                    {
+                        "id": "1:122",
+                        "name": "Booth I2",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 600],
+                            [0, 1, 240]
+                        ],
+                        "size": { "x": 120, "y": 120 }
+                    },
+                    {
+                        "id": "1:123",
+                        "name": "Booth I2 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 655],
+                            [0, 1, 293.5]
+                        ],
+                        "size": { "x": 10, "y": 13 },
+                        "characters": "I2"
+                    },
+                    {
+                        "id": "1:124",
+                        "name": "Booth P1",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 140],
+                            [0, 1, 740]
+                        ],
+                        "size": { "x": 120, "y": 80 }
+                    },
+                    {
+                        "id": "1:125",
+                        "name": "Booth P1 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 193.5],
+                            [0, 1, 773.5]
+                        ],
+                        "size": { "x": 13, "y": 13 },
+                        "characters": "P1"
+                    },
+                    {
+                        "id": "1:126",
+                        "name": "Booth P2",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1060],
+                            [0, 1, 740]
+                        ],
+                        "size": { "x": 120, "y": 80 }
+                    },
+                    {
+                        "id": "1:127",
+                        "name": "Booth P2 label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 1113],
+                            [0, 1, 773.5]
+                        ],
+                        "size": { "x": 14, "y": 13 },
+                        "characters": "P2"
+                    },
+                    {
+                        "id": "1:128",
+                        "name": "Column",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 354],
+                            [0, 1, 524]
+                        ],
+                        "size": { "x": 12, "y": 12 }
+                    },
+                    {
+                        "id": "1:129",
+                        "name": "Column",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 354],
+                            [0, 1, 404]
+                        ],
+                        "size": { "x": 12, "y": 12 }
+                    },
+                    {
+                        "id": "1:130",
+                        "name": "Column",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 654],
+                            [0, 1, 524]
+                        ],
+                        "size": { "x": 12, "y": 12 }
+                    },
+                    {
+                        "id": "1:131",
+                        "name": "Column",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 654],
+                            [0, 1, 404]
+                        ],
+                        "size": { "x": 12, "y": 12 }
+                    },
+                    {
+                        "id": "1:132",
+                        "name": "Column",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 954],
+                            [0, 1, 524]
+                        ],
+                        "size": { "x": 12, "y": 12 }
+                    },
+                    {
+                        "id": "1:133",
+                        "name": "Column",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 954],
+                            [0, 1, 404]
+                        ],
+                        "size": { "x": 12, "y": 12 }
+                    },
+                    {
+                        "id": "1:134",
+                        "name": "Wall",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 57],
+                            [0, 1, 857]
+                        ],
+                        "size": { "x": 1206, "y": 6 }
+                    },
+                    {
+                        "id": "1:135",
+                        "name": "Wall",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1257],
+                            [0, 1, 57]
+                        ],
+                        "size": { "x": 6, "y": 806 }
+                    },
+                    {
+                        "id": "1:136",
+                        "name": "Wall",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 57],
+                            [0, 1, 57]
+                        ],
+                        "size": { "x": 1206, "y": 6 }
+                    },
+                    {
+                        "id": "1:137",
+                        "name": "Wall",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 57],
+                            [0, 1, 57]
+                        ],
+                        "size": { "x": 6, "y": 806 }
+                    },
+                    {
+                        "id": "1:138",
+                        "name": "Entrance",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 430],
+                            [0, 1, 852]
+                        ],
+                        "size": { "x": 60, "y": 16 }
+                    },
+                    {
+                        "id": "1:139",
+                        "name": "Entrance label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 433],
+                            [0, 1, 876]
+                        ],
+                        "size": { "x": 54, "y": 12 },
+                        "characters": "ENTRANCE"
+                    },
+                    {
+                        "id": "1:140",
+                        "name": "Entrance",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 830],
+                            [0, 1, 852]
+                        ],
+                        "size": { "x": 60, "y": 16 }
+                    },
+                    {
+                        "id": "1:141",
+                        "name": "Entrance label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 833],
+                            [0, 1, 876]
+                        ],
+                        "size": { "x": 54, "y": 12 },
+                        "characters": "ENTRANCE"
+                    },
+                    {
+                        "id": "1:142",
+                        "name": "Emergency exit",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 242],
+                            [0, 1, 52]
+                        ],
+                        "size": { "x": 36, "y": 16 }
+                    },
+                    {
+                        "id": "1:143",
+                        "name": "Emergency exit",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1042],
+                            [0, 1, 52]
+                        ],
+                        "size": { "x": 36, "y": 16 }
+                    },
+                    {
+                        "id": "1:144",
+                        "name": "Emergency exit",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 52],
+                            [0, 1, 242]
+                        ],
+                        "size": { "x": 16, "y": 36 }
+                    },
+                    {
+                        "id": "1:145",
+                        "name": "Emergency exit",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 1252],
+                            [0, 1, 242]
+                        ],
+                        "size": { "x": 16, "y": 36 }
+                    },
+                    {
+                        "id": "1:146",
+                        "name": "Dimension 60 m",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 60],
+                            [0, 1, 28]
+                        ],
+                        "size": { "x": 1200, "y": 1 }
+                    },
+                    {
+                        "id": "1:147",
+                        "name": "Dimension 60 m label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, 645.5],
+                            [0, 1, 8.5]
+                        ],
+                        "size": { "x": 29, "y": 15 },
+                        "characters": "60 m"
+                    },
+                    {
+                        "id": "1:148",
+                        "name": "Dimension 40 m",
+                        "type": "RECTANGLE",
+                        "relativeTransform": [
+                            [1, 0, 28],
+                            [0, 1, 60]
+                        ],
+                        "size": { "x": 1, "y": 800 }
+                    },
+                    {
+                        "id": "1:149",
+                        "name": "Dimension 40 m label",
+                        "type": "TEXT",
+                        "relativeTransform": [
+                            [1, 0, -1],
+                            [0, 1, 452.5]
+                        ],
+                        "size": { "x": 30, "y": 15 },
+                        "characters": "40 m"
+                    }
+                ]
+            }
+        }
+    }
+}
