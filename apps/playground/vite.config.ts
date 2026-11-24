@@ -50,6 +50,9 @@ export default defineConfig(({ mode }) => {
         // Relative asset paths, so the build works from any folder on a static server.
         base: './',
         plugins: [react(), devFavicon, beacon(env.PUBLIC_CF_BEACON_TOKEN)],
+        // The playground is an app with React and the whole Editor, not a widget; what sites
+        // download is measured by `pnpm size` (scripts/size/), so Vite's 500 KB warning is noise.
+        build: { chunkSizeWarningLimit: 1024 },
         server: { port, strictPort: true },
         preview: { port, strictPort: true },
     };

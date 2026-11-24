@@ -26,7 +26,7 @@ function timed<T>(fn: () => T): { value: T; ms: number } {
     return { value, ms: performance.now() - start };
 }
 
-// The slowest Zones of the demo office (apps/server/demo/office.json): long and thin.
+// The slowest Zones of the demo office (samples/office.json): long and thin.
 const serviceCorridor: Shape = {
     outer: [
         [36.6, 0.02],

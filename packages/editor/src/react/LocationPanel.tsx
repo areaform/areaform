@@ -3,8 +3,8 @@
 // the plan faces. GeoJSON exports use it.
 import type { AreaformDocument, Editor, Georeference } from '@areaform/core';
 import { useState } from 'react';
-import { formatLatLng, middleLatLng, parseLatLng, placeMiddle } from '../location.ts';
-import { formatDecimal, parseDecimal } from '../units.ts';
+import { formatLatLng, middleLatLng, parseLatLng, placeMiddle } from '../document/location.ts';
+import { formatDecimal, parseDecimal } from '../interaction/units.ts';
 import { CommitInput } from './CommitInput.tsx';
 import { useI18n } from './i18n.ts';
 

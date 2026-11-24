@@ -1,0 +1,17 @@
+{
+    "view": {
+        "initial": 16384,
+        "plan2d": 224256,
+        "with3d": 406528
+    },
+    "editor": {
+        "initial": 84992,
+        "plan2d": 283648,
+        "with3d": 464896
+    },
+    "core": {
+        "initial": 6144,
+        "plan2d": 6144,
+        "with3d": 6144
+    }
+}

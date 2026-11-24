@@ -31,7 +31,7 @@ import {
     type KeyboardEvent,
     type ReactNode,
 } from 'react';
-import { categoryFromText } from '../categories.ts';
+import { categoryFromText } from '../document/categories.ts';
 import type { Translator } from '../i18n/index.ts';
 import {
     isOneJobTool,
@@ -40,7 +40,7 @@ import {
     type PendingDelete,
     type PickableTool,
     type ToolName,
-} from '../controller.ts';
+} from '../interaction/controller.ts';
 import type { ShapeMode } from '../tools/shape.ts';
 import type { OutlineMode } from '../tools/outline.ts';
 import {
@@ -53,8 +53,8 @@ import {
     SHORTCUTS,
     type KeyCombo,
     type Platform,
-} from '../shortcuts.ts';
-import { parseLength, rulersFor, unitLabel, type DisplayUnits } from '../units.ts';
+} from '../interaction/shortcuts.ts';
+import { parseLength, rulersFor, unitLabel, type DisplayUnits } from '../interaction/units.ts';
 import { CategoryList } from './CategoryList.tsx';
 import { CommitInput } from './CommitInput.tsx';
 import { Icon, type IconName } from './Icon.tsx';
@@ -72,9 +72,9 @@ import { LanguagesPanel } from './LanguagesPanel.tsx';
 import { LocationPanel } from './LocationPanel.tsx';
 import { ProblemsPanel, useProblems } from './ProblemsPanel.tsx';
 import { ViewpointsPanel } from './ViewpointsPanel.tsx';
-import { viewpointMarks } from '../viewpoints.ts';
+import { viewpointMarks } from '../document/viewpoints.ts';
 import { HerePrompt, type HereLink } from './HereValue.tsx';
-import { fillingInResolver, fillingLanguage } from '../contentLanguages.ts';
+import { fillingInResolver, fillingLanguage } from '../document/contentLanguages.ts';
 import { DEFAULT_FOLDED_SECTIONS, Section, type SidebarSection } from './SidebarSection.tsx';
 import { ShortcutsDialog } from './ShortcutsDialog.tsx';
 import { useViewMode, type ViewModeProps } from './useViewMode.ts';

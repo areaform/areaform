@@ -69,6 +69,8 @@ When the agent connects, the server tells it the order of work and its rules (th
 7. **`flag(elementId, reason)`** on whatever is uncertain: a guessed category, an exit read from a coloured mark, an Outline traced from a shadow.
 8. **`save_document(dir)`.** This writes the Draft folder, and the agent reports the folder, the scale used and the flags.
 
+**Where it reads and writes.** The server runs on your machine with your user's rights, as any MCP server you add does. `save_document` writes to the folder the agent names, creating it if needed; it never replaces a `plan.json` already there unless the agent passes `overwrite`, which it is told to do only when updating a plan it opened. `attach_source` reads the file the agent names. A download from a link is https only, never to this machine or a private network (such as `localhost`, `192.168.…` or a cloud's metadata address), follows at most three redirects, each checked the same way, and stops at 25 MB. To let it download from a host inside your network, such as a company intranet or a NAS, name the host or its address in `AREAFORM_MCP_ALLOW_HOSTS` (comma-separated) in the server's `env` in your MCP client's configuration: `"AREAFORM_MCP_ALLOW_HOSTS": "intranet.example.com,192.168.1.10"`.
+
 `get_document` and `get_diagnostics` read the Draft at any point.
 
 ### One Draft per session

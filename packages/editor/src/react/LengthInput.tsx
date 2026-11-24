@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 import type { Translator } from '../i18n/index.ts';
-import { parseLength, toInputValue, unitLabel, type DisplayUnits } from '../units.ts';
+import { parseLength, toInputValue, unitLabel, type DisplayUnits } from '../interaction/units.ts';
 import { CommitInput } from './CommitInput.tsx';
 import { useI18n } from './i18n.ts';
 

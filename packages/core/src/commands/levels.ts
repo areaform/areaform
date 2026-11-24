@@ -1,6 +1,6 @@
-import { normalizeShape } from '../geometry.ts';
+import { normalizeShape } from '../geometry/geometry.ts';
 import { newId } from '../ids.ts';
-import { Rejection } from '../invariants.ts';
+import { Rejection } from '../checks/invariants.ts';
 import type { AreaformDocument, Id, Level, Shape } from '../model.ts';
 import { updateLevel, withChanges, type Changes } from './shared.ts';
 

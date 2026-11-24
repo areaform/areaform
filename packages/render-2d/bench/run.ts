@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { fromJSON } from '@areaform/core';
 import { visualCenter } from '../src/polylabel.ts';
 
-const file = new URL('../../../apps/server/demo/office.json', import.meta.url);
+const file = new URL('../../../samples/office.json', import.meta.url);
 const result = fromJSON(readFileSync(file, 'utf8'));
 if (!result.ok) throw new Error('the demo office does not load');
 const { doc } = result;

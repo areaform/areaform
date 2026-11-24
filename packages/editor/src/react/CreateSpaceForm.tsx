@@ -6,9 +6,9 @@ import {
     type Preset,
 } from '@areaform/core';
 import { useState, type FormEvent } from 'react';
-import { COMMON_LANGUAGES, languageName } from '../contentLanguages.ts';
+import { COMMON_LANGUAGES, languageName } from '../document/contentLanguages.ts';
 import { kindLabel, type Translator } from '../i18n/index.ts';
-import { formatDecimal, parseLength, unitLabel, type DisplayUnits } from '../units.ts';
+import { formatDecimal, parseLength, unitLabel, type DisplayUnits } from '../interaction/units.ts';
 import { I18nContext, useTranslator, type LocaleProps } from './i18n.ts';
 
 /** A Preset's Grid Step as the form shows it: metres (`0,5` in Polish), or whole feet (at least 1). */

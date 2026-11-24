@@ -36,6 +36,8 @@ jobs:
             - run: pnpm typecheck
             - run: pnpm build
             - run: pnpm coverage
+            # What a site downloads for the View, the Editor and the core, against scripts/size/budget.json.
+            - run: pnpm size
             # Warnings are errors: an exported API that refers to an unexported type fails here.
             - run: pnpm docs:api
 

@@ -10,10 +10,10 @@ import type {
 } from '@areaform/core';
 import type { OverlayItem } from '@areaform/render-2d';
 import { hitTest, zoneLabelBoxes } from '@areaform/render-2d';
-import type { PointerInput } from '../controller.ts';
-import type { SnapResult } from '../snap.ts';
-import { boxesOverlap, dimensionLabels, overlayLabelBox } from '../dimensions.ts';
-import { formatSize } from '../units.ts';
+import type { PointerInput } from '../interaction/controller.ts';
+import type { SnapResult } from '../interaction/snap.ts';
+import { boxesOverlap, dimensionLabels, overlayLabelBox } from '../interaction/dimensions.ts';
+import { formatSize } from '../interaction/units.ts';
 import {
     flipDoorCommands,
     moveCommand,
@@ -22,7 +22,7 @@ import {
     rotateCommand,
     sameRef,
     selectionPoints,
-} from '../elements.ts';
+} from '../interaction/elements.ts';
 import {
     dragRectangleCorner,
     dragRectangleSide,
@@ -39,7 +39,7 @@ import {
     withRing,
     type Corner,
     type ShapedRef,
-} from '../shapeEdit.ts';
+} from '../interaction/shapeEdit.ts';
 import { previewFill, previewLine, snapMarker } from './overlayStyles.ts';
 import type { Tool, ToolContext } from './tool.ts';
 

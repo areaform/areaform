@@ -471,7 +471,7 @@ export class MeshBuilder {
         if (-y > max[2]) max[2] = -y;
     }
 
-    bounds() {
+    bounds(): { min: [number, number, number]; max: [number, number, number] } {
         return { min: [...this.min] as typeof this.min, max: [...this.max] as typeof this.max };
     }
 

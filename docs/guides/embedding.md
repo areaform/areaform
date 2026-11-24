@@ -2,9 +2,9 @@
 
 How to put Areaform into your own application: create and load Documents, show them to visitors, let people edit them, and keep your backend in sync. Every export is listed with its doc comment in the API reference (`pnpm docs:api` writes it to `docs/api/`). For the vocabulary (Space, Level, Wall Node, Zone, Connection, …) see [`CONTEXT.md`](../../CONTEXT.md); for the decisions behind the design see [`adr/`](../adr/).
 
-> For a site owner who pastes the hosted snippet (`embed.js`), the public docs are at [areaform.app/docs](https://areaform.app/docs/) (source: [`apps/site/src/content/docs/`](../../apps/site/src/content/docs/)). This guide is for developers using the packages.
+> For a site owner who pastes the hosted snippet (`embed.js`), the public docs are at [areaform.app/docs](https://areaform.app/docs/). This guide is for developers using the packages.
 
-> The packages are not published to npm yet. Inside this repository they resolve to their source; `pnpm build` produces what will be published.
+> Install what you need from npm, for example `npm install @areaform/view three` to show a Space, or `npm install @areaform/editor three react react-dom` to edit one. Inside the repository the packages resolve to their source; `pnpm build` produces what is published.
 
 ## The packages
 
@@ -21,6 +21,18 @@ Use `core` alone on a server (validation, conversion, analytics), `render-2d` or
 The components need a stylesheet: `import '@areaform/view/styles.css'` for the View, or `import '@areaform/editor/styles.css'` for the Editor, which includes the View's. With TypeScript, that import is typed by your bundler (for Vite, `vite/client`).
 
 PixiJS is loaded on the first `createRenderer` call (the React components make it when the canvas mounts) through a dynamic `import()`, so bundlers put it in its own chunk: pages that only use `core`, or the editor's pure helpers, never download it. Three.js works the same way: it is loaded the first time someone switches to 3D, so pages that only show the plan in 2D never download it. Install `three` alongside the packages (npm and pnpm install peer dependencies by themselves).
+
+### What a page downloads
+
+Measured by `pnpm size` ([`scripts/size/`](../../scripts/size/check.ts)) on 2026-11-24: each import below bundled by Vite as a site's build would, React left out (your page has it). Sizes are what a browser downloads, compressed; CI fails if a stage grows more than 10 % past these, or if Three.js loads before 3D is asked for.
+
+| What you import                                 | At once           | To draw the plan in 2D (+ PixiJS) | After the first switch to 3D (+ Three.js) |
+| ----------------------------------------------- | ----------------- | --------------------------------- | ----------------------------------------- |
+| `createView` from `@areaform/view`              | 14 KB gzip, 12 br | 199 KB gzip, 171 br               | 361 KB gzip, 302 br                       |
+| `AreaformEditor` from `@areaform/editor/react`  | 75 KB gzip, 63 br | 252 KB gzip, 215 br               | 412 KB gzip, 345 br                       |
+| `createSpace`, `fromJSON`, `toJSON` from `core` | 5 KB gzip, 5 br   | —                                 | —                                         |
+
+Most of the 2D stage is PixiJS, and most of the 3D one is Three.js. Plugins such as Wayfinding load the same way, when a Space uses them. The packages are marked free of side effects (except their stylesheets), so a bundler keeps only what you import.
 
 ## Documents
 
@@ -614,7 +626,7 @@ The **tooltip** shows the hovered Element's name, in the visitor's Content Langu
 **Wayfinding** shows visitors the walking route to a place ([ADR-0017](../adr/0017-wayfinding-inside-one-space.md)). A tap on a Zone opens a card with its name and **Directions**; a tap on open floor offers **Directions to here**. Without a start yet, the panel asks "Where are you?": the next tap on the plan, or a Zone picked from the list, is **Here**, shown as "You are here" and kept for the visit. The route is a dashed line in the accent colour, its dashes moving toward the destination (still under `prefers-reduced-motion`), ending at a pin; the panel gives the distance and the walking time at 1.2 m/s, with **Change start** and **Clear route**. It keeps 0.3 m clear of Walls, goes through Openings, and walks around Obstacles, Connection Stops and Walk-around Zones (`walkAround`), ending at a booth's edge; a place it cannot reach gives "No route found". Options:
 
 - `here`: where the visitor starts, e.g. from `?here=` on a printed QR code: a Zone's id (that Zone, on its Level; stays valid when the plan is redrawn), or `<levelId>:<x>,<y>` in metres. `parseHere(text, doc)` reads the same forms. In the Editor, **Here for visitors → Pick a point…** (shown when nothing is selected) gives the value for a point clicked on the plan, and a Zone's properties give its own (its id), each with **Copy**; `hereValue(levelId, point)` makes the same text.
-- `to`: a place to show at the start, e.g. from `?to=` on a link to one shop: a Zone's id. The View opens on its Level with its card; with `here` as well, the route is drawn at once and shown from its start ([ADR-0028](../adr/0028-shopping-centre-leasing-and-links-to-one-place.md)). An id naming no Zone is ignored; `parseTo(text, doc)` reads it.
+- `to`: a place to show at the start, e.g. from `?to=` on a link to one shop: a Zone's id. The View opens on its Level with its card; with `here` as well, the route is drawn at once and shown from its start. An id naming no Zone is ignored; `parseTo(text, doc)` reads it.
 - `clearance`: how far routes keep from what is in the way, metres (default 0.3).
 - `stepFree`: start with step-free routes on, e.g. on an accessible kiosk (default off).
 

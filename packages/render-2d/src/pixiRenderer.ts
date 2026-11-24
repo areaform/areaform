@@ -35,7 +35,7 @@ import {
     LABEL_LINE_HEIGHT,
     type LabelResolver,
 } from './labels.ts';
-import { containIn, loadSvgImage } from './svgImage.ts';
+import { containIn, loadSvgImage } from './icons/svgImage.ts';
 import { underlayAsset } from './underlayAsset.ts';
 import { buildScene, type AssetResolver, type SceneItem, type StyleResolver } from './scene.ts';
 import type {

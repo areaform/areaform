@@ -6,13 +6,20 @@ import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 import { commandReference } from './commandReference.ts';
 import { createDraftSession, DraftError, type DraftSession } from './session.ts';
-import { fetchFigmaNode, parseFigmaUrl, type Fetch } from './figma.ts';
-import { buildCommands, scanFrame } from './figmaExtract.ts';
+import { fetchFigmaNode, parseFigmaUrl, type Fetch } from './figma/figma.ts';
+import { buildCommands, scanFrame } from './figma/figmaExtract.ts';
 import type { Calibration } from './source.ts';
 import { readImportMeta } from './importMeta.ts';
+
+/** This package's version, read from its package.json beside `src/` and `dist/` alike. */
+const VERSION = (
+    JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')) as {
+        version: string;
+    }
+).version;
 import { renderPreview } from './preview.ts';
 import { saveDraft, saveGeoJSON } from './save.ts';
-import { loadSourceImage } from './sourceImage.ts';
+import { loadSourceImage, type ImageDownload } from './sourceImage.ts';
 import { matchZones, type MatchField, type SetField } from './matchZones.ts';
 import { openDraft } from './open.ts';
 import { frameViewpoint } from './frameViewpoint.ts';
@@ -77,6 +84,8 @@ export interface ServerOptions {
     /** For `figma_extract`; `FIGMA_TOKEN` from the environment when absent. */
     figmaToken?: string;
     fetch?: Fetch;
+    /** How `attach_source` downloads an image from a URL; the network when absent. */
+    download?: ImageDownload;
 }
 
 /** An MCP server that lets an agent build one Draft through the core's Commands (ADR-0008). */
@@ -85,7 +94,7 @@ export function createServer(
     options: ServerOptions = {},
 ): McpServer {
     const server = new McpServer(
-        { name: 'areaform', version: '0.0.0' },
+        { name: 'areaform', version: VERSION },
         { instructions: INSTRUCTIONS },
     );
 
@@ -274,7 +283,7 @@ export function createServer(
             },
         },
         guardedAsync(async ({ path, url, figmaUrl }) => {
-            const { file, type, size } = await loadSourceImage({ path, url }, options.fetch);
+            const { file, type, size } = await loadSourceImage({ path, url }, options.download);
             const underlay = session.attachSource({
                 path: file,
                 type,
@@ -446,8 +455,10 @@ export function createServer(
         {
             description:
                 'Write the Draft folder for the reviewer: plan.json and the Source image under ' +
-                'the name its Underlay refers to. Creates the folder if needed. Report the folder ' +
-                'path, the scale used and the Import Flags to the person when done.',
+                'the name its Underlay refers to. Creates the folder if needed, anywhere this ' +
+                'process may write, so use the folder the person named. Never replaces a plan ' +
+                'unless overwrite is set. Report the folder path, the scale used and the Import ' +
+                'Flags to the person when done.',
             inputSchema: {
                 dir: z.string().describe('Folder to write the Draft into'),
                 overwrite: z

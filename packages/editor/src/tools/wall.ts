@@ -1,9 +1,9 @@
 import type { Transaction, Vec2 } from '@areaform/core';
 import type { OverlayItem } from '@areaform/render-2d';
-import type { PointerInput } from '../controller.ts';
-import type { SnapResult } from '../snap.ts';
-import { segmentLabel } from '../dimensions.ts';
-import { formatLength, parseLength, unitLabel } from '../units.ts';
+import type { PointerInput } from '../interaction/controller.ts';
+import type { SnapResult } from '../interaction/snap.ts';
+import { segmentLabel } from '../interaction/dimensions.ts';
+import { formatLength, parseLength, unitLabel } from '../interaction/units.ts';
 import { previewLine, snapMarker } from './overlayStyles.ts';
 import type { Tool, ToolContext } from './tool.ts';
 

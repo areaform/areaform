@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import type { PickableTool } from '../controller.ts';
+import type { PickableTool } from '../interaction/controller.ts';
 import {
     keyLabels,
     SHORTCUT_GROUPS,
@@ -7,7 +7,7 @@ import {
     type KeyCombo,
     type Platform,
     type Shortcut,
-} from '../shortcuts.ts';
+} from '../interaction/shortcuts.ts';
 import type { Translator } from '../i18n/index.ts';
 import { useI18n } from './i18n.ts';
 import type { ViewMode } from './PlanControls.tsx';

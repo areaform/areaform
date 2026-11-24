@@ -20,6 +20,7 @@
         "coverage": "vitest run --coverage",
         "build": "pnpm -r build",
         "docs:api": "typedoc",
+        "size": "node scripts/size/check.ts",
         "prepare": "husky"
     },
     "devDependencies": {
@@ -32,6 +33,7 @@
         "typedoc": "0.28.20",
         "typescript": "~6.0.3",
         "typescript-eslint": "^8.71.2",
+        "vite": "^8.3.4",
         "vitest": "5.0.5"
     },
     "lint-staged": {

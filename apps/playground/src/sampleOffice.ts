@@ -4,7 +4,7 @@
 // and marked done, leaving an empty list as the Review panel does; it keeps its Figma image as the ground floor
 // Underlay. The playground opens with it.
 import { fromJSON, type AreaformDocument } from '@areaform/core';
-import plan from '../../server/demo/office.json?raw';
+import plan from '../../../samples/office.json?raw';
 import { describeLoadErrors } from './storage.ts';
 
 export function sampleOffice(): AreaformDocument {

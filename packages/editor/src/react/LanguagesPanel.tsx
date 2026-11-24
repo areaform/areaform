@@ -12,7 +12,7 @@ import {
     type Translations,
 } from '@areaform/core';
 import { useId, useMemo, useState } from 'react';
-import { COMMON_LANGUAGES, languageName } from '../contentLanguages.ts';
+import { COMMON_LANGUAGES, languageName } from '../document/contentLanguages.ts';
 import { CommitInput } from './CommitInput.tsx';
 import { useI18n } from './i18n.ts';
 

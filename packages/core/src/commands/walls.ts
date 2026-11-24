@@ -4,8 +4,8 @@ import {
     EPSILON,
     samePoint,
     segmentIntersection,
-} from '../geometry.ts';
-import { Rejection } from '../invariants.ts';
+} from '../geometry/geometry.ts';
+import { Rejection } from '../checks/invariants.ts';
 import { newId } from '../ids.ts';
 import type { AreaformDocument, Id, Level, Opening, Vec2, Wall, WallNode } from '../model.ts';
 import { requireElement, updateElement, updateLevel, withChanges, type Changes } from './shared.ts';

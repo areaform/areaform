@@ -17,8 +17,8 @@ export {
     type PreviewResult,
     type Transaction,
 } from './editor.ts';
-export { isViewpointTilt, type InvariantError } from './invariants.ts';
-export { boundingBox, type Box } from './geometry.ts';
+export { isViewpointTilt, type InvariantError } from './checks/invariants.ts';
+export { boundingBox, type Box } from './geometry/geometry.ts';
 export {
     containsPoint,
     containsRing,
@@ -30,8 +30,8 @@ export {
     viewpointSpot,
     zoneAt,
     type Placement,
-} from './queries.ts';
-export { wallOutlines } from './wallOutlines.ts';
+} from './geometry/queries.ts';
+export { wallOutlines } from './geometry/wallOutlines.ts';
 export {
     toGeoJSON,
     type GeoFeature,
@@ -39,8 +39,8 @@ export {
     type GeoFeatureType,
     type GeoGeometry,
     type GeoPosition,
-} from './geojson.ts';
-export { georeferenceAt, lngLatProjection, type LngLat } from './georeference.ts';
+} from './io/geojson.ts';
+export { georeferenceAt, lngLatProjection, type LngLat } from './geometry/georeference.ts';
 export type { ElementRef, LevelElementKind } from './elements.ts';
 export {
     fromJSON,
@@ -51,7 +51,7 @@ export {
     type LoadResult,
     type Repair,
     type SaveOptions,
-} from './serialization.ts';
+} from './io/serialization.ts';
 export {
     CURRENT_SCHEMA_VERSION,
     MIGRATIONS,
@@ -62,7 +62,7 @@ export {
     type MigrationError,
     type MigrationResult,
     type Migrations,
-} from './migrations.ts';
+} from './io/migrations.ts';
 export {
     isLanguageTag,
     matchLanguage,
@@ -73,7 +73,7 @@ export {
     textIn,
     translationIn,
 } from './languages.ts';
-export { diagnose, type DiagnoseOptions, type Diagnostic } from './diagnostics.ts';
+export { diagnose, type DiagnoseOptions, type Diagnostic } from './checks/diagnostics.ts';
 export {
     diff,
     type DiffEntry,
@@ -82,4 +82,4 @@ export {
     type ElementValues,
     type LevelProps,
     type SpaceProps,
-} from './diff.ts';
+} from './io/diff.ts';

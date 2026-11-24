@@ -1,4 +1,4 @@
-import { normalizeShape } from '../geometry.ts';
+import { normalizeShape } from '../geometry/geometry.ts';
 import { newId } from '../ids.ts';
 import type { Connection, AreaformDocument, Id, Stop } from '../model.ts';
 import { requireElement, withChanges, type Changes, type Input } from './shared.ts';

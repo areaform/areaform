@@ -18,7 +18,15 @@ The hosted builder, where a plan is drawn, published and embedded with one snipp
 | [`@areaform/editor`](packages/editor)         | The Editor: React components and framework-free tools                                                  | [BUSL 1.1](packages/editor/LICENSE), MIT after two years |
 | [`@areaform/mcp`](packages/mcp)               | An MCP server that builds a Draft from a design for a person to review                                 | MIT                                                      |
 
-They are not on npm yet; they will be published under the `@areaform` scope. Until then, clone the repository and use them from source.
+Install them from npm:
+
+```sh
+npm install @areaform/view three                    # show a Space on your page
+npm install @areaform/editor three react react-dom   # let people draw one
+npx @areaform/mcp                                   # the MCP server, for your AI assistant's configuration
+```
+
+They are at 0.x: the API can still change between minor versions, and [`CHANGELOG.md`](CHANGELOG.md) says what did.
 
 ## Try it
 

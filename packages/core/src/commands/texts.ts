@@ -1,4 +1,4 @@
-import { Rejection } from '../invariants.ts';
+import { Rejection } from '../checks/invariants.ts';
 import { offersLanguage, sameLanguage, translationIn } from '../languages.ts';
 import type { AreaformDocument, ContentLanguages, Id, Translations } from '../model.ts';
 import { requireElement, updateElement, updateLevel } from './shared.ts';

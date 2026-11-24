@@ -1,7 +1,7 @@
 import type { Vec2 } from '@areaform/core';
 import type { OverlayItem } from '@areaform/render-2d';
-import { segmentLabel } from '../dimensions.ts';
-import { formatLength } from '../units.ts';
+import { segmentLabel } from '../interaction/dimensions.ts';
+import { formatLength } from '../interaction/units.ts';
 import { previewLine, snapMarker } from './overlayStyles.ts';
 import type { Tool, ToolContext } from './tool.ts';
 

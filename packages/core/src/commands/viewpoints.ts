@@ -1,5 +1,5 @@
 import { newId } from '../ids.ts';
-import { Rejection } from '../invariants.ts';
+import { Rejection } from '../checks/invariants.ts';
 import type { AreaformDocument, Id, Level, Viewpoint } from '../model.ts';
 import { requireElement, updateLevel, withChanges, type Changes, type Input } from './shared.ts';
 

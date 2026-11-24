@@ -8,8 +8,18 @@ import type {
     Vec2,
 } from '@areaform/core';
 import { useState, type MouseEvent } from 'react';
-import { extendableConnections, type EditorController, type ExtendOffer } from '../controller.ts';
-import { formatDecimal, unitLabel, parseDecimal, parseLength, toInputValue } from '../units.ts';
+import {
+    extendableConnections,
+    type EditorController,
+    type ExtendOffer,
+} from '../interaction/controller.ts';
+import {
+    formatDecimal,
+    unitLabel,
+    parseDecimal,
+    parseLength,
+    toInputValue,
+} from '../interaction/units.ts';
 import { TranslatableField, translatableCaption } from './LanguagesPanel.tsx';
 import { CommitInput } from './CommitInput.tsx';
 import { AssetRefused, useAssets, type AssetUploader } from './assets.ts';

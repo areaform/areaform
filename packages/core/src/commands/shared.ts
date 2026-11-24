@@ -1,4 +1,4 @@
-import { Rejection } from '../invariants.ts';
+import { Rejection } from '../checks/invariants.ts';
 import type { AreaformDocument, Id, Level } from '../model.ts';
 
 /** An element as passed to a Command: the id is optional and generated when omitted. */

@@ -13,9 +13,9 @@ import type {
 import { presetFor, type Preset } from '@areaform/core';
 import { defaultTheme } from '@areaform/render-2d';
 import { useEffect, useId, useRef } from 'react';
-import { categoryFromText, categoryFlags } from '../categories.ts';
-import type { EditorController } from '../controller.ts';
-import { wallLengthCommand } from '../elements.ts';
+import { categoryFromText, categoryFlags } from '../document/categories.ts';
+import type { EditorController } from '../interaction/controller.ts';
+import { wallLengthCommand } from '../interaction/elements.ts';
 import {
     holesValid,
     rectangleSides,
@@ -23,8 +23,8 @@ import {
     resizeRectangle,
     shapeArea,
     type ShapedRef,
-} from '../shapeEdit.ts';
-import { formatArea } from '../units.ts';
+} from '../interaction/shapeEdit.ts';
+import { formatArea } from '../interaction/units.ts';
 import { CategoryList } from './CategoryList.tsx';
 import { TranslatableField, translatableCaption } from './LanguagesPanel.tsx';
 import { CommitInput } from './CommitInput.tsx';
@@ -32,7 +32,7 @@ import { HereValue, type HereLink } from './HereValue.tsx';
 import { useI18n } from './i18n.ts';
 import { LengthCaption, LengthInput, useUnits } from './LengthInput.tsx';
 import { UnderlayCard } from './LevelPanel.tsx';
-import { startsAccessible } from '../connectionDefaults.ts';
+import { startsAccessible } from '../document/connectionDefaults.ts';
 
 /** Edits the selected Element's properties through core Commands. */
 export function PropertiesPanel({

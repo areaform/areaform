@@ -1,5 +1,5 @@
 // Run: node packages/core/bench/run.ts
-import { checkInvariants } from '../src/invariants.ts';
+import { checkInvariants } from '../src/checks/invariants.ts';
 import { createEditor, diagnose, fromJSON, toJSON, zoneAt } from '../src/index.ts';
 import { stressSpace } from './stressSpace.ts';
 

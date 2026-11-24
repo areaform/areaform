@@ -39,10 +39,10 @@ export {
     type LabelResolver,
     type NameLayout,
 } from './labels.ts';
-export { categoryIconBodies, categoryIcons } from './categoryIcons.ts';
-export { containIn, loadSvgImage } from './svgImage.ts';
+export { categoryIconBodies, categoryIcons } from './icons/categoryIcons.ts';
+export { containIn, loadSvgImage } from './icons/svgImage.ts';
 export { defaultTheme, mergeStyles, type Style, type Theme } from './theme.ts';
-export { connectionIconBodies, connectionIcons } from './connectionIcons.ts';
+export { connectionIconBodies, connectionIcons } from './icons/connectionIcons.ts';
 export { gridLines, gridSpacing, MIN_GRID_PX, type GridLines } from './grid.ts';
 export {
     MIN_RULER_PX,

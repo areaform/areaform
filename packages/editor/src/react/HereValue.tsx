@@ -1,7 +1,7 @@
 // Here for visitors (ADR-0017): the value for `?here=` with a Copy button, and the host's link.
 import { useEffect, useState } from 'react';
-import type { EditorController, HerePick } from '../controller.ts';
-import { hereValue } from '../here.ts';
+import type { EditorController, HerePick } from '../interaction/controller.ts';
+import { hereValue } from '../document/here.ts';
 import { useI18n } from './i18n.ts';
 
 /** Makes a link that opens the published plan with routes starting at `here`, e.g. for a QR code. */

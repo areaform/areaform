@@ -4,7 +4,7 @@ status: accepted
 
 # The camera moves on its own, through Viewpoints saved on the Level, and plans let the page scroll
 
-Home's hero is meant to show a live plan, not a video, and [ADR-0022](0022-the-landing-site.md) wants its camera to move. A still 3D plan looks like a screenshot, and only movement shows that it is alive. While planning this we found something else: an embedded plan takes the page's scrolling. In 3D the wheel always zooms, and 2D's `WheelMode` only chooses between zooming and panning. A visitor scrolling down any page with a plan on it gets stuck inside the plan. Decided on 2026-11-16, together with bringing the camera tour forward from "an interview and an ADR of its own first" to this change.
+Home's hero is meant to show a live plan, not a video, and the landing site wants its camera to move. A still 3D plan looks like a screenshot, and only movement shows that it is alive. While planning this we found something else: an embedded plan takes the page's scrolling. In 3D the wheel always zooms, and 2D's `WheelMode` only chooses between zooming and panning. A visitor scrolling down any page with a plan on it gets stuck inside the plan. Decided on 2026-11-16, together with bringing the camera tour forward from "an interview and an ADR of its own first" to this change.
 
 ## Motion: `none`, `orbit` or `tour`
 
@@ -46,7 +46,7 @@ interface Viewpoint {
 - **In plan terms, not the camera's.** The renderer's `Camera3D` is a position and a target in Three.js space (y up, z the plan's −y). A Viewpoint is in plan coordinates ([ADR-0002](0002-y-up-ccw-coordinates.md)) and orbit terms, so a person reading the file, or an AI asked for "booth A12 from the south-east", can write one without 3D trigonometry. render-3d converts both ways, and a test checks the round trip.
 - **Optional, so no `schemaVersion` bump** ([ADR-0006](0006-schema-versions-and-migrations.md)). Older readers ignore the field, and older Documents have none. The model, the checker, `toJSON` and the JSON Schema at its address ([ADR-0024](0024-the-json-schema-at-a-permanent-address.md)) change together, and the agreement test holds them to it. The GeoJSON export leaves Viewpoints out.
 - **Changed through Commands:** `viewpoint.add`, `viewpoint.update`, `viewpoint.delete` and `viewpoint.move` (its place in the list), each one undo step. Deleting a Level deletes its Viewpoints with it, and duplicating one copies them with ids of their own. A Viewpoint is not checked against the plan: one left looking at nothing after Walls moved is the owner's to fix, and it still flies.
-- **Exported with the plan.** A plan shown from the owner's own storage ([ADR-0019](0019-embed-js-shows-a-plan-from-the-owners-storage.md)) carries its tour.
+- **Exported with the plan.** A plan shown from the owner's own storage carries its tour.
 
 **In the Editor,** a Viewpoints section in the sidebar while the 3D view is open:
 

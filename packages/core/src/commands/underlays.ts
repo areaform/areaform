@@ -1,8 +1,8 @@
-import { EPSILON } from '../geometry.ts';
+import { EPSILON } from '../geometry/geometry.ts';
 import { newId } from '../ids.ts';
-import { Rejection } from '../invariants.ts';
+import { Rejection } from '../checks/invariants.ts';
 import type { AreaformDocument, Id, Underlay, Vec2 } from '../model.ts';
-import { underlayToWorld } from '../queries.ts';
+import { underlayToWorld } from '../geometry/queries.ts';
 import {
     addElement,
     deleteElement,

@@ -1,6 +1,6 @@
 import type { Connection } from '@areaform/core';
-import { categoryIcons } from './categoryIcons.ts';
-import { connectionIcons } from './connectionIcons.ts';
+import { categoryIcons } from './icons/categoryIcons.ts';
+import { connectionIcons } from './icons/connectionIcons.ts';
 
 /** A look for an item. Colours are CSS strings; `strokeWidth` is in screen pixels. */
 export interface Style {

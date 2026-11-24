@@ -6,8 +6,8 @@ import type { Changes, Editor, Level, Viewpoint } from '@areaform/core';
 import { poseOfCamera, type Pose, type Renderer3D } from '@areaform/render-3d';
 import { onInteraction, ORBIT_TURNS_PER_MINUTE } from '@areaform/view';
 import { useEffect, useState, type RefObject } from 'react';
-import { formatDecimal, parseDecimal } from '../units.ts';
-import { nextViewpointName } from '../viewpoints.ts';
+import { formatDecimal, parseDecimal } from '../interaction/units.ts';
+import { nextViewpointName } from '../document/viewpoints.ts';
 import { CommitInput } from './CommitInput.tsx';
 import { useI18n } from './i18n.ts';
 

@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
-import type { Fetch } from './figma.ts';
+import type { Fetch } from './figma/figma.ts';
 import { createServer, INSTRUCTIONS, type ServerOptions } from './server.ts';
 import { png } from './testImages.ts';
 
@@ -127,13 +127,17 @@ describe('createServer', () => {
     });
 
     it('downloads the Source image from a URL without keeping the URL', async () => {
-        const shot: Fetch = async () => ({
-            ok: true,
-            status: 200,
-            json: async () => ({}),
-            arrayBuffer: async () => png(600, 400).slice().buffer,
+        const bytes = png(600, 400);
+        const { call } = await connect({
+            download: {
+                fetch: async () => ({
+                    status: 200,
+                    headers: { get: () => null },
+                    body: new Blob([bytes.slice().buffer]).stream(),
+                }),
+                lookup: async () => ['93.184.215.14'],
+            },
         });
-        const { call } = await connect({ fetch: shot });
         await call('create_draft', { name: 'Hall A', kind: 'exhibition' });
         await call('calibrate', { p1: [0, 0], p2: [100, 0], distance: 10, size: [300, 200] });
         const url = 'https://www.figma.com/api/mcp/asset/secret-token.png';

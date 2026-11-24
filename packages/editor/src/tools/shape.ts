@@ -1,9 +1,9 @@
 import type { Connection, Ring, Vec2, Zone } from '@areaform/core';
 import type { OverlayItem } from '@areaform/render-2d';
-import type { PointerInput } from '../controller.ts';
+import type { PointerInput } from '../interaction/controller.ts';
 import { previewFill, previewLine, snapMarker } from './overlayStyles.ts';
 import type { Tool, ToolContext } from './tool.ts';
-import { startsAccessible } from '../connectionDefaults.ts';
+import { startsAccessible } from '../document/connectionDefaults.ts';
 
 /** How the Zone, Obstacle and Connection tools draw: drag a rectangle, or click a polygon. */
 export type ShapeMode = 'rectangle' | 'polygon';

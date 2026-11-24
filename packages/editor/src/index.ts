@@ -14,9 +14,9 @@ export {
     type PickableTool,
     type PointerInput,
     type ToolName,
-} from './controller.ts';
-export { categoryFromText, categoryFlags } from './categories.ts';
-export { hereValue } from './here.ts';
+} from './interaction/controller.ts';
+export { categoryFromText, categoryFlags } from './document/categories.ts';
+export { hereValue } from './document/here.ts';
 export {
     categoryLabel,
     createTranslator,
@@ -45,8 +45,14 @@ export {
     type Shortcut,
     type ShortcutAction,
     type ShortcutGroup,
-} from './shortcuts.ts';
-export { snap, type SnapContext, type SnapKind, type SnapResult } from './snap.ts';
+} from './interaction/shortcuts.ts';
+export { snap, type SnapContext, type SnapKind, type SnapResult } from './interaction/snap.ts';
 export type { ShapeMode } from './tools/shape.ts';
 export type { OutlineMode } from './tools/outline.ts';
-export { formatArea, formatLength, formatSize, parseLength, type DisplayUnits } from './units.ts';
+export {
+    formatArea,
+    formatLength,
+    formatSize,
+    parseLength,
+    type DisplayUnits,
+} from './interaction/units.ts';

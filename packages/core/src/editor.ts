@@ -1,5 +1,5 @@
 import { apply, type Command } from './commands/index.ts';
-import { checkInvariants, Rejection, type InvariantError } from './invariants.ts';
+import { checkInvariants, Rejection, type InvariantError } from './checks/invariants.ts';
 import { removedRefs, type ElementRef } from './elements.ts';
 import type { AreaformDocument } from './model.ts';
 

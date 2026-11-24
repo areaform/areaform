@@ -213,7 +213,7 @@ The visitor's start point for Wayfinding, shown as "You are here": set by a tap,
 _Avoid_: Location, Current position, Origin
 
 **Kiosk**:
-A Space shown on a touch screen in a public place (a shopping centre's "find a shop"), as a hosted Business feature: a Welcome Screen, then the map with big category buttons, back to the start when idle ([kiosk notes](docs/notes/kiosk.md#decided-2026-11-03)).
+A Space shown on a touch screen in a public place (a shopping centre's "find a shop"), as a hosted Business feature: a Welcome Screen, then the map with big category buttons, back to the start when idle.
 _Avoid_: Terminal, Totem, Signage (a signage player is one way to run a Kiosk)
 
 **Kiosk Screen**:

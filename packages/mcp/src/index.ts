@@ -1,13 +1,23 @@
 export { createServer, INSTRUCTIONS, type ServerOptions } from './server.ts';
 export { COMMAND_EXAMPLES, commandReference, LEVEL } from './commandReference.ts';
-export { loadSourceImage, MAX_IMAGE_BYTES, type SourceImageFile } from './sourceImage.ts';
+export {
+    allowedHostsFromEnv,
+    isInternalAddress,
+    loadSourceImage,
+    MAX_IMAGE_BYTES,
+    MAX_REDIRECTS,
+    type ImageDownload,
+    type ImageFetch,
+    type Lookup,
+    type SourceImageFile,
+} from './sourceImage.ts';
 export {
     fetchFigmaNode,
     parseFigmaUrl,
     type Fetch,
     type FigmaFrameRef,
     type FigmaNode,
-} from './figma.ts';
+} from './figma/figma.ts';
 export {
     buildCommands,
     roleOf,
@@ -17,7 +27,7 @@ export {
     type Role,
     type Scan,
     type Skipped,
-} from './figmaExtract.ts';
+} from './figma/figmaExtract.ts';
 export {
     createDraftSession,
     DraftError,

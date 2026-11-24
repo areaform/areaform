@@ -1,7 +1,7 @@
 import type { AreaformDocument, Id, Level } from '@areaform/core';
 import { useContext, useState, type DragEvent, type KeyboardEvent } from 'react';
-import { levelDropMove, levelsTopDown } from '../levelOrder.ts';
-import { formatLength } from '../units.ts';
+import { levelDropMove, levelsTopDown } from '../document/levelOrder.ts';
+import { formatLength } from '../interaction/units.ts';
 import { useI18n } from './i18n.ts';
 import { UnitsContext } from './LengthInput.tsx';
 

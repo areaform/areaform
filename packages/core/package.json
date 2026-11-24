@@ -1,7 +1,6 @@
 {
     "name": "@areaform/core",
-    "version": "0.0.0",
-    "private": true,
+    "version": "0.1.0",
     "license": "MIT",
     "homepage": "https://github.com/areaform/areaform/tree/main/packages/core#readme",
     "repository": {
@@ -13,6 +12,7 @@
         "url": "https://github.com/areaform/areaform/issues"
     },
     "type": "module",
+    "sideEffects": false,
     "exports": {
         ".": "./src/index.ts",
         "./testing": "./bench/stressSpace.ts",
@@ -21,7 +21,8 @@
     "files": [
         "dist",
         "schema",
-        "LICENSE"
+        "LICENSE",
+        "CHANGELOG.md"
     ],
     "publishConfig": {
         "exports": {

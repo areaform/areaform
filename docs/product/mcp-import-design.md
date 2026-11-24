@@ -1,6 +1,6 @@
 # Draft import through MCP: design
 
-Decisions from the design interview of 2026-10-22 for making a first plan from a design source (a Figma mock-up or an image) that a person then reviews and corrects. Why the import is an agent working through Commands rather than a converter is in [ADR-0008](../adr/0008-draft-import-through-mcp-commands.md); vocabulary (**Draft**, **Import Flag**, **Source**) is in [`CONTEXT.md`](../../CONTEXT.md); the work is tracked in phase 10 of the [implementation plan](implementation-plan.md).
+Decisions from the design interview of 2026-10-22 for making a first plan from a design source (a Figma mock-up or an image) that a person then reviews and corrects. Why the import is an agent working through Commands rather than a converter is in [ADR-0008](../adr/0008-draft-import-through-mcp-commands.md); vocabulary (**Draft**, **Import Flag**, **Source**) is in [`CONTEXT.md`](../../CONTEXT.md).
 
 ## The flow
 

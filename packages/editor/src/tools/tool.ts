@@ -1,9 +1,9 @@
 import type { Editor, ElementRef, Id, Level, Vec2 } from '@areaform/core';
 import type { LabelResolver, OverlayItem, Theme } from '@areaform/render-2d';
 import type { Translator } from '../i18n/index.ts';
-import type { DisplayUnits } from '../units.ts';
-import type { Calibration, HerePick, KeyInput, PointerInput } from '../controller.ts';
-import type { SnapContext, SnapResult } from '../snap.ts';
+import type { DisplayUnits } from '../interaction/units.ts';
+import type { Calibration, HerePick, KeyInput, PointerInput } from '../interaction/controller.ts';
+import type { SnapContext, SnapResult } from '../interaction/snap.ts';
 
 /** What a tool can use from the controller. */
 export interface ToolContext {

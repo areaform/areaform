@@ -7,7 +7,7 @@ import {
 } from '@areaform/core';
 import type { UnreachableZone } from '@areaform/wayfinding';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { problemLevel, problemText, type Problem } from '../problems.ts';
+import { problemLevel, problemText, type Problem } from '../document/problems.ts';
 import { useI18n } from './i18n.ts';
 
 /** Wait after the last change before checking again, so typing or a drag is checked once. */

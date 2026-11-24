@@ -5,7 +5,7 @@ import {
     createEditorController,
     type ControllerState,
     type EditorController,
-} from '../controller.ts';
+} from '../interaction/controller.ts';
 
 /** The core Editor's current Document, re-rendering on every change. */
 export function useDocument(editor: Editor): AreaformDocument {

@@ -4,9 +4,9 @@ status: accepted
 
 # Zone Categories in the Document, with icons from a collection
 
-A Zone Category is a bare id today. The Preset of the Space Kind suggests some (`booth`, `meeting-room`…), the Theme colours them and gives 12 of the 32 built-in ones an icon, and any other id is accepted with no name, colour or icon (`garden` in the Office demo). Shopping centres move visitors by big category buttons with an icon each ([kiosk notes](../notes/kiosk.md#decided-2026-11-03)), and owners want categories of their own. Decided 2026-11-03.
+A Zone Category is a bare id today. The Preset of the Space Kind suggests some (`booth`, `meeting-room`…), the Theme colours them and gives 12 of the 32 built-in ones an icon, and any other id is accepted with no name, colour or icon (`garden` in the Office demo). Shopping centres move visitors by big category buttons with an icon each, and owners want categories of their own. Decided 2026-11-03.
 
-**Built-in categories are complete.** Every category of every Preset gets a default colour and its name in `en`, `pl`, `uk` and `ru`, and an icon from the collection, except where Zones show their own name (a booth, a room) or are a way through (an aisle, a corridor), as today ([the reviewed table](../notes/categories.md)). A new Space Kind, `mall`, has a Preset whose categories match the collection (food court, restaurant, fashion, kids, electronics, beauty, services, supermarket, WC, ATM, info desk). The list per Kind is in [`categories.md`](../notes/categories.md), reviewed on 2026-11-03.
+**Built-in categories are complete.** Every category of every Preset gets a default colour and its name in `en`, `pl`, `uk` and `ru`, and an icon from the collection, except where Zones show their own name (a booth, a room) or are a way through (an aisle, a corridor), as today. A new Space Kind, `mall`, has a Preset whose categories match the collection (food court, restaurant, fashion, kids, electronics, beauty, services, supermarket, WC, ATM, info desk). The list per Kind is in [`presets.ts`](../../packages/core/src/presets.ts), reviewed on 2026-11-03.
 
 **An icon collection, in the open packages.** One-colour SVG icons, drawn as silhouettes as today (ADR-0010), named by id (`fork-knife`, `hanger`…). Every plan can use it.
 

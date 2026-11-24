@@ -1,4 +1,4 @@
-import { normalizeShape } from '../geometry.ts';
+import { normalizeShape } from '../geometry/geometry.ts';
 import { newId } from '../ids.ts';
 import type { AreaformDocument, Id, Obstacle } from '../model.ts';
 import {

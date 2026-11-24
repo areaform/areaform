@@ -3,7 +3,7 @@
     "$id": "https://areaform.app/schema/v1/document.json",
     "title": "Areaform Document, schema version 1",
     "description": "One Space: its Levels, Walls, Openings, Zones, Obstacles, Underlays and the Connections between Levels. Lengths are metres in a Y-up plane local to the Space; angles are radians, counter-clockwise from +X, except a Viewpoint's, which are compass degrees. Readers ignore properties they do not know, and new optional properties do not change the version; only a change an older reader would misread does. This schema checks the shape only: the rules between values (ids unique, references that name an existing Element, rings that do not cross themselves, at least two Stops on a Connection, a positive ceiling height) are checked by @areaform/core when the Document is loaded.",
-    "$comment": "Must agree with the checker in packages/core/src/schema.ts; packages/core/src/schemaJson.test.ts checks that it does.",
+    "$comment": "Must agree with the checker in packages/core/src/io/schema.ts; packages/core/src/io/schemaJson.test.ts checks that it does.",
     "type": "object",
     "required": ["schemaVersion", "id", "name", "kind", "units", "grid", "levels", "connections"],
     "properties": {

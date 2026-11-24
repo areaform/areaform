@@ -7,7 +7,7 @@ import {
     type Vec2,
 } from '@areaform/core';
 import type { OverlayItem } from '@areaform/render-2d';
-import { holesValid } from '../shapeEdit.ts';
+import { holesValid } from '../interaction/shapeEdit.ts';
 import { snapMarker } from './overlayStyles.ts';
 import { createShapeTool, type ShapeMode } from './shape.ts';
 import type { Tool, ToolContext } from './tool.ts';

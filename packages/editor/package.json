@@ -1,7 +1,6 @@
 {
     "name": "@areaform/editor",
-    "version": "0.0.0",
-    "private": true,
+    "version": "0.1.0",
     "license": "BUSL-1.1",
     "homepage": "https://github.com/areaform/areaform/tree/main/packages/editor#readme",
     "repository": {
@@ -13,6 +12,9 @@
         "url": "https://github.com/areaform/areaform/issues"
     },
     "type": "module",
+    "sideEffects": [
+        "**/*.css"
+    ],
     "exports": {
         ".": "./src/index.ts",
         "./react": "./src/react/index.ts",
@@ -20,7 +22,8 @@
     },
     "files": [
         "dist",
-        "LICENSE"
+        "LICENSE",
+        "CHANGELOG.md"
     ],
     "publishConfig": {
         "exports": {
