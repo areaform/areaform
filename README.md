@@ -30,7 +30,18 @@ They are at 0.x: the API can still change between minor versions, and [`CHANGELO
 
 ## Try it
 
-You need Node 24 and pnpm (`corepack enable` sets up the version this repository asks for).
+In your own page, with no framework:
+
+```js
+import { fromJSON } from '@areaform/core';
+import { createView } from '@areaform/view';
+import '@areaform/view/styles.css';
+
+const loaded = fromJSON(await (await fetch('/plan.json')).text());
+if (loaded.ok) createView(document.getElementById('plan'), { doc: loaded.doc, controls: true });
+```
+
+The [embedding guide](docs/guides/embedding.md) has the same in [React](docs/guides/embedding.md#showing-a-space-areaformview) and [Vue](docs/guides/embedding.md#vue), and the Editor. To work on the engine itself, you need Node 24 and pnpm (`corepack enable` sets up the version this repository asks for).
 
 ```sh
 pnpm install

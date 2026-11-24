@@ -6,6 +6,8 @@ How to put Areaform into your own application: create and load Documents, show t
 
 > Install what you need from npm, for example `npm install @areaform/view three` to show a Space, or `npm install @areaform/editor three react react-dom` to edit one. Inside the repository the packages resolve to their source; `pnpm build` produces what is published.
 
+**Any framework.** The View is plain TypeScript and needs no framework: start with [plain JavaScript](#quick-start-plain-javascript), use the [React components](#showing-a-space-areaformview), or wrap it in [Vue](#vue) (or Svelte, Angular, …) in a few lines. The Editor's ready-made interface is React; outside React it runs as a React island, or you build your own interface on its [framework-free controller](#without-react).
+
 ## The packages
 
 | Package               | What it is                                                                                                                                                                                                   | Depends on                                          |
@@ -33,6 +35,54 @@ Measured by `pnpm size` ([`scripts/size/`](../../scripts/size/check.ts)) on 2026
 | `createSpace`, `fromJSON`, `toJSON` from `core` | 5 KB gzip, 5 br   | —                                 | —                                         |
 
 Most of the 2D stage is PixiJS, and most of the 3D one is Three.js. Plugins such as Wayfinding load the same way, when a Space uses them. The packages are marked free of side effects (except their stylesheets), so a bundler keeps only what you import.
+
+## Quick start: plain JavaScript
+
+A page that shows an exhibition hall, colours its booths from your own data and answers a click, with no framework. `plan.json` is any saved plan, such as [`samples/expo.json`](../../samples/expo.json). With Vite (`npm install @areaform/core @areaform/view three vite`, then `npx vite`):
+
+```html
+<div id="plan" style="height: 600px"></div>
+<p id="picked">Click a booth</p>
+<script type="module" src="/main.js"></script>
+```
+
+```js
+import { fromJSON } from '@areaform/core';
+import { createView } from '@areaform/view';
+import { tooltip } from '@areaform/view/plugins/tooltip';
+import '@areaform/view/styles.css';
+
+// Your own data: which booths are taken.
+const taken = new Set(['A-1', 'A-2', 'B-4']);
+
+const response = await fetch('/plan.json');
+const loaded = fromJSON(await response.text());
+if (!loaded.ok) throw new Error('The plan does not load');
+
+const view = createView(document.getElementById('plan'), {
+    doc: loaded.doc,
+    controls: true,
+    plugins: [tooltip()],
+    // Colours from your data, drawn over the plan and never saved in it.
+    styleResolver: (ref, element) =>
+        ref.kind === 'zone' && element.category === 'booth'
+            ? { fill: taken.has(element.label) ? '#d4d4d4' : '#bfe3c0' }
+            : undefined,
+});
+
+view.on('elementClick', (e) => {
+    if (e.ref.kind !== 'zone') return;
+    const level = view.getDocument().levels.find((l) => l.id === e.ref.levelId);
+    const zone = level?.zones.find((z) => z.id === e.ref.id);
+    if (!zone) return;
+    document.getElementById('picked').textContent =
+        `${zone.label}: ${taken.has(zone.label) ? 'taken' : 'free'}`;
+    view.highlight([e.ref]);
+});
+view.on('ready', () => console.log('areaform: 2D ready'));
+```
+
+The 2D plan draws at once; **3D** in the plan controls loads Three.js the first time it is pressed. Everything the View can do is in [Without React](#without-react) and in the API reference.
 
 ## Documents
 
@@ -734,6 +784,98 @@ if (isWebGLAvailable()) {
 If the 3D view covers a 2D renderer, as the View and `<AreaformEditor>` do, call `renderer.setPaused(true)` while it is shown and `renderer.setPaused(false)` when it goes. Otherwise the plan underneath keeps drawing every frame. Updates made meanwhile show when it draws again.
 
 The controller also offers `select`, `setLevel`, `setUnits`, `setDimensions`, `copy` / `cut` / `paste` / `duplicate`, `clipboardText` / `pasteText` (for your own clipboard handling), `duplicateLevel`, `requestLevelDelete`, `confirmDelete` / `cancelDelete`, `startCalibration` / `finishCalibration`, and `on('toolChange' | 'levelChange' | 'selectionChange', …)`. Its state (`getState()`) carries what a UI needs: the tool, selection, overlay, a pending delete to confirm, an in-progress calibration, and a short message to show.
+
+## Vue
+
+The View in a Vue 3 component: create it when the component mounts, pass prop changes to its setters, destroy it when the component goes. The same few lines wrap it in Svelte, Angular or anything else.
+
+```vue
+<!-- AreaformView.vue -->
+<script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import type { AreaformDocument, ElementRef } from '@areaform/core';
+import type { ElementEvent, StyleResolver } from '@areaform/render-2d';
+import { createView, type View } from '@areaform/view';
+import '@areaform/view/styles.css';
+
+const props = defineProps<{
+    doc: AreaformDocument;
+    styleResolver?: StyleResolver;
+    highlight?: ElementRef[];
+}>();
+const emit = defineEmits<{ elementClick: [event: ElementEvent] }>();
+
+const container = ref<HTMLDivElement>();
+let view: View | undefined;
+
+onMounted(() => {
+    view = createView(container.value!, {
+        doc: props.doc,
+        controls: true,
+        ...(props.styleResolver && { styleResolver: props.styleResolver }),
+        ...(props.highlight && { highlight: props.highlight }),
+    });
+    view.on('elementClick', (e) => emit('elementClick', e));
+});
+onBeforeUnmount(() => view?.destroy());
+
+// Props change the View through its setters; it redraws only what changed.
+watch(
+    () => props.doc,
+    (doc) => view?.update(doc),
+);
+watch(
+    () => props.styleResolver,
+    (resolver) => view?.setStyleResolver(resolver),
+);
+watch(
+    () => props.highlight,
+    (refs) => view?.highlight(refs ?? []),
+);
+</script>
+
+<template>
+    <div ref="container" style="height: 100%" />
+</template>
+```
+
+```vue
+<!-- in a page -->
+<AreaformView :doc="doc" :style-resolver="colours" :highlight="picked" @element-click="onClick" />
+```
+
+Keep the Document in a `shallowRef`: it is immutable, and every change is a new object, so Vue need not watch inside it. Add a prop and a `watch` for each setter you need (`setLevel`, `setView`, `setLocale`, …).
+
+**The Editor in Vue.** Its interface is React, so it runs inside a Vue component as a React island (add `react` and `react-dom`):
+
+```vue
+<!-- AreaformEditorIsland.vue -->
+<script setup lang="ts">
+// The Editor's interface is React: it runs inside this component as a React island.
+import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { createElement } from 'react';
+import { createRoot, type Root } from 'react-dom/client';
+import type { Editor } from '@areaform/core';
+import { AreaformEditor } from '@areaform/editor/react';
+import '@areaform/editor/styles.css';
+
+const props = defineProps<{ editor: Editor }>();
+const container = ref<HTMLDivElement>();
+let root: Root | undefined;
+
+onMounted(() => {
+    root = createRoot(container.value!);
+    root.render(createElement(AreaformEditor, { editor: props.editor }));
+});
+onBeforeUnmount(() => root?.unmount());
+</script>
+
+<template>
+    <div ref="container" style="height: 100%" />
+</template>
+```
+
+Give it an Editor from `createEditor(doc)` and listen to `editor.on('change', …)` to save. To draw your own interface in Vue instead, use the framework-free controller in [Without React](#without-react).
 
 ## Reading a Document in your own code
 
