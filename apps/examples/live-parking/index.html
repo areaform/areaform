@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="data:," />
+        <title>Live car park · Areaform example</title>
+        <meta
+            name="description"
+            content="An Areaform example: a three-level car park with its spots coloured by a live feed of bay sensors, free spaces per level, and the drive from the gate to the best free spot."
+        />
+    </head>
+    <body>
+        <main class="app">
+            <div class="plan" id="plan" aria-label="Plan of the car park"></div>
+            <aside class="panel">
+                <header>
+                    <h1>Mill Street Car Park</h1>
+                    <p class="live"><span class="live__dot"></span>Live · simulated sensors</p>
+                </header>
+
+                <section aria-labelledby="levels-h">
+                    <h2 id="levels-h">Free spaces</h2>
+                    <ul class="levels" id="levels"></ul>
+                </section>
+
+                <section aria-labelledby="find-h">
+                    <h2 id="find-h">Find a space</h2>
+                    <fieldset class="need">
+                        <legend>For</legend>
+                        <label
+                            ><input type="radio" name="need" value="spot" checked />Any car</label
+                        >
+                        <label><input type="radio" name="need" value="ev" />EV charging</label>
+                        <label
+                            ><input type="radio" name="need" value="accessible" />Accessible</label
+                        >
+                    </fieldset>
+                    <button type="button" class="find" id="find">Find a free spot</button>
+                    <p class="suggestion" id="suggestion" aria-live="polite"></p>
+                    <ol class="steps" id="steps"></ol>
+                </section>
+
+                <section class="card" id="card" aria-live="polite" hidden></section>
+
+                <ul class="legend" aria-label="Colours">
+                    <li><span class="swatch swatch--free"></span>Free</li>
+                    <li><span class="swatch swatch--occupied"></span>Taken</li>
+                    <li><span class="swatch swatch--reserved"></span>Reserved</li>
+                    <li><span class="swatch swatch--silent"></span>No signal</li>
+                </ul>
+            </aside>
+        </main>
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>

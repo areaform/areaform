@@ -1,0 +1,260 @@
+:root {
+    --text: #232321;
+    --muted: #6f6f68;
+    --line: #e2e2dc;
+    --accent: #1f6feb;
+    font-family: system-ui, sans-serif;
+    color: var(--text);
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+}
+.app {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    height: 100vh;
+}
+.plan {
+    position: relative;
+    min-height: 0;
+}
+.panel {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+    overflow: auto;
+    border-left: 1px solid var(--line);
+}
+h1 {
+    margin: 0;
+    font-size: 20px;
+}
+h2 {
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+}
+.live {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--muted);
+}
+.live__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2e8b57;
+}
+.levels {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.level {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 2px 8px;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: none;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+.level[aria-current='true'] {
+    border-color: var(--line);
+    background: #f6f6f3;
+}
+.level__name {
+    grid-row: span 2;
+    align-self: center;
+    font-weight: 600;
+}
+.level meter {
+    width: 100%;
+    height: 6px;
+}
+.need {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin: 0 0 12px;
+    padding: 0;
+    border: 0;
+    font-size: 14px;
+}
+.need legend {
+    position: absolute;
+    clip-path: inset(50%);
+}
+.need input {
+    margin: 0 6px 0 0;
+}
+.find {
+    width: 100%;
+    padding: 10px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--accent);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+.suggestion {
+    margin: 12px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.suggestion:empty {
+    display: none;
+}
+.card {
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+.card h2 {
+    color: var(--text);
+    font-size: 15px;
+}
+.card dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 12px;
+    margin: 0;
+    font-size: 13px;
+}
+.card dt {
+    color: var(--muted);
+}
+.card dd {
+    margin: 0;
+}
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin: auto 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: var(--muted);
+}
+.legend li {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+.swatch {
+    width: 14px;
+    height: 14px;
+    border: 1px solid;
+    border-radius: 3px;
+}
+.swatch--free {
+    background: #b9e4c2;
+    border-color: #2e8b57;
+}
+.swatch--occupied {
+    background: #d9d9d4;
+    border-color: #a5a59e;
+}
+.swatch--reserved {
+    background: #dcd3f3;
+    border-color: #7c62c9;
+}
+.swatch--silent {
+    background: #fff;
+    border-color: #c2c2ba;
+}
+/* The trip, step by step: each step shows its Level. */
+.steps {
+    display: grid;
+    gap: 2px;
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+}
+.steps:empty {
+    display: none;
+}
+.steps button {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: none;
+    font: inherit;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+}
+.steps button::before {
+    counter-increment: step;
+    content: counter(step);
+    flex: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+}
+.steps li:last-child button::before {
+    background: #0f7b4a;
+}
+.steps button[aria-current='true'] {
+    border-color: var(--line);
+    background: #f6f6f3;
+}
+/* The trip over the 2D plan: the drive solid, the walk dashed. */
+.trip {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+.trip path {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.trip__drive {
+    stroke: var(--accent);
+    stroke-width: 5;
+}
+.trip__walk {
+    stroke: #0f7b4a;
+    stroke-width: 4;
+    stroke-dasharray: 8 6;
+}
+@media (max-width: 760px) {
+    .app {
+        grid-template-columns: 1fr;
+        grid-template-rows: 60vh auto;
+        height: auto;
+    }
+    .panel {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+    }
+}

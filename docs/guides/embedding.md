@@ -84,6 +84,8 @@ view.on('ready', () => console.log('areaform: 2D ready'));
 
 The 2D plan draws at once; **3D** in the plan controls loads Three.js the first time it is pressed. Everything the View can do is in [Without React](#without-react) and in the API reference.
 
+A bigger example in plain TypeScript is [the live car park](../../apps/examples/live-parking): spots coloured by a sensor feed, free spaces per Level, and the drive from the gate to the best free spot and the walk on to the lift, both found with `@areaform/wayfinding`. It runs at [areaform.app/examples/live-parking](https://areaform.app/examples/live-parking/).
+
 ## Documents
 
 A **Document** is one Space: its Levels (floors), and on each Level the Outline, Walls, Openings, Zones, Obstacles and Underlays; Connections (stairs, lifts) join Levels. Coordinates are metres, Y up ([ADR-0002](../adr/0002-y-up-ccw-coordinates.md)). Documents are plain, immutable JSON-compatible objects.

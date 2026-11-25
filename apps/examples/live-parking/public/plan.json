@@ -1,0 +1,2867 @@
+{
+    "$schema": "https://areaform.app/schema/v1/document.json",
+    "schemaVersion": 1,
+    "id": "mill-street-car-park",
+    "name": "Mill Street Car Park",
+    "kind": "parking",
+    "units": "m",
+    "grid": {
+        "step": 2.5,
+        "snap": true
+    },
+    "levels": [
+        {
+            "id": "p0",
+            "name": "P0",
+            "ordinal": 0,
+            "elevation": 0,
+            "height": 2.6,
+            "outline": {
+                "outer": [
+                    [0, 0],
+                    [46, 0],
+                    [46, 32],
+                    [0, 32]
+                ]
+            },
+            "wallNodes": [
+                {
+                    "id": "p0-n0",
+                    "position": [0, 0]
+                },
+                {
+                    "id": "p0-n1",
+                    "position": [46, 0]
+                },
+                {
+                    "id": "p0-n2",
+                    "position": [46, 32]
+                },
+                {
+                    "id": "p0-n3",
+                    "position": [0, 32]
+                }
+            ],
+            "walls": [
+                {
+                    "id": "p0-w0",
+                    "a": "p0-n0",
+                    "b": "p0-n1",
+                    "thickness": 0.25,
+                    "height": 1.1
+                },
+                {
+                    "id": "p0-w1",
+                    "a": "p0-n1",
+                    "b": "p0-n2",
+                    "thickness": 0.25,
+                    "height": 1.1
+                },
+                {
+                    "id": "p0-w2",
+                    "a": "p0-n2",
+                    "b": "p0-n3",
+                    "thickness": 0.25,
+                    "height": 1.1
+                },
+                {
+                    "id": "p0-w3",
+                    "a": "p0-n3",
+                    "b": "p0-n0",
+                    "thickness": 0.25,
+                    "height": 1.1
+                }
+            ],
+            "openings": [
+                {
+                    "id": "car-entrance",
+                    "kind": "entrance",
+                    "host": "wall",
+                    "wallId": "p0-w1",
+                    "offset": 8,
+                    "width": 6
+                },
+                {
+                    "id": "way-out",
+                    "kind": "entrance",
+                    "host": "wall",
+                    "wallId": "p0-w3",
+                    "offset": 23.5,
+                    "width": 1.5
+                }
+            ],
+            "zones": [
+                {
+                    "id": "P0-lane-south",
+                    "shape": {
+                        "outer": [
+                            [0, 5],
+                            [46, 5],
+                            [46, 11],
+                            [0, 11]
+                        ]
+                    },
+                    "category": "lane",
+                    "restricted": true
+                },
+                {
+                    "id": "P0-lane-north",
+                    "shape": {
+                        "outer": [
+                            [0, 21],
+                            [46, 21],
+                            [46, 27],
+                            [0, 27]
+                        ]
+                    },
+                    "category": "lane",
+                    "restricted": true
+                },
+                {
+                    "id": "P0-lane-ramp",
+                    "shape": {
+                        "outer": [
+                            [35, 11],
+                            [46, 11],
+                            [46, 21],
+                            [35, 21]
+                        ]
+                    },
+                    "category": "lane",
+                    "restricted": true
+                },
+                {
+                    "id": "gate",
+                    "shape": {
+                        "outer": [
+                            [42, 5],
+                            [46, 5],
+                            [46, 11],
+                            [42, 11]
+                        ]
+                    },
+                    "label": "Entry",
+                    "category": "gate"
+                },
+                {
+                    "id": "P0-walkway-0",
+                    "shape": {
+                        "outer": [
+                            [0, 11],
+                            [10, 11],
+                            [10, 21],
+                            [0, 21]
+                        ]
+                    },
+                    "category": "walkway"
+                },
+                {
+                    "id": "P0-walkway-1",
+                    "shape": {
+                        "outer": [
+                            [0, 0],
+                            [10, 0],
+                            [10, 5],
+                            [0, 5]
+                        ]
+                    },
+                    "category": "walkway"
+                },
+                {
+                    "id": "P0-walkway-2",
+                    "shape": {
+                        "outer": [
+                            [35, 0],
+                            [46, 0],
+                            [46, 5],
+                            [35, 5]
+                        ]
+                    },
+                    "category": "walkway"
+                },
+                {
+                    "id": "P0-walkway-3",
+                    "shape": {
+                        "outer": [
+                            [0, 27],
+                            [10, 27],
+                            [10, 32],
+                            [0, 32]
+                        ]
+                    },
+                    "category": "walkway"
+                },
+                {
+                    "id": "P0-walkway-4",
+                    "shape": {
+                        "outer": [
+                            [35, 27],
+                            [46, 27],
+                            [46, 32],
+                            [35, 32]
+                        ]
+                    },
+                    "category": "walkway"
+                },
+                {
+                    "id": "P0-A01",
+                    "shape": {
+                        "outer": [
+                            [10, 27],
+                            [12.5, 27],
+                            [12.5, 32],
+                            [10, 32]
+                        ]
+                    },
+                    "label": "A01",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-a01"
+                    }
+                },
+                {
+                    "id": "P0-A02",
+                    "shape": {
+                        "outer": [
+                            [12.5, 27],
+                            [15, 27],
+                            [15, 32],
+                            [12.5, 32]
+                        ]
+                    },
+                    "label": "A02",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-a02"
+                    }
+                },
+                {
+                    "id": "P0-A03",
+                    "shape": {
+                        "outer": [
+                            [15, 27],
+                            [17.5, 27],
+                            [17.5, 32],
+                            [15, 32]
+                        ]
+                    },
+                    "label": "A03",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-a03"
+                    }
+                },
+                {
+                    "id": "P0-A04",
+                    "shape": {
+                        "outer": [
+                            [17.5, 27],
+                            [20, 27],
+                            [20, 32],
+                            [17.5, 32]
+                        ]
+                    },
+                    "label": "A04",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-a04"
+                    }
+                },
+                {
+                    "id": "P0-A05",
+                    "shape": {
+                        "outer": [
+                            [20, 27],
+                            [22.5, 27],
+                            [22.5, 32],
+                            [20, 32]
+                        ]
+                    },
+                    "label": "A05",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-a05"
+                    }
+                },
+                {
+                    "id": "P0-A06",
+                    "shape": {
+                        "outer": [
+                            [22.5, 27],
+                            [25, 27],
+                            [25, 32],
+                            [22.5, 32]
+                        ]
+                    },
+                    "label": "A06",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-a06"
+                    }
+                },
+                {
+                    "id": "P0-A07",
+                    "shape": {
+                        "outer": [
+                            [25, 27],
+                            [27.5, 27],
+                            [27.5, 32],
+                            [25, 32]
+                        ]
+                    },
+                    "label": "A07",
+                    "category": "ev",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-a07"
+                    }
+                },
+                {
+                    "id": "P0-A08",
+                    "shape": {
+                        "outer": [
+                            [27.5, 27],
+                            [30, 27],
+                            [30, 32],
+                            [27.5, 32]
+                        ]
+                    },
+                    "label": "A08",
+                    "category": "ev",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-a08"
+                    }
+                },
+                {
+                    "id": "P0-A09",
+                    "shape": {
+                        "outer": [
+                            [30, 27],
+                            [32.5, 27],
+                            [32.5, 32],
+                            [30, 32]
+                        ]
+                    },
+                    "label": "A09",
+                    "category": "ev",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-a09"
+                    }
+                },
+                {
+                    "id": "P0-A10",
+                    "shape": {
+                        "outer": [
+                            [32.5, 27],
+                            [35, 27],
+                            [35, 32],
+                            [32.5, 32]
+                        ]
+                    },
+                    "label": "A10",
+                    "category": "ev",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-a10"
+                    }
+                },
+                {
+                    "id": "P0-B01",
+                    "shape": {
+                        "outer": [
+                            [10, 16],
+                            [12.5, 16],
+                            [12.5, 21],
+                            [10, 21]
+                        ]
+                    },
+                    "label": "B01",
+                    "category": "accessible",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-b01"
+                    }
+                },
+                {
+                    "id": "P0-B02",
+                    "shape": {
+                        "outer": [
+                            [12.5, 16],
+                            [15, 16],
+                            [15, 21],
+                            [12.5, 21]
+                        ]
+                    },
+                    "label": "B02",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-b02"
+                    }
+                },
+                {
+                    "id": "P0-B03",
+                    "shape": {
+                        "outer": [
+                            [15, 16],
+                            [17.5, 16],
+                            [17.5, 21],
+                            [15, 21]
+                        ]
+                    },
+                    "label": "B03",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-b03"
+                    }
+                },
+                {
+                    "id": "P0-B04",
+                    "shape": {
+                        "outer": [
+                            [17.5, 16],
+                            [20, 16],
+                            [20, 21],
+                            [17.5, 21]
+                        ]
+                    },
+                    "label": "B04",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-b04"
+                    }
+                },
+                {
+                    "id": "P0-B05",
+                    "shape": {
+                        "outer": [
+                            [20, 16],
+                            [22.5, 16],
+                            [22.5, 21],
+                            [20, 21]
+                        ]
+                    },
+                    "label": "B05",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-b05"
+                    }
+                },
+                {
+                    "id": "P0-B06",
+                    "shape": {
+                        "outer": [
+                            [22.5, 16],
+                            [25, 16],
+                            [25, 21],
+                            [22.5, 21]
+                        ]
+                    },
+                    "label": "B06",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-b06"
+                    }
+                },
+                {
+                    "id": "P0-B07",
+                    "shape": {
+                        "outer": [
+                            [25, 16],
+                            [27.5, 16],
+                            [27.5, 21],
+                            [25, 21]
+                        ]
+                    },
+                    "label": "B07",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-b07"
+                    }
+                },
+                {
+                    "id": "P0-B08",
+                    "shape": {
+                        "outer": [
+                            [27.5, 16],
+                            [30, 16],
+                            [30, 21],
+                            [27.5, 21]
+                        ]
+                    },
+                    "label": "B08",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-b08"
+                    }
+                },
+                {
+                    "id": "P0-B09",
+                    "shape": {
+                        "outer": [
+                            [30, 16],
+                            [32.5, 16],
+                            [32.5, 21],
+                            [30, 21]
+                        ]
+                    },
+                    "label": "B09",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-b09"
+                    }
+                },
+                {
+                    "id": "P0-B10",
+                    "shape": {
+                        "outer": [
+                            [32.5, 16],
+                            [35, 16],
+                            [35, 21],
+                            [32.5, 21]
+                        ]
+                    },
+                    "label": "B10",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-b10"
+                    }
+                },
+                {
+                    "id": "P0-C01",
+                    "shape": {
+                        "outer": [
+                            [10, 11],
+                            [12.5, 11],
+                            [12.5, 16],
+                            [10, 16]
+                        ]
+                    },
+                    "label": "C01",
+                    "category": "accessible",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-c01"
+                    }
+                },
+                {
+                    "id": "P0-C02",
+                    "shape": {
+                        "outer": [
+                            [12.5, 11],
+                            [15, 11],
+                            [15, 16],
+                            [12.5, 16]
+                        ]
+                    },
+                    "label": "C02",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-c02"
+                    }
+                },
+                {
+                    "id": "P0-C03",
+                    "shape": {
+                        "outer": [
+                            [15, 11],
+                            [17.5, 11],
+                            [17.5, 16],
+                            [15, 16]
+                        ]
+                    },
+                    "label": "C03",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-c03"
+                    }
+                },
+                {
+                    "id": "P0-C04",
+                    "shape": {
+                        "outer": [
+                            [17.5, 11],
+                            [20, 11],
+                            [20, 16],
+                            [17.5, 16]
+                        ]
+                    },
+                    "label": "C04",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-c04"
+                    }
+                },
+                {
+                    "id": "P0-C05",
+                    "shape": {
+                        "outer": [
+                            [20, 11],
+                            [22.5, 11],
+                            [22.5, 16],
+                            [20, 16]
+                        ]
+                    },
+                    "label": "C05",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-c05"
+                    }
+                },
+                {
+                    "id": "P0-C06",
+                    "shape": {
+                        "outer": [
+                            [22.5, 11],
+                            [25, 11],
+                            [25, 16],
+                            [22.5, 16]
+                        ]
+                    },
+                    "label": "C06",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-c06"
+                    }
+                },
+                {
+                    "id": "P0-C07",
+                    "shape": {
+                        "outer": [
+                            [25, 11],
+                            [27.5, 11],
+                            [27.5, 16],
+                            [25, 16]
+                        ]
+                    },
+                    "label": "C07",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-c07"
+                    }
+                },
+                {
+                    "id": "P0-C08",
+                    "shape": {
+                        "outer": [
+                            [27.5, 11],
+                            [30, 11],
+                            [30, 16],
+                            [27.5, 16]
+                        ]
+                    },
+                    "label": "C08",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-c08"
+                    }
+                },
+                {
+                    "id": "P0-C09",
+                    "shape": {
+                        "outer": [
+                            [30, 11],
+                            [32.5, 11],
+                            [32.5, 16],
+                            [30, 16]
+                        ]
+                    },
+                    "label": "C09",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-c09"
+                    }
+                },
+                {
+                    "id": "P0-C10",
+                    "shape": {
+                        "outer": [
+                            [32.5, 11],
+                            [35, 11],
+                            [35, 16],
+                            [32.5, 16]
+                        ]
+                    },
+                    "label": "C10",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-c10"
+                    }
+                },
+                {
+                    "id": "P0-D01",
+                    "shape": {
+                        "outer": [
+                            [10, 0],
+                            [12.5, 0],
+                            [12.5, 5],
+                            [10, 5]
+                        ]
+                    },
+                    "label": "D01",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-d01"
+                    }
+                },
+                {
+                    "id": "P0-D02",
+                    "shape": {
+                        "outer": [
+                            [12.5, 0],
+                            [15, 0],
+                            [15, 5],
+                            [12.5, 5]
+                        ]
+                    },
+                    "label": "D02",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-d02"
+                    }
+                },
+                {
+                    "id": "P0-D03",
+                    "shape": {
+                        "outer": [
+                            [15, 0],
+                            [17.5, 0],
+                            [17.5, 5],
+                            [15, 5]
+                        ]
+                    },
+                    "label": "D03",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-d03"
+                    }
+                },
+                {
+                    "id": "P0-D04",
+                    "shape": {
+                        "outer": [
+                            [17.5, 0],
+                            [20, 0],
+                            [20, 5],
+                            [17.5, 5]
+                        ]
+                    },
+                    "label": "D04",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-d04"
+                    }
+                },
+                {
+                    "id": "P0-D05",
+                    "shape": {
+                        "outer": [
+                            [20, 0],
+                            [22.5, 0],
+                            [22.5, 5],
+                            [20, 5]
+                        ]
+                    },
+                    "label": "D05",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-d05"
+                    }
+                },
+                {
+                    "id": "P0-D06",
+                    "shape": {
+                        "outer": [
+                            [22.5, 0],
+                            [25, 0],
+                            [25, 5],
+                            [22.5, 5]
+                        ]
+                    },
+                    "label": "D06",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-d06"
+                    }
+                },
+                {
+                    "id": "P0-D07",
+                    "shape": {
+                        "outer": [
+                            [25, 0],
+                            [27.5, 0],
+                            [27.5, 5],
+                            [25, 5]
+                        ]
+                    },
+                    "label": "D07",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-d07"
+                    }
+                },
+                {
+                    "id": "P0-D08",
+                    "shape": {
+                        "outer": [
+                            [27.5, 0],
+                            [30, 0],
+                            [30, 5],
+                            [27.5, 5]
+                        ]
+                    },
+                    "label": "D08",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-d08"
+                    }
+                },
+                {
+                    "id": "P0-D09",
+                    "shape": {
+                        "outer": [
+                            [30, 0],
+                            [32.5, 0],
+                            [32.5, 5],
+                            [30, 5]
+                        ]
+                    },
+                    "label": "D09",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-d09"
+                    }
+                },
+                {
+                    "id": "P0-D10",
+                    "shape": {
+                        "outer": [
+                            [32.5, 0],
+                            [35, 0],
+                            [35, 5],
+                            [32.5, 5]
+                        ]
+                    },
+                    "label": "D10",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p0-d10"
+                    }
+                }
+            ],
+            "obstacles": [
+                {
+                    "id": "p0-col-0",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [9.75, 15.75],
+                            [10.25, 15.75],
+                            [10.25, 16.25],
+                            [9.75, 16.25]
+                        ]
+                    }
+                },
+                {
+                    "id": "p0-col-1",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [17.25, 15.75],
+                            [17.75, 15.75],
+                            [17.75, 16.25],
+                            [17.25, 16.25]
+                        ]
+                    }
+                },
+                {
+                    "id": "p0-col-2",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [24.75, 15.75],
+                            [25.25, 15.75],
+                            [25.25, 16.25],
+                            [24.75, 16.25]
+                        ]
+                    }
+                },
+                {
+                    "id": "p0-col-3",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [32.25, 15.75],
+                            [32.75, 15.75],
+                            [32.75, 16.25],
+                            [32.25, 16.25]
+                        ]
+                    }
+                }
+            ],
+            "underlays": []
+        },
+        {
+            "id": "p1",
+            "name": "P1",
+            "ordinal": 1,
+            "elevation": 3,
+            "height": 2.6,
+            "outline": {
+                "outer": [
+                    [0, 0],
+                    [46, 0],
+                    [46, 32],
+                    [0, 32]
+                ]
+            },
+            "wallNodes": [
+                {
+                    "id": "p1-n0",
+                    "position": [0, 0]
+                },
+                {
+                    "id": "p1-n1",
+                    "position": [46, 0]
+                },
+                {
+                    "id": "p1-n2",
+                    "position": [46, 32]
+                },
+                {
+                    "id": "p1-n3",
+                    "position": [0, 32]
+                }
+            ],
+            "walls": [
+                {
+                    "id": "p1-w0",
+                    "a": "p1-n0",
+                    "b": "p1-n1",
+                    "thickness": 0.25,
+                    "height": 1.1
+                },
+                {
+                    "id": "p1-w1",
+                    "a": "p1-n1",
+                    "b": "p1-n2",
+                    "thickness": 0.25,
+                    "height": 1.1
+                },
+                {
+                    "id": "p1-w2",
+                    "a": "p1-n2",
+                    "b": "p1-n3",
+                    "thickness": 0.25,
+                    "height": 1.1
+                },
+                {
+                    "id": "p1-w3",
+                    "a": "p1-n3",
+                    "b": "p1-n0",
+                    "thickness": 0.25,
+                    "height": 1.1
+                }
+            ],
+            "openings": [],
+            "zones": [
+                {
+                    "id": "P1-lane-south",
+                    "shape": {
+                        "outer": [
+                            [0, 5],
+                            [46, 5],
+                            [46, 11],
+                            [0, 11]
+                        ]
+                    },
+                    "category": "lane",
+                    "restricted": true
+                },
+                {
+                    "id": "P1-lane-north",
+                    "shape": {
+                        "outer": [
+                            [0, 21],
+                            [46, 21],
+                            [46, 27],
+                            [0, 27]
+                        ]
+                    },
+                    "category": "lane",
+                    "restricted": true
+                },
+                {
+                    "id": "P1-lane-ramp",
+                    "shape": {
+                        "outer": [
+                            [35, 11],
+                            [46, 11],
+                            [46, 21],
+                            [35, 21]
+                        ]
+                    },
+                    "category": "lane",
+                    "restricted": true
+                },
+                {
+                    "id": "P1-walkway-0",
+                    "shape": {
+                        "outer": [
+                            [0, 11],
+                            [10, 11],
+                            [10, 21],
+                            [0, 21]
+                        ]
+                    },
+                    "category": "walkway"
+                },
+                {
+                    "id": "P1-walkway-1",
+                    "shape": {
+                        "outer": [
+                            [0, 0],
+                            [10, 0],
+                            [10, 5],
+                            [0, 5]
+                        ]
+                    },
+                    "category": "walkway"
+                },
+                {
+                    "id": "P1-walkway-2",
+                    "shape": {
+                        "outer": [
+                            [35, 0],
+                            [46, 0],
+                            [46, 5],
+                            [35, 5]
+                        ]
+                    },
+                    "category": "walkway"
+                },
+                {
+                    "id": "P1-walkway-3",
+                    "shape": {
+                        "outer": [
+                            [0, 27],
+                            [10, 27],
+                            [10, 32],
+                            [0, 32]
+                        ]
+                    },
+                    "category": "walkway"
+                },
+                {
+                    "id": "P1-walkway-4",
+                    "shape": {
+                        "outer": [
+                            [35, 27],
+                            [46, 27],
+                            [46, 32],
+                            [35, 32]
+                        ]
+                    },
+                    "category": "walkway"
+                },
+                {
+                    "id": "P1-A01",
+                    "shape": {
+                        "outer": [
+                            [10, 27],
+                            [12.5, 27],
+                            [12.5, 32],
+                            [10, 32]
+                        ]
+                    },
+                    "label": "A01",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-a01"
+                    }
+                },
+                {
+                    "id": "P1-A02",
+                    "shape": {
+                        "outer": [
+                            [12.5, 27],
+                            [15, 27],
+                            [15, 32],
+                            [12.5, 32]
+                        ]
+                    },
+                    "label": "A02",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-a02"
+                    }
+                },
+                {
+                    "id": "P1-A03",
+                    "shape": {
+                        "outer": [
+                            [15, 27],
+                            [17.5, 27],
+                            [17.5, 32],
+                            [15, 32]
+                        ]
+                    },
+                    "label": "A03",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-a03"
+                    }
+                },
+                {
+                    "id": "P1-A04",
+                    "shape": {
+                        "outer": [
+                            [17.5, 27],
+                            [20, 27],
+                            [20, 32],
+                            [17.5, 32]
+                        ]
+                    },
+                    "label": "A04",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-a04"
+                    }
+                },
+                {
+                    "id": "P1-A05",
+                    "shape": {
+                        "outer": [
+                            [20, 27],
+                            [22.5, 27],
+                            [22.5, 32],
+                            [20, 32]
+                        ]
+                    },
+                    "label": "A05",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-a05"
+                    }
+                },
+                {
+                    "id": "P1-A06",
+                    "shape": {
+                        "outer": [
+                            [22.5, 27],
+                            [25, 27],
+                            [25, 32],
+                            [22.5, 32]
+                        ]
+                    },
+                    "label": "A06",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-a06"
+                    }
+                },
+                {
+                    "id": "P1-A07",
+                    "shape": {
+                        "outer": [
+                            [25, 27],
+                            [27.5, 27],
+                            [27.5, 32],
+                            [25, 32]
+                        ]
+                    },
+                    "label": "A07",
+                    "category": "ev",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-a07"
+                    }
+                },
+                {
+                    "id": "P1-A08",
+                    "shape": {
+                        "outer": [
+                            [27.5, 27],
+                            [30, 27],
+                            [30, 32],
+                            [27.5, 32]
+                        ]
+                    },
+                    "label": "A08",
+                    "category": "ev",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-a08"
+                    }
+                },
+                {
+                    "id": "P1-A09",
+                    "shape": {
+                        "outer": [
+                            [30, 27],
+                            [32.5, 27],
+                            [32.5, 32],
+                            [30, 32]
+                        ]
+                    },
+                    "label": "A09",
+                    "category": "ev",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-a09"
+                    }
+                },
+                {
+                    "id": "P1-A10",
+                    "shape": {
+                        "outer": [
+                            [32.5, 27],
+                            [35, 27],
+                            [35, 32],
+                            [32.5, 32]
+                        ]
+                    },
+                    "label": "A10",
+                    "category": "ev",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-a10"
+                    }
+                },
+                {
+                    "id": "P1-B01",
+                    "shape": {
+                        "outer": [
+                            [10, 16],
+                            [12.5, 16],
+                            [12.5, 21],
+                            [10, 21]
+                        ]
+                    },
+                    "label": "B01",
+                    "category": "accessible",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-b01"
+                    }
+                },
+                {
+                    "id": "P1-B02",
+                    "shape": {
+                        "outer": [
+                            [12.5, 16],
+                            [15, 16],
+                            [15, 21],
+                            [12.5, 21]
+                        ]
+                    },
+                    "label": "B02",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-b02"
+                    }
+                },
+                {
+                    "id": "P1-B03",
+                    "shape": {
+                        "outer": [
+                            [15, 16],
+                            [17.5, 16],
+                            [17.5, 21],
+                            [15, 21]
+                        ]
+                    },
+                    "label": "B03",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-b03"
+                    }
+                },
+                {
+                    "id": "P1-B04",
+                    "shape": {
+                        "outer": [
+                            [17.5, 16],
+                            [20, 16],
+                            [20, 21],
+                            [17.5, 21]
+                        ]
+                    },
+                    "label": "B04",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-b04"
+                    }
+                },
+                {
+                    "id": "P1-B05",
+                    "shape": {
+                        "outer": [
+                            [20, 16],
+                            [22.5, 16],
+                            [22.5, 21],
+                            [20, 21]
+                        ]
+                    },
+                    "label": "B05",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-b05"
+                    }
+                },
+                {
+                    "id": "P1-B06",
+                    "shape": {
+                        "outer": [
+                            [22.5, 16],
+                            [25, 16],
+                            [25, 21],
+                            [22.5, 21]
+                        ]
+                    },
+                    "label": "B06",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-b06"
+                    }
+                },
+                {
+                    "id": "P1-B07",
+                    "shape": {
+                        "outer": [
+                            [25, 16],
+                            [27.5, 16],
+                            [27.5, 21],
+                            [25, 21]
+                        ]
+                    },
+                    "label": "B07",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-b07"
+                    }
+                },
+                {
+                    "id": "P1-B08",
+                    "shape": {
+                        "outer": [
+                            [27.5, 16],
+                            [30, 16],
+                            [30, 21],
+                            [27.5, 21]
+                        ]
+                    },
+                    "label": "B08",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-b08"
+                    }
+                },
+                {
+                    "id": "P1-B09",
+                    "shape": {
+                        "outer": [
+                            [30, 16],
+                            [32.5, 16],
+                            [32.5, 21],
+                            [30, 21]
+                        ]
+                    },
+                    "label": "B09",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-b09"
+                    }
+                },
+                {
+                    "id": "P1-B10",
+                    "shape": {
+                        "outer": [
+                            [32.5, 16],
+                            [35, 16],
+                            [35, 21],
+                            [32.5, 21]
+                        ]
+                    },
+                    "label": "B10",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-b10"
+                    }
+                },
+                {
+                    "id": "P1-C01",
+                    "shape": {
+                        "outer": [
+                            [10, 11],
+                            [12.5, 11],
+                            [12.5, 16],
+                            [10, 16]
+                        ]
+                    },
+                    "label": "C01",
+                    "category": "accessible",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-c01"
+                    }
+                },
+                {
+                    "id": "P1-C02",
+                    "shape": {
+                        "outer": [
+                            [12.5, 11],
+                            [15, 11],
+                            [15, 16],
+                            [12.5, 16]
+                        ]
+                    },
+                    "label": "C02",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-c02"
+                    }
+                },
+                {
+                    "id": "P1-C03",
+                    "shape": {
+                        "outer": [
+                            [15, 11],
+                            [17.5, 11],
+                            [17.5, 16],
+                            [15, 16]
+                        ]
+                    },
+                    "label": "C03",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-c03"
+                    }
+                },
+                {
+                    "id": "P1-C04",
+                    "shape": {
+                        "outer": [
+                            [17.5, 11],
+                            [20, 11],
+                            [20, 16],
+                            [17.5, 16]
+                        ]
+                    },
+                    "label": "C04",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-c04"
+                    }
+                },
+                {
+                    "id": "P1-C05",
+                    "shape": {
+                        "outer": [
+                            [20, 11],
+                            [22.5, 11],
+                            [22.5, 16],
+                            [20, 16]
+                        ]
+                    },
+                    "label": "C05",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-c05"
+                    }
+                },
+                {
+                    "id": "P1-C06",
+                    "shape": {
+                        "outer": [
+                            [22.5, 11],
+                            [25, 11],
+                            [25, 16],
+                            [22.5, 16]
+                        ]
+                    },
+                    "label": "C06",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-c06"
+                    }
+                },
+                {
+                    "id": "P1-C07",
+                    "shape": {
+                        "outer": [
+                            [25, 11],
+                            [27.5, 11],
+                            [27.5, 16],
+                            [25, 16]
+                        ]
+                    },
+                    "label": "C07",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-c07"
+                    }
+                },
+                {
+                    "id": "P1-C08",
+                    "shape": {
+                        "outer": [
+                            [27.5, 11],
+                            [30, 11],
+                            [30, 16],
+                            [27.5, 16]
+                        ]
+                    },
+                    "label": "C08",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-c08"
+                    }
+                },
+                {
+                    "id": "P1-C09",
+                    "shape": {
+                        "outer": [
+                            [30, 11],
+                            [32.5, 11],
+                            [32.5, 16],
+                            [30, 16]
+                        ]
+                    },
+                    "label": "C09",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-c09"
+                    }
+                },
+                {
+                    "id": "P1-C10",
+                    "shape": {
+                        "outer": [
+                            [32.5, 11],
+                            [35, 11],
+                            [35, 16],
+                            [32.5, 16]
+                        ]
+                    },
+                    "label": "C10",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-c10"
+                    }
+                },
+                {
+                    "id": "P1-D01",
+                    "shape": {
+                        "outer": [
+                            [10, 0],
+                            [12.5, 0],
+                            [12.5, 5],
+                            [10, 5]
+                        ]
+                    },
+                    "label": "D01",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-d01"
+                    }
+                },
+                {
+                    "id": "P1-D02",
+                    "shape": {
+                        "outer": [
+                            [12.5, 0],
+                            [15, 0],
+                            [15, 5],
+                            [12.5, 5]
+                        ]
+                    },
+                    "label": "D02",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-d02"
+                    }
+                },
+                {
+                    "id": "P1-D03",
+                    "shape": {
+                        "outer": [
+                            [15, 0],
+                            [17.5, 0],
+                            [17.5, 5],
+                            [15, 5]
+                        ]
+                    },
+                    "label": "D03",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-d03"
+                    }
+                },
+                {
+                    "id": "P1-D04",
+                    "shape": {
+                        "outer": [
+                            [17.5, 0],
+                            [20, 0],
+                            [20, 5],
+                            [17.5, 5]
+                        ]
+                    },
+                    "label": "D04",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-d04"
+                    }
+                },
+                {
+                    "id": "P1-D05",
+                    "shape": {
+                        "outer": [
+                            [20, 0],
+                            [22.5, 0],
+                            [22.5, 5],
+                            [20, 5]
+                        ]
+                    },
+                    "label": "D05",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-d05"
+                    }
+                },
+                {
+                    "id": "P1-D06",
+                    "shape": {
+                        "outer": [
+                            [22.5, 0],
+                            [25, 0],
+                            [25, 5],
+                            [22.5, 5]
+                        ]
+                    },
+                    "label": "D06",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-d06"
+                    }
+                },
+                {
+                    "id": "P1-D07",
+                    "shape": {
+                        "outer": [
+                            [25, 0],
+                            [27.5, 0],
+                            [27.5, 5],
+                            [25, 5]
+                        ]
+                    },
+                    "label": "D07",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-d07"
+                    }
+                },
+                {
+                    "id": "P1-D08",
+                    "shape": {
+                        "outer": [
+                            [27.5, 0],
+                            [30, 0],
+                            [30, 5],
+                            [27.5, 5]
+                        ]
+                    },
+                    "label": "D08",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-d08"
+                    }
+                },
+                {
+                    "id": "P1-D09",
+                    "shape": {
+                        "outer": [
+                            [30, 0],
+                            [32.5, 0],
+                            [32.5, 5],
+                            [30, 5]
+                        ]
+                    },
+                    "label": "D09",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-d09"
+                    }
+                },
+                {
+                    "id": "P1-D10",
+                    "shape": {
+                        "outer": [
+                            [32.5, 0],
+                            [35, 0],
+                            [35, 5],
+                            [32.5, 5]
+                        ]
+                    },
+                    "label": "D10",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p1-d10"
+                    }
+                }
+            ],
+            "obstacles": [
+                {
+                    "id": "p1-col-0",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [9.75, 15.75],
+                            [10.25, 15.75],
+                            [10.25, 16.25],
+                            [9.75, 16.25]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-col-1",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [17.25, 15.75],
+                            [17.75, 15.75],
+                            [17.75, 16.25],
+                            [17.25, 16.25]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-col-2",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [24.75, 15.75],
+                            [25.25, 15.75],
+                            [25.25, 16.25],
+                            [24.75, 16.25]
+                        ]
+                    }
+                },
+                {
+                    "id": "p1-col-3",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [32.25, 15.75],
+                            [32.75, 15.75],
+                            [32.75, 16.25],
+                            [32.25, 16.25]
+                        ]
+                    }
+                }
+            ],
+            "underlays": []
+        },
+        {
+            "id": "p2",
+            "name": "P2",
+            "ordinal": 2,
+            "elevation": 6,
+            "height": 2.6,
+            "outline": {
+                "outer": [
+                    [0, 0],
+                    [46, 0],
+                    [46, 32],
+                    [0, 32]
+                ]
+            },
+            "wallNodes": [
+                {
+                    "id": "p2-n0",
+                    "position": [0, 0]
+                },
+                {
+                    "id": "p2-n1",
+                    "position": [46, 0]
+                },
+                {
+                    "id": "p2-n2",
+                    "position": [46, 32]
+                },
+                {
+                    "id": "p2-n3",
+                    "position": [0, 32]
+                }
+            ],
+            "walls": [
+                {
+                    "id": "p2-w0",
+                    "a": "p2-n0",
+                    "b": "p2-n1",
+                    "thickness": 0.25,
+                    "height": 1.1
+                },
+                {
+                    "id": "p2-w1",
+                    "a": "p2-n1",
+                    "b": "p2-n2",
+                    "thickness": 0.25,
+                    "height": 1.1
+                },
+                {
+                    "id": "p2-w2",
+                    "a": "p2-n2",
+                    "b": "p2-n3",
+                    "thickness": 0.25,
+                    "height": 1.1
+                },
+                {
+                    "id": "p2-w3",
+                    "a": "p2-n3",
+                    "b": "p2-n0",
+                    "thickness": 0.25,
+                    "height": 1.1
+                }
+            ],
+            "openings": [],
+            "zones": [
+                {
+                    "id": "P2-lane-south",
+                    "shape": {
+                        "outer": [
+                            [0, 5],
+                            [46, 5],
+                            [46, 11],
+                            [0, 11]
+                        ]
+                    },
+                    "category": "lane",
+                    "restricted": true
+                },
+                {
+                    "id": "P2-lane-north",
+                    "shape": {
+                        "outer": [
+                            [0, 21],
+                            [46, 21],
+                            [46, 27],
+                            [0, 27]
+                        ]
+                    },
+                    "category": "lane",
+                    "restricted": true
+                },
+                {
+                    "id": "P2-lane-ramp",
+                    "shape": {
+                        "outer": [
+                            [35, 11],
+                            [46, 11],
+                            [46, 21],
+                            [35, 21]
+                        ]
+                    },
+                    "category": "lane",
+                    "restricted": true
+                },
+                {
+                    "id": "P2-walkway-0",
+                    "shape": {
+                        "outer": [
+                            [0, 11],
+                            [10, 11],
+                            [10, 21],
+                            [0, 21]
+                        ]
+                    },
+                    "category": "walkway"
+                },
+                {
+                    "id": "P2-walkway-1",
+                    "shape": {
+                        "outer": [
+                            [0, 0],
+                            [10, 0],
+                            [10, 5],
+                            [0, 5]
+                        ]
+                    },
+                    "category": "walkway"
+                },
+                {
+                    "id": "P2-walkway-2",
+                    "shape": {
+                        "outer": [
+                            [35, 0],
+                            [46, 0],
+                            [46, 5],
+                            [35, 5]
+                        ]
+                    },
+                    "category": "walkway"
+                },
+                {
+                    "id": "P2-walkway-3",
+                    "shape": {
+                        "outer": [
+                            [0, 27],
+                            [10, 27],
+                            [10, 32],
+                            [0, 32]
+                        ]
+                    },
+                    "category": "walkway"
+                },
+                {
+                    "id": "P2-walkway-4",
+                    "shape": {
+                        "outer": [
+                            [35, 27],
+                            [46, 27],
+                            [46, 32],
+                            [35, 32]
+                        ]
+                    },
+                    "category": "walkway"
+                },
+                {
+                    "id": "P2-A01",
+                    "shape": {
+                        "outer": [
+                            [10, 27],
+                            [12.5, 27],
+                            [12.5, 32],
+                            [10, 32]
+                        ]
+                    },
+                    "label": "A01",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-a01"
+                    }
+                },
+                {
+                    "id": "P2-A02",
+                    "shape": {
+                        "outer": [
+                            [12.5, 27],
+                            [15, 27],
+                            [15, 32],
+                            [12.5, 32]
+                        ]
+                    },
+                    "label": "A02",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-a02"
+                    }
+                },
+                {
+                    "id": "P2-A03",
+                    "shape": {
+                        "outer": [
+                            [15, 27],
+                            [17.5, 27],
+                            [17.5, 32],
+                            [15, 32]
+                        ]
+                    },
+                    "label": "A03",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-a03"
+                    }
+                },
+                {
+                    "id": "P2-A04",
+                    "shape": {
+                        "outer": [
+                            [17.5, 27],
+                            [20, 27],
+                            [20, 32],
+                            [17.5, 32]
+                        ]
+                    },
+                    "label": "A04",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-a04"
+                    }
+                },
+                {
+                    "id": "P2-A05",
+                    "shape": {
+                        "outer": [
+                            [20, 27],
+                            [22.5, 27],
+                            [22.5, 32],
+                            [20, 32]
+                        ]
+                    },
+                    "label": "A05",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-a05"
+                    }
+                },
+                {
+                    "id": "P2-A06",
+                    "shape": {
+                        "outer": [
+                            [22.5, 27],
+                            [25, 27],
+                            [25, 32],
+                            [22.5, 32]
+                        ]
+                    },
+                    "label": "A06",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-a06"
+                    }
+                },
+                {
+                    "id": "P2-A07",
+                    "shape": {
+                        "outer": [
+                            [25, 27],
+                            [27.5, 27],
+                            [27.5, 32],
+                            [25, 32]
+                        ]
+                    },
+                    "label": "A07",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-a07"
+                    }
+                },
+                {
+                    "id": "P2-A08",
+                    "shape": {
+                        "outer": [
+                            [27.5, 27],
+                            [30, 27],
+                            [30, 32],
+                            [27.5, 32]
+                        ]
+                    },
+                    "label": "A08",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-a08"
+                    }
+                },
+                {
+                    "id": "P2-A09",
+                    "shape": {
+                        "outer": [
+                            [30, 27],
+                            [32.5, 27],
+                            [32.5, 32],
+                            [30, 32]
+                        ]
+                    },
+                    "label": "A09",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-a09"
+                    }
+                },
+                {
+                    "id": "P2-A10",
+                    "shape": {
+                        "outer": [
+                            [32.5, 27],
+                            [35, 27],
+                            [35, 32],
+                            [32.5, 32]
+                        ]
+                    },
+                    "label": "A10",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-a10"
+                    }
+                },
+                {
+                    "id": "P2-B01",
+                    "shape": {
+                        "outer": [
+                            [10, 16],
+                            [12.5, 16],
+                            [12.5, 21],
+                            [10, 21]
+                        ]
+                    },
+                    "label": "B01",
+                    "category": "accessible",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-b01"
+                    }
+                },
+                {
+                    "id": "P2-B02",
+                    "shape": {
+                        "outer": [
+                            [12.5, 16],
+                            [15, 16],
+                            [15, 21],
+                            [12.5, 21]
+                        ]
+                    },
+                    "label": "B02",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-b02"
+                    }
+                },
+                {
+                    "id": "P2-B03",
+                    "shape": {
+                        "outer": [
+                            [15, 16],
+                            [17.5, 16],
+                            [17.5, 21],
+                            [15, 21]
+                        ]
+                    },
+                    "label": "B03",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-b03"
+                    }
+                },
+                {
+                    "id": "P2-B04",
+                    "shape": {
+                        "outer": [
+                            [17.5, 16],
+                            [20, 16],
+                            [20, 21],
+                            [17.5, 21]
+                        ]
+                    },
+                    "label": "B04",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-b04"
+                    }
+                },
+                {
+                    "id": "P2-B05",
+                    "shape": {
+                        "outer": [
+                            [20, 16],
+                            [22.5, 16],
+                            [22.5, 21],
+                            [20, 21]
+                        ]
+                    },
+                    "label": "B05",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-b05"
+                    }
+                },
+                {
+                    "id": "P2-B06",
+                    "shape": {
+                        "outer": [
+                            [22.5, 16],
+                            [25, 16],
+                            [25, 21],
+                            [22.5, 21]
+                        ]
+                    },
+                    "label": "B06",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-b06"
+                    }
+                },
+                {
+                    "id": "P2-B07",
+                    "shape": {
+                        "outer": [
+                            [25, 16],
+                            [27.5, 16],
+                            [27.5, 21],
+                            [25, 21]
+                        ]
+                    },
+                    "label": "B07",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-b07"
+                    }
+                },
+                {
+                    "id": "P2-B08",
+                    "shape": {
+                        "outer": [
+                            [27.5, 16],
+                            [30, 16],
+                            [30, 21],
+                            [27.5, 21]
+                        ]
+                    },
+                    "label": "B08",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-b08"
+                    }
+                },
+                {
+                    "id": "P2-B09",
+                    "shape": {
+                        "outer": [
+                            [30, 16],
+                            [32.5, 16],
+                            [32.5, 21],
+                            [30, 21]
+                        ]
+                    },
+                    "label": "B09",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-b09"
+                    }
+                },
+                {
+                    "id": "P2-B10",
+                    "shape": {
+                        "outer": [
+                            [32.5, 16],
+                            [35, 16],
+                            [35, 21],
+                            [32.5, 21]
+                        ]
+                    },
+                    "label": "B10",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-b10"
+                    }
+                },
+                {
+                    "id": "P2-C01",
+                    "shape": {
+                        "outer": [
+                            [10, 11],
+                            [12.5, 11],
+                            [12.5, 16],
+                            [10, 16]
+                        ]
+                    },
+                    "label": "C01",
+                    "category": "accessible",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-c01"
+                    }
+                },
+                {
+                    "id": "P2-C02",
+                    "shape": {
+                        "outer": [
+                            [12.5, 11],
+                            [15, 11],
+                            [15, 16],
+                            [12.5, 16]
+                        ]
+                    },
+                    "label": "C02",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-c02"
+                    }
+                },
+                {
+                    "id": "P2-C03",
+                    "shape": {
+                        "outer": [
+                            [15, 11],
+                            [17.5, 11],
+                            [17.5, 16],
+                            [15, 16]
+                        ]
+                    },
+                    "label": "C03",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-c03"
+                    }
+                },
+                {
+                    "id": "P2-C04",
+                    "shape": {
+                        "outer": [
+                            [17.5, 11],
+                            [20, 11],
+                            [20, 16],
+                            [17.5, 16]
+                        ]
+                    },
+                    "label": "C04",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-c04"
+                    }
+                },
+                {
+                    "id": "P2-C05",
+                    "shape": {
+                        "outer": [
+                            [20, 11],
+                            [22.5, 11],
+                            [22.5, 16],
+                            [20, 16]
+                        ]
+                    },
+                    "label": "C05",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-c05"
+                    }
+                },
+                {
+                    "id": "P2-C06",
+                    "shape": {
+                        "outer": [
+                            [22.5, 11],
+                            [25, 11],
+                            [25, 16],
+                            [22.5, 16]
+                        ]
+                    },
+                    "label": "C06",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-c06"
+                    }
+                },
+                {
+                    "id": "P2-C07",
+                    "shape": {
+                        "outer": [
+                            [25, 11],
+                            [27.5, 11],
+                            [27.5, 16],
+                            [25, 16]
+                        ]
+                    },
+                    "label": "C07",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-c07"
+                    }
+                },
+                {
+                    "id": "P2-C08",
+                    "shape": {
+                        "outer": [
+                            [27.5, 11],
+                            [30, 11],
+                            [30, 16],
+                            [27.5, 16]
+                        ]
+                    },
+                    "label": "C08",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-c08"
+                    }
+                },
+                {
+                    "id": "P2-C09",
+                    "shape": {
+                        "outer": [
+                            [30, 11],
+                            [32.5, 11],
+                            [32.5, 16],
+                            [30, 16]
+                        ]
+                    },
+                    "label": "C09",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-c09"
+                    }
+                },
+                {
+                    "id": "P2-C10",
+                    "shape": {
+                        "outer": [
+                            [32.5, 11],
+                            [35, 11],
+                            [35, 16],
+                            [32.5, 16]
+                        ]
+                    },
+                    "label": "C10",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-c10"
+                    }
+                },
+                {
+                    "id": "P2-D01",
+                    "shape": {
+                        "outer": [
+                            [10, 0],
+                            [12.5, 0],
+                            [12.5, 5],
+                            [10, 5]
+                        ]
+                    },
+                    "label": "D01",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-d01"
+                    }
+                },
+                {
+                    "id": "P2-D02",
+                    "shape": {
+                        "outer": [
+                            [12.5, 0],
+                            [15, 0],
+                            [15, 5],
+                            [12.5, 5]
+                        ]
+                    },
+                    "label": "D02",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-d02"
+                    }
+                },
+                {
+                    "id": "P2-D03",
+                    "shape": {
+                        "outer": [
+                            [15, 0],
+                            [17.5, 0],
+                            [17.5, 5],
+                            [15, 5]
+                        ]
+                    },
+                    "label": "D03",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-d03"
+                    }
+                },
+                {
+                    "id": "P2-D04",
+                    "shape": {
+                        "outer": [
+                            [17.5, 0],
+                            [20, 0],
+                            [20, 5],
+                            [17.5, 5]
+                        ]
+                    },
+                    "label": "D04",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-d04"
+                    }
+                },
+                {
+                    "id": "P2-D05",
+                    "shape": {
+                        "outer": [
+                            [20, 0],
+                            [22.5, 0],
+                            [22.5, 5],
+                            [20, 5]
+                        ]
+                    },
+                    "label": "D05",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-d05"
+                    }
+                },
+                {
+                    "id": "P2-D06",
+                    "shape": {
+                        "outer": [
+                            [22.5, 0],
+                            [25, 0],
+                            [25, 5],
+                            [22.5, 5]
+                        ]
+                    },
+                    "label": "D06",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-d06"
+                    }
+                },
+                {
+                    "id": "P2-D07",
+                    "shape": {
+                        "outer": [
+                            [25, 0],
+                            [27.5, 0],
+                            [27.5, 5],
+                            [25, 5]
+                        ]
+                    },
+                    "label": "D07",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-d07"
+                    }
+                },
+                {
+                    "id": "P2-D08",
+                    "shape": {
+                        "outer": [
+                            [27.5, 0],
+                            [30, 0],
+                            [30, 5],
+                            [27.5, 5]
+                        ]
+                    },
+                    "label": "D08",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-d08"
+                    }
+                },
+                {
+                    "id": "P2-D09",
+                    "shape": {
+                        "outer": [
+                            [30, 0],
+                            [32.5, 0],
+                            [32.5, 5],
+                            [30, 5]
+                        ]
+                    },
+                    "label": "D09",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-d09"
+                    }
+                },
+                {
+                    "id": "P2-D10",
+                    "shape": {
+                        "outer": [
+                            [32.5, 0],
+                            [35, 0],
+                            [35, 5],
+                            [32.5, 5]
+                        ]
+                    },
+                    "label": "D10",
+                    "category": "spot",
+                    "walkAround": true,
+                    "data": {
+                        "sensorId": "s-p2-d10"
+                    }
+                }
+            ],
+            "obstacles": [
+                {
+                    "id": "p2-col-0",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [9.75, 15.75],
+                            [10.25, 15.75],
+                            [10.25, 16.25],
+                            [9.75, 16.25]
+                        ]
+                    }
+                },
+                {
+                    "id": "p2-col-1",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [17.25, 15.75],
+                            [17.75, 15.75],
+                            [17.75, 16.25],
+                            [17.25, 16.25]
+                        ]
+                    }
+                },
+                {
+                    "id": "p2-col-2",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [24.75, 15.75],
+                            [25.25, 15.75],
+                            [25.25, 16.25],
+                            [24.75, 16.25]
+                        ]
+                    }
+                },
+                {
+                    "id": "p2-col-3",
+                    "kind": "column",
+                    "shape": {
+                        "outer": [
+                            [32.25, 15.75],
+                            [32.75, 15.75],
+                            [32.75, 16.25],
+                            [32.25, 16.25]
+                        ]
+                    }
+                }
+            ],
+            "underlays": []
+        }
+    ],
+    "connections": [
+        {
+            "id": "lift",
+            "kind": "elevator",
+            "name": "Lift",
+            "stops": [
+                {
+                    "levelId": "p0",
+                    "shape": {
+                        "outer": [
+                            [1, 16],
+                            [4, 16],
+                            [4, 19.5],
+                            [1, 19.5]
+                        ]
+                    },
+                    "entry": [4, 17.75]
+                },
+                {
+                    "levelId": "p1",
+                    "shape": {
+                        "outer": [
+                            [1, 16],
+                            [4, 16],
+                            [4, 19.5],
+                            [1, 19.5]
+                        ]
+                    },
+                    "entry": [4, 17.75]
+                },
+                {
+                    "levelId": "p2",
+                    "shape": {
+                        "outer": [
+                            [1, 16],
+                            [4, 16],
+                            [4, 19.5],
+                            [1, 19.5]
+                        ]
+                    },
+                    "entry": [4, 17.75]
+                }
+            ],
+            "bidirectional": true,
+            "accessible": true
+        },
+        {
+            "id": "stairs",
+            "kind": "stairs",
+            "name": "Stairs",
+            "stops": [
+                {
+                    "levelId": "p0",
+                    "shape": {
+                        "outer": [
+                            [1, 11.5],
+                            [5, 11.5],
+                            [5, 15],
+                            [1, 15]
+                        ]
+                    },
+                    "entry": [5, 13.25]
+                },
+                {
+                    "levelId": "p1",
+                    "shape": {
+                        "outer": [
+                            [1, 11.5],
+                            [5, 11.5],
+                            [5, 15],
+                            [1, 15]
+                        ]
+                    },
+                    "entry": [5, 13.25]
+                },
+                {
+                    "levelId": "p2",
+                    "shape": {
+                        "outer": [
+                            [1, 11.5],
+                            [5, 11.5],
+                            [5, 15],
+                            [1, 15]
+                        ]
+                    },
+                    "entry": [5, 13.25]
+                }
+            ],
+            "bidirectional": true
+        },
+        {
+            "id": "ramp",
+            "kind": "ramp",
+            "name": "Car ramp",
+            "stops": [
+                {
+                    "levelId": "p0",
+                    "shape": {
+                        "outer": [
+                            [39, 13],
+                            [45, 13],
+                            [45, 19],
+                            [39, 19]
+                        ]
+                    },
+                    "entry": [39, 16]
+                },
+                {
+                    "levelId": "p1",
+                    "shape": {
+                        "outer": [
+                            [39, 13],
+                            [45, 13],
+                            [45, 19],
+                            [39, 19]
+                        ]
+                    },
+                    "entry": [39, 16]
+                },
+                {
+                    "levelId": "p2",
+                    "shape": {
+                        "outer": [
+                            [39, 13],
+                            [45, 13],
+                            [45, 19],
+                            [39, 19]
+                        ]
+                    },
+                    "entry": [39, 16]
+                }
+            ],
+            "bidirectional": true
+        }
+    ]
+}

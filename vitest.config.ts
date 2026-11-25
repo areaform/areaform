@@ -3,7 +3,7 @@ import { defineConfig } from 'vitest/config';
 // One run over every package, for `pnpm coverage`; `pnpm test` still runs each package alone.
 export default defineConfig({
     test: {
-        projects: ['packages/*', 'apps/playground'],
+        projects: ['packages/*', 'apps/playground', 'apps/examples/live-parking'],
         coverage: {
             provider: 'v8',
             include: ['packages/*/src/**/*.{ts,tsx}'],

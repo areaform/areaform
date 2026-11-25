@@ -1,0 +1,30 @@
+{
+    "name": "@areaform/example-live-parking",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc -p tsconfig.json && vite build",
+        "typecheck": "tsc -p tsconfig.json && tsc -p e2e/tsconfig.json",
+        "preview": "vite preview",
+        "plan": "node plan/make-plan.ts && prettier --write public/plan.json",
+        "test": "vitest run",
+        "e2e": "playwright test"
+    },
+    "dependencies": {
+        "@areaform/core": "workspace:*",
+        "@areaform/render-2d": "workspace:*",
+        "@areaform/render-3d": "workspace:*",
+        "@areaform/view": "workspace:*",
+        "@areaform/wayfinding": "workspace:*",
+        "three": "^0.186.1"
+    },
+    "devDependencies": {
+        "@playwright/test": "^1.64.1",
+        "@types/node": "^24.19.2",
+        "typescript": "~6.0.3",
+        "vite": "^8.3.4",
+        "vitest": "^5.0.5"
+    }
+}

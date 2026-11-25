@@ -12,11 +12,12 @@
     },
     "scripts": {
         "dev": "pnpm --filter @areaform/playground dev",
+        "parking:dev": "pnpm --filter @areaform/example-live-parking dev",
         "test": "pnpm -r test",
         "typecheck": "pnpm -r typecheck",
         "lint": "eslint .",
         "format": "prettier --write .",
-        "e2e": "pnpm --filter @areaform/playground e2e",
+        "e2e": "pnpm --filter \"./apps/**\" --workspace-concurrency=1 --no-bail e2e",
         "coverage": "vitest run --coverage",
         "build": "pnpm -r build",
         "docs:api": "typedoc",

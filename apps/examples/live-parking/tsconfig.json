@@ -1,0 +1,11 @@
+{
+    "extends": "../../../tsconfig.base.json",
+    "compilerOptions": {
+        "lib": ["ES2023", "DOM", "DOM.Iterable"],
+        "types": ["vite/client", "node"],
+        "paths": {
+            "@kninnug/constrainautor": ["../../../packages/wayfinding/types/constrainautor.d.ts"]
+        }
+    },
+    "include": ["src", "plan", "vite.config.ts", "vitest.config.ts"]
+}
