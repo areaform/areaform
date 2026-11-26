@@ -22,12 +22,14 @@ jobs:
             # The OIDC token npm checks instead of a password.
             id-token: write
         steps:
-            - uses: actions/checkout@v4
-            - uses: pnpm/action-setup@v4 # version from package.json "packageManager"
-            - uses: actions/setup-node@v4
+            - uses: actions/checkout@v5
+            - uses: pnpm/action-setup@v5 # version from package.json "packageManager"
+            - uses: actions/setup-node@v5
               with:
                   node-version: 24
                   registry-url: https://registry.npmjs.org
+                  # No dependency cache in a release: a poisoned cache must not reach npm.
+                  package-manager-cache: false
             # Trusted Publishing needs npm 11.5.1 or newer.
             - run: |
                   node -e 'const [a, b, c] = process.argv[1].split(".").map(Number);

@@ -18,6 +18,13 @@ export {
 export { categoryFromText, categoryFlags } from './document/categories.ts';
 export { hereValue } from './document/here.ts';
 export {
+    describeLoadError,
+    describeLoadErrors,
+    relativeSources,
+    sortDraftFiles,
+    type DraftFiles,
+} from './document/planFiles.ts';
+export {
     categoryLabel,
     createTranslator,
     english,
