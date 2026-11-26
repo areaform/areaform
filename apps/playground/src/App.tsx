@@ -12,7 +12,15 @@ import {
 import { CreateSpaceForm, AreaformEditor, Icon, useDocument } from '@areaform/editor/react';
 import type { PluginSource } from '@areaform/view';
 import { AreaformView } from '@areaform/view/react';
-import { createDeviceAssets, LOCALE_NAMES, LOCALES, type BuiltInLocale } from '@areaform/editor';
+import {
+    createDeviceAssets,
+    describeLoadErrors as whyNotLoaded,
+    LOCALE_NAMES,
+    LOCALES,
+    relativeSources,
+    sortDraftFiles,
+    type BuiltInLocale,
+} from '@areaform/editor';
 import { stressSpace } from '@areaform/core/testing';
 import {
     worldToScreen,
@@ -20,17 +28,17 @@ import {
     type Renderer,
     type StyleResolver,
 } from '@areaform/render-2d';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import logo from '../../../brand/favicon.svg';
 import { browserAssetStore } from './assetStore.ts';
 import { compactJSON } from './compactJSON.ts';
-import { relativeSources, sortDraftFiles } from './draftImport.ts';
 import { Menu, MenuSeparator } from './Menu.tsx';
 import { ReviewPanel } from './ReviewPanel.tsx';
+import { Toast } from './Toast.tsx';
 import { sampleExpo } from './sampleExpo.ts';
 import { sampleOffice } from './sampleOffice.ts';
 import { demoLabels, demoTheme } from './demoTheme.ts';
-import { createStore, describeLoadErrors, type KeyValueStorage, type Prefs } from './storage.ts';
+import { createStore, type KeyValueStorage, type Prefs } from './storage.ts';
 
 type Demo = 'expo' | 'office' | 'stress';
 
@@ -215,6 +223,7 @@ export function App() {
     useEffect(() => setShortcuts(false), [prefs.mode, creating, generation]);
     const [confirmation, setConfirmation] = useState<Confirmation | null>(null);
     const [notice, setNotice] = useState<string | null>(initial.notice);
+    const closeNotice = useCallback(() => setNotice(null), []);
     const fileInput = useRef<HTMLInputElement>(null);
     const folderInput = useRef<HTMLInputElement>(null);
     /**
@@ -377,7 +386,8 @@ export function App() {
         if ('error' in sorted) return setNotice(`Could not import: ${sorted.error}.`);
         const { plan, images } = sorted;
         const loaded = fromJSON(await plan.text(), { repair: true });
-        if (!loaded.ok) return setNotice(`Could not import: ${describeLoadErrors(loaded.errors)}.`);
+        if (!loaded.ok)
+            return setNotice(`Could not import ${plan.name}. ${whyNotLoaded(loaded.errors)}`);
         const missing = relativeSources(loaded.doc).filter((name) => !images.has(name));
         const notes = [
             loaded.repairs.length > 0 && `${loaded.repairs.length} broken element(s) removed`,
@@ -410,7 +420,7 @@ export function App() {
     return (
         <div className="shell">
             {/* One row, never wrapped: a taller bar moves the plan, which breaks drags in the e2e
-                tests. Actions live in the Demos and File menus; a long notice is cut short. */}
+                tests. Actions live in the Demos and File menus; messages show in a Toast below. */}
             <nav className="bar">
                 <a className="title-block" href="/" title="Back to areaform.app">
                     <img src={logo} alt="" width={20} height={20} />
@@ -565,11 +575,6 @@ export function App() {
                     }}
                 />
                 <span className="bar-end">
-                    {notice && (
-                        <span className="muted notice" role="status" title={notice}>
-                            {notice}
-                        </span>
-                    )}
                     {autosaving ? (
                         <span
                             className="save-state"
@@ -623,6 +628,7 @@ export function App() {
                     </select>
                 </span>
             </nav>
+            <Toast message={notice} onClose={closeNotice} />
             {prefs.mode === 'edit' && creating ? (
                 <div className="dialog">
                     <CreateSpaceForm
