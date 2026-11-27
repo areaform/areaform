@@ -1,0 +1,430 @@
+<!doctype html>
+<!--
+    An example client site (ADR-0022's update 2026-11-20): a made-up craft fair's home page with
+    the demo hall's plan inside, to show how an Areaform plan looks on a client's own page after
+    set-up. The fair, its exhibitors and its dates are invented. One file, no build, no fonts or
+    scripts from anyone but Areaform's own embed.js; kept out of search engines.
+-->
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Northbound Makers Fair 2027 · an example site · Areaform</title>
+        <meta
+            name="description"
+            content="An example site: a made-up craft fair's page with its Areaform floor plan inside."
+        />
+        <meta name="robots" content="noindex" />
+        <!-- Share tags, for a link sent to a prospect; still kept out of search -->
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Areaform" />
+        <meta property="og:url" content="https://areaform.app/examples/makers-fair/" />
+        <meta
+            property="og:title"
+            content="Northbound Makers Fair 2027 · an example site · Areaform"
+        />
+        <meta
+            property="og:description"
+            content="An example site: a made-up craft fair's page with its Areaform floor plan inside."
+        />
+        <meta property="og:image" content="https://areaform.app/og.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="icon" href="https://areaform.app/favicon.svg" type="image/svg+xml" />
+        <style>
+            :root {
+                --paper: #f6f1e7;
+                --paper-2: #ece4d3;
+                --ink: #1d2a24;
+                --muted: #5b655f;
+                --line: rgb(29 42 36 / 0.14);
+                --accent: #c2481c;
+                --accent-ink: #fff8f2;
+                --serif:
+                    'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+                --sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+                --wrap: 1160px;
+                --gut: clamp(16px, 5vw, 48px);
+            }
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                background: var(--paper);
+                color: var(--ink);
+                font: 400 17px / 1.6 var(--sans);
+            }
+            h1,
+            h2,
+            h3,
+            p {
+                margin: 0;
+            }
+            a {
+                color: inherit;
+            }
+            .wrap {
+                max-width: calc(var(--wrap) + 2 * var(--gut));
+                margin: 0 auto;
+                padding-inline: var(--gut);
+            }
+
+            /* the example bar: Areaform's, not the fair's */
+            .example {
+                background: #0b0c0e;
+                color: #dfe3e8;
+                font:
+                    400 14px / 1.4 system-ui,
+                    sans-serif;
+            }
+            .example .wrap {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 4px 16px;
+                padding-block: 10px;
+            }
+            .example a {
+                color: #fff;
+                font-weight: 500;
+                text-underline-offset: 3px;
+            }
+
+            /* the fair's own page */
+            header .wrap {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                padding-block: 20px;
+            }
+            .brand {
+                font: 600 20px / 1 var(--serif);
+                text-decoration: none;
+                letter-spacing: 0.01em;
+            }
+            .brand span {
+                color: var(--accent);
+            }
+            nav ul {
+                display: flex;
+                gap: 24px;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                font-size: 15px;
+            }
+            nav a {
+                text-decoration: none;
+            }
+            nav a:hover {
+                text-decoration: underline;
+                text-underline-offset: 4px;
+            }
+            .tickets {
+                display: inline-flex;
+                align-items: center;
+                min-height: 44px;
+                padding: 0 20px;
+                border-radius: 999px;
+                background: var(--accent);
+                color: var(--accent-ink);
+                font-weight: 600;
+                font-size: 15px;
+                text-decoration: none;
+            }
+            .tickets:hover {
+                background: #a83c15;
+            }
+
+            .hero {
+                padding-block: 48px 64px;
+                border-bottom: 1px solid var(--line);
+            }
+            .hero .wrap {
+                display: grid;
+                grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+                gap: 48px;
+                align-items: end;
+            }
+            .when {
+                margin-bottom: 20px;
+                font-size: 15px;
+                letter-spacing: 0.02em;
+                color: var(--accent);
+                font-weight: 600;
+            }
+            .hero h1 {
+                text-wrap: balance;
+                font: 400 clamp(44px, 6vw, 84px) / 0.98 var(--serif);
+                letter-spacing: -0.02em;
+            }
+            .hero p.lead {
+                margin-top: 24px;
+                max-width: 560px;
+                font-size: 19px;
+                color: var(--muted);
+            }
+            .facts {
+                display: grid;
+                gap: 0;
+                margin: 0;
+                border-top: 1px solid var(--line);
+            }
+            .facts div {
+                display: flex;
+                justify-content: space-between;
+                gap: 16px;
+                padding: 12px 0;
+                border-bottom: 1px solid var(--line);
+                font-size: 15px;
+            }
+            .facts dt {
+                color: var(--muted);
+            }
+            .facts dd {
+                margin: 0;
+                text-align: right;
+                font-weight: 500;
+            }
+
+            section {
+                padding-block: 72px;
+            }
+            .head {
+                display: grid;
+                gap: 12px;
+                max-width: 640px;
+                margin-bottom: 32px;
+            }
+            h2 {
+                font: 400 clamp(32px, 3.6vw, 48px) / 1.05 var(--serif);
+                letter-spacing: -0.01em;
+            }
+            .head p {
+                color: var(--muted);
+            }
+
+            /* the plan and the exhibitors beside it */
+            /* the plan takes the page's width, so the stands' numbers show; the makers under it */
+            .plan .wrap > .grid {
+                display: grid;
+                gap: 40px;
+            }
+            .plan-frame {
+                height: clamp(420px, 70vh, 640px);
+                border-radius: 12px;
+                overflow: hidden;
+                background: #fff;
+                box-shadow: 0 0 0 1px var(--line);
+            }
+            .exhibitors h3 {
+                margin-bottom: 8px;
+                font: 600 15px / 1.4 var(--sans);
+            }
+            .exhibitors ul {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                column-gap: 48px;
+                margin: 0;
+                border-top: 1px solid var(--line);
+                padding: 0;
+                list-style: none;
+            }
+            .exhibitors li {
+                display: flex;
+                justify-content: space-between;
+                gap: 12px;
+                padding: 10px 0;
+                border-bottom: 1px solid var(--line);
+                font-size: 15px;
+            }
+            .stand {
+                font:
+                    500 14px / 1.6 ui-monospace,
+                    'SFMono-Regular',
+                    Menlo,
+                    monospace;
+                color: var(--ink);
+                white-space: nowrap;
+            }
+            .exhibitors p {
+                margin-top: 12px;
+                font-size: 14px;
+                color: var(--muted);
+            }
+
+            .visit {
+                background: var(--paper-2);
+            }
+            .visit .cols {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 32px;
+            }
+            .visit h3 {
+                margin-bottom: 8px;
+                font: 600 17px / 1.4 var(--sans);
+            }
+            .visit p {
+                color: var(--muted);
+            }
+
+            footer {
+                padding-block: 32px;
+                font-size: 14px;
+                color: var(--muted);
+            }
+
+            @media (max-width: 860px) {
+                nav {
+                    display: none;
+                }
+                .hero .wrap,
+                .plan .wrap > .grid,
+                .visit .cols {
+                    grid-template-columns: 1fr;
+                }
+                /* the hall is wide and a phone shows it by its width */
+                .plan-frame {
+                    height: 320px;
+                }
+                .exhibitors ul {
+                    grid-template-columns: 1fr;
+                }
+                section {
+                    padding-block: 56px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="example">
+            <div class="wrap">
+                <span
+                    >An example site: the fair is made up, to show an Areaform plan on a client’s
+                    own page.</span
+                >
+                <a href="https://areaform.app/exhibitions/">Areaform for exhibitions →</a>
+            </div>
+        </div>
+
+        <header>
+            <div class="wrap">
+                <a class="brand" href="#top">Northbound <span>Makers</span> Fair</a>
+                <nav aria-label="The fair">
+                    <ul>
+                        <li><a href="#plan">Floor plan</a></li>
+                        <li><a href="#makers">Exhibitors</a></li>
+                        <li><a href="#visit">Visit</a></li>
+                    </ul>
+                </nav>
+                <a class="tickets" href="#visit">Tickets</a>
+            </div>
+        </header>
+
+        <main id="top">
+            <div class="hero">
+                <div class="wrap">
+                    <div>
+                        <p class="when">14–16 May 2027 · Expo Hall A</p>
+                        <h1>Three days of furniture, ceramics and things made by hand</h1>
+                        <p class="lead">
+                            Forty makers on one floor, a gallery of new work upstairs, and a stage
+                            for talks downstairs. Find the stands you came for on the plan below.
+                        </p>
+                    </div>
+                    <dl class="facts">
+                        <div>
+                            <dt>Makers</dt>
+                            <dd>40 stands</dd>
+                        </div>
+                        <div>
+                            <dt>Open</dt>
+                            <dd>10:00–18:00</dd>
+                        </div>
+                        <div>
+                            <dt>Day ticket</dt>
+                            <dd>€12</dd>
+                        </div>
+                        <div>
+                            <dt>Under 16</dt>
+                            <dd>Free</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+
+            <section class="plan" id="plan" aria-labelledby="plan-h">
+                <div class="wrap">
+                    <div class="head">
+                        <h2 id="plan-h">Floor plan</h2>
+                        <p>
+                            Tap a stand to see it and get directions. The gallery is upstairs; the
+                            stage, registration and first aid are on the services floor.
+                        </p>
+                    </div>
+                    <div class="grid">
+                        <!-- The Areaform snippet, as the fair would paste it -->
+                        <div class="plan-frame">
+                            <div data-areaform="sp_demo-expo" style="height: 100%"></div>
+                        </div>
+                        <div class="exhibitors" id="makers">
+                            <h3>Some of this year’s makers</h3>
+                            <ul>
+                                <li>Oak &amp; Iron, furniture <span class="stand">A-3</span></li>
+                                <li>Saltmarsh Pottery <span class="stand">A-7</span></li>
+                                <li>Linnea Weaves <span class="stand">B-2</span></li>
+                                <li>Fernhill Glass <span class="stand">B-9</span></li>
+                                <li>Cobble &amp; Thread, leather <span class="stand">C-4</span></li>
+                                <li>Hollow Reed Instruments <span class="stand">C-10</span></li>
+                                <li>North Light Prints <span class="stand">D-1</span></li>
+                                <li>Ember Forge, knives <span class="stand">D-6</span></li>
+                            </ul>
+                            <p>Every maker and stand here is invented for this example.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="visit" id="visit" aria-labelledby="visit-h">
+                <div class="wrap">
+                    <div class="head">
+                        <h2 id="visit-h">Visit</h2>
+                    </div>
+                    <div class="cols">
+                        <div>
+                            <h3>Getting in</h3>
+                            <p>
+                                Tickets are €12 a day at the door, free under 16. Two entrances on
+                                the south side of the hall; registration is one floor down.
+                            </p>
+                        </div>
+                        <div>
+                            <h3>Step-free</h3>
+                            <p>
+                                A lift reaches every floor. Ask the plan for a step-free route and
+                                it avoids the stairs.
+                            </p>
+                        </div>
+                        <div>
+                            <h3>Food</h3>
+                            <p>
+                                The café by the north wall is open all day, with a quiet lounge
+                                upstairs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="wrap">Northbound Makers Fair is an invented event. Plan by Areaform.</div>
+        </footer>
+
+        <script src="https://cdn.areaform.app/v1/embed.js" async></script>
+    </body>
+</html>

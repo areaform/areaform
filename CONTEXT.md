@@ -179,8 +179,12 @@ A camera saved on a Level: the floor point it looks at, the bearing it looks tow
 _Avoid_: View (the component), Shot, Camera view, Bookmark
 
 **Motion**:
-How a View's camera moves on its own in 3D: still, turning slowly (orbit), or flying through the Viewpoints (tour). It stops on the first interaction inside the plan, and on **Pause**; **Play** moves it on from where it is. Unless auto-resume is on, nothing else starts it again but choosing another Level or 3D.
+How a View's camera moves on its own in 3D: still, turning slowly (orbit), or flying through the Viewpoints (tour). It stops on the first interaction inside the plan, when the host page moves the camera, and on **Pause**; **Play** moves it on from where it is. Unless auto-resume is on, nothing else starts it again but choosing another Level or 3D.
 _Avoid_: Animation, Autoplay
+
+**Camera from the page**:
+The host page moving a View's camera itself (ADR-0030): a flight to a Viewpoint or a camera, a turn to a Zone or a point, or progress along a Level's Viewpoints as the page scrolls, by ids only. The visitor's touch always wins over it. A **flight** is one such move, ending on arrival or interrupted.
+_Avoid_: Scroll animation, Camera script, Scripted tour (a tour is the Motion's)
 
 **Auto-resume**:
 Motion stopped by a touch of the plan starting again after some seconds of nobody touching it, while the plan is seen and no Plugin holds it (a route or a place card being read). Off unless the snippet asks for it; never after **Pause**. For a plan nobody reads for long, such as a Kiosk.

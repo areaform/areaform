@@ -94,6 +94,18 @@ export const uk: EditorMessages = {
     'sidebar.levels': 'Рівні',
     'sidebar.properties': 'Властивості',
     'sidebar.languages': 'Мови',
+    'sidebar.page': 'Для вашої сторінки',
+    'page.intro':
+        'Рядки для скрипту вашої сторінки, щоб керувати камерою цього плану через el.areaform.',
+    'page.level': 'Рівень',
+    'page.zone': 'Зона',
+    'page.selectZone': 'Виберіть зону, щоб отримати її рядок.',
+    'page.point': 'Точка',
+    'page.pick': 'Виберіть точку для камери…',
+    'page.pickIn2d': 'Перейдіть у 2D, щоб вибрати точку.',
+    'page.clickPoint': 'Клацніть точку, до якої має повернутися камера.',
+    'page.camera': 'Камера',
+    'page.cameraIn3d': 'Відкрийте 3D, щоб скопіювати камеру як є.',
     'sidebar.location': 'Де це?',
     'here.heading': 'Точка старту для відвідувачів',
     'here.outside': 'Виберіть точку всередині будівлі: там стоять відвідувачі.',
@@ -344,4 +356,9 @@ export const uk: EditorMessages = {
     'viewpoint.seconds': 'с',
     'viewpoint.play': 'Запустити проліт',
     'viewpoint.stop': 'Зупинити проліт',
+    'viewpoint.copy': 'Копіювати',
+    'viewpoint.copyTitle': 'Скопіювати рядок для вашої сторінки, що переносить камеру сюди',
+    'page.copyCamera': 'Копіювати камеру',
+    'page.copyCameraTitle':
+        'Скопіювати поточний 3D-вигляд для flyTo на вашій сторінці, не зберігаючи точку',
 };

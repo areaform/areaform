@@ -7,7 +7,9 @@ import { poseOfCamera, type Pose, type Renderer3D } from '@areaform/render-3d';
 import { onInteraction, ORBIT_TURNS_PER_MINUTE } from '@areaform/view';
 import { useEffect, useState, type RefObject } from 'react';
 import { formatDecimal, parseDecimal } from '../interaction/units.ts';
+import { flyToLine } from '../document/pageLines.ts';
 import { nextViewpointName } from '../document/viewpoints.ts';
+import { CopyButton } from './CopyButton.tsx';
 import { CommitInput } from './CommitInput.tsx';
 import { useI18n } from './i18n.ts';
 
@@ -151,6 +153,11 @@ export function ViewpointsPanel({
                                     </label>
                                 </div>
                                 <div className="af-buttons">
+                                    <CopyButton
+                                        text={() => flyToLine(viewpoint)}
+                                        label={i18n.t('viewpoint.copy')}
+                                        title={i18n.t('viewpoint.copyTitle')}
+                                    />
                                     {renderer3d && (
                                         <>
                                             <button
@@ -214,6 +221,7 @@ export function ViewpointsPanel({
                     <button className="af-button" onClick={add}>
                         {i18n.t('viewpoint.add')}
                     </button>
+
                     {viewpoints.length > 0 &&
                         (flying === 'tour' ? (
                             <button className="af-button" aria-pressed="true" onClick={stop}>

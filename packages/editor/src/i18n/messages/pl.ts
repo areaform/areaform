@@ -94,6 +94,18 @@ export const pl: EditorMessages = {
     'sidebar.levels': 'Poziomy',
     'sidebar.properties': 'Właściwości',
     'sidebar.languages': 'Języki',
+    'sidebar.page': 'Dla Twojej strony',
+    'page.intro':
+        'Linie do skryptu Twojej strony, aby poruszać kamerą tego planu przez el.areaform.',
+    'page.level': 'Poziom',
+    'page.zone': 'Strefa',
+    'page.selectZone': 'Zaznacz strefę, aby dostać jej linię.',
+    'page.point': 'Punkt',
+    'page.pick': 'Wybierz punkt dla kamery…',
+    'page.pickIn2d': 'Przełącz na 2D, aby wybrać punkt.',
+    'page.clickPoint': 'Kliknij punkt, na który ma się obrócić kamera.',
+    'page.camera': 'Kamera',
+    'page.cameraIn3d': 'Otwórz 3D, aby skopiować kamerę taką, jaka jest.',
     'sidebar.location': 'Gdzie to jest?',
     'here.heading': 'Punkt startowy dla odwiedzających',
     'here.outside': 'Wybierz punkt wewnątrz budynku: tam stoją odwiedzający.',
@@ -343,4 +355,9 @@ export const pl: EditorMessages = {
     'viewpoint.seconds': 's',
     'viewpoint.play': 'Odtwórz przelot',
     'viewpoint.stop': 'Zatrzymaj przelot',
+    'viewpoint.copy': 'Kopiuj',
+    'viewpoint.copyTitle': 'Skopiuj linię dla swojej strony, która przenosi tu kamerę',
+    'page.copyCamera': 'Kopiuj kamerę',
+    'page.copyCameraTitle':
+        'Skopiuj obecny widok 3D dla flyTo na swojej stronie, bez zapisywania punktu',
 };

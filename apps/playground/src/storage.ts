@@ -8,6 +8,7 @@ const SECTIONS: readonly SidebarSection[] = [
     'properties',
     'levels',
     'viewpoints',
+    'page',
     'languages',
     'location',
 ];

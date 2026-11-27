@@ -43,6 +43,8 @@ export interface ToolContext {
     requestDelete(): void;
     setMessage(message: string | null): void;
     setCalibration(calibration: Calibration | null): void;
+    /** The point being picked, and what for, while the Here tool is on. */
+    herePick(): HerePick | null;
     setHerePick(pick: HerePick | null): void;
     /** Returns to the Select tool. */
     endTool(): void;

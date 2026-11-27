@@ -13,12 +13,15 @@ describe('picking Here', () => {
     it('gives the point clicked, snapped and rounded, and moves it on the next click', () => {
         const h = harness();
         h.controller.startHerePick();
-        expect(h.controller.getState()).toMatchObject({ tool: 'here', herePick: { point: null } });
+        expect(h.controller.getState()).toMatchObject({
+            tool: 'here',
+            herePick: { point: null, for: 'visitors' },
+        });
 
         h.click([3.02, 4.01]); // the grid snaps it to [3, 4]
-        expect(h.controller.getState().herePick).toEqual({ point: [3, 4] });
+        expect(h.controller.getState().herePick).toEqual({ point: [3, 4], for: 'visitors' });
         h.click([6, 2]);
-        expect(h.controller.getState().herePick).toEqual({ point: [6, 2] });
+        expect(h.controller.getState().herePick).toEqual({ point: [6, 2], for: 'visitors' });
         // It changes nothing in the plan.
         expect(h.controller.getState().selection).toEqual([]);
     });
@@ -28,13 +31,23 @@ describe('picking Here', () => {
         h.controller.startHerePick();
         h.click([3, 4]);
         h.click([-5, 4]);
-        expect(h.controller.getState().herePick).toEqual({ point: [3, 4] });
+        expect(h.controller.getState().herePick).toEqual({ point: [3, 4], for: 'visitors' });
         expect(h.controller.getState().message).toBe(
             'Pick a point inside the building: visitors stand there.',
         );
         h.click([6, 2]);
         expect(h.controller.getState()).toMatchObject({
-            herePick: { point: [6, 2] },
+            herePick: { point: [6, 2], for: 'visitors' },
+            message: null,
+        });
+    });
+
+    it('picks any point for a page, outside the building too', () => {
+        const h = harness();
+        h.controller.startHerePick('page');
+        h.click([-5, 4]);
+        expect(h.controller.getState()).toMatchObject({
+            herePick: { point: [-5, 4], for: 'page' },
             message: null,
         });
     });

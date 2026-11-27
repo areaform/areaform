@@ -809,6 +809,22 @@
     flex-wrap: nowrap;
 }
 
+/* For your page: each line under its label, the field as wide as the sidebar */
+.af-page-lines {
+    display: grid;
+    gap: 12px;
+}
+
+.af-page-line {
+    display: grid;
+    gap: 4px;
+}
+
+.af-page-label {
+    font-size: 12px;
+    color: var(--af-muted);
+}
+
 .af-copyable input {
     flex: 1;
     min-width: 0;

@@ -24,13 +24,21 @@ import {
     type Camera3D,
     type Renderer3D,
     type Theme3D,
+    type Vec3,
     type ViewPreset,
 } from '@areaform/render-3d';
 import { createPlanControls, type PlanControls, type ViewMode } from './controls.ts';
 import { createTranslator, type Messages, type Translator } from './i18n/translator.ts';
 import { createLevelSwitcher, startingLevel, type LevelSwitcher } from './levelSwitcher.ts';
 import { createGestureHint } from './gestureHint.ts';
-import { createMotion, type Motion, type MotionState } from './motion.ts';
+import { createMotion, onInteraction, type Motion, type MotionState } from './motion.ts';
+import {
+    camera3dOf2d,
+    type CameraTarget,
+    type FlightResult,
+    type FlyToOptions,
+    type LookAtOptions,
+} from './pageCameraCore.ts';
 import type { PluginSource, ViewPlugin } from './plugins.ts';
 import { rulersFor } from './units.ts';
 
@@ -142,6 +150,15 @@ export interface ViewEvents {
     /** The 2D plan moved or zoomed, or the View changed size: anything drawn over it moves too. */
     camera2dChange: Camera;
     camera3dChange: Camera3D;
+    /**
+     * A flight the host started with `flyTo` arrived: at a Viewpoint (its `id`), or at a camera
+     * (`id` null).
+     */
+    viewpoint: { id: Id | null; levelId: Id };
+    /** A visitor clicked a Zone, in 2D or 3D: its id, its Level and its `data`. */
+    zoneClick: { id: Id; levelId: Id; data: Record<string, unknown> | undefined };
+    /** The tour (`motion: 'tour'`) reached a Viewpoint, `index` in its Level's list, and stays a while. */
+    tourStep: { id: Id; levelId: Id; index: number };
     /** The 2D renderer is ready. */
     ready: Renderer;
     /** A 3D renderer is ready, each time 3D is shown. */
@@ -194,6 +211,32 @@ export interface View {
     /** In 3D, looks from a named angle. */
     setViewAngle(angle: ViewPreset): void;
     /**
+     * Flies the camera to a Viewpoint, by its id, or to a camera as `getCamera` gives it, showing
+     * its Level first. In 2D the plan pans and zooms there instead. Resolves on arrival, then the
+     * `viewpoint` event follows; resolves `{ interrupted: true }` when the visitor took the plan on
+     * the way, or the page moved the camera again. Rejects an id this plan has no Viewpoint for.
+     * Under `prefers-reduced-motion` the camera is there at once.
+     */
+    flyTo(to: CameraTarget, options?: FlyToOptions): Promise<FlightResult>;
+    /**
+     * Turns the camera to a Zone, by its id, showing its Level first, or to a plan point (metres)
+     * on the Level shown. A small Zone brings the camera closer along its line of sight and one
+     * too big to fit sends it back (`ZONE_SHARE`); `distance` says how far to end up. In 2D the
+     * plan pans there and zooms by the same rule. Resolves as `flyTo` does.
+     */
+    lookAt(to: Id | Vec2, options?: LookAtOptions): Promise<FlightResult>;
+    /**
+     * Puts the camera `t` of the way along the shown Level's Viewpoints in tour order, 0 at the
+     * first and 1 at the last, for a scroll library to drive: no flight, no events. Called before
+     * the view is ready, it waits for it.
+     */
+    setProgress(t: number): void;
+    /**
+     * Where the camera is, in the 3D view's coordinates; in 2D a camera straight above the plan's
+     * middle, as high as its zoom. Null before the view is ready. `flyTo` takes it back.
+     */
+    getCamera(): Camera3D | null;
+    /**
      * Where a plan point (metres) at `height` above the floor is on the View, CSS pixels from its
      * top-left corner, in the view shown; null when it is not in view yet or behind the 3D camera.
      */
@@ -205,6 +248,23 @@ export interface View {
 }
 
 const BOTH: ViewMode[] = ['2d', '3d'];
+
+/** The camera driven by the page, loaded on its first move: most pages never move it. */
+type PageCamera = typeof import('./pageCamera.ts');
+let pageCamera: PageCamera | null = null;
+let pageCameraLoading: Promise<PageCamera> | null = null;
+const loadPageCamera = () =>
+    (pageCameraLoading ??= import('./pageCamera.ts').then(
+        (module) => (pageCamera = module),
+        (error: unknown) => {
+            // A failed download is tried again on the next call.
+            pageCameraLoading = null;
+            throw error;
+        },
+    ));
+
+/** Seconds `lookAt` takes to turn the camera, unless told. */
+const LOOK_SECONDS = 1.5;
 
 /** One empty list, so a Level without Viewpoints never looks like a new tour. */
 const NO_VIEWPOINTS: Viewpoint[] = [];
@@ -273,9 +333,11 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
             controls?.update({ motion: toggleState() });
         },
     });
+    /** The Viewpoints of the Level shown, in tour order. */
+    const shownViewpoints = () =>
+        doc.levels.find((l) => l.id === levelId)?.viewpoints ?? NO_VIEWPOINTS;
     /** The tour flies through the Viewpoints of the Level shown. */
-    const followViewpoints = () =>
-        motion.setViewpoints(doc.levels.find((l) => l.id === levelId)?.viewpoints ?? NO_VIEWPOINTS);
+    const followViewpoints = () => motion.setViewpoints(shownViewpoints());
     followViewpoints();
 
     // --- 2D: always mounted, so the plan keeps its pan and zoom across a visit to 3D -----------
@@ -294,7 +356,11 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
     }).then((r) => {
         if (destroyed) return r.destroy();
         r2 = r;
-        r.on('elementClick', (e) => in2d() && emit('elementClick', e));
+        r.on('elementClick', (e) => {
+            if (!in2d()) return;
+            emit('elementClick', e);
+            zoneClicked(e);
+        });
         r.on('backgroundClick', (e) => in2d() && emit('backgroundClick', e));
         r.on('elementHover', (e) => in2d() && emit('elementHover', e));
         r.on('cameraChange', (c) => {
@@ -314,6 +380,7 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
         // Opened in 3D: the plan underneath waits, undrawn, for a switch to 2D.
         if (!in2d()) r.setPaused(true);
         emit('ready', r);
+        rendererReady();
     });
 
     // --- 3D: created when shown, its camera kept for the next visit ----------------------------
@@ -353,15 +420,25 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
                     camera3d = c;
                     emit('camera3dChange', c);
                 });
-                r.on('elementClick', (e) => emit('elementClick', e));
+                r.on('elementClick', (e) => {
+                    emit('elementClick', e);
+                    zoneClicked(e);
+                });
                 r.on('backgroundClick', (e) => emit('backgroundClick', e));
                 r.on('elementHover', (e) => emit('elementHover', e));
                 r.on('gestureHint', showHint);
+                r.on('tourStep', (viewpoint) => {
+                    const index = shownViewpoints().findIndex((v) => v.id === viewpoint.id);
+                    emit('tourStep', { id: viewpoint.id, levelId, index });
+                });
                 emit('ready3d', r);
                 motion.attach(r);
+                rendererReady();
             },
             () => {
                 if (canvas3d !== holder) return;
+                // Nothing to move: a flight waiting for 3D ends.
+                wake(false);
                 holder.classList.add('af-canvas-message');
                 holder.setAttribute('role', 'status');
                 holder.textContent = i18n.t('plan.no3dMessage');
@@ -455,6 +532,124 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
     };
     drawAttribution();
 
+    // --- The camera driven by the page ----------------------------------------------------------
+
+    /** Calls waiting for the view shown to be ready, each told whether it is. */
+    const waiting: ((ready: boolean) => void)[] = [];
+    const shownRenderer = () => (mode === '3d' ? r3 : r2);
+    const whenShown = (): Promise<boolean> =>
+        shownRenderer() ? Promise.resolve(true) : new Promise((resolve) => waiting.push(resolve));
+    /** Tells waiting calls the view is ready, or with `false` that it never will be. */
+    const wake = (ready = true) => {
+        if (ready && !shownRenderer()) return;
+        for (const resolve of waiting.splice(0)) resolve(ready);
+    };
+    /** Each move the page starts gets the next number; an older one still waiting gives way. */
+    let pageMoves = 0;
+    let flight2d: { frame: number; done: (arrived: boolean) => void } | null = null;
+    /** Ends the page's flight where it is, in either view: its Promise says it was interrupted. */
+    const stopPageMove = () => {
+        r3?.stopFlight();
+        const ended = flight2d;
+        flight2d = null;
+        if (ended) {
+            cancelAnimationFrame(ended.frame);
+            ended.done(false);
+        }
+    };
+    // The visitor wins: a drag, a zoom, a tap or a key stops what the page started, a call still
+    // waiting for the view to be ready included.
+    const unlistenPage = onInteraction(
+        element,
+        () => gestures,
+        () => {
+            pageMoves += 1;
+            stopPageMove();
+        },
+    );
+    /** Pans and zooms the 2D plan there over `seconds`; true on arrival. */
+    const fly2d = (
+        { camera2dAt }: PageCamera,
+        to: { center: Vec2; zoom: number },
+        seconds: number,
+    ) =>
+        new Promise<boolean>((resolve) => {
+            const r = r2;
+            if (!r) return resolve(false);
+            const from = r.getCamera();
+            const start = performance.now();
+            const move = { frame: 0, done: resolve };
+            flight2d = move;
+            const step = (now: number) => {
+                if (flight2d !== move) return;
+                const t = seconds > 0 ? Math.min(1, (now - start) / 1000 / seconds) : 1;
+                // The View may change size on the way: the plan keeps the viewport it has now.
+                r.setCamera({ ...camera2dAt(from, to, t), viewport: r.getCamera().viewport });
+                if (t < 1) move.frame = requestAnimationFrame(step);
+                else {
+                    flight2d = null;
+                    resolve(true);
+                }
+            };
+            step(start);
+        });
+    /** A flight's time; none under `prefers-reduced-motion`. */
+    const flightTime = (seconds: number) =>
+        globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+            ? 0
+            : Math.max(0, seconds);
+    /**
+     * The page takes the camera: what it or the motion was doing stops at once, and the move gets
+     * its number. A visitor's gesture or a newer call while the camera's code loads ends it.
+     */
+    const claimCamera = () => {
+        stopPageMove();
+        motion.stop();
+        return ++pageMoves;
+    };
+    /**
+     * The move numbered `mine` shows `levelTo` and `go` moves the camera once the view is ready,
+     * unless a newer call or the visitor came meanwhile.
+     */
+    const takeCamera = async (
+        mine: number,
+        levelTo: Id,
+        go: () => Promise<boolean>,
+    ): Promise<FlightResult> => {
+        if (mine !== pageMoves || destroyed) return { interrupted: true };
+        if (levelTo !== levelId) api.setLevel(levelTo);
+        if (!(await whenShown()) || mine !== pageMoves || destroyed) return { interrupted: true };
+        return { interrupted: !(await go()) };
+    };
+    /** Where `setProgress` put the camera, until the view shown is ready to be put there. */
+    let progress: number | null = null;
+    const applyProgress = () => {
+        if (progress === null || !pageCamera) return;
+        const { poseAlong, cameraOfPose, camera2dAt, camera2dOf } = pageCamera;
+        const pose = poseAlong(shownViewpoints(), progress);
+        if (!pose) return void (progress = null);
+        const camera = cameraOfPose(pose, levelId);
+        if (mode === '3d' && r3) r3.setCamera(camera);
+        else if (mode === '2d' && r2) {
+            const now = r2.getCamera();
+            r2.setCamera(camera2dAt(now, camera2dOf(camera, now.viewport.height), 1));
+        } else return;
+        progress = null;
+    };
+    /** A renderer became ready: calls waiting for it go on. */
+    const rendererReady = () => {
+        wake();
+        applyProgress();
+    };
+    /** A click on a Zone, told with its `data`. */
+    const zoneClicked = ({ ref }: ElementEvent) => {
+        if (ref.kind !== 'zone') return;
+        const zone = doc.levels
+            .find((l) => l.id === ref.levelId)
+            ?.zones.find((z) => z.id === ref.id);
+        emit('zoneClick', { id: ref.id, levelId: ref.levelId, data: zone?.data });
+    };
+
     // --- Plugins -------------------------------------------------------------------------------
 
     const cleanups: (() => void)[] = [];
@@ -471,6 +666,7 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
         update(next) {
             const fresh = next.id !== doc.id;
             doc = next;
+            const shown = levelId;
             if (!doc.levels.some((l) => l.id === levelId)) levelId = startingLevel(doc).id;
             r2?.update(doc);
             r2?.setLevel(levelId);
@@ -479,9 +675,12 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
             r3?.setLevel(levelId);
             followViewpoints();
             redrawSwitcher();
+            // The Level shown is gone from the plan: another is shown, and the host is told.
+            if (levelId !== shown) emit('levelChange', levelId);
         },
         setLevel(id) {
             if (id === levelId) return;
+            stopPageMove();
             levelId = id;
             r2?.setLevel(id);
             r2?.fitLevel();
@@ -493,10 +692,13 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
         },
         setView(next) {
             if (next === mode || !views.includes(next) || (next === '3d' && !canShow3d)) return;
+            // A flight in the view being left ends there; a call waiting for a view goes on in this one.
+            stopPageMove();
             mode = next;
             if (next === '3d') show3d();
             else hide3d();
             controls?.update({ view: mode });
+            wake();
         },
         setStyleResolver(resolver) {
             styleResolver = resolver;
@@ -592,6 +794,97 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
         setViewAngle(angle) {
             r3?.setView(angle);
         },
+        async flyTo(to, options = {}) {
+            const mine = claimCamera();
+            const pc = await loadPageCamera();
+            const { findViewpoint, cameraOfPose, camera2dOf, DEFAULT_FLIGHT } = pc;
+            let levelTo = levelId;
+            let camera: Pick<Camera3D, 'position' | 'target'>;
+            let id: Id | null = null;
+            let seconds = options.seconds;
+            if (typeof to === 'string') {
+                const found = findViewpoint(doc, to);
+                if (!found) throw new Error(`Areaform: no Viewpoint "${to}" in this plan`);
+                levelTo = found.levelId;
+                id = to;
+                camera = cameraOfPose(found.viewpoint, found.levelId);
+                seconds ??= found.viewpoint.flight;
+            } else {
+                if (to.levelId && doc.levels.some((l) => l.id === to.levelId)) levelTo = to.levelId;
+                camera = to;
+            }
+            const time = flightTime(seconds ?? DEFAULT_FLIGHT);
+            return takeCamera(mine, levelTo, () => {
+                if (mode === '3d' && r3) return r3.flyTo(camera, { seconds: time });
+                if (mode === '2d' && r2)
+                    return fly2d(pc, camera2dOf(camera, r2.getCamera().viewport.height), time);
+                return Promise.resolve(false);
+            }).then((result) => {
+                if (!result.interrupted) emit('viewpoint', { id, levelId });
+                return result;
+            });
+        },
+        async lookAt(to, options = {}) {
+            const mine = claimCamera();
+            const pc = await loadPageCamera();
+            const {
+                findZone,
+                cameraDistance,
+                distanceToShow,
+                positionAtDistance,
+                zoomAtDistance,
+                zoomToShow,
+            } = pc;
+            let levelTo = levelId;
+            let point: Vec2;
+            let size: Vec2 | null = null;
+            if (typeof to === 'string') {
+                const zone = findZone(doc, to);
+                if (!zone) throw new Error(`Areaform: no Zone "${to}" in this plan`);
+                ({ center: point, size, levelId: levelTo } = zone);
+            } else point = to;
+            const time = flightTime(options.seconds ?? LOOK_SECONDS);
+            return takeCamera(mine, levelTo, () => {
+                if (mode === '3d' && r3) {
+                    const { position } = r3.getCamera();
+                    const target: Vec3 = [point[0], 0, -point[1]];
+                    const now = cameraDistance({ position, target });
+                    const viewport = { width: element.clientWidth, height: element.clientHeight };
+                    const distance =
+                        options.distance ?? (size ? distanceToShow(size, now, viewport) : now);
+                    return r3.flyTo(
+                        { position: positionAtDistance(position, target, distance), target },
+                        { seconds: time, path: 'line' },
+                    );
+                }
+                if (mode === '2d' && r2) {
+                    const now = r2.getCamera();
+                    const zoom =
+                        options.distance !== undefined
+                            ? zoomAtDistance(options.distance, now.viewport.height)
+                            : size
+                              ? zoomToShow(now, size)
+                              : now.zoom;
+                    return fly2d(pc, { center: point, zoom }, time);
+                }
+                return Promise.resolve(false);
+            });
+        },
+        setProgress(t) {
+            stopPageMove();
+            pageMoves += 1;
+            motion.stop();
+            progress = t;
+            if (pageCamera) return applyProgress();
+            loadPageCamera().then(
+                () => !destroyed && applyProgress(),
+                () => {}, // offline: the next call tries again
+            );
+        },
+        getCamera() {
+            if (mode === '3d') return r3?.getCamera() ?? null;
+            return r2 ? camera3dOf2d(r2.getCamera(), levelId) : null;
+        },
         toScreen(point, height = 0) {
             if (mode === '3d') return r3?.toScreen(point, height) ?? null;
             return r2 ? worldToScreen(r2.getCamera(), point) : null;
@@ -610,6 +903,9 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
         },
         destroy() {
             destroyed = true;
+            stopPageMove();
+            unlistenPage();
+            wake(false);
             for (const cleanup of cleanups.splice(0)) cleanup();
             hide3d();
             motion.destroy();

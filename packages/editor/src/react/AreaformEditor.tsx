@@ -75,6 +75,7 @@ import { ViewpointsPanel } from './ViewpointsPanel.tsx';
 import { viewpointMarks } from '../document/viewpoints.ts';
 import { HerePrompt, type HereLink } from './HereValue.tsx';
 import { fillingInResolver, fillingLanguage } from '../document/contentLanguages.ts';
+import { PagePanel } from './PagePanel.tsx';
 import { DEFAULT_FOLDED_SECTIONS, Section, type SidebarSection } from './SidebarSection.tsx';
 import { ShortcutsDialog } from './ShortcutsDialog.tsx';
 import { useViewMode, type ViewModeProps } from './useViewMode.ts';
@@ -689,6 +690,18 @@ export function AreaformEditor({
                                     level={level}
                                     renderer3d={in3d ? renderer3d : null}
                                     stage={stage}
+                                />
+                            </Section>
+                            <Section
+                                title={i18n.t('sidebar.page')}
+                                open={!folded.includes('page')}
+                                onToggle={fold('page')}
+                            >
+                                <PagePanel
+                                    controller={controller}
+                                    level={level}
+                                    selection={state?.selection ?? NO_SELECTION}
+                                    renderer3d={in3d ? renderer3d : null}
                                 />
                             </Section>
                             <Section
