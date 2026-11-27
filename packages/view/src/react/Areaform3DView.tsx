@@ -9,9 +9,10 @@ import type {
     Theme,
 } from '@areaform/render-2d';
 import type { Camera3D, Renderer3D, Theme3D } from '@areaform/render-3d';
-import { useEffect } from 'react';
+import { useEffect, type Ref } from 'react';
 import type { Motion } from '../motion.ts';
 import type { PluginSource } from '../plugins.ts';
+import type { View, ViewEvents } from '../view.ts';
 import type { LocaleProps } from './AreaformView.tsx';
 import { HOLDER_STYLE, useView } from './useView.ts';
 
@@ -86,6 +87,14 @@ export interface Areaform3DViewProps extends LocaleProps {
     /** The pointer moved onto another Element, or off every Element. */
     onElementHover?: (e: HoverEvent) => void;
     onReady?: (renderer: Renderer3D) => void;
+    /** Gets the View once it is made, for `flyTo`, `lookAt`, `setProgress` and `getCamera`. */
+    ref?: Ref<View | null>;
+    /** A flight started with `flyTo` arrived: at a Viewpoint (its id) or at a camera (`id` null). */
+    onViewpoint?: (e: ViewEvents['viewpoint']) => void;
+    /** A visitor clicked a Zone: its id, its Level and its `data`. */
+    onZoneClick?: (e: ViewEvents['zoneClick']) => void;
+    /** The tour reached a Viewpoint and stays there a while. */
+    onTourStep?: (e: ViewEvents['tourStep']) => void;
     /** Plugins to start with, as in the View. Read when the view mounts. */
     plugins?: PluginSource[];
     /** The small "Made with Areaform" link in the bottom-left corner (default on); turn it off freely. */
@@ -145,7 +154,11 @@ export function Areaform3DView(props: Areaform3DViewProps) {
             elementHover: props.onElementHover,
             camera3dChange: props.onCameraChange,
             ready3d: props.onReady,
+            viewpoint: props.onViewpoint,
+            zoneClick: props.onZoneClick,
+            tourStep: props.onTourStep,
         },
+        props.ref,
     );
     useEffect(
         () => view?.setAttribution(props.attribution ?? true, props.attributionNote),

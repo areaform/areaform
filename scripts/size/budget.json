@@ -1,6 +1,6 @@
 {
     "view": {
-        "initial": 16384,
+        "initial": 17408,
         "plan2d": 224256,
         "with3d": 406528
     },

@@ -12,11 +12,12 @@ import type {
     WheelMode,
 } from '@areaform/render-2d';
 import type { Renderer3D } from '@areaform/render-3d';
-import { useEffect } from 'react';
+import { useEffect, type Ref } from 'react';
 import type { ViewMode } from '../controls.ts';
 import type { Messages } from '../i18n/translator.ts';
 import type { Motion } from '../motion.ts';
 import type { PluginSource } from '../plugins.ts';
+import type { View, ViewEvents } from '../view.ts';
 import { HOLDER_STYLE, useView } from './useView.ts';
 
 /** The language props every component takes. */
@@ -112,6 +113,17 @@ export interface AreaformViewProps extends LocaleProps {
     onBackgroundClick?: (e: BackgroundEvent) => void;
     onElementHover?: (e: HoverEvent) => void;
     onZoomChange?: (zoom: number) => void;
+    /**
+     * Gets the View once it is made, for the camera driven by the page: `flyTo`, `lookAt`,
+     * `setProgress`, `getCamera`, `setLevel`.
+     */
+    ref?: Ref<View | null>;
+    /** A flight started with `flyTo` arrived: at a Viewpoint (its id) or at a camera (`id` null). */
+    onViewpoint?: (e: ViewEvents['viewpoint']) => void;
+    /** A visitor clicked a Zone: its id, its Level and its `data`. */
+    onZoneClick?: (e: ViewEvents['zoneClick']) => void;
+    /** The tour reached a Viewpoint and stays there a while. */
+    onTourStep?: (e: ViewEvents['tourStep']) => void;
     onReady?: (renderer: Renderer) => void;
     /** Called with the 3D renderer each time the 3D view is shown and ready. */
     onReady3d?: (renderer: Renderer3D) => void;
@@ -171,9 +183,13 @@ export function AreaformView(props: AreaformViewProps) {
             levelChange: props.onLevelChange,
             gridChange: props.onGridChange,
             zoomChange: props.onZoomChange,
+            viewpoint: props.onViewpoint,
+            zoneClick: props.onZoneClick,
+            tourStep: props.onTourStep,
             ready: props.onReady,
             ready3d: props.onReady3d,
         },
+        props.ref,
     );
     useEffect(
         () => view?.setAttribution(props.attribution ?? true, props.attributionNote),

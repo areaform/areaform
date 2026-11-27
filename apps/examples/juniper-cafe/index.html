@@ -1,0 +1,633 @@
+<!doctype html>
+<!--
+    An example client site (ADR-0022's update 2026-11-20, ADR-0027): a made-up café's home page with
+    the demo café's plan inside and a "Book a table" form that opens the table booking demo at
+    /cafe-booking/. The café, its menu and its address are invented. One file, no build, no fonts or
+    scripts from anyone but Areaform's own embed.js; kept out of search engines.
+-->
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Juniper Café · an example site · Areaform</title>
+        <meta
+            name="description"
+            content="An example site: a made-up café's page with its Areaform plan inside and table booking on the plan."
+        />
+        <meta name="robots" content="noindex" />
+        <!-- Share tags, for a link sent to a prospect; still kept out of search -->
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Areaform" />
+        <meta property="og:url" content="https://areaform.app/examples/juniper-cafe/" />
+        <meta property="og:title" content="Juniper Café · an example site · Areaform" />
+        <meta
+            property="og:description"
+            content="An example site: a made-up café's page with its Areaform plan inside and table booking on the plan."
+        />
+        <meta property="og:image" content="https://areaform.app/og.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="icon" href="https://areaform.app/favicon.svg" type="image/svg+xml" />
+        <style>
+            :root {
+                --paper: #f5f0e8;
+                --paper-2: #ebe3d6;
+                --card: #fffdf9;
+                --ink: #1e2622;
+                --muted: #5f665f;
+                --line: rgb(30 38 34 / 0.14);
+                --juniper: #2e4f43;
+                --juniper-deep: #223b32;
+                --on-juniper: #f6f2ea;
+                --serif:
+                    'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+                --sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+                --wrap: 1160px;
+                --gut: clamp(16px, 5vw, 48px);
+            }
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                background: var(--paper);
+                color: var(--ink);
+                font: 400 17px / 1.6 var(--sans);
+                -webkit-font-smoothing: antialiased;
+            }
+            h1,
+            h2,
+            h3,
+            p,
+            dl,
+            dd {
+                margin: 0;
+            }
+            a {
+                color: inherit;
+            }
+            :focus-visible {
+                outline: 2px solid var(--juniper);
+                outline-offset: 3px;
+            }
+            .wrap {
+                max-width: calc(var(--wrap) + 2 * var(--gut));
+                margin: 0 auto;
+                padding-inline: var(--gut);
+            }
+
+            /* the example bar: Areaform's, not the café's */
+            .example {
+                background: #0b0c0e;
+                color: #dfe3e8;
+                font:
+                    400 14px / 1.4 system-ui,
+                    sans-serif;
+            }
+            .example .wrap {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 4px 16px;
+                padding-block: 10px;
+            }
+            .example a {
+                color: #fff;
+                font-weight: 500;
+                text-underline-offset: 3px;
+            }
+
+            /* the café's own page */
+            header .wrap {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                padding-block: 20px;
+            }
+            .brand {
+                font: 400 26px / 1 var(--serif);
+                text-decoration: none;
+            }
+            .brand em {
+                color: var(--juniper);
+            }
+            nav ul {
+                display: flex;
+                gap: 28px;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                font-size: 15px;
+            }
+            nav a {
+                text-decoration: none;
+            }
+            nav a:hover {
+                text-decoration: underline;
+                text-underline-offset: 4px;
+            }
+            .button {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 48px;
+                padding: 0 24px;
+                border: 0;
+                border-radius: 10px;
+                background: var(--juniper);
+                color: var(--on-juniper);
+                font: 500 16px / 1 var(--sans);
+                text-decoration: none;
+                cursor: pointer;
+            }
+            .button:hover {
+                background: var(--juniper-deep);
+            }
+            header .button {
+                min-height: 44px;
+                font-size: 15px;
+            }
+
+            .hero {
+                padding-block: 56px 72px;
+            }
+            .hero .wrap {
+                display: grid;
+                grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+                gap: 56px;
+                align-items: center;
+            }
+            .where {
+                margin-bottom: 20px;
+                color: var(--juniper);
+                font-size: 15px;
+                font-weight: 500;
+            }
+            .hero h1 {
+                font: 400 clamp(42px, 5.6vw, 76px) / 1 var(--serif);
+                letter-spacing: -0.02em;
+                text-wrap: balance;
+            }
+            .lead {
+                max-width: 540px;
+                margin-top: 24px;
+                color: var(--muted);
+                font-size: 19px;
+            }
+
+            /* the booking card: three choices, then the plan picks the table */
+            .book {
+                display: grid;
+                gap: 16px;
+                padding: 28px;
+                border: 1px solid var(--line);
+                border-radius: 16px;
+                background: var(--card);
+            }
+            .book h2 {
+                font: 400 28px / 1.1 var(--serif);
+            }
+            .choices {
+                display: grid;
+                grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr) minmax(0, 0.9fr);
+                gap: 12px;
+            }
+            .choices label {
+                display: grid;
+                gap: 6px;
+                color: var(--muted);
+                font-size: 13px;
+            }
+            select {
+                width: 100%;
+                min-height: 48px;
+                padding: 0 32px 0 12px;
+                border: 1px solid rgb(30 38 34 / 0.24);
+                border-radius: 10px;
+                background: #fff
+                    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%231e2622' stroke-width='1.6'/%3E%3C/svg%3E")
+                    no-repeat right 12px center;
+                color: var(--ink);
+                font: 400 16px / 1 var(--sans);
+                appearance: none;
+            }
+            .book .note {
+                color: var(--muted);
+                font-size: 14px;
+            }
+
+            section {
+                padding-block: 80px;
+                border-top: 1px solid var(--line);
+            }
+            .head {
+                display: grid;
+                grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+                gap: 24px 56px;
+                align-items: end;
+                margin-bottom: 40px;
+            }
+            .head h2 {
+                font: 400 clamp(34px, 4vw, 52px) / 1.05 var(--serif);
+                letter-spacing: -0.015em;
+            }
+            .head p {
+                max-width: 560px;
+                color: var(--muted);
+            }
+
+            .inside .grid {
+                display: grid;
+                grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+                gap: 40px;
+            }
+            .plan-frame {
+                height: 560px;
+                overflow: hidden;
+                border: 1px solid var(--line);
+                border-radius: 16px;
+                background: var(--card);
+            }
+            .seats {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+            .seats li {
+                display: grid;
+                gap: 2px;
+                padding-block: 16px;
+                border-top: 1px solid var(--line);
+            }
+            .seats li:last-child {
+                border-bottom: 1px solid var(--line);
+            }
+            .seats strong {
+                font-weight: 500;
+            }
+            .seats span {
+                color: var(--muted);
+                font-size: 15px;
+            }
+
+            .menu .cols {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 48px;
+            }
+            .menu h3 {
+                margin-bottom: 8px;
+                font: 400 24px / 1.2 var(--serif);
+            }
+            .menu .when {
+                margin-bottom: 16px;
+                color: var(--muted);
+                font-size: 14px;
+            }
+            .menu dl div {
+                display: flex;
+                justify-content: space-between;
+                gap: 16px;
+                padding-block: 12px;
+                border-top: 1px solid var(--line);
+            }
+            .menu dd {
+                font-variant-numeric: tabular-nums;
+                white-space: nowrap;
+            }
+
+            .visit .cols {
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 32px;
+            }
+            .visit h3 {
+                margin-bottom: 8px;
+                font-size: 15px;
+                font-weight: 500;
+            }
+            .visit p {
+                color: var(--muted);
+            }
+
+            footer {
+                padding-block: 32px 48px;
+                border-top: 1px solid var(--line);
+                color: var(--muted);
+                font-size: 14px;
+            }
+
+            @media (max-width: 900px) {
+                .hero .wrap,
+                .head,
+                .inside .grid {
+                    grid-template-columns: minmax(0, 1fr);
+                }
+                .hero .wrap {
+                    gap: 40px;
+                }
+                .menu .cols {
+                    grid-template-columns: minmax(0, 1fr);
+                    gap: 40px;
+                }
+                .visit .cols {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+                .plan-frame {
+                    height: 440px;
+                }
+            }
+            @media (max-width: 640px) {
+                nav {
+                    display: none;
+                }
+                .hero {
+                    padding-block: 32px 56px;
+                }
+                .book {
+                    padding: 20px;
+                }
+                .choices {
+                    grid-template-columns: 1fr 1fr;
+                }
+                .choices label:first-child {
+                    grid-column: 1 / -1;
+                }
+                section {
+                    padding-block: 56px;
+                }
+                .visit .cols {
+                    grid-template-columns: minmax(0, 1fr);
+                    gap: 24px;
+                }
+                .plan-frame {
+                    height: 380px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="example">
+            <div class="wrap">
+                <span
+                    >An example site: the café is made up, to show an Areaform plan and table
+                    booking on a café’s own page.</span
+                >
+                <a href="https://areaform.app/cafes/">Areaform for cafés →</a>
+            </div>
+        </div>
+
+        <header>
+            <div class="wrap">
+                <a class="brand" href="#top">Juniper <em>Café</em></a>
+                <nav aria-label="The café">
+                    <ul>
+                        <li><a href="#inside">Inside</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#visit">Visit</a></li>
+                    </ul>
+                </nav>
+                <a class="button" href="#book">Book a table</a>
+            </div>
+        </header>
+
+        <main id="top">
+            <div class="hero">
+                <div class="wrap">
+                    <div>
+                        <p class="where">14 Alder Street · open every day 8:00–22:00</p>
+                        <h1>Long breakfasts, good coffee and a table by the window</h1>
+                        <p class="lead">
+                            A corner café with twelve tables, five stools at the bar and a terrace
+                            on the street. Book any time we’re open, and choose the table yourself.
+                        </p>
+                    </div>
+                    <!-- The café's form opens the booking page with the day, time and group filled in -->
+                    <form
+                        class="book"
+                        id="book"
+                        action="https://areaform.app/cafe-booking/"
+                        method="get"
+                    >
+                        <h2>Book a table</h2>
+                        <div class="choices">
+                            <label
+                                >Day
+                                <select name="date" id="date">
+                                    <option value="">Today</option>
+                                </select>
+                            </label>
+                            <label
+                                >Time
+                                <select name="time" id="time"></select>
+                            </label>
+                            <label
+                                >People
+                                <select name="people">
+                                    <option>1</option>
+                                    <option selected>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option value="7">7 or more</option>
+                                </select>
+                            </label>
+                        </div>
+                        <button class="button" type="submit">See free tables</button>
+                        <p class="note">You’ll choose your table on our floor plan.</p>
+                    </form>
+                </div>
+            </div>
+
+            <section class="inside" id="inside" aria-labelledby="inside-h">
+                <div class="wrap">
+                    <div class="head">
+                        <h2 id="inside-h">Inside and on the terrace</h2>
+                        <p>
+                            Look around before you come: drag to turn the room, or tap a table to
+                            see it. The kitchen and the WC are at the back.
+                        </p>
+                    </div>
+                    <div class="grid">
+                        <!-- The Areaform snippet, as the café would paste it -->
+                        <div class="plan-frame">
+                            <div
+                                data-areaform="sp_demo-cafe"
+                                data-view="3d"
+                                data-motion="tour"
+                                style="height: 100%"
+                            ></div>
+                        </div>
+                        <ul class="seats">
+                            <li>
+                                <strong>By the window</strong
+                                ><span>Tables 1–4, for two, looking onto Alder Street</span>
+                            </li>
+                            <li>
+                                <strong>Round tables</strong
+                                ><span>Tables 5–9, for three or four</span>
+                            </li>
+                            <li>
+                                <strong>The long table</strong
+                                ><span>Table 10, for four to six, by the back wall</span>
+                            </li>
+                            <li>
+                                <strong>Terrace</strong
+                                ><span>Tables 11 and 12, for four, with heaters in winter</span>
+                            </li>
+                            <li>
+                                <strong>At the bar</strong
+                                ><span>Five stools, for up to five, facing the coffee machine</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="menu" id="menu" aria-labelledby="menu-h">
+                <div class="wrap">
+                    <div class="head">
+                        <h2 id="menu-h">Menu</h2>
+                        <p>Bread from the bakery next door, eggs from a farm an hour away.</p>
+                    </div>
+                    <div class="cols">
+                        <div>
+                            <h3>Coffee</h3>
+                            <p class="when">All day</p>
+                            <dl>
+                                <div>
+                                    <dt>Espresso</dt>
+                                    <dd>€2.40</dd>
+                                </div>
+                                <div>
+                                    <dt>Flat white</dt>
+                                    <dd>€3.60</dd>
+                                </div>
+                                <div>
+                                    <dt>Filter, a pot for two</dt>
+                                    <dd>€5.80</dd>
+                                </div>
+                                <div>
+                                    <dt>Hot chocolate</dt>
+                                    <dd>€4.20</dd>
+                                </div>
+                            </dl>
+                        </div>
+                        <div>
+                            <h3>Breakfast</h3>
+                            <p class="when">8:00–12:00</p>
+                            <dl>
+                                <div>
+                                    <dt>Eggs on sourdough</dt>
+                                    <dd>€8.50</dd>
+                                </div>
+                                <div>
+                                    <dt>Granola, yoghurt and plums</dt>
+                                    <dd>€6.90</dd>
+                                </div>
+                                <div>
+                                    <dt>Buckwheat pancakes</dt>
+                                    <dd>€9.20</dd>
+                                </div>
+                                <div>
+                                    <dt>Cardamom bun</dt>
+                                    <dd>€3.40</dd>
+                                </div>
+                            </dl>
+                        </div>
+                        <div>
+                            <h3>Supper</h3>
+                            <p class="when">From 17:00</p>
+                            <dl>
+                                <div>
+                                    <dt>Barley risotto, mushrooms</dt>
+                                    <dd>€14.00</dd>
+                                </div>
+                                <div>
+                                    <dt>Trout, brown butter</dt>
+                                    <dd>€18.00</dd>
+                                </div>
+                                <div>
+                                    <dt>Beetroot, goat’s cheese</dt>
+                                    <dd>€11.50</dd>
+                                </div>
+                                <div>
+                                    <dt>Plum crumble</dt>
+                                    <dd>€6.50</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="visit" id="visit" aria-labelledby="visit-h">
+                <div class="wrap">
+                    <div class="head">
+                        <h2 id="visit-h">Visit</h2>
+                    </div>
+                    <div class="cols">
+                        <div>
+                            <h3>Where</h3>
+                            <p>14 Alder Street, on the corner with Mill Lane.</p>
+                        </div>
+                        <div>
+                            <h3>When</h3>
+                            <p>Every day, 8:00–22:00. The kitchen closes at 21:30.</p>
+                        </div>
+                        <div>
+                            <h3>Groups</h3>
+                            <p>
+                                For seven or more, call <a href="tel:5550142">555 0142</a> and we’ll
+                                put tables together.
+                            </p>
+                        </div>
+                        <div>
+                            <h3>Step-free</h3>
+                            <p>The front door is level with the street, and so is the WC.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="wrap">
+                Juniper Café is invented for this example. Plan and table booking by Areaform.
+            </div>
+        </footer>
+
+        <script>
+            // The next 15 days and the start times, 8:00 to 20:30, as the booking page takes them.
+            (() => {
+                const pad = (n) => String(n).padStart(2, '0');
+                const iso = (d) =>
+                    `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+                const now = new Date();
+                const minute = now.getHours() * 60 + now.getMinutes();
+                const day = document.getElementById('date');
+                const label = new Intl.DateTimeFormat('en-GB', {
+                    weekday: 'short',
+                    day: 'numeric',
+                    month: 'short',
+                });
+                // Today only while a start time is left.
+                const first = minute < 20 * 60 + 30 ? 0 : 1;
+                day.innerHTML = '';
+                for (let i = first; i <= 14; i++) {
+                    const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i);
+                    const name = i === 0 ? 'Today' : i === 1 ? 'Tomorrow' : label.format(d);
+                    day.add(new Option(name, iso(d)));
+                }
+                const time = document.getElementById('time');
+                for (let m = 8 * 60; m <= 20 * 60 + 30; m += 30)
+                    time.add(new Option(`${pad(Math.floor(m / 60))}:${pad(m % 60)}`));
+                time.value = '19:00';
+            })();
+        </script>
+        <script src="https://cdn.areaform.app/v1/embed.js" async></script>
+    </body>
+</html>

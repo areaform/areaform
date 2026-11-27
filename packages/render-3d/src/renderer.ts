@@ -12,6 +12,7 @@ import type {
     Theme,
 } from '@areaform/render-2d';
 import type { Theme3D } from './theme3d.ts';
+import type { FlightPath } from './tour.ts';
 import type { Camera3D, ViewPreset } from './view.ts';
 
 export interface Renderer3DOptions {
@@ -66,6 +67,16 @@ export interface Renderer3DEvents {
     elementHover: HoverEvent;
     /** A gesture went to the page under cooperative gestures, e.g. a plain wheel: say how to move the plan. */
     gestureHint: GestureHint;
+    /** A tour reached one of its Viewpoints and stays there for its pause. */
+    tourStep: Viewpoint;
+}
+
+/** How `flyTo` moves the camera. */
+export interface FlightOptions {
+    /** How long the flight takes, seconds; 0 jumps there (default `DEFAULT_FLIGHT`). */
+    seconds?: number;
+    /** How the camera goes there: `arc` (default), or a straight `line`, as `lookAt` turns it. */
+    path?: FlightPath;
 }
 
 /**
@@ -160,6 +171,15 @@ export interface Renderer3D {
      * was flying to; 0 when no tour played.
      */
     stopTour(): number;
+    /**
+     * Flies the camera from where it is to `camera` on the Level shown, eased in and out, ending
+     * a tour or a turn. Resolves `true` on arrival, `false` when something else took the camera on
+     * the way: the visitor's drag or zoom, `stopFlight`, another flight, a tour, `setCamera`,
+     * another Level or a view preset.
+     */
+    flyTo(camera: Pick<Camera3D, 'position' | 'target'>, options?: FlightOptions): Promise<boolean>;
+    /** Ends a flight where it is; its Promise resolves `false`. */
+    stopFlight(): void;
     on<E extends keyof Renderer3DEvents>(
         event: E,
         handler: (e: Renderer3DEvents[E]) => void,

@@ -1,0 +1,785 @@
+<!doctype html>
+<!--
+    An example client site (ADR-0022's update 2026-11-20, ADR-0028): a made-up shopping centre's home
+    page with the demo centre's plan in 3D, a shop directory that opens the plan at each shop, the QR
+    signs at its entrances, and a "Lease a unit" link to the leasing demo at /mall-leasing/. The
+    centre, its shops and its address are invented. One file, no build, no fonts or scripts from
+    anyone but Areaform's own embed.js; kept out of search engines.
+-->
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Linden Square · an example site · Areaform</title>
+        <meta
+            name="description"
+            content="An example site: a made-up shopping centre with its Areaform plan, a shop directory with directions, QR codes at the entrances and units to let."
+        />
+        <meta name="robots" content="noindex" />
+        <!-- Share tags, for a link sent to a prospect; still kept out of search -->
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Areaform" />
+        <meta property="og:url" content="https://areaform.app/examples/linden-square/" />
+        <meta property="og:title" content="Linden Square · an example site · Areaform" />
+        <meta
+            property="og:description"
+            content="An example site: a made-up shopping centre with its Areaform plan, a shop directory with directions, QR codes at the entrances and units to let."
+        />
+        <meta property="og:image" content="https://areaform.app/og.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="icon" href="https://areaform.app/favicon.svg" type="image/svg+xml" />
+        <style>
+            :root {
+                --paper: #f4f3ef;
+                --paper-2: #e9e7e1;
+                --card: #ffffff;
+                --ink: #1c2230;
+                --muted: #5d6270;
+                --line: rgb(28 34 48 / 0.13);
+                --accent: #22324f;
+                --accent-deep: #172338;
+                --on-accent: #f4f3ef;
+                --leaf: #7f9c3c;
+                --sans:
+                    'Avenir Next', Avenir, ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+                    Roboto, sans-serif;
+                --wrap: 1160px;
+                --gut: clamp(16px, 5vw, 48px);
+            }
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                background: var(--paper);
+                color: var(--ink);
+                font: 400 17px / 1.6 var(--sans);
+                -webkit-font-smoothing: antialiased;
+            }
+            h1,
+            h2,
+            h3,
+            p,
+            dl,
+            dd {
+                margin: 0;
+            }
+            a {
+                color: inherit;
+            }
+            :focus-visible {
+                outline: 2px solid var(--accent);
+                outline-offset: 3px;
+            }
+            .wrap {
+                max-width: calc(var(--wrap) + 2 * var(--gut));
+                margin: 0 auto;
+                padding-inline: var(--gut);
+            }
+
+            /* the example bar: Areaform's, not the centre's */
+            .example {
+                background: #0b0c0e;
+                color: #dfe3e8;
+                font:
+                    400 14px / 1.4 system-ui,
+                    sans-serif;
+            }
+            .example .wrap {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 4px 16px;
+                padding-block: 10px;
+            }
+            .example a {
+                color: #fff;
+                font-weight: 500;
+                text-underline-offset: 3px;
+            }
+
+            /* the centre's own page */
+            header .wrap {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                padding-block: 20px;
+            }
+            .brand {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 22px;
+                font-weight: 500;
+                letter-spacing: -0.01em;
+                text-decoration: none;
+            }
+            /* the centre's mark: a linden leaf's shape */
+            .mark {
+                width: 14px;
+                height: 14px;
+                border-radius: 0 50% 0 50%;
+                background: var(--leaf);
+                transform: rotate(45deg);
+            }
+            nav ul {
+                display: flex;
+                gap: 28px;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                font-size: 15px;
+            }
+            nav a {
+                text-decoration: none;
+            }
+            nav a:hover {
+                text-decoration: underline;
+                text-underline-offset: 4px;
+            }
+            .button {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 48px;
+                padding: 0 24px;
+                border: 1px solid var(--accent);
+                border-radius: 10px;
+                background: var(--accent);
+                color: var(--on-accent);
+                font: 500 16px / 1 var(--sans);
+                text-decoration: none;
+            }
+            .button:hover {
+                background: var(--accent-deep);
+            }
+            .button-quiet {
+                border-color: rgb(28 34 48 / 0.24);
+                background: transparent;
+                color: var(--ink);
+            }
+            .button-quiet:hover {
+                border-color: var(--ink);
+                background: transparent;
+            }
+            header .button {
+                min-height: 44px;
+                font-size: 15px;
+            }
+
+            .hero {
+                padding-block: 40px 72px;
+            }
+            .hero .wrap {
+                display: grid;
+                grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+                gap: 48px;
+                align-items: center;
+            }
+            .where {
+                margin-bottom: 20px;
+                color: var(--muted);
+                font-size: 15px;
+            }
+            .where strong {
+                color: var(--ink);
+                font-weight: 500;
+            }
+            .hero h1 {
+                font-size: clamp(38px, 4.6vw, 60px);
+                font-weight: 500;
+                line-height: 1.05;
+                letter-spacing: -0.025em;
+                text-wrap: balance;
+            }
+            .lead {
+                max-width: 480px;
+                margin-top: 20px;
+                color: var(--muted);
+                font-size: 19px;
+            }
+            .actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                margin-top: 32px;
+            }
+            .plan-frame {
+                height: 560px;
+                overflow: hidden;
+                border: 1px solid var(--line);
+                border-radius: 16px;
+                background: var(--card);
+            }
+
+            section {
+                padding-block: 80px;
+                border-top: 1px solid var(--line);
+            }
+            .head {
+                display: grid;
+                grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+                gap: 24px 56px;
+                align-items: end;
+                margin-bottom: 40px;
+            }
+            .head h2 {
+                font-size: clamp(30px, 3.4vw, 44px);
+                font-weight: 500;
+                line-height: 1.1;
+                letter-spacing: -0.02em;
+            }
+            .head p {
+                max-width: 560px;
+                color: var(--muted);
+            }
+
+            /* the directory: each shop opens the map page with the way to it */
+            .directory {
+                columns: 3 260px;
+                column-gap: 48px;
+            }
+            .group {
+                break-inside: avoid;
+                margin-bottom: 32px;
+            }
+            .group h3 {
+                margin-bottom: 4px;
+                color: var(--muted);
+                font-size: 14px;
+                font-weight: 500;
+            }
+            .group ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+            .group a {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                gap: 16px;
+                padding-block: 10px;
+                border-bottom: 1px solid var(--line);
+                text-decoration: none;
+            }
+            .group a:hover .name {
+                text-decoration: underline;
+                text-underline-offset: 4px;
+            }
+            .floor {
+                color: var(--muted);
+                font-size: 14px;
+                white-space: nowrap;
+            }
+
+            .cols {
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 32px;
+            }
+            .cols h3 {
+                margin-bottom: 8px;
+                font-size: 15px;
+                font-weight: 500;
+            }
+            .cols p {
+                color: var(--muted);
+            }
+            .figure {
+                display: block;
+                margin-bottom: 4px;
+                color: var(--ink);
+                font-size: 32px;
+                font-weight: 500;
+                letter-spacing: -0.02em;
+                font-variant-numeric: tabular-nums;
+            }
+
+            /* the signs as they hang in the centre: a navy plate with its QR code */
+            .signs {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 24px;
+            }
+            .sign {
+                display: grid;
+                grid-template-columns: 112px minmax(0, 1fr);
+                gap: 20px;
+                align-items: center;
+                padding: 20px;
+                border-radius: 14px;
+                background: var(--accent);
+                color: var(--on-accent);
+            }
+            .sign .qr {
+                display: block;
+                width: 112px;
+                height: 112px;
+                padding: 8px;
+                border-radius: 8px;
+                background: #fff;
+            }
+            .sign .qr img {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+            .sign strong {
+                display: block;
+                font-size: 18px;
+                font-weight: 500;
+            }
+            .sign span {
+                color: rgb(244 243 239 / 0.75);
+                font-size: 14px;
+            }
+            .signs-note {
+                margin-top: 20px;
+                color: var(--muted);
+                font-size: 15px;
+            }
+
+            .lease .wrap {
+                display: grid;
+                grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+                gap: 48px;
+                align-items: center;
+            }
+            .lease h2 {
+                font-size: clamp(30px, 3.4vw, 44px);
+                font-weight: 500;
+                line-height: 1.1;
+                letter-spacing: -0.02em;
+            }
+            .lease p {
+                margin-top: 16px;
+                color: var(--muted);
+            }
+            .facts {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 24px;
+                padding: 28px;
+                border: 1px solid var(--line);
+                border-radius: 16px;
+                background: var(--card);
+            }
+            .facts dt {
+                color: var(--muted);
+                font-size: 14px;
+            }
+            .facts dd {
+                font-size: 28px;
+                font-weight: 500;
+                letter-spacing: -0.02em;
+                font-variant-numeric: tabular-nums;
+            }
+
+            footer {
+                padding-block: 32px 48px;
+                border-top: 1px solid var(--line);
+                color: var(--muted);
+                font-size: 14px;
+            }
+
+            @media (max-width: 900px) {
+                .hero .wrap,
+                .head,
+                .lease .wrap {
+                    grid-template-columns: minmax(0, 1fr);
+                }
+                .hero .wrap {
+                    gap: 32px;
+                }
+                .cols {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+                .signs {
+                    grid-template-columns: minmax(0, 1fr);
+                }
+                .plan-frame {
+                    height: 420px;
+                }
+            }
+            @media (max-width: 640px) {
+                nav {
+                    display: none;
+                }
+                .hero {
+                    padding-block: 24px 56px;
+                }
+                section {
+                    padding-block: 56px;
+                }
+                .cols {
+                    grid-template-columns: minmax(0, 1fr);
+                    gap: 24px;
+                }
+                .facts {
+                    padding: 20px;
+                    gap: 16px;
+                }
+                .facts dd {
+                    font-size: 22px;
+                }
+                .plan-frame {
+                    height: 360px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="example">
+            <div class="wrap">
+                <span
+                    >An example site: the centre is made up, to show an Areaform plan, directions
+                    and unit leasing on a shopping centre’s own page.</span
+                >
+                <a href="https://areaform.app/shopping-centres/">Areaform for shopping centres →</a>
+            </div>
+        </div>
+
+        <header>
+            <div class="wrap">
+                <a class="brand" href="#top"
+                    ><span class="mark" aria-hidden="true"></span>Linden Square</a
+                >
+                <nav aria-label="The centre">
+                    <ul>
+                        <li><a href="#shops">Shops</a></li>
+                        <li><a href="#getting-here">Getting here</a></li>
+                        <li><a href="#lease">Lease a unit</a></li>
+                    </ul>
+                </nav>
+                <a class="button" href="map/">Find a shop</a>
+            </div>
+        </header>
+
+        <main id="top">
+            <div class="hero">
+                <div class="wrap">
+                    <div>
+                        <p class="where">
+                            <strong>Open today 9:00–21:00</strong> · Station Road, Alderbury
+                        </p>
+                        <h1>Seventeen shops, a market and a cinema under one roof</h1>
+                        <p class="lead">
+                            Two floors round a glass atrium, with 210 parking spaces under and
+                            beside the centre. Find any shop and the way to it, step-free if you
+                            like.
+                        </p>
+                        <div class="actions">
+                            <a class="button" href="map/">Find a shop</a>
+                            <a class="button button-quiet" href="#getting-here">Getting here</a>
+                        </div>
+                    </div>
+                    <!-- The Areaform snippet, as the centre would paste it -->
+                    <div class="plan-frame">
+                        <div
+                            data-areaform="sp_demo-mall"
+                            data-view="3d"
+                            data-motion="tour"
+                            style="height: 100%"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+
+            <section id="shops" aria-labelledby="shops-h">
+                <div class="wrap">
+                    <div class="head">
+                        <h2 id="shops-h">Shops and places</h2>
+                        <p>
+                            Tap a name to see it on the plan. From the entrances and the car park,
+                            the map draws the way there.
+                        </p>
+                    </div>
+                    <!-- Each link opens the map page with the shop's card: ?to= is its Zone's id -->
+                    <div class="directory">
+                        <div class="group">
+                            <h3>Food &amp; drink</h3>
+                            <ul>
+                                <li>
+                                    <a href="map/?to=greenway-market"
+                                        ><span class="name">Greenway Market</span
+                                        ><span class="floor">Ground</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="map/?to=unit-g03"
+                                        ><span class="name">Coldharbour Coffee</span
+                                        ><span class="floor">Ground</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="map/?to=unit-g08"
+                                        ><span class="name">Kettle Bakery</span
+                                        ><span class="floor">Ground</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="map/?to=unit-f04"
+                                        ><span class="name">Saffron Bowl</span
+                                        ><span class="floor">First</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="map/?to=unit-f05"
+                                        ><span class="name">Nonna’s Pasta</span
+                                        ><span class="floor">First</span></a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="group">
+                            <h3>Fashion</h3>
+                            <ul>
+                                <li>
+                                    <a href="map/?to=hollis-rowe"
+                                        ><span class="name">Hollis &amp; Rowe</span
+                                        ><span class="floor">First</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="map/?to=unit-f01"
+                                        ><span class="name">Ashby Denim</span
+                                        ><span class="floor">First</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="map/?to=unit-g04"
+                                        ><span class="name">Marlow Shoes</span
+                                        ><span class="floor">Ground</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="map/?to=unit-g11"
+                                        ><span class="name">Northwind Outdoor</span
+                                        ><span class="floor">Ground</span></a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="group">
+                            <h3>Health &amp; beauty</h3>
+                            <ul>
+                                <li>
+                                    <a href="map/?to=unit-g02"
+                                        ><span class="name">Pell Pharmacy</span
+                                        ><span class="floor">Ground</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="map/?to=unit-g09"
+                                        ><span class="name">Tally Opticians</span
+                                        ><span class="floor">Ground</span></a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="group">
+                            <h3>Home, gifts and books</h3>
+                            <ul>
+                                <li>
+                                    <a href="map/?to=unit-g07"
+                                        ><span class="name">Moss &amp; Stem</span
+                                        ><span class="floor">Ground</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="map/?to=unit-f08"
+                                        ><span class="name">Bramble Home</span
+                                        ><span class="floor">First</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="map/?to=unit-g01"
+                                        ><span class="name">Fernhill Books</span
+                                        ><span class="floor">Ground</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="map/?to=unit-g13"
+                                        ><span class="name">Quill Stationers</span
+                                        ><span class="floor">Ground</span></a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="group">
+                            <h3>Tech and kids</h3>
+                            <ul>
+                                <li>
+                                    <a href="map/?to=unit-g06"
+                                        ><span class="name">Brightside Phones</span
+                                        ><span class="floor">Ground</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="map/?to=unit-f03"
+                                        ><span class="name">Little Ferns</span
+                                        ><span class="floor">First</span></a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="group">
+                            <h3>Services and leisure</h3>
+                            <ul>
+                                <li>
+                                    <a href="map/?to=cinema"
+                                        ><span class="name">Lumen Cinema</span
+                                        ><span class="floor">First</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="map/?to=unit-f09"
+                                        ><span class="name">Cut &amp; Comb</span
+                                        ><span class="floor">First</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="map/?to=wc-ground"
+                                        ><span class="name">Toilets</span
+                                        ><span class="floor">Ground</span></a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="getting-here" aria-labelledby="here-h">
+                <div class="wrap">
+                    <div class="head">
+                        <h2 id="here-h">Getting here and parking</h2>
+                        <p>
+                            Parking is free for the first three hours, with a ticket from any shop.
+                        </p>
+                    </div>
+                    <div class="cols">
+                        <div>
+                            <span class="figure">132</span>
+                            <h3>Underground, P−1</h3>
+                            <p>
+                                In from Station Road down the ramp. Lifts and stairs at both ends.
+                            </p>
+                        </div>
+                        <div>
+                            <span class="figure">78</span>
+                            <h3>Outside, by the south entrance</h3>
+                            <p>A covered walkway leads straight to the doors.</p>
+                        </div>
+                        <div>
+                            <span class="figure">4 min</span>
+                            <h3>From Alderbury station</h3>
+                            <p>Walk up Station Road; the north entrance faces the square.</p>
+                        </div>
+                        <div>
+                            <span class="figure">2</span>
+                            <h3>Step-free lifts</h3>
+                            <p>
+                                From the car park to the first floor. The map finds the way by lift.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section aria-labelledby="signs-h">
+                <div class="wrap">
+                    <div class="head">
+                        <h2 id="signs-h">Scan at the door</h2>
+                        <p>
+                            A sign at each entrance and by the car park lifts. Its code opens the
+                            map where you stand, so the way to any shop starts from there.
+                        </p>
+                    </div>
+                    <div class="signs">
+                        <div class="sign">
+                            <a class="qr" href="map/?here=entrance-north"
+                                ><img
+                                    src="qr/north-entrance.svg"
+                                    alt="QR code: the map from the north entrance"
+                            /></a>
+                            <div>
+                                <strong>North entrance</strong
+                                ><span>Station Road, by the square</span>
+                            </div>
+                        </div>
+                        <div class="sign">
+                            <a class="qr" href="map/?here=entrance-south"
+                                ><img
+                                    src="qr/south-entrance.svg"
+                                    alt="QR code: the map from the south entrance"
+                            /></a>
+                            <div>
+                                <strong>South entrance</strong
+                                ><span>From the outside car park</span>
+                            </div>
+                        </div>
+                        <div class="sign">
+                            <a class="qr" href="map/?here=p1-lobby-west"
+                                ><img
+                                    src="qr/p1-lift-lobby.svg"
+                                    alt="QR code: the map from the car park lifts"
+                            /></a>
+                            <div>
+                                <strong>P−1 lift lobby</strong><span>The underground car park</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="signs-note">
+                        On a computer, click a code to open the map as a phone would
+                    </p>
+                </div>
+            </section>
+
+            <section class="lease" id="lease" aria-labelledby="lease-h">
+                <div class="wrap">
+                    <div>
+                        <h2 id="lease-h">Open your shop at Linden Square</h2>
+                        <p>
+                            Six units are free, from a 43 m² food court kitchen to a 310 m² former
+                            furniture store. See each one on the plan, with its rent, and book a
+                            viewing.
+                        </p>
+                        <div class="actions">
+                            <a class="button" href="https://areaform.app/mall-leasing/"
+                                >See the free units</a
+                            >
+                        </div>
+                    </div>
+                    <dl class="facts">
+                        <div>
+                            <dt>Units free</dt>
+                            <dd>6</dd>
+                        </div>
+                        <div>
+                            <dt>Visitors a week</dt>
+                            <dd>38,000</dd>
+                        </div>
+                        <div>
+                            <dt>From</dt>
+                            <dd>€200/m²</dd>
+                        </div>
+                    </dl>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="wrap">
+                Linden Square and its shops are invented for this example. Plan, directions and
+                leasing by Areaform.
+            </div>
+        </footer>
+
+        <script src="https://cdn.areaform.app/v1/embed.js" async></script>
+    </body>
+</html>

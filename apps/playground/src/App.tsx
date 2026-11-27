@@ -28,13 +28,14 @@ import {
     type Renderer,
     type StyleResolver,
 } from '@areaform/render-2d';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import logo from '../../../brand/favicon.svg';
 import { browserAssetStore } from './assetStore.ts';
 import { compactJSON } from './compactJSON.ts';
 import { Menu, MenuSeparator } from './Menu.tsx';
 import { ReviewPanel } from './ReviewPanel.tsx';
 import { Toast } from './Toast.tsx';
+import { offersSignUp, SIGN_UP_URL, SignUpCard, signUpClosed } from './SignUpCard.tsx';
 import { sampleExpo } from './sampleExpo.ts';
 import { sampleOffice } from './sampleOffice.ts';
 import { demoLabels, demoTheme } from './demoTheme.ts';
@@ -159,7 +160,10 @@ function browserStorage(): KeyValueStorage {
     }
 }
 
-const store = createStore(browserStorage());
+const storage = browserStorage();
+const store = createStore(storage);
+/** On areaform.app, and not closed in this browser before. */
+const signUpOffered = offersSignUp() && !signUpClosed(storage);
 const assetStore = browserAssetStore();
 /** Underlay images picked with **Keep on this device** (ADR-0016), in this browser only. */
 const deviceAssets = createDeviceAssets('areaform-playground-device');
@@ -222,7 +226,14 @@ export function App() {
     // The window belongs to the editor shown; a new one, or none, starts with it closed.
     useEffect(() => setShortcuts(false), [prefs.mode, creating, generation]);
     const [confirmation, setConfirmation] = useState<Confirmation | null>(null);
-    const [notice, setNotice] = useState<string | null>(initial.notice);
+    const [notice, setNotice] = useState<ReactNode>(initial.notice);
+    /** The sign-up card, once the person has changed the plan or opened another. */
+    const [signUp, setSignUp] = useState<'waiting' | 'shown' | 'closed'>(
+        signUpOffered ? 'waiting' : 'closed',
+    );
+    useEffect(() => {
+        if (doc !== initial.doc) setSignUp((s) => (s === 'waiting' ? 'shown' : s));
+    }, [doc, initial.doc]);
     const closeNotice = useCallback(() => setNotice(null), []);
     const fileInput = useRef<HTMLInputElement>(null);
     const folderInput = useRef<HTMLInputElement>(null);
@@ -377,9 +388,27 @@ export function App() {
         link.click();
         URL.revokeObjectURL(url);
     };
-    const exportFile = () => download(toJSON(doc), 'json', 'application/json');
-    const exportGeoJSON = () =>
+    /** After a download on areaform.app: where the plan goes next. */
+    const afterExport = () => {
+        if (!offersSignUp()) return;
+        setNotice(
+            <>
+                Downloaded. To show it on your own site,{' '}
+                <a className="toast-link" href={SIGN_UP_URL}>
+                    sign up free
+                </a>
+                .
+            </>,
+        );
+    };
+    const exportFile = () => {
+        download(toJSON(doc), 'json', 'application/json');
+        afterExport();
+    };
+    const exportGeoJSON = () => {
         download(JSON.stringify(toGeoJSON(doc)), 'geojson', 'application/geo+json');
+        afterExport();
+    };
     /** Imports a plan, with the images its Underlays name, e.g. a Draft folder from the MCP import. */
     const importFiles = async (files: File[]) => {
         const sorted = sortDraftFiles(files);
@@ -629,6 +658,9 @@ export function App() {
                 </span>
             </nav>
             <Toast message={notice} onClose={closeNotice} />
+            {signUp === 'shown' && (
+                <SignUpCard storage={storage} onClose={() => setSignUp('closed')} />
+            )}
             {prefs.mode === 'edit' && creating ? (
                 <div className="dialog">
                     <CreateSpaceForm

@@ -2,13 +2,14 @@
 import { useEffect, useState } from 'react';
 import type { EditorController, HerePick } from '../interaction/controller.ts';
 import { hereValue } from '../document/here.ts';
+import { lookAtPointLine } from '../document/pageLines.ts';
 import { useI18n } from './i18n.ts';
 
 /** Makes a link that opens the published plan with routes starting at `here`, e.g. for a QR code. */
 export type HereLink = (here: string) => string;
 
 /** A text to copy: shown in a read-only field (so it can also be selected by hand) with Copy. */
-function Copyable({
+export function Copyable({
     value,
     label,
     copyLabel,
@@ -63,7 +64,10 @@ export function HereValue({ value, link }: { value: string; link?: HereLink | un
     );
 }
 
-/** While picking Here: asks for a click, then shows the value for the point clicked. */
+/**
+ * While picking a point: asks for a click, then shows the value for the point clicked: for `?here=`,
+ * or a `lookAt` line for a page that moves the camera.
+ */
 export function HerePrompt({
     controller,
     levelId,
@@ -78,8 +82,17 @@ export function HerePrompt({
     const i18n = useI18n();
     return (
         <div className="af-modal" role="dialog" aria-label={i18n.t('here.heading')}>
-            <p>{i18n.t('here.clickPoint')}</p>
-            {pick.point && <HereValue value={hereValue(levelId, pick.point)} link={link} />}
+            <p>{i18n.t(pick.for === 'page' ? 'page.clickPoint' : 'here.clickPoint')}</p>
+            {pick.point &&
+                (pick.for === 'page' ? (
+                    <Copyable
+                        value={lookAtPointLine(pick.point)}
+                        label={i18n.t('page.point')}
+                        copyLabel={i18n.t('here.copy')}
+                    />
+                ) : (
+                    <HereValue value={hereValue(levelId, pick.point)} link={link} />
+                ))}
             <div className="af-buttons">
                 <button className="af-button" onClick={() => controller.setTool('select')}>
                     {i18n.t('here.done')}

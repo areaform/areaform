@@ -186,6 +186,53 @@ export function tourAt(start: Pose, viewpoints: Viewpoint[], seconds: number): T
     };
 }
 
+/**
+ * The Pose `t` of the way along these Viewpoints, from 0 at the first to 1 at the last, for a
+ * page scrubbing the camera as it scrolls. Each leg between two Viewpoints is an equal share of
+ * `t`, eased as a tour flies it, so a scroll settles on each Viewpoint. Null without any.
+ */
+export function poseAlong(viewpoints: readonly Viewpoint[], t: number): Pose | null {
+    const poses = viewpoints.map(poseOf);
+    if (poses.length === 0) return null;
+    if (poses.length === 1) return poses[0]!;
+    const legs = poses.length - 1;
+    const at = Math.min(Math.max(Number.isFinite(t) ? t : 0, 0), 1) * legs;
+    const leg = Math.min(Math.floor(at), legs - 1);
+    return between(poses[leg]!, poses[leg + 1]!, ease(at - leg));
+}
+
+/**
+ * How a flight goes: `arc` flies in orbit terms, as a tour does, over the plan rather than through
+ * Walls; `line` swings the target across and moves the camera in a straight line, if at all, e.g.
+ * along its line of sight to come closer (`lookAt`).
+ */
+export type FlightPath = 'arc' | 'line';
+
+/** The camera of a flight `t` (0 to 1, not eased) of the way from `from` to `to`, on Level `levelId`. */
+export function flightAt(
+    from: Camera3D,
+    to: Camera3D,
+    t: number,
+    path: FlightPath,
+    levelId: Id,
+): Camera3D {
+    const e = ease(t);
+    if (e >= 1) return { position: to.position, target: to.target, levelId };
+    if (path === 'line') {
+        const along = (a: Vec3, b: Vec3): Vec3 => [
+            a[0] + (b[0] - a[0]) * e,
+            a[1] + (b[1] - a[1]) * e,
+            a[2] + (b[2] - a[2]) * e,
+        ];
+        return {
+            position: along(from.position, to.position),
+            target: along(from.target, to.target),
+            levelId,
+        };
+    }
+    return cameraOfPose(between(poseOfCamera(from), poseOfCamera(to), e), levelId);
+}
+
 function normalizeBearing(degrees: number): number {
     const d = degrees % 360;
     // `+ 0` turns −0 into 0.

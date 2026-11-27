@@ -278,6 +278,10 @@ export function HallMap() {
 | `onElementHover`    | `(e: HoverEvent) => void`                 | Fires when the pointer moves onto another Element; `e.ref` is `null` when it leaves every Element. `e.point` and `e.screen` as in `onElementClick`, e.g. to place a tooltip.                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `onZoomChange`      | `(zoom: number) => void`                  | Screen pixels per metre.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `onReady`           | `(renderer: Renderer) => void`            | The underlying renderer once the canvas exists, e.g. to `fitLevel()` or read the camera.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `ref`               | `Ref<View \| null>`                       | The View, for its methods: `flyTo`, `lookAt`, `setProgress`, `getCamera`, `setLevel` (see [the camera driven by the page](#the-camera-driven-by-the-page)).                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `onViewpoint`       | `(e: { id, levelId }) => void`            | A flight started with `flyTo` arrived, at a Viewpoint (its `id`) or at a camera (`id` is `null`).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `onZoneClick`       | `(e: { id, levelId, data }) => void`      | A visitor clicked a Zone, in 2D or 3D, with its `data`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `onTourStep`        | `(e: { id, levelId, index }) => void`     | The tour (`motion="tour"`) reached a Viewpoint, `index` in its Level's list, and stays a while.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | `onReady3d`         | `(renderer: Renderer3D) => void`          | The 3D renderer each time the 3D view is shown, e.g. for `toScreen` to place a tooltip over a Zone.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 The component fills its parent, so give the parent a height.
@@ -325,7 +329,7 @@ export function HallEditor() {
 | `dimensions`                                   | `boolean`                                   | Always-on dimensions at the start (default off); the toolbar's **Dimensions** toggles them.                                                                                                                                                                                                                                                                                                                                                                            |
 | `onUnitsChange`                                | `(units: DisplayUnits) => void`             | The user switched units in the toolbar, e.g. to remember the choice.                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `onDimensionsChange`                           | `(on: boolean) => void`                     | The user toggled always-on dimensions in the toolbar.                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `foldedSections`                               | `SidebarSection[]`                          | The sidebar's sections folded shut at the start: `'properties'`, `'levels'`, `'viewpoints'`, `'languages'`, `'location'` (Problems never folds). When absent, all but Properties start folded (`DEFAULT_FOLDED_SECTIONS`); a change of this prop folds them again.                                                                                                                                                                                                     |
+| `foldedSections`                               | `SidebarSection[]`                          | The sidebar's sections folded shut at the start: `'properties'`, `'levels'`, `'viewpoints'`, `'page'` (**For your page**), `'languages'`, `'location'` (Problems never folds). When absent, all but Properties start folded (`DEFAULT_FOLDED_SECTIONS`); a change of this prop folds them again.                                                                                                                                                                       |
 | `onFoldedSectionsChange`                       | `(sections: SidebarSection[]) => void`      | The user folded or opened a section by its heading, e.g. to remember it.                                                                                                                                                                                                                                                                                                                                                                                               |
 | `grid`                                         | `boolean`                                   | Show the grid at the start (default off); **Show grid** in the plan's corner toggles it. Rulers and the origin mark come with it, in the toolbar's units; the origin mark is also shown while drawing.                                                                                                                                                                                                                                                                 |
 | `onGridChange`                                 | `(on: boolean) => void`                     | The user showed or hid the grid.                                                                                                                                                                                                                                                                                                                                                                                                                                       |
@@ -422,7 +426,7 @@ Both components have a **2D / 3D** switch in the plan's corner (in the View, wit
 
 In both views a Zone's name is centred on its `labelAnchor` (its visual centre by default) and kept inside the Zone: a name too wide for it wraps onto two lines, then shrinks. `labelSize` (or the Theme's) is the largest it may be. A name that cannot shrink to a fifth of that and still fit is left out.
 
-Drag to orbit, right-drag or `Shift`-drag to pan, and scroll to zoom towards the pointer. On a touch screen, one finger orbits, two fingers pinch to zoom and pan, and a tap is a click. With `gestures="cooperative"` the page keeps a plain scroll and one finger: ⌘/Ctrl + scroll or a pinch zooms, and two fingers orbit and pinch. The hint a plain scroll brings up also says how to move the plan: a drag in 2D, Ctrl + drag in 3D. In 2D, two fingers pan and pinch to zoom. The canvas is drawn at most 2 device pixels per CSS pixel (`maxPixelRatio`), and when the browser drops the WebGL context and gives it back, the view draws itself again. **Top view** looks straight down with north up, **Angled view** goes back to the starting ¾ view, and **Fit** frames the whole Level from the current angle. Clicks and hovers give the same events as in 2D, `point` being where on the plan the pointer is; a lowered Wall is only its kerb, so a click above it lands on what is behind (a click on the sky gives `backgroundClick` with the point the camera looks at). In the Editor, a click in 3D selects the Element and the properties panel shows it; drawing stays in 2D. Its **Viewpoints** section saves the 3D camera as it is (**Add this viewpoint**) for the camera tour (`motion="tour"`): each has a name, a flight and a stay time, **Go to**, **Use this view** to save the camera in its place, a place in the order and delete, and **Play tour** plays it until the plan is touched. In 2D the list stays, and the plan shows each one as a numbered camera mark with a wedge towards what it looks at. A renderer's `toScreen(point, height)` gives where a plan point is on the canvas, e.g. to place a tooltip. The camera is kept while you switch back and forth, and keeps its angle when the Level changes. Edits, undo and a new `doc` show up immediately; only a Level that changed is rebuilt.
+Drag to orbit, right-drag or `Shift`-drag to pan, and scroll to zoom towards the pointer. On a touch screen, one finger orbits, two fingers pinch to zoom and pan, and a tap is a click. With `gestures="cooperative"` the page keeps a plain scroll and one finger: ⌘/Ctrl + scroll or a pinch zooms, and two fingers orbit and pinch. The hint a plain scroll brings up also says how to move the plan: a drag in 2D, Ctrl + drag in 3D. In 2D, two fingers pan and pinch to zoom. The canvas is drawn at most 2 device pixels per CSS pixel (`maxPixelRatio`), and when the browser drops the WebGL context and gives it back, the view draws itself again. **Top view** looks straight down with north up, **Angled view** goes back to the starting ¾ view, and **Fit** frames the whole Level from the current angle. Clicks and hovers give the same events as in 2D, `point` being where on the plan the pointer is; a lowered Wall is only its kerb, so a click above it lands on what is behind (a click on the sky gives `backgroundClick` with the point the camera looks at). In the Editor, a click in 3D selects the Element and the properties panel shows it; drawing stays in 2D. Its **Viewpoints** section saves the 3D camera as it is (**Add this viewpoint**) for the camera tour (`motion="tour"`): each has a name, a flight and a stay time, **Copy** (a `flyTo` line for the client's page), **Go to**, **Use this view** to save the camera in its place, a place in the order and delete, and **Play tour** plays it until the plan is touched. The **For your page** section copies ready lines for a page that moves the camera (see [the camera driven by the page](#the-camera-driven-by-the-page)). In 2D the list stays, and the plan shows each one as a numbered camera mark with a wedge towards what it looks at. A renderer's `toScreen(point, height)` gives where a plan point is on the canvas, e.g. to place a tooltip. The camera is kept while you switch back and forth, and keeps its angle when the Level changes. Edits, undo and a new `doc` show up immediately; only a Level that changed is rebuilt.
 
 Without WebGL 2 the **3D** button is greyed out, and a View asked to start in 3D starts in 2D (unless `views` leaves 2D out).
 
@@ -432,7 +436,7 @@ On Areaform's hosting, the owner picks how `embed.js` first shows a Space in the
 <div data-areaform="sp_…" data-view="auto"></div>
 ```
 
-`embed.js` always uses cooperative gestures, since a snippet sits on a page that scrolls; `data-gestures="greedy"` gives a full-page plan, such as a Kiosk, every gesture. Before ADR-0025 an embedded plan took a plain wheel, so pages relying on that now scroll instead. The owner picks how the 3D camera moves in the Publish dialog (**Camera in 3D**: _Still_, _Turn slowly_ or _Tour_), saved per Space and written into the manifest as `motion`, so it reaches the client's site with no new Publish; `data-motion="none"`, `"orbit"` or `"tour"` on the snippet wins over it, and moves the camera as `motion` does. `data-motion-resume` gives `motionResume`. Once the plan is drawn (`ready3d` in 3D, `ready` in 2D), the snippet's element sends a bubbling `areaform:ready` event, the first of the events a host page can listen to.
+`embed.js` always uses cooperative gestures, since a snippet sits on a page that scrolls; `data-gestures="greedy"` gives a full-page plan, such as a Kiosk, every gesture. Before ADR-0025 an embedded plan took a plain wheel, so pages relying on that now scroll instead. The owner picks how the 3D camera moves in the Publish dialog (**Camera in 3D**: _Still_, _Turn slowly_ or _Tour_), saved per Space and written into the manifest as `motion`, so it reaches the client's site with no new Publish; `data-motion="none"`, `"orbit"` or `"tour"` on the snippet wins over it, and moves the camera as `motion` does. `data-motion-resume` gives `motionResume`. Once the plan is drawn (`ready3d` in 3D, `ready` in 2D), the snippet's element sends a bubbling `areaform:ready` event; after it, the page can move the camera with `element.areaform` and hear the other `areaform:` events (see [the camera driven by the page](#the-camera-driven-by-the-page)).
 
 While a plan loads, `embed.js` shows thin grey lines sketching a plan, then, once the Revision has arrived, the outline, Zones, Obstacles, Connection Stops and Walls of the Level shown first, drawn where the plan will be, until the renderer is ready; then they fade out. There is no logo in it, so it suits white-label plans, and under `prefers-reduced-motion` the lines are drawn at once and stay still. Screen readers hear "Loading the plan…" in the visitor's language. `startingLevel(doc)` from `@areaform/view` tells which Level a View shows first.
 
@@ -485,6 +489,89 @@ export function Preview() {
 | `onBackgroundClick` | `(e: BackgroundEvent) => void`   | A click on the bare floor, the ground or the sky.                                                                                   |
 | `onElementHover`    | `(e: HoverEvent) => void`        | The pointer moved onto another Element, or off every Element.                                                                       |
 | `onReady`           | `(renderer: Renderer3D) => void` | The underlying renderer, e.g. to `setView('top')`.                                                                                  |
+
+## The camera driven by the page
+
+A page can move the plan's camera itself: a story that flies through the building as the visitor scrolls (a scroll trigger), or an app that shows what its list is about. The View has the methods, `<AreaformView>` and `<Areaform3DView>` give the View through `ref`, and on a client's site `embed.js` puts them on the snippet's element as `element.areaform`.
+
+```ts
+import { createView } from '@areaform/view';
+
+const view = createView(container, { doc, view: '3d', gestures: 'cooperative' });
+
+await view.flyTo('vp_garden'); // a Viewpoint, by its id, on any Level
+await view.lookAt('z_room-3-2'); // turn to a Zone, coming closer if it is small
+await view.lookAt([12, 4], { distance: 15 }); // turn to a point, ending 15 m from it
+view.setProgress(0.4); // 40 % of the way along the Level's Viewpoints, for a scroll library
+view.setLevel('level-p1');
+const camera = view.getCamera(); // { position, target, levelId }, for flyTo later
+```
+
+- **`flyTo(viewpointId | camera, { seconds }?)`** flies to a Viewpoint, in its own flight time (3 s unless it has one), or to a camera as `getCamera` gives it, in the 3D view's coordinates (metres; x east, y up, z south). It returns a Promise that resolves `{ interrupted: false }` on arrival, then the `viewpoint` event follows, or `{ interrupted: true }` when the visitor took the plan on the way or the page moved the camera again. An id the plan has no Viewpoint for rejects.
+- **`lookAt(zoneId | [x, y], { seconds, distance }?)`** turns the camera to a Zone's middle or a plan point (metres), in 1.5 s, resolving as `flyTo` does. A Zone ends up between 40 % and 80 % of the view's shorter side (`ZONE_SHARE`): a small one, such as a locker or an office seen from across the building, brings the camera closer along its line of sight, and one too big to fit sends it back. A Zone already in between, and a point, keep the distance the camera has. `distance` says where to end up instead, in metres from the camera to what it looks at.
+- **`setProgress(t)`** puts the camera `t` of the way along the shown Level's Viewpoints in tour order, from 0 at the first to 1 at the last. There is no flight and no event, so a scroll library can call it on every frame; a touch does not stop it, and the next call puts the camera back on the path. Each leg between two Viewpoints is an equal share, eased, so the camera settles on each Viewpoint. It covers one Level: a story that goes to another floor calls `setLevel` in its next part. Called before the view is ready, it waits for it.
+- **`setLevel(levelId)`**, **`getLevelId()`** (`getLevel()` on `element.areaform`) and **`getCamera()`**.
+- **Ids only, never names.** Names can repeat, change, and differ between Content Languages. The Editor's **Viewpoints** section has **Copy** on each Viewpoint, a ready line `el.areaform.flyTo('vp_…'); // its name`. Its **For your page** section (folded at first) gives the rest as ready lines: `setLevel` for the Level shown, `lookAt` for the Zone selected, **Pick a point to look at…** in 2D for `lookAt([x, y])` (any point, outside the building too, to a tenth of a metre), and **Copy camera** in 3D, the view as it is now with its Level, for a view you do not want as a Viewpoint. `foldedSections` names it `page`.
+- **Another Level:** a Viewpoint or a Zone on another Level shows that Level first, as the Level switcher does, then flies or turns there.
+- **In 2D** the methods pan and zoom the plan instead: to the point a Viewpoint looks at, as far out as it is; `lookAt` zooms by the same rule as in 3D, and `distance` gives the zoom that shows as much. They never switch the visitor to 3D. `getCamera()` in 2D gives a camera straight above the plan's middle.
+- **The visitor wins:** a drag, a zoom, a tap or a key stops what the page started, and the page's next call takes the camera again. A page call also stops the camera's own motion, as a touch does; with `motionResume` set, the motion starts again after that many idle seconds.
+- Under `prefers-reduced-motion` the camera is there at once.
+
+The events, with `view.on(event, handler)` (each returns its own unsubscribe) or the components' props:
+
+| Event         | Prop            | What it tells                                                                                    |
+| ------------- | --------------- | ------------------------------------------------------------------------------------------------ |
+| `levelChange` | `onLevelChange` | Another Level is shown, from any cause: the page, the Level switcher, a route.                   |
+| `viewpoint`   | `onViewpoint`   | `{ id, levelId }`: a flight from `flyTo` arrived, at a Viewpoint, or at a camera with `id` null. |
+| `zoneClick`   | `onZoneClick`   | `{ id, levelId, data }`: a visitor clicked a Zone, in 2D or 3D.                                  |
+| `tourStep`    | `onTourStep`    | `{ id, levelId, index }`: the tour reached a Viewpoint and stays there for its pause.            |
+
+There is no event for each frame the camera moves while a page flies it; `camera3dChange` and `camera2dChange` report every move already.
+
+In `<AreaformEditor>`, the sidebar's **For your page** section (`'page'` in `foldedSections`, folded at first) gives the ids for these calls as ready lines, each with **Copy**:
+
+- **Level**: `el.areaform.setLevel('…'); // its name`, for the Level shown.
+- **Zone**: `el.areaform.lookAt('…'); // its name`, for the Zone selected, in 2D or 3D; with none selected it asks for one.
+- **Point**: in 2D, **Pick a point to look at…** starts the Here tool for a page (`controller.startHerePick('page')`). Each click on the plan gives `el.areaform.lookAt([x, y]);`, snapped and to a tenth of a metre, anywhere on the Level, outside the building too. Esc or **Done** ends it. In 3D the row says to switch to 2D.
+- **Camera**: in 3D, **Copy camera** gives the view as it is now, `{ position, target, levelId }`, for `flyTo`. In 2D the row says to open 3D.
+
+Each Viewpoint's own line, `el.areaform.flyTo('…'); // its name`, is **Copy** in its row of the **Viewpoints** section. The lines assume the page calls the snippet's element `el`.
+
+In React, the View comes through `ref`:
+
+```tsx
+import type { AreaformDocument } from '@areaform/core';
+import type { View } from '@areaform/view';
+import { AreaformView } from '@areaform/view/react';
+import { useRef } from 'react';
+
+export function Story({ doc }: { doc: AreaformDocument }) {
+    const plan = useRef<View>(null);
+    return (
+        <>
+            <button onClick={() => plan.current?.flyTo('vp_garden')}>The garden</button>
+            <AreaformView ref={plan} doc={doc} defaultView="3d" gestures="cooperative" />
+        </>
+    );
+}
+```
+
+In Vue, keep the View from `createView` in a ref, as in [Vue](#vue), and call it.
+
+On a client's site, `embed.js` gives the snippet's element an `areaform` property once the View is made; wait for `areaform:ready` before the first call. It has `flyTo`, `lookAt`, `setProgress`, `setLevel`, `getLevel`, `getCamera` and `on(event, handler)`. Its events are in lower case, and each is also a bubbling DOM event on the element, `areaform:levelchange`, `areaform:viewpoint`, `areaform:zoneclick` and `areaform:tourstep`, with what it tells as `detail` (`levelchange` tells `{ levelId }`):
+
+```html
+<div id="plan" data-areaform="sp_demo-office" data-view="3d"></div>
+<script>
+    const el = document.getElementById('plan');
+    el.addEventListener('areaform:ready', () => {
+        el.areaform.flyTo('tour-3'); // The garden
+        el.areaform.on('zoneclick', ({ id, data }) => console.log(id, data));
+    });
+</script>
+```
+
+The site's [Moving the camera](https://areaform.app/docs/camera/) is the full reference for the snippet. [Lettera House, the story](https://areaform.app/examples/lettera-house/story/) does this as the page scrolls, with a switch between stepping (one `flyTo` per part) and scrubbing (`setProgress`); its one file is in the public repository under `apps/examples/lettera-house/story/`.
 
 ## Interface language
 

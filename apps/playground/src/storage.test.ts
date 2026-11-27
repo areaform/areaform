@@ -98,7 +98,7 @@ describe('the playground store', () => {
             autosave: false,
             mode: 'view',
             locale: 'en',
-            foldedSections: ['levels', 'viewpoints', 'languages', 'location'],
+            foldedSections: ['levels', 'viewpoints', 'page', 'languages', 'location'],
         });
     });
 

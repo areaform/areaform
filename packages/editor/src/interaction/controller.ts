@@ -88,9 +88,13 @@ export interface Calibration {
     points: Vec2[];
 }
 
-/** Picking Here for visitors (ADR-0017): the point clicked on the current Level, if any yet. */
+/**
+ * Picking a point on the current Level: the point clicked, if any yet, and what it is for: Here
+ * for visitors (ADR-0017), or a line for a page that moves the camera (ADR-0030).
+ */
 export interface HerePick {
     point: Vec2 | null;
+    for: 'visitors' | 'page';
 }
 
 /** After duplicating a Level: its Connections could stop on the copy too (Q32). */
@@ -229,10 +233,11 @@ export interface EditorController {
     /** Starts two-point calibration of an Underlay on the current Level. */
     startCalibration(underlayId: Id): void;
     /**
-     * Starts picking Here for visitors: the next click on the plan gives `herePick.point`, the value
-     * for `?here=` (see `hereValue`). Ends with the Select tool or Esc.
+     * Starts picking a point: the next click on the plan gives `herePick.point`, the value for
+     * `?here=` (see `hereValue`), or for `page` a point for the camera to turn to. Ends with the
+     * Select tool or Esc.
      */
-    startHerePick(): void;
+    startHerePick(purpose?: HerePick['for']): void;
     /**
      * Completes calibration once two points are marked: `distance` is the real metres between
      * them. With `straighten`, the image also turns so the marked line is exactly horizontal or
@@ -408,6 +413,7 @@ export function createEditorController(
         },
         setMessage: (message) => setState({ message }),
         setCalibration: (calibration) => setState({ calibration }),
+        herePick: () => state.herePick,
         setHerePick: (herePick) => setState({ herePick }),
         endTool: () => switchTool('select'),
         options: { wallThickness: options.wallThickness ?? 0.15 },
@@ -675,9 +681,9 @@ export function createEditorController(
         requestLevelDelete(levelId) {
             confirmIfMore({ type: 'level.delete', levelId }, [{ kind: 'level', id: levelId }]);
         },
-        startHerePick() {
+        startHerePick(purpose = 'visitors') {
             switchTool('here');
-            setState({ herePick: { point: null } });
+            setState({ herePick: { point: null, for: purpose } });
         },
         startCalibration(underlayId) {
             calibrating = underlayId;

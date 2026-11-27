@@ -95,6 +95,18 @@ export const ru: EditorMessages = {
     'sidebar.levels': 'Уровни',
     'sidebar.properties': 'Свойства',
     'sidebar.languages': 'Языки',
+    'sidebar.page': 'Для вашей страницы',
+    'page.intro':
+        'Строки для скрипта вашей страницы, чтобы управлять камерой этого плана через el.areaform.',
+    'page.level': 'Уровень',
+    'page.zone': 'Зона',
+    'page.selectZone': 'Выберите зону, чтобы получить её строку.',
+    'page.point': 'Точка',
+    'page.pick': 'Выберите точку для камеры…',
+    'page.pickIn2d': 'Переключитесь в 2D, чтобы выбрать точку.',
+    'page.clickPoint': 'Щёлкните точку, к которой должна повернуться камера.',
+    'page.camera': 'Камера',
+    'page.cameraIn3d': 'Откройте 3D, чтобы скопировать камеру как есть.',
     'sidebar.location': 'Где это?',
     'here.heading': 'Точка старта для посетителей',
     'here.outside': 'Выберите точку внутри здания: там стоят посетители.',
@@ -343,4 +355,9 @@ export const ru: EditorMessages = {
     'viewpoint.seconds': 'с',
     'viewpoint.play': 'Запустить облёт',
     'viewpoint.stop': 'Остановить облёт',
+    'viewpoint.copy': 'Копировать',
+    'viewpoint.copyTitle': 'Скопировать строку для вашей страницы, которая переносит камеру сюда',
+    'page.copyCamera': 'Копировать камеру',
+    'page.copyCameraTitle':
+        'Скопировать текущий 3D-вид для flyTo на вашей странице, не сохраняя точку',
 };

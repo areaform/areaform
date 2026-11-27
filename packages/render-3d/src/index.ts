@@ -1,6 +1,7 @@
 export {
     createRenderer3D,
     isWebGLAvailable,
+    type FlightOptions,
     type FloorLine,
     type Renderer3D,
     type Renderer3DEvents,
@@ -13,10 +14,14 @@ export {
     cameraOfPose,
     DEFAULT_FLIGHT,
     DEFAULT_PAUSE,
+    ease,
+    flightAt,
     framePose,
     nextIndex,
+    poseAlong,
     poseOfCamera,
     tourAt,
+    type FlightPath,
     type Pose,
     type TourState,
 } from './tour.ts';
