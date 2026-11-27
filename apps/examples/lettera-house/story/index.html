@@ -268,32 +268,32 @@
                 <span class="eyebrow">Lettera House · offices to let</span>
                 <h1>A building shaped like the letter A</h1>
                 <p>Scroll, and the plan walks you through it. Touch it any time to look around.</p>
-                <code class="call">flyTo('tour-1')</code>
+                <code class="call">flyTo('tour-1', { seconds: 1 })</code>
             </section>
 
             <section class="part" data-viewpoint="tour-2">
                 <h2>Meeting rooms on every corridor</h2>
                 <p>Six of them, booked from your phone, so a client never waits in the corridor.</p>
-                <code class="call">flyTo('tour-2')</code>
+                <code class="call">flyTo('tour-2', { seconds: 1 })</code>
             </section>
 
             <section class="part" data-zone="b3-z2">
                 <h2>Room 3.2 is free from January</h2>
                 <p>76 m² facing the garden, with its own door and a kitchen across the corridor.</p>
                 <p class="offer">€1,900 a month</p>
-                <code class="call">lookAt('b3-z2')</code>
+                <code class="call">lookAt('b3-z2', { seconds: 1 })</code>
             </section>
 
             <section class="part" data-viewpoint="tour-3">
                 <h2>A garden between the wings</h2>
                 <p>Lunch outside from May to September, and a quiet path between the two wings.</p>
-                <code class="call">flyTo('tour-3')</code>
+                <code class="call">flyTo('tour-3', { seconds: 1 })</code>
             </section>
 
             <section class="part" data-viewpoint="tour-4">
                 <h2>The whole A from above</h2>
                 <p>Two long wings of light offices, kitchens in each and two entrances.</p>
-                <code class="call">flyTo('tour-4')</code>
+                <code class="call">flyTo('tour-4', { seconds: 1 })</code>
             </section>
 
             <section class="part" data-level="level-p1">
@@ -318,13 +318,17 @@
             let mode = 'step';
             let current = null;
 
+            // A second per move keeps up with someone scrolling; without it a flight takes its
+            // Viewpoint's own time (3 s unless set in the Editor) and a turn 1.5 s.
+            const MOVE = { seconds: 1 };
+
             /** What a part asks of the plan, when stepping. */
             function show(part) {
                 const plan = element.areaform;
                 const { viewpoint, zone, level } = part.dataset;
                 if (level) plan.setLevel(level);
-                else if (zone) plan.lookAt(zone);
-                else if (viewpoint) plan.flyTo(viewpoint);
+                else if (zone) plan.lookAt(zone, MOVE);
+                else if (viewpoint) plan.flyTo(viewpoint, MOVE);
             }
 
             /** The part across the middle of the screen. */
