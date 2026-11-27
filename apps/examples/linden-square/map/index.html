@@ -1,0 +1,341 @@
+<!doctype html>
+<!--
+    The example centre's map page (ADR-0028), what its QR signs open on a phone: the plan on top
+    with every gesture, and the shop directory under it. `?here=` says where the sign hangs; each shop
+    links back here with `?to=` added, so the plan opens on the shop with the way to it drawn. Made
+    up, like the rest of the example; kept out of search engines.
+-->
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <title>Map · Linden Square · an example site · Areaform</title>
+        <meta
+            name="description"
+            content="An example site: a made-up shopping centre's map, opened from a QR code, with the way to any shop."
+        />
+        <meta name="robots" content="noindex" />
+        <link rel="icon" href="https://areaform.app/favicon.svg" type="image/svg+xml" />
+        <style>
+            :root {
+                --paper: #f4f3ef;
+                --card: #ffffff;
+                --ink: #1c2230;
+                --muted: #5d6270;
+                --line: rgb(28 34 48 / 0.13);
+                --accent: #22324f;
+                --leaf: #7f9c3c;
+                --sans:
+                    'Avenir Next', Avenir, ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+                    Roboto, sans-serif;
+                --gut: 16px;
+            }
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                background: var(--paper);
+                color: var(--ink);
+                font: 400 16px / 1.5 var(--sans);
+                -webkit-font-smoothing: antialiased;
+            }
+            h1,
+            h2,
+            p {
+                margin: 0;
+            }
+            a {
+                color: inherit;
+            }
+            :focus-visible {
+                outline: 2px solid var(--accent);
+                outline-offset: 2px;
+            }
+            .example {
+                padding: 8px var(--gut);
+                background: #0b0c0e;
+                color: #dfe3e8;
+                font:
+                    400 13px / 1.4 system-ui,
+                    sans-serif;
+            }
+            .example a {
+                color: #fff;
+                text-underline-offset: 3px;
+            }
+            header {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px var(--gut);
+                border-bottom: 1px solid var(--line);
+            }
+            .brand {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 18px;
+                font-weight: 500;
+                text-decoration: none;
+            }
+            .mark {
+                width: 12px;
+                height: 12px;
+                border-radius: 0 50% 0 50%;
+                background: var(--leaf);
+                transform: rotate(45deg);
+            }
+            .here {
+                margin-left: auto;
+                color: var(--muted);
+                font-size: 14px;
+                text-align: right;
+            }
+            .here strong {
+                color: var(--ink);
+                font-weight: 500;
+            }
+            .plan {
+                height: 62dvh;
+                min-height: 360px;
+                border-bottom: 1px solid var(--line);
+                background: var(--card);
+            }
+            main {
+                max-width: 720px;
+                margin: 0 auto;
+                padding: 24px var(--gut) 48px;
+            }
+            h1 {
+                font-size: 24px;
+                font-weight: 500;
+                letter-spacing: -0.01em;
+            }
+            .filter {
+                width: 100%;
+                margin-top: 16px;
+                padding: 12px;
+                border: 1px solid rgb(28 34 48 / 0.24);
+                border-radius: 10px;
+                background: #fff;
+                font: 400 16px / 1.2 var(--sans);
+            }
+            .group {
+                margin-top: 24px;
+            }
+            .group h2 {
+                margin-bottom: 4px;
+                color: var(--muted);
+                font-size: 14px;
+                font-weight: 500;
+            }
+            .group ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+            .group a {
+                display: flex;
+                justify-content: space-between;
+                gap: 16px;
+                min-height: 48px;
+                align-items: center;
+                border-bottom: 1px solid var(--line);
+                text-decoration: none;
+            }
+            .group a[aria-current='true'] {
+                font-weight: 500;
+            }
+            .group a[aria-current='true']::before {
+                content: '';
+                width: 4px;
+                align-self: stretch;
+                margin: 8px 0 8px -12px;
+                border-radius: 2px;
+                background: var(--accent);
+            }
+            .group a[aria-current='true'] .name {
+                margin-right: auto;
+                margin-left: 8px;
+            }
+            .floor {
+                color: var(--muted);
+                font-size: 14px;
+                white-space: nowrap;
+            }
+            .none {
+                margin-top: 24px;
+                color: var(--muted);
+            }
+            .back {
+                display: inline-block;
+                margin-top: 32px;
+                color: var(--muted);
+                font-size: 14px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="example">
+            An example: the map a QR code in a shopping centre opens.
+            <a href="https://areaform.app/shopping-centres/">Areaform for shopping centres →</a>
+        </div>
+        <header>
+            <a class="brand" href="../"
+                ><span class="mark" aria-hidden="true"></span>Linden Square</a
+            >
+            <p class="here" id="here" hidden></p>
+        </header>
+
+        <!-- The Areaform snippet: it reads ?here= and ?to= from this page's address -->
+        <div class="plan">
+            <div
+                data-areaform="sp_demo-mall"
+                data-view="2d"
+                data-gestures="greedy"
+                style="height: 100%"
+            ></div>
+        </div>
+
+        <main>
+            <h1>Find a shop</h1>
+            <input
+                class="filter"
+                id="filter"
+                type="search"
+                placeholder="Search shops"
+                aria-label="Find a shop"
+                autocomplete="off"
+            />
+            <div id="directory"></div>
+            <p class="none" id="none" hidden>Nothing by that name. Try another word.</p>
+            <a class="back" href="../">Linden Square’s home page</a>
+        </main>
+
+        <script>
+            // The centre's shops by group: name, the Zone's id on the plan, the floor, and words
+            // people look for them by.
+            const SHOPS = [
+                [
+                    'Food & drink',
+                    [
+                        ['Greenway Market', 'greenway-market', 'Ground', 'supermarket groceries'],
+                        ['Coldharbour Coffee', 'unit-g03', 'Ground', 'café'],
+                        ['Kettle Bakery', 'unit-g08', 'Ground', 'bread cakes'],
+                        ['Saffron Bowl', 'unit-f04', 'First', 'curry food court'],
+                        ['Nonna’s Pasta', 'unit-f05', 'First', 'italian food court'],
+                    ],
+                ],
+                [
+                    'Fashion',
+                    [
+                        ['Hollis & Rowe', 'hollis-rowe', 'First', 'department store clothes'],
+                        ['Ashby Denim', 'unit-f01', 'First', 'jeans clothes'],
+                        ['Marlow Shoes', 'unit-g04', 'Ground', 'shoes'],
+                        ['Northwind Outdoor', 'unit-g11', 'Ground', 'outdoor sport jackets'],
+                    ],
+                ],
+                [
+                    'Health & beauty',
+                    [
+                        ['Pell Pharmacy', 'unit-g02', 'Ground', 'chemist medicine'],
+                        ['Tally Opticians', 'unit-g09', 'Ground', 'glasses eyes'],
+                    ],
+                ],
+                [
+                    'Home, gifts and books',
+                    [
+                        ['Moss & Stem', 'unit-g07', 'Ground', 'flowers florist plants'],
+                        ['Bramble Home', 'unit-f08', 'First', 'homeware kitchen'],
+                        ['Fernhill Books', 'unit-g01', 'Ground', 'bookshop'],
+                        ['Quill Stationers', 'unit-g13', 'Ground', 'pens paper cards'],
+                    ],
+                ],
+                [
+                    'Tech and kids',
+                    [
+                        ['Brightside Phones', 'unit-g06', 'Ground', 'mobile repair'],
+                        ['Little Ferns', 'unit-f03', 'First', 'toys children'],
+                    ],
+                ],
+                [
+                    'Services and leisure',
+                    [
+                        ['Lumen Cinema', 'cinema', 'First', 'films movies'],
+                        ['Cut & Comb', 'unit-f09', 'First', 'barber hair'],
+                        ['Toilets', 'wc-ground', 'Ground', 'wc restroom'],
+                    ],
+                ],
+            ];
+            const PLACES = {
+                'entrance-north': 'North entrance',
+                'entrance-south': 'South entrance',
+                'p1-lobby-west': 'P−1, by the lifts',
+            };
+
+            const params = new URLSearchParams(location.search);
+            const here = params.get('here');
+            const to = params.get('to');
+            if (PLACES[here]) {
+                const box = document.getElementById('here');
+                box.hidden = false;
+                box.innerHTML = 'You are at<br><strong></strong>';
+                box.querySelector('strong').textContent = PLACES[here];
+            }
+
+            // A shop's link: this page again, from where the visitor stands, to the shop.
+            const link = (id) => {
+                const next = new URLSearchParams();
+                if (here) next.set('here', here);
+                next.set('to', id);
+                return `?${next}`;
+            };
+            const directory = document.getElementById('directory');
+            for (const [group, shops] of SHOPS) {
+                const section = document.createElement('section');
+                section.className = 'group';
+                const title = document.createElement('h2');
+                title.textContent = group;
+                const list = document.createElement('ul');
+                for (const [name, id, floor, words] of shops) {
+                    const item = document.createElement('li');
+                    item.dataset.words = `${name} ${group} ${words}`.toLowerCase();
+                    const a = document.createElement('a');
+                    a.href = link(id);
+                    if (id === to) a.setAttribute('aria-current', 'true');
+                    const label = document.createElement('span');
+                    label.className = 'name';
+                    label.textContent = name;
+                    const where = document.createElement('span');
+                    where.className = 'floor';
+                    where.textContent = floor;
+                    a.append(label, where);
+                    item.append(a);
+                    list.append(item);
+                }
+                section.append(title, list);
+                directory.append(section);
+            }
+
+            document.getElementById('filter').addEventListener('input', (e) => {
+                const words = e.target.value.trim().toLowerCase();
+                let shown = 0;
+                for (const section of directory.children) {
+                    let any = false;
+                    for (const item of section.querySelectorAll('li')) {
+                        const match = !words || item.dataset.words.includes(words);
+                        item.hidden = !match;
+                        any ||= match;
+                        shown += match ? 1 : 0;
+                    }
+                    section.hidden = !any;
+                }
+                document.getElementById('none').hidden = shown > 0;
+            });
+        </script>
+        <script src="https://cdn.areaform.app/v1/embed.js" async></script>
+    </body>
+</html>

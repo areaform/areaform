@@ -39,7 +39,16 @@ import { createPicker, type WallCut } from './picking.ts';
 import { createLevelSync } from './sync.ts';
 import { buildZoneLayer, type OutlineData } from './zones.ts';
 import { defaultTheme3D } from './theme3d.ts';
-import { cameraOfPose, nextIndex, poseOfCamera, tourAt, type Pose } from './tour.ts';
+import {
+    cameraOfPose,
+    DEFAULT_FLIGHT,
+    flightAt,
+    nextIndex,
+    poseOfCamera,
+    tourAt,
+    type FlightPath,
+    type Pose,
+} from './tour.ts';
 import {
     FOV,
     frame,
@@ -132,6 +141,8 @@ export async function createThreeRenderer(options: Renderer3DOptions): Promise<R
         arrived: boolean;
         orbitAfter: number;
     } | null = null;
+    /** The Viewpoint the tour stays at now, if any, so each stay is told once. */
+    let tourStay: number | null = null;
     const flyTour = (seconds: number) => {
         if (!tour || tour.paused || tour.arrived || !levelId) return;
         tour.seconds += seconds;
@@ -139,10 +150,39 @@ export async function createThreeRenderer(options: Renderer3DOptions): Promise<R
         const next = cameraOfPose(state.pose, levelId);
         camera.position.set(...next.position);
         controls.target.set(...next.target);
+        const stay = state.arrived ? state.index : null;
+        if (stay !== tourStay) {
+            tourStay = stay;
+            const reached = stay === null ? undefined : tour.viewpoints[stay];
+            if (reached) emit('tourStep', reached);
+        }
         if (state.done) {
             tour.arrived = true;
             orbitAt(tour.orbitAfter);
         }
+    };
+    /** The page's flight: from where, to where, how far along, and what to tell when it ends. */
+    let flight: {
+        from: Camera3D;
+        to: Camera3D;
+        seconds: number;
+        elapsed: number;
+        path: FlightPath;
+        done: (arrived: boolean) => void;
+    } | null = null;
+    const endFlight = (arrived: boolean) => {
+        const ended = flight;
+        flight = null;
+        ended?.done(arrived);
+    };
+    const flyFlight = (seconds: number) => {
+        if (!flight || !levelId) return;
+        flight.elapsed += seconds;
+        const t = flight.seconds > 0 ? Math.min(1, flight.elapsed / flight.seconds) : 1;
+        const next = flightAt(flight.from, flight.to, t, flight.path, levelId);
+        camera.position.set(...next.position);
+        controls.target.set(...next.target);
+        if (t >= 1) endFlight(true);
     };
 
     const opaqueMaterial = new MeshLambertMaterial({ vertexColors: true });
@@ -414,7 +454,11 @@ export async function createThreeRenderer(options: Renderer3DOptions): Promise<R
         emit('cameraChange', getCamera());
     };
     controls.addEventListener('change', onChange);
-    const onStart = () => (moved = true);
+    // The visitor's drag or zoom: the camera is theirs, and a page's flight ends where it is.
+    const onStart = () => {
+        moved = true;
+        endFlight(false);
+    };
     controls.addEventListener('start', onStart);
 
     // --- Picking: clicks and hover, with the same events as the 2D renderer ---------------------
@@ -571,6 +615,7 @@ export async function createThreeRenderer(options: Renderer3DOptions): Promise<R
             controls.autoRotateSpeed = orbitSpeed;
         }
         flyTour(seconds);
+        flyFlight(seconds);
         controls.update(seconds);
         if (labelLayer.bake()) dirty = true;
         if (!dirty) return;
@@ -596,14 +641,17 @@ export async function createThreeRenderer(options: Renderer3DOptions): Promise<R
         },
         setLevel(id) {
             if (id === levelId) return;
+            endFlight(false);
             levelId = id;
             show();
             frameFrom(framed ? currentOrbit() : VIEWS.perspective);
         },
         setView(view) {
+            endFlight(false);
             frameFrom(VIEWS[view]);
         },
         fitLevel() {
+            endFlight(false);
             frameFrom(currentOrbit());
         },
         setLabelResolver(resolver) {
@@ -648,6 +696,7 @@ export async function createThreeRenderer(options: Renderer3DOptions): Promise<R
         },
         getCamera,
         setCamera(view) {
+            endFlight(false);
             if (view.levelId !== levelId) {
                 frameFrom(orbitOf(view.position, view.target));
                 return;
@@ -676,7 +725,9 @@ export async function createThreeRenderer(options: Renderer3DOptions): Promise<R
             orbitAt(turnsPerMinute ?? 0);
         },
         playTour(viewpoints, { orbitAfter = 0 } = {}) {
+            endFlight(false);
             orbitAt(0);
+            tourStay = null;
             tour =
                 viewpoints.length > 0
                     ? {
@@ -702,6 +753,28 @@ export async function createThreeRenderer(options: Renderer3DOptions): Promise<R
             tour = null;
             return next;
         },
+        flyTo(to, { seconds = DEFAULT_FLIGHT, path = 'arc' } = {}) {
+            endFlight(false);
+            if (!levelId) return Promise.resolve(false);
+            orbitAt(0);
+            tour = null;
+            return new Promise<boolean>((resolve) => {
+                flight = {
+                    from: getCamera(),
+                    to: { position: to.position, target: to.target, levelId: levelId! },
+                    seconds: Math.max(0, seconds),
+                    elapsed: 0,
+                    path,
+                    done: resolve,
+                };
+                // No time to take: there now, without waiting for a frame.
+                if (flight.seconds === 0) flyFlight(0);
+                dirty = true;
+            });
+        },
+        stopFlight() {
+            endFlight(false);
+        },
         on(event, handler) {
             const set = listeners.get(event) ?? new Set();
             set.add(handler as (e: never) => void);
@@ -709,6 +782,7 @@ export async function createThreeRenderer(options: Renderer3DOptions): Promise<R
             return () => set.delete(handler as (e: never) => void);
         },
         destroy() {
+            endFlight(false);
             renderer.setAnimationLoop(null);
             container.removeEventListener('wheel', onWheel, { capture: true });
             touch.dispose();

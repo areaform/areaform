@@ -1,0 +1,401 @@
+<!doctype html>
+<!--
+    An example client site for developers (the camera driven by the page, decided 2026-11-26):
+    Lettera House's letting story. The plan stays on screen while the story scrolls past it, and
+    each part moves the camera: `flyTo` a Viewpoint by its id, `lookAt` a Zone, `setLevel` for the
+    car park. A switch picks between stepping (one flight a part) and scrubbing (`setProgress`, the
+    camera following the scroll). The building and its offers are invented; the plan is the demo
+    office's. One file, no build, nothing from anyone but Areaform's own embed.js; kept out of
+    search engines.
+-->
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Lettera House, the story · an example site · Areaform</title>
+        <meta
+            name="description"
+            content="An example site for developers: a building's story that moves an Areaform plan's camera as the page scrolls."
+        />
+        <meta name="robots" content="noindex" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Areaform" />
+        <meta property="og:url" content="https://areaform.app/examples/lettera-house/story/" />
+        <meta property="og:title" content="Lettera House, the story · an example site · Areaform" />
+        <meta
+            property="og:description"
+            content="An example site for developers: a building's story that moves an Areaform plan's camera as the page scrolls."
+        />
+        <meta property="og:image" content="https://areaform.app/og.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="icon" href="https://areaform.app/favicon.svg" type="image/svg+xml" />
+        <style>
+            :root {
+                --bg: #f3f3f1;
+                --stone: #e4e3df;
+                --ink: #16181b;
+                --muted: #61656b;
+                --line: rgb(22 24 27 / 0.12);
+                --accent: #2f5d50;
+                --sans: 'Helvetica Neue', Helvetica, Arial, ui-sans-serif, system-ui, sans-serif;
+                --mono: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+                --gut: clamp(16px, 5vw, 56px);
+            }
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                background: var(--bg);
+                color: var(--ink);
+                font: 400 16px / 1.6 var(--sans);
+            }
+            h1,
+            h2,
+            p {
+                margin: 0;
+            }
+            a {
+                color: inherit;
+            }
+            code {
+                font: 13px / 1.5 var(--mono);
+            }
+
+            /* the example bar: Areaform's, not the building's */
+            .example {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 4px 16px;
+                padding: 10px var(--gut);
+                background: #0b0c0e;
+                color: #dfe3e8;
+                font:
+                    400 14px / 1.4 system-ui,
+                    sans-serif;
+            }
+            .example a {
+                color: #fff;
+                font-weight: 500;
+                text-underline-offset: 3px;
+            }
+
+            header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                padding: 24px var(--gut);
+            }
+            .brand {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                font: 500 18px / 1 var(--sans);
+                text-decoration: none;
+            }
+            .brand svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            /* Step or scrub: how the camera follows the story */
+            .mode {
+                display: inline-flex;
+                padding: 3px;
+                border: 1px solid var(--line);
+                border-radius: 999px;
+                background: #fff;
+                font-size: 14px;
+            }
+            .mode button {
+                padding: 6px 14px;
+                border: 0;
+                border-radius: 999px;
+                background: none;
+                color: var(--muted);
+                font: inherit;
+                cursor: pointer;
+            }
+            .mode button[aria-pressed='true'] {
+                background: var(--ink);
+                color: #fff;
+            }
+
+            /* The story: parts on the left scroll past the plan, which stays on the right */
+            .story {
+                display: grid;
+                grid-template-columns: minmax(300px, 420px) 1fr;
+                gap: 0 var(--gut);
+                padding-inline: var(--gut);
+            }
+            .plan {
+                position: sticky;
+                top: 0;
+                grid-column: 2;
+                grid-row: 1 / span 20;
+                height: 100vh;
+                padding-block: 24px;
+            }
+            .plan > div {
+                height: 100%;
+                border-radius: 4px;
+                overflow: hidden;
+                background: var(--stone);
+            }
+            .part {
+                grid-column: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 14px;
+                min-height: 90vh;
+                padding-block: 48px;
+                opacity: 0.4;
+                transition: opacity 0.3s;
+            }
+            .part.on {
+                opacity: 1;
+            }
+            .part:first-of-type {
+                min-height: 70vh;
+            }
+            .part:last-of-type {
+                min-height: 100vh;
+            }
+            .eyebrow {
+                color: var(--accent);
+                font-size: 13px;
+                font-weight: 500;
+                letter-spacing: 0.02em;
+            }
+            h1 {
+                font: 500 clamp(32px, 4vw, 48px) / 1.08 var(--sans);
+                letter-spacing: -0.02em;
+            }
+            h2 {
+                font: 500 28px / 1.15 var(--sans);
+                letter-spacing: -0.01em;
+            }
+            .part p {
+                max-width: 38ch;
+                color: var(--muted);
+            }
+            /* What the part asks the plan, for a developer reading the page */
+            .call {
+                align-self: flex-start;
+                padding: 4px 8px;
+                border-radius: 4px;
+                background: #fff;
+                color: var(--ink);
+            }
+            .offer {
+                align-self: flex-start;
+                padding: 10px 14px;
+                border-left: 3px solid var(--accent);
+                background: #fff;
+            }
+
+            footer {
+                padding: 40px var(--gut);
+                border-top: 1px solid var(--line);
+                color: var(--muted);
+                font-size: 14px;
+            }
+
+            /* Narrow: the plan stays at the top, the parts scroll under it */
+            @media (max-width: 800px) {
+                .story {
+                    display: block;
+                }
+                .plan {
+                    z-index: 1;
+                    height: 48vh;
+                    padding-block: 0 12px;
+                    background: var(--bg);
+                }
+                /* the words below the plan, not under it */
+                .part {
+                    justify-content: flex-end;
+                    min-height: 70vh;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="example">
+            <span
+                >An example site for developers: the page moves the plan’s camera as it scrolls. The
+                building is made up.</span
+            >
+            <a href="https://areaform.app/docs/camera/">How it is done →</a>
+        </div>
+
+        <header>
+            <a class="brand" href="../">
+                <svg viewBox="0 0 22 22" aria-hidden="true">
+                    <path
+                        d="M3 20 11 2l8 18M6.5 13h9"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    />
+                </svg>
+                Lettera House
+            </a>
+            <div class="mode" role="group" aria-label="How the plan follows the story">
+                <button type="button" data-mode="step" aria-pressed="true">Step</button>
+                <button type="button" data-mode="scrub" aria-pressed="false">Scrub</button>
+            </div>
+        </header>
+
+        <main class="story">
+            <!-- The Areaform snippet: still, in 3D; the story below moves its camera -->
+            <div class="plan">
+                <div
+                    id="plan"
+                    data-areaform="sp_demo-office"
+                    data-view="3d"
+                    data-motion="none"
+                    style="height: 100%"
+                ></div>
+            </div>
+
+            <section class="part" data-viewpoint="tour-1">
+                <span class="eyebrow">Lettera House · offices to let</span>
+                <h1>A building shaped like the letter A</h1>
+                <p>Scroll, and the plan walks you through it. Touch it any time to look around.</p>
+                <code class="call">flyTo('tour-1')</code>
+            </section>
+
+            <section class="part" data-viewpoint="tour-2">
+                <h2>Meeting rooms on every corridor</h2>
+                <p>Six of them, booked from your phone, so a client never waits in the corridor.</p>
+                <code class="call">flyTo('tour-2')</code>
+            </section>
+
+            <section class="part" data-zone="b3-z2">
+                <h2>Room 3.2 is free from January</h2>
+                <p>76 m² facing the garden, with its own door and a kitchen across the corridor.</p>
+                <p class="offer">€1,900 a month</p>
+                <code class="call">lookAt('b3-z2')</code>
+            </section>
+
+            <section class="part" data-viewpoint="tour-3">
+                <h2>A garden between the wings</h2>
+                <p>Lunch outside from May to September, and a quiet path between the two wings.</p>
+                <code class="call">flyTo('tour-3')</code>
+            </section>
+
+            <section class="part" data-viewpoint="tour-4">
+                <h2>The whole A from above</h2>
+                <p>Two long wings of light offices, kitchens in each and two entrances.</p>
+                <code class="call">flyTo('tour-4')</code>
+            </section>
+
+            <section class="part" data-level="level-p1">
+                <h2>Parking under your desk</h2>
+                <p>74 spaces, four of them accessible, with lifts up to the offices.</p>
+                <code class="call">setLevel('level-p1')</code>
+            </section>
+        </main>
+
+        <footer>
+            Lettera House is an invented building. Plan by Areaform. The
+            <a href="../">building’s home page</a> shows the same plan as a tour and for visitors.
+        </footer>
+
+        <script src="https://cdn.areaform.app/v1/embed.js" async></script>
+        <script>
+            // The story: each part names what the plan shows while it is read. Stepping flies there
+            // once per part; scrubbing puts the camera along the Viewpoints as the page scrolls.
+            const element = document.getElementById('plan');
+            const parts = [...document.querySelectorAll('.part')];
+            const GROUND = '4bd6d522-01fb-4885-a90a-1fc47b5cf9cf';
+            let mode = 'step';
+            let current = null;
+
+            /** What a part asks of the plan, when stepping. */
+            function show(part) {
+                const plan = element.areaform;
+                const { viewpoint, zone, level } = part.dataset;
+                if (level) plan.setLevel(level);
+                else if (zone) plan.lookAt(zone);
+                else if (viewpoint) plan.flyTo(viewpoint);
+            }
+
+            /** The part across the middle of the screen. */
+            function partInView() {
+                const middle = innerHeight / 2;
+                return (
+                    parts.find((part) => {
+                        const box = part.getBoundingClientRect();
+                        return box.top <= middle && box.bottom > middle;
+                    }) ?? null
+                );
+            }
+
+            /**
+             * Scrubbing: the camera's place along the ground floor's Viewpoints (0 at the first,
+             * 1 at the last, in tour order) follows the middle of the screen, at each Viewpoint
+             * while its part is centred; past them, the car park.
+             */
+            function scrub() {
+                const plan = element.areaform;
+                const middle = innerHeight / 2;
+                const parking = parts.find((part) => part.dataset.level);
+                if (parking.getBoundingClientRect().top <= middle) {
+                    if (plan.getLevel() !== 'level-p1') plan.setLevel('level-p1');
+                    return;
+                }
+                if (plan.getLevel() !== GROUND) plan.setLevel(GROUND);
+                const centres = parts
+                    .filter((part) => part.dataset.viewpoint)
+                    .map((part) => {
+                        const box = part.getBoundingClientRect();
+                        return box.top + box.height / 2;
+                    });
+                const legs = centres.length - 1;
+                let t = 1;
+                for (let i = 0; i < legs; i++) {
+                    if (middle >= centres[i + 1]) continue;
+                    const along = (middle - centres[i]) / (centres[i + 1] - centres[i]);
+                    t = (i + Math.max(0, along)) / legs;
+                    break;
+                }
+                plan.setProgress(t);
+            }
+
+            function follow() {
+                const part = partInView();
+                for (const each of parts) each.classList.toggle('on', each === part);
+                if (!element.areaform) return;
+                if (mode === 'scrub') return scrub();
+                if (part && part !== current) {
+                    current = part;
+                    show(part);
+                }
+            }
+
+            for (const button of document.querySelectorAll('.mode button'))
+                button.addEventListener('click', () => {
+                    mode = button.dataset.mode;
+                    for (const other of document.querySelectorAll('.mode button'))
+                        other.setAttribute('aria-pressed', String(other === button));
+                    current = null;
+                    follow();
+                });
+
+            // The plan is ready to be moved once it says so.
+            element.addEventListener('areaform:ready', () => {
+                current = null;
+                follow();
+            });
+            addEventListener('scroll', () => requestAnimationFrame(follow), { passive: true });
+            follow();
+        </script>
+    </body>
+</html>

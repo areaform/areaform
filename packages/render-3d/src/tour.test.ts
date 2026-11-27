@@ -4,13 +4,15 @@ import {
     between,
     cameraOfPose,
     ease,
+    flightAt,
     framePose,
     nextIndex,
+    poseAlong,
     poseOfCamera,
     tourAt,
     type Pose,
 } from './tour.ts';
-import { MAX_POLAR, orbitOf, VIEWS } from './view.ts';
+import { MAX_POLAR, orbitOf, VIEWS, type Vec3 } from './view.ts';
 
 const close = (actual: number[], expected: number[]) =>
     actual.forEach((v, i) => expect(v, `[${i}]`).toBeCloseTo(expected[i]!, 6));
@@ -247,5 +249,64 @@ describe('nextIndex', () => {
         expect(nextIndex(tourAt(start, list, 4), 3)).toBe(1);
         // A, B and C each 5 s: at 14 s it stays at C.
         expect(nextIndex(tourAt(start, list, 14), 3)).toBe(0);
+    });
+});
+
+describe('poseAlong', () => {
+    const list = ['A', 'B', 'C'].map((id, i) =>
+        viewpoint(id, { target: [i * 10, 0], bearing: i * 90, distance: 10 * (i + 1) }),
+    );
+
+    it('is at the first Viewpoint at 0 and the last at 1, and clamps beyond', () => {
+        expect(poseAlong(list, 0)).toEqual(poseAlong(list, -1));
+        expect(poseAlong(list, 0)!.target).toEqual([0, 0]);
+        expect(poseAlong(list, 1)!.target).toEqual([20, 0]);
+        expect(poseAlong(list, 5)!.target).toEqual([20, 0]);
+    });
+
+    it('gives each leg an equal share, settling on the Viewpoint between them', () => {
+        expect(poseAlong(list, 0.5)!.target).toEqual([10, 0]);
+        // A quarter of the way is half way along the first leg, eased: half way too.
+        close(poseAlong(list, 0.25)!.target, [5, 0]);
+        // Eased: a little past a Viewpoint the camera has hardly left it.
+        expect(poseAlong(list, 0.55)!.target[0]).toBeLessThan(10.1);
+    });
+
+    it('stays at a single Viewpoint, and has nothing to say without any', () => {
+        expect(poseAlong(list.slice(0, 1), 0.7)!.target).toEqual([0, 0]);
+        expect(poseAlong([], 0.5)).toBeNull();
+        expect(poseAlong(list, Number.NaN)!.target).toEqual([0, 0]);
+    });
+});
+
+describe('flightAt', () => {
+    const from = cameraOfPose({ target: [0, 0], bearing: 0, tilt: 45, distance: 20 }, 'L1');
+    const to = cameraOfPose({ target: [30, 10], bearing: 90, tilt: 30, distance: 40 }, 'L1');
+
+    it('starts where the camera is and ends exactly where it was sent', () => {
+        close(flightAt(from, to, 0, 'arc', 'L1').position, from.position);
+        expect(flightAt(from, to, 1, 'arc', 'L1')).toEqual({ ...to, levelId: 'L1' });
+    });
+
+    it('arcs over the plan on the way, never below the floor', () => {
+        for (const t of [0.1, 0.3, 0.5, 0.7, 0.9])
+            expect(flightAt(from, to, t, 'arc', 'L1').position[1]).toBeGreaterThan(0);
+    });
+
+    it('a line that comes closer moves the camera in a line towards its new target', () => {
+        const target: Vec3 = [30, 0, -10];
+        const closer: Vec3 = [15, 10, -5];
+        const half = flightAt(from, { position: closer, target, levelId: 'L1' }, 0.5, 'line', 'L1');
+        close(
+            half.position,
+            from.position.map((v, i) => (v + closer[i]!) / 2),
+        );
+    });
+
+    it('a line from where the camera is keeps it there and swings its target across', () => {
+        const turned = { position: from.position, target: [30, 0, -10] as Vec3, levelId: 'L1' };
+        const half = flightAt(from, turned, 0.5, 'line', 'L1');
+        expect(half.position).toEqual(from.position);
+        close(half.target, [15, 0, -5]);
     });
 });

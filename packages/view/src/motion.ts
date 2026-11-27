@@ -79,6 +79,11 @@ export interface MotionController {
     play(): void;
     /** The visitor's **Pause**: the camera stays until **Play**; nothing starts it on its own. */
     pause(): void;
+    /**
+     * The host page took the camera, e.g. with `flyTo`: the motion stops as on an interaction,
+     * and auto-resume, if on, counts from now.
+     */
+    stop(): void;
     /** Whether the visitor paused it. */
     paused(): boolean;
     /** Holds auto-resume while `reason` is on, e.g. a route or a place card being read. */
@@ -261,6 +266,7 @@ export function createMotion(
             paused = true;
             update();
         },
+        stop,
         paused: () => paused,
         hold(reason, on) {
             if (on) holds.add(reason);

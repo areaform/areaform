@@ -46,4 +46,11 @@ export {
     type MotionState,
 } from './motion.ts';
 export { createView, type View, type ViewEvents, type ViewOptions } from './view.ts';
+export {
+    ZONE_SHARE,
+    type CameraTarget,
+    type FlightResult,
+    type FlyToOptions,
+    type LookAtOptions,
+} from './pageCameraCore.ts';
 export type { PluginContext, PluginLoader, PluginSource, ViewPlugin } from './plugins.ts';

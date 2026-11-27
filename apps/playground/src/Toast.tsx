@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 
 /** How long a message stays, milliseconds; it waits while the pointer is over it. */
 const SHOWN_FOR = 8000;
@@ -8,7 +8,7 @@ const SHOWN_FOR = 8000;
  * the top bar: that bar is one row of fixed height, and a long message would widen or wrap it. It
  * goes by itself, or with ×; a screen reader reads it as it comes (`role="status"`).
  */
-export function Toast({ message, onClose }: { message: string | null; onClose: () => void }) {
+export function Toast({ message, onClose }: { message: ReactNode; onClose: () => void }) {
     const [hovered, setHovered] = useState(false);
     useEffect(() => {
         if (!message || hovered) return;

@@ -9,7 +9,8 @@ const round = (v: number) => Math.round(v * 10) / 10 + 0;
 /**
  * A click marks Here for visitors (ADR-0017), snapped like other tools; another click moves it.
  * Visitors stand inside the building: a click outside the Level's Outline marks nothing and says
- * so. The controller shows the value for `?here=` until Esc or another tool.
+ * so. The controller shows the value for `?here=` until Esc or another tool. Picked for a page
+ * that moves the camera (ADR-0030), any point will do: a camera may turn to the car park outside.
  */
 export function createHereTool(ctx: ToolContext): Tool {
     let marked: Vec2 | null = null;
@@ -28,12 +29,17 @@ export function createHereTool(ctx: ToolContext): Tool {
         pointerDown(input) {
             const { point } = ctx.snap(input);
             const at: Vec2 = [round(point[0]), round(point[1])];
-            if (!isInside(ctx.editor.getDocument(), { levelId: ctx.levelId(), point: at })) {
+            const purpose = ctx.herePick()?.for ?? 'visitors';
+            const inside = isInside(ctx.editor.getDocument(), {
+                levelId: ctx.levelId(),
+                point: at,
+            });
+            if (purpose === 'visitors' && !inside) {
                 ctx.setMessage(ctx.i18n().t('here.outside'));
                 return;
             }
             marked = at;
-            ctx.setHerePick({ point: marked });
+            ctx.setHerePick({ point: marked, for: purpose });
             show();
         },
         pointerMove(input) {

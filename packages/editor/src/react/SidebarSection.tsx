@@ -1,12 +1,14 @@
 import { useId, type ReactNode } from 'react';
 
 /** The sidebar's sections that can be folded shut: all but Problems, which is a warning. */
-export type SidebarSection = 'properties' | 'levels' | 'viewpoints' | 'languages' | 'location';
+export type SidebarSection =
+    'properties' | 'levels' | 'viewpoints' | 'page' | 'languages' | 'location';
 
 /** Folded at the start when the host names none: all but Properties, the one used most. */
 export const DEFAULT_FOLDED_SECTIONS: readonly SidebarSection[] = [
     'levels',
     'viewpoints',
+    'page',
     'languages',
     'location',
 ];

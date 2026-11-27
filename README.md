@@ -50,6 +50,13 @@ pnpm test       # unit tests of every package
 pnpm e2e        # the playground in Chrome with Playwright
 ```
 
+## Examples
+
+All live at [areaform.app/examples](https://areaform.app/examples/). The licence is MIT: copy them freely.
+
+- Made-up client sites, each one HTML file with a plan embedded through `embed.js`, so you can download it and open it with no build: a craft fair ([`makers-fair`](apps/examples/makers-fair/index.html)), an office building ([`lettera-house`](apps/examples/lettera-house/index.html)), a café with table booking ([`juniper-cafe`](apps/examples/juniper-cafe/index.html)) and a shopping centre with a directory and QR codes at its entrances ([`linden-square`](apps/examples/linden-square/index.html)).
+- [A live car park](apps/examples/live-parking) in plain TypeScript with the packages: sensors, free spaces per Level and the route to the best free spot (`pnpm parking:dev`).
+
 ## Documentation
 
 - [Embedding](docs/guides/embedding.md): Documents and Commands, `<AreaformView>`, `<AreaformEditor>`, theming, use without React
