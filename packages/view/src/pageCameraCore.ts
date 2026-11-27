@@ -34,14 +34,8 @@ export interface LookAtOptions extends FlyToOptions {
     distance?: number;
 }
 
-/**
- * How much of the view's shorter side a Zone takes after `lookAt`: a smaller one brings the
- * camera closer, a bigger one sends it back, and one in between leaves the distance alone.
- */
-export const ZONE_SHARE = { min: 0.4, max: 0.8 } as const;
-
-/** Half the 3D view's vertical field of view, in radians. */
-export const HALF_FOV = ((FOV / 2) * Math.PI) / 180;
+/** Half the 3D view's vertical field of view, in radians (`pageCamera.ts` has its own). */
+const HALF_FOV = ((FOV / 2) * Math.PI) / 180;
 
 /** A 3D camera straight above the 2D plan's centre, as far up as its zoom: `getCamera` in 2D. */
 export function camera3dOf2d(camera: Camera, levelId: Id): Camera3D {

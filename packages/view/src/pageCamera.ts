@@ -11,12 +11,9 @@ import {
     type Viewpoint,
 } from '@areaform/core';
 import type { Camera, Viewport } from '@areaform/render-2d';
-import { ease, type Camera3D, type Vec3 } from '@areaform/render-3d';
-import { HALF_FOV, ZONE_SHARE } from './pageCameraCore.ts';
+import { ease, FOV, type Camera3D, type Vec3 } from '@areaform/render-3d';
 
 export {
-    camera3dOf2d,
-    ZONE_SHARE,
     type CameraTarget,
     type FlightResult,
     type FlyToOptions,
@@ -24,6 +21,19 @@ export {
 } from './pageCameraCore.ts';
 // The 3D view's own pose helpers, loaded with the rest of the page's camera.
 export { cameraOfPose, DEFAULT_FLIGHT, poseAlong } from '@areaform/render-3d';
+
+/**
+ * How much of the view's shorter side a Zone takes after `lookAt`: a smaller one brings the
+ * camera closer, a bigger one sends it back, and one in between leaves the distance alone.
+ */
+export const ZONE_SHARE = { min: 0.4, max: 0.8 } as const;
+
+/**
+ * Half the 3D view's vertical field of view, in radians. `pageCameraCore.ts` has its own: were it
+ * imported from there, the build would make a chunk of their shared code, one more request for
+ * every page.
+ */
+const HALF_FOV = ((FOV / 2) * Math.PI) / 180;
 
 /** The Viewpoint with this id, and its Level. */
 export function findViewpoint(
