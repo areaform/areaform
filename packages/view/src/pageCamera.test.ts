@@ -4,7 +4,6 @@ import { describe, expect, it } from 'vitest';
 import {
     camera2dAt,
     camera2dOf,
-    camera3dOf2d,
     findViewpoint,
     distanceToShow,
     findZone,
@@ -12,6 +11,7 @@ import {
     zoomAtDistance,
     zoomToShow,
 } from './pageCamera.ts';
+import { camera3dOf2d } from './pageCameraCore.ts';
 
 const base = createSpace({ name: 'House', kind: 'office', size: [40, 20] });
 const ground = base.levels[0]!;
