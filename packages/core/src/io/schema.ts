@@ -132,6 +132,10 @@ const zone = object({
     'category?': string,
     'restricted?': boolean,
     'walkAround?': boolean,
+    'innerSpace?': object({
+        space: string,
+        'fit?': object({ x: number, y: number, rotation: number }),
+    }),
     'style?': object({ 'fill?': string, 'stroke?': string, 'opacity?': number }),
     'data?': record,
 });

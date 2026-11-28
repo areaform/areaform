@@ -33,6 +33,14 @@ export {
 } from './geometry/queries.ts';
 export { wallOutlines } from './geometry/wallOutlines.ts';
 export {
+    FIT_TOLERANCE,
+    fitsUnit,
+    fitToUnit,
+    placeDocument,
+    placePoint,
+    withInnerSpace,
+} from './geometry/place.ts';
+export {
     toGeoJSON,
     type GeoFeature,
     type GeoFeatureCollection,

@@ -5,6 +5,7 @@
 import { wheelGoesToPage, type Gestures } from '@areaform/render-2d';
 import type { Viewpoint } from '@areaform/core';
 import type { Renderer3D } from '@areaform/render-3d';
+import { MIN_IDLE_SECONDS, validIdle } from './idle.ts';
 
 /**
  * How the 3D camera moves on its own: `none` (default); `orbit`, a slow turn; or `tour`, a flight
@@ -41,8 +42,8 @@ export interface MotionWatchers {
 /** What the Play/Pause toggle shows: the camera moving, or not, by the visitor's doing or not. */
 export type MotionState = 'moving' | 'still';
 
-/** The shortest idle time auto-resume takes, seconds: less would fight a visitor between taps. */
-export const MIN_RESUME_SECONDS = 5;
+/** The shortest idle time auto-resume takes, seconds: the idle reset's, `MIN_IDLE_SECONDS`. */
+export const MIN_RESUME_SECONDS = MIN_IDLE_SECONDS;
 
 export interface MotionOptions {
     /** How the camera moves on its own: `none`, `orbit` or `tour`. */
@@ -84,6 +85,11 @@ export interface MotionController {
      * and auto-resume, if on, counts from now.
      */
     stop(): void;
+    /**
+     * Back to how it started, for a View put back as it opened (`View.reset`): the tour from its
+     * first Viewpoint, and a camera the visitor stopped or paused moving again.
+     */
+    reset(): void;
     /** Whether the visitor paused it. */
     paused(): boolean;
     /** Holds auto-resume while `reason` is on, e.g. a route or a place card being read. */
@@ -120,7 +126,7 @@ export function createMotion(
     /** What the renderer does now: nothing, a turn, or a tour, which a pause only holds. */
     let playing: Motion = 'none';
     let held = false;
-    let resumeAfter = validResume(options.resumeAfter);
+    let resumeAfter = validIdle(options.resumeAfter);
     const holds = new Set<string>();
     let idle = 0;
     let ticker: ReturnType<typeof setInterval> | undefined;
@@ -267,6 +273,15 @@ export function createMotion(
             update();
         },
         stop,
+        reset() {
+            end();
+            startIndex = 0;
+            stopped = false;
+            paused = false;
+            playedByVisitor = false;
+            stillAgain();
+            update();
+        },
         paused: () => paused,
         hold(reason, on) {
             if (on) holds.add(reason);
@@ -275,7 +290,7 @@ export function createMotion(
             if (!on) stillAgain();
         },
         setResumeAfter(seconds) {
-            resumeAfter = validResume(seconds);
+            resumeAfter = validIdle(seconds);
             update();
         },
         running,
@@ -288,13 +303,6 @@ export function createMotion(
             renderer = null;
         },
     };
-}
-
-/** Seconds of idle time to resume after, or none: absent, not a number, or too short. */
-function validResume(seconds: number | undefined): number | undefined {
-    return seconds !== undefined && Number.isFinite(seconds) && seconds >= MIN_RESUME_SECONDS
-        ? seconds
-        : undefined;
 }
 
 /**

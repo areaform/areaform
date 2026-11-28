@@ -29,6 +29,8 @@ import { CategoryList } from './CategoryList.tsx';
 import { TranslatableField, translatableCaption } from './LanguagesPanel.tsx';
 import { CommitInput } from './CommitInput.tsx';
 import { HereValue, type HereLink } from './HereValue.tsx';
+import type { InnerSpaceSource } from '../document/innerSpaces.ts';
+import { InsidePanel } from './InsidePanel.tsx';
 import { useI18n } from './i18n.ts';
 import { LengthCaption, LengthInput, useUnits } from './LengthInput.tsx';
 import { UnderlayCard } from './LevelPanel.tsx';
@@ -44,6 +46,7 @@ export function PropertiesPanel({
     presets,
     filling,
     hereLink,
+    innerSpaces,
 }: {
     editor: Editor;
     controller: EditorController | null;
@@ -56,6 +59,8 @@ export function PropertiesPanel({
     filling?: string | undefined;
     /** The host's link for Here, shown with a Zone's `?here=` value. */
     hereLink?: HereLink | undefined;
+    /** Where a unit's Inner Space comes from, for its **Inside** (Inner Space, CONTEXT.md). */
+    innerSpaces?: InnerSpaceSource | undefined;
 }) {
     const i18n = useI18n();
     if (selection.length === 0) return null;
@@ -93,6 +98,7 @@ export function PropertiesPanel({
                 doc={doc}
                 filling={filling}
                 hereLink={hereLink}
+                innerSpaces={innerSpaces}
                 onReshape={reshape({ kind: 'zone', id: zone.id, levelId })}
             />
         ) : null;
@@ -407,6 +413,7 @@ function ZoneProperties({
     doc,
     filling,
     hereLink,
+    innerSpaces,
     onReshape,
 }: {
     editor: Editor;
@@ -416,6 +423,7 @@ function ZoneProperties({
     doc: AreaformDocument;
     filling: string | undefined;
     hereLink: HereLink | undefined;
+    innerSpaces: InnerSpaceSource | undefined;
     onReshape: (shape: Shape) => void;
 }) {
     const update = (changes: ZoneChanges) =>
@@ -480,6 +488,10 @@ function ZoneProperties({
             <dd>
                 <HereValue value={zone.id} link={hereLink} />
             </dd>
+            {/* A shop's plan inside a unit: a shopping centre's, or a Zone that has one already. */}
+            {(zone.innerSpace || doc.kind === 'mall') && (
+                <InsidePanel editor={editor} levelId={levelId} zone={zone} source={innerSpaces} />
+            )}
             <dt>{i18n.t('props.fill')}</dt>
             <dd>
                 <input

@@ -7,6 +7,7 @@ export {
     type PropertiesContext,
 } from './AreaformEditor.tsx';
 export type { HereLink } from './HereValue.tsx';
+export type { InnerSpaceSource } from '../document/innerSpaces.ts';
 export { DEFAULT_FOLDED_SECTIONS, type SidebarSection } from './SidebarSection.tsx';
 export { useControllerState, useDocument, useEditorController } from './hooks.ts';
 export { Icon, iconNames, type IconName } from './Icon.tsx';

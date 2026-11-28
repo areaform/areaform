@@ -264,6 +264,10 @@ export function HallMap() {
 | `gestures`          | `'greedy' \| 'cooperative'`               | Who gets a plain wheel and one finger (default `greedy`, the plan). `cooperative` leaves them to the page and moves the plan with ⌘/Ctrl + wheel, a pinch or two fingers, with a short hint ([ADR-0025](../adr/0025-camera-motion-viewpoints-and-cooperative-gestures.md)). For a plan on a page that scrolls.                                                                                                                                                                                                                                                                               |
 | `motion`            | `'none' \| 'orbit' \| 'tour'`             | The 3D camera moving on its own until the first interaction or **Pause** (default `none`): `orbit` turns it about once a minute; `tour` flies through the Viewpoints of the Level shown, round and round, turns around a single one, and is `orbit` on a Level without any. Picking a Level in the Level switcher or switching to 3D plays it again for what is shown. It waits off screen and in a hidden tab, and never moves under `prefers-reduced-motion`. 2D stays still. With `controls`, a **Play / Pause** toggle shows in 3D; Pause sticks, and Play moves it on from where it is. |
 | `motionResume`      | `number`                                  | Seconds, at least 5, without an interaction after which a camera stopped by a touch moves again; off by default. Never after Pause or under reduced motion, nor while a Plugin holds it with `view.holdMotion(reason, on)`, as Wayfinding does while its card or route is shown. For a Kiosk.                                                                                                                                                                                                                                                                                                |
+| `idleAfter`         | `number`                                  | Seconds, at least 5, with nobody touching, clicking, typing or scrolling anywhere on the page, after which `onIdle` is called; off by default. It counts from the first touch and calls once until the next. For a Kiosk: answer with `reset()` (see [A Kiosk](#a-kiosk)).                                                                                                                                                                                                                                                                                                                   |
+| `onIdle`            | `(e: { seconds }) => void`                | Nobody used the page for `idleAfter` seconds.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `onReset`           | `() => void`                              | `reset()` put the View back as it opened.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `controlSize`       | `'normal' \| 'large'`                     | `large` makes the plan's buttons, cards, route panel and pins bigger, every button at least 52 px tall, for a touch screen read standing up, such as a Kiosk (the `af-large` class on the View's element).                                                                                                                                                                                                                                                                                                                                                                                   |
 | `grid`              | `boolean`                                 | Draw the grid over the floor: lines at the Document's Grid Step, every fifth stronger, thinned out when zoomed out.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `rulers`            | `boolean`                                 | Rulers in metres along the plan's top and left edges, numbering the grid's strong lines (default off).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `origin`            | `boolean`                                 | Mark the origin, 0/0, which all Levels share: a cross with X → and Y ↑ arrows (default off).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -573,6 +577,59 @@ On a client's site, `embed.js` gives the snippet's element an `areaform` propert
 
 The site's [Moving the camera](https://areaform.app/docs/camera/) is the full reference for the snippet. [Lettera House, the story](https://areaform.app/examples/lettera-house/story/) does this as the page scrolls, with a switch between stepping (one `flyTo` per part) and scrubbing (`setProgress`); its one file is in the public repository under `apps/examples/lettera-house/story/`.
 
+## A Kiosk
+
+A touch screen in the building, such as one by a shopping centre's entrance, shows the plan full screen to one visitor after another. The View gives the building blocks; your page adds its own Welcome Screen and buttons around them ([`kiosk.md`](../notes/kiosk.md) has the hosted Kiosk, a Business feature, built on the same blocks; [ADR-0032](../adr/0032-a-kiosks-building-blocks-idle-reset-and-large-controls.md) says why they work as they do).
+
+```ts
+import { createView } from '@areaform/view';
+import { wayfinding } from '@areaform/view/plugins/wayfinding';
+
+const directions = wayfinding({ here: 'entrance-north' }); // where the screen stands
+const view = createView(container, {
+    doc,
+    controls: true,
+    levelSwitcher: true,
+    controlSize: 'large', // buttons for a finger at arm's length
+    idleAfter: 60, // seconds with nobody touching the page
+    plugins: [directions],
+});
+
+view.on('idle', () => view.reset()); // or show "Still here?" first, then reset
+shopButton.onclick = () => directions.show('unit-g03'); // the way there from Here
+categoryButton.onclick = () => view.highlight(foodShops); // ElementRef[]
+```
+
+- **`idleAfter`** counts touches, clicks, keys and wheels anywhere on the page, not only on the plan: on a Kiosk the page is the screen, and a visitor reading your list beside the plan is still there. It starts counting at the first touch and sends `idle` once until the next, so a screen nobody has touched sends nothing.
+- **`reset()`** puts the View back as it opened: its first Level and view, the `highlight` it was given, the plan fitted, the 3D camera where `camera3d` put it, and the camera's motion from the start, even after **Pause**. It then sends `reset`, on which Wayfinding clears the route and the card and goes back to its `here` and `to`. Your page's own state, such as a search box or a chosen category, is yours to clear.
+- **`wayfinding(…).show(zoneId)`** opens a place as `to` does: with Here, the way to it at once, shown from its start; without, its Level with its card. It returns false for an id the plan has no Zone for, or before the Plugin runs. Give each View its own `wayfinding(…)`.
+- **`controlSize: 'large'`** (`setControlSize`) sizes the View's own buttons and the Plugin's card, panel and pins; the plan itself zooms as always.
+- Run the page full screen and locked to it: `chrome --kiosk <url>` on a PC, Fully Kiosk on an Android panel, Guided Access on an iPad (the page added to its Home Screen), or a ChromeOS kiosk app ([`kiosk.md`](../notes/kiosk.md#how-a-screen-shows-one-app-and-nothing-else)). Use `gestures: 'greedy'` (the default) so one finger moves the plan. iPad Safari pinch-zooms the page despite `user-scalable=no`: stop its `gesturestart` and `gesturechange` outside the plan, as [Linden Square's kiosk](https://areaform.app/examples/linden-square/kiosk/) does.
+
+On a client's site, the snippet does the same with attributes, and `element.areaform` has `reset()`, `showPlace(zoneId)` (a Promise of `show`'s answer; without **Directions** it highlights the Zone on its Level) and `highlight(zoneIds)`:
+
+```html
+<div
+    id="plan"
+    data-areaform="sp_demo-mall"
+    data-gestures="greedy"
+    data-control-size="large"
+    data-here="entrance-north"
+    data-idle-reset="60"
+    style="height: 100%"
+></div>
+<script>
+    const el = document.getElementById('plan');
+    // Without this, the plan resets itself after the idle time.
+    el.addEventListener('areaform:idle', (event) => {
+        event.preventDefault();
+        showStillHere(() => el.areaform.reset()); // your notice, then the reset
+    });
+</script>
+```
+
+`data-idle-reset` sends a cancellable `areaform:idle` on the element after that many seconds; unless the page calls `preventDefault()`, the plan resets, and `areaform:reset` follows. [Linden Square's kiosk](https://areaform.app/examples/linden-square/kiosk/) builds a whole screen this way: a Welcome Screen with slides, categories that highlight their shops, the way to a shop on a tap, and "Still here?" before it starts over.
+
 ## Interface language
 
 The components speak English unless told otherwise. `locale` picks a built-in language: `en`, `pl`, `uk` (Ukrainian; show it as `UA` in your own switcher, `LOCALE_NAMES` has the names) or `ru`. A region tag such as `pl-PL` works too. `<AreaformEditor>`, `<AreaformView>`, `<Areaform3DView>` and `<CreateSpaceForm>` all take it:
@@ -769,6 +826,8 @@ The **tooltip** shows the hovered Element's name, in the visitor's Content Langu
 - `clearance`: how far routes keep from what is in the way, metres (default 0.3).
 - `stepFree`: start with step-free routes on, e.g. on an accessible kiosk (default off).
 
+The Plugin `wayfinding(…)` returns has `show(zoneId)`, which opens a place as `to` does, for your page's own buttons; on the View's `reset` it clears the route and goes back to its `here` and `to` (see [A Kiosk](#a-kiosk)).
+
 On Areaform's hosting, `embed.js` starts the Plugin for every published Space unless its owner switches **Directions** off in the Publish dialog. Here comes from `data-here` on the snippet's element, else from `?here=` in the page's address:
 
 ```html
@@ -780,6 +839,32 @@ On Areaform's hosting, `embed.js` starts the Plugin for every published Space un
 With **Page with the plan** filled in, the Editor's Here values come with a link to that page.
 
 The Plugin is about 2.5 KB gzipped; the route search (`@areaform/wayfinding`, about 34 KB gzipped) is imported when the first route is asked for, and the navmesh is built once per Level (about 0.2 s for a 5,000-booth hall). A route to another Level goes through the Space's Connections, the quickest way (a lift waits about 30 s; a one-way escalator only goes from its first Stop toward its last). The View shows it from its start: on each Level its part of the line, a button where it changes Level (**↓ Level 1**) and one where it arrives (**From Gallery**), and the panel lists the steps ("Take Main stairs down to Level 1"), each showing the Level where it starts. The time includes the rides. A Space with Connections gets a **Step-free** switch in the panel: routes then take only Connections marked Accessible (in the Editor, lifts and ramps start marked; stairs and escalators do not), or say "No step-free route found". The `stepFree` option starts with it on. In 3D the same line lies just above the floor and follows the camera as it orbits, breaking off where it would pass behind the camera; it is drawn over the 3D scene, so a Wall between it and the camera does not hide it (near Walls are cut down anyway).
+
+The **Inner Space** Plugin shows a shop's own plan inside a shopping centre's unit (an **Inner Space**, see [`CONTEXT.md`](../../CONTEXT.md)). A Zone names that plan with `innerSpace: { space, fit? }`, in the Document or with `zone.update`. The unit's place card then gets **See inside** beside **Directions**. Going in, the camera turns to the unit, the plan fades, and the shop's plan comes in on that spot, laid in by `fit` (`{ x, y, rotation }`: its point `p` at `rotate(p, rotation) + [x, y]`, both in metres). Without a `fit`, it comes in on its own, framed whole. The Level switcher shows the shop's Levels, and a button at the top named after your own plan (**← Linden Square** in the demo) goes back out. Your code loads each plan:
+
+```ts
+import { innerSpace } from '@areaform/view/plugins/innerSpace';
+
+const inner = innerSpace({
+    // `null` when it cannot be shown: the button then stays away.
+    loadInnerSpace: async (ref) => (await fetch(`/plans/${ref.space}.json`)).json(),
+});
+createView(container, { doc, plugins: [wayfinding(), inner] });
+```
+
+Each Space's plan is asked for once, when its unit's card first opens; **See inside** comes once it has loaded. `onEnter(unit)` is called each time a visitor goes in, by **See inside** or a link, e.g. to count it for the centre. `inner.enter(zoneId)` goes into a unit from your page, as `?to=g06&inside=watches` does on Areaform's hosting (resolves `false` when the unit has none to show), and `inner.leave()` comes back out. Without Wayfinding, the Plugin shows a card of its own for units with a plan inside. The View's `reset()` always comes back out to your own plan, as a Kiosk needs.
+
+What the Plugin uses is the View's, for Plugins of your own too:
+
+- **`view.showSpace(doc, levelId?)`** shows another Space's Document in place of the host's own, and `showSpace(null)` shows the host's own again. Each sends **`spaceChange`** (`{ doc, inner }`), and **`getHomeDocument()`** gives the host's own throughout. The host's `update(doc)` goes to its own Document, shown once the visitor is back. Wayfinding keeps each Space's Here and route apart, so a route in the centre is there again once the visitor comes back out.
+- **`spaceChange`'s `unit`** (`{ zoneId, levelId, fitted }`, given as `showSpace`'s third argument) says which unit the Inner Space is shown for. With a fit, Wayfinding then routes from Here in the centre through the shop's entrance to a department: **Directions** on a department, or a link with `here`, `to` and `inside`. Inside, it draws the route from where it comes into the unit, with an **Enter Volt** step; back out, it draws the route in full. In `@areaform/core`, `withInnerSpace(outer, unit, placed)` merges the shop's ground floor into the unit's Level for that route, walling in its Outline but for its Openings. A department upstairs in a shop of two floors is routed to inside the shop, with its own Here. With `load`, the Editor's Problems add "Visitors can't get into the plan inside Volt" when the shop's entrance meets no way in from the centre.
+- **`view.placeCard`**: `add((zone) => ({ label, run }) | null)` puts a button on a Zone's place card, the card Wayfinding shows, and `changed()` has it drawn again, e.g. once something has loaded.
+
+In `@areaform/core`, `placeDocument(doc, fit)` lays a whole Document in by a fit, `fitToUnit(unitShape, doc)` gives a first fit (turned a quarter at a time to match the unit's long side, and centred), and `fitsUnit(unitShape, doc, fit)` says whether the plan still lies in its unit, to within `FIT_TOLERANCE` (0.3 m).
+
+In the Editor, a shopping centre's Zones (and any Zone that has one) get **Inside**: paste the plan's link or id, then **Fit to the unit**, or correct the fit with its numbers. Pass `innerSpaces` to `<AreaformEditor>` to say where plans come from. `load(space)` gives the plan as visitors see it. Optionally, `parse(text)` reads a pasted link, `choices()` lists Spaces to choose from, `makeForUnit({ zone, levelId })` makes one, giving its `{ space, fit }`, and `opens()` gives how many visitors went into each unit lately, `{ days, counts }` by the unit's Zone id, shown on its **Inside**. With `load`, Problems adds two: "The plan inside Volt isn't published" and "The plan inside Volt changed and no longer fits the unit".
+
+On Areaform's hosting, `embed.js` follows a unit's Inner Space only to another hosted Space (`sp_…`), published, and only when the centre's plan includes Inner Spaces. The shop's views count to the centre. A link to a department goes with the unit: `data-inside` beside `data-to`, or `?inside=` beside `?to=`.
 
 A Plugin of your own is just the function:
 

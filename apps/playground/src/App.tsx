@@ -10,7 +10,7 @@ import {
     type Zone,
 } from '@areaform/core';
 import { CreateSpaceForm, AreaformEditor, Icon, useDocument } from '@areaform/editor/react';
-import type { PluginSource } from '@areaform/view';
+import type { PluginSource, View } from '@areaform/view';
 import { AreaformView } from '@areaform/view/react';
 import {
     createDeviceAssets,
@@ -146,6 +146,15 @@ const logEvent = (event: string) => {
 // `?mode=edit`, `?sample=stress` and `?status=1` open a given state directly (handy for
 // screenshots and e2e tests); `?sample=` opens a demo without touching the saved plan.
 const params = new URLSearchParams(globalThis.location?.search);
+
+/**
+ * A Kiosk's building blocks, to try them: `?idle=<seconds>` puts the View back as it opened after
+ * that long with nobody touching the page, and `?large=1` gives it large controls.
+ */
+const KIOSK = {
+    idleAfter: Number(params.get('idle')) || undefined,
+    large: params.get('large') === '1',
+};
 
 /** localStorage, or an in-memory stand-in where the browser blocks it. */
 function browserStorage(): KeyValueStorage {
@@ -763,6 +772,7 @@ function Viewer({
     const [hovered, setHovered] = useState<ElementRef | null>(null);
     const [clicked, setClicked] = useState<string | null>(null);
     const [showStatus, setShowStatus] = useState(params.get('status') === '1');
+    const viewRef = useRef<View | null>(null);
     const [zoom, setZoom] = useState(0);
 
     const diagnostics = useMemo(() => diagnose(doc), [doc]);
@@ -897,6 +907,13 @@ function Viewer({
                     onReady={(r) => exposeForTests(() => doc, r)}
                     onReady3d={(r) => (shown3d = r)}
                     plugins={VIEW_PLUGINS}
+                    {...(KIOSK.idleAfter && {
+                        idleAfter: KIOSK.idleAfter,
+                        // As a Kiosk does: back to how the plan opened for the next visitor.
+                        onIdle: () => viewRef.current?.reset(),
+                    })}
+                    {...(KIOSK.large && { controlSize: 'large' as const })}
+                    ref={viewRef}
                 />
             </main>
         </div>

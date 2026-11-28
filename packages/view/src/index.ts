@@ -45,7 +45,15 @@ export {
     type Motion,
     type MotionState,
 } from './motion.ts';
-export { createView, type View, type ViewEvents, type ViewOptions } from './view.ts';
+export {
+    createView,
+    type ControlSize,
+    type InnerUnit,
+    type View,
+    type ViewEvents,
+    type ViewOptions,
+} from './view.ts';
 export type { CameraTarget, FlightResult, FlyToOptions, LookAtOptions } from './pageCameraCore.ts';
 export { ZONE_SHARE } from './pageCamera.ts';
+export type { PlaceAction, PlaceButton, PlaceCard, PlaceZone } from './placeCard.ts';
 export type { PluginContext, PluginLoader, PluginSource, ViewPlugin } from './plugins.ts';

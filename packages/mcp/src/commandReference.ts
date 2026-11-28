@@ -109,7 +109,7 @@ export const COMMAND_EXAMPLES: { note: string; command: Command }[] = [
         },
     },
     {
-        note: "Changes to a Zone's fields (label, category, restricted, walkAround, shape, …); opening.update, obstacle.update and wall.update (thickness) work the same way with their own id field.",
+        note: "Changes to a Zone's fields (label, category, restricted, walkAround, innerSpace, shape, …); innerSpace: { space, fit? } names another Space shown inside the Zone, such as a shop's own plan in a mall's unit, with fit { x, y, rotation } placing its coordinates in this one (rotation in radians); set it only when the person names that Space. opening.update, obstacle.update and wall.update (thickness) work the same way with their own id field.",
         command: {
             type: 'zone.update',
             levelId: LEVEL,

@@ -146,6 +146,23 @@ describe('zone.update and zone.delete', () => {
         });
     });
 
+    it('names an Inner Space with its fit, and takes it away again', () => {
+        const { editor, levelId, zone } = expoEditor();
+        editor.exec({ type: 'zone.add', levelId, zone: { id: 'Z', shape: { outer: square } } });
+        const innerSpace = { space: 'sp_volt', fit: { x: 2, y: 3, rotation: Math.PI / 2 } };
+
+        editor.exec({ type: 'zone.update', levelId, zoneId: 'Z', changes: { innerSpace } });
+        expect(zone('Z')?.innerSpace).toEqual(innerSpace);
+
+        editor.exec({
+            type: 'zone.update',
+            levelId,
+            zoneId: 'Z',
+            changes: { innerSpace: undefined },
+        });
+        expect(zone('Z')).toEqual({ id: 'Z', shape: { outer: square } });
+    });
+
     it('validates a changed shape', () => {
         const { editor, levelId } = expoEditor();
         editor.exec({ type: 'zone.add', levelId, zone: { id: 'Z', shape: { outer: square } } });

@@ -92,6 +92,7 @@ const withEveryProperty = {
                     category: 'booth',
                     restricted: false,
                     walkAround: true,
+                    innerSpace: { space: 'sp_volt', fit: { x: 1, y: 1, rotation: 0.5 } },
                     style: { fill: '#eeeeee', stroke: '#333333', opacity: 0.8 },
                     data: { exhibitorId: 42 },
                 },

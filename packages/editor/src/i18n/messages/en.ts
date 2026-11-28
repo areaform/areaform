@@ -124,6 +124,29 @@ export const en = {
     'problem.holesOverlap': '{{name}} has holes that overlap',
     'problem.stopMisaligned': '{{name}} does not line up with its Stop on the Level below',
     'problem.zoneUnreachable': "Visitors can't reach {{name}}: no door or passage leads to it",
+    'problem.innerSpaceUnpublished':
+        "The plan inside {{name}} isn't published, so visitors can't see inside",
+    'problem.innerSpaceMisfit':
+        'The plan inside {{name}} changed and no longer fits the unit; check its fit',
+    'problem.innerSpaceClosed':
+        "Visitors can't get into the plan inside {{name}}: its entrance meets no way in from the centre; check its fit",
+    'inside.title': 'Inside',
+    'inside.hint':
+        "Another plan shown inside this unit, such as a shop's own plan: visitors tap the unit and choose See inside",
+    'inside.paste': "Paste a plan's link",
+    'inside.choose': 'Or choose a plan…',
+    'inside.make': 'Make a plan for this unit',
+    'inside.making': 'Making the plan…',
+    'inside.makeFailed': "The plan couldn't be made. Try again.",
+    'inside.unpublished': 'Not published yet',
+    'inside.opened_one': '{{count}} visitor went inside in the last {{days}} days',
+    'inside.opened_other': '{{count}} visitors went inside in the last {{days}} days',
+    'inside.fit': 'Fit to the unit',
+    'inside.onItsOwn': 'Show on its own',
+    'inside.remove': 'Remove',
+    'inside.x': 'Fit X',
+    'inside.y': 'Fit Y',
+    'inside.turn': 'Turn, degrees',
 
     // Properties
     'props.selected': '{{kind}} selected',

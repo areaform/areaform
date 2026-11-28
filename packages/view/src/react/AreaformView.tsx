@@ -17,7 +17,7 @@ import type { ViewMode } from '../controls.ts';
 import type { Messages } from '../i18n/translator.ts';
 import type { Motion } from '../motion.ts';
 import type { PluginSource } from '../plugins.ts';
-import type { View, ViewEvents } from '../view.ts';
+import type { ControlSize, View, ViewEvents } from '../view.ts';
 import { HOLDER_STYLE, useView } from './useView.ts';
 
 /** The language props every component takes. */
@@ -75,6 +75,13 @@ export interface AreaformViewProps extends LocaleProps {
     motion?: Motion;
     /** Seconds without an interaction after which a stopped camera moves again (at least 5); off when absent. */
     motionResume?: number;
+    /**
+     * Seconds with nobody using the page after which `onIdle` is called (at least 5); off when
+     * absent. For a Kiosk: answer with `reset()` on the View from `ref`.
+     */
+    idleAfter?: number;
+    /** `large` buttons, cards and pins for a touch screen read standing up, such as a Kiosk. */
+    controlSize?: ControlSize;
     /** Draw the Document's grid over the floor (default off). */
     grid?: boolean;
     /** Rulers in metres along the plan's top and left edges (default off). */
@@ -124,6 +131,10 @@ export interface AreaformViewProps extends LocaleProps {
     onZoneClick?: (e: ViewEvents['zoneClick']) => void;
     /** The tour reached a Viewpoint and stays there a while. */
     onTourStep?: (e: ViewEvents['tourStep']) => void;
+    /** Nobody used the page for `idleAfter` seconds. */
+    onIdle?: (e: ViewEvents['idle']) => void;
+    /** The View was put back as it opened with `reset()`. */
+    onReset?: () => void;
     onReady?: (renderer: Renderer) => void;
     /** Called with the 3D renderer each time the 3D view is shown and ready. */
     onReady3d?: (renderer: Renderer3D) => void;
@@ -152,6 +163,8 @@ export function AreaformView(props: AreaformViewProps) {
         gestures,
         motion,
         motionResume,
+        idleAfter,
+        controlSize,
         grid,
         rulers,
         origin,
@@ -186,6 +199,8 @@ export function AreaformView(props: AreaformViewProps) {
             viewpoint: props.onViewpoint,
             zoneClick: props.onZoneClick,
             tourStep: props.onTourStep,
+            idle: props.onIdle,
+            reset: props.onReset,
             ready: props.onReady,
             ready3d: props.onReady3d,
         },
@@ -212,6 +227,8 @@ export function AreaformView(props: AreaformViewProps) {
     useEffect(() => view?.setGestures(gestures ?? 'greedy'), [view, gestures]);
     useEffect(() => view?.setMotion(motion ?? 'none'), [view, motion]);
     useEffect(() => view?.setMotionResume(motionResume), [view, motionResume]);
+    useEffect(() => view?.setIdleAfter(idleAfter), [view, idleAfter]);
+    useEffect(() => view?.setControlSize(controlSize ?? 'normal'), [view, controlSize]);
     useEffect(() => view?.setGrid(grid ?? false), [view, grid]);
     useEffect(() => view?.setRulers(rulers ?? false), [view, rulers]);
     useEffect(() => view?.setOrigin(origin ?? false), [view, origin]);
