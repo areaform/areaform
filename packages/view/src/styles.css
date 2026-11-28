@@ -508,3 +508,182 @@
     background: var(--af-accent);
     border-color: var(--af-accent);
 }
+
+/*
+ * Large controls (`controlSize: 'large'`), for a touch screen read standing up, such as a Kiosk:
+ * text a step bigger and every button at least about 52 pixels tall, past the 44 pixels touch
+ * guidelines ask for, since a kiosk is touched by many hands from arm's length.
+ */
+/* Inner Spaces (Inner Space, CONTEXT.md): the plan fades out and in when the visitor goes into a shop's plan. */
+.af-canvas {
+    transition: opacity 250ms ease;
+}
+
+.af-inner-fade .af-canvas {
+    opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .af-canvas {
+        transition: none;
+    }
+}
+
+/* **← Linden Square**: back out to the centre's plan, at the top in the middle. */
+.af-inner-back {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    translate: -50% 0;
+    max-width: calc(100% - 200px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 6px 14px;
+    white-space: nowrap;
+    font: inherit;
+    font-weight: 600;
+    color: var(--af-text);
+    background: var(--af-bg);
+    border: 1px solid var(--af-border);
+    border-radius: var(--af-radius);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.af-inner-back[hidden] {
+    display: none;
+}
+
+/* The unit's outline over the shop's plan, where the visitor went in. */
+.af-inner-unit {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.af-inner-unit path {
+    fill: none;
+    stroke: var(--af-accent);
+    stroke-width: 3;
+    stroke-linejoin: round;
+}
+
+.af-view.af-large {
+    --af-icon-size: 24px;
+    --af-radius: 10px;
+    font-size: 20px;
+}
+.af-large .af-button {
+    min-height: 52px;
+    padding: 10px 18px;
+}
+.af-large .af-icon-button {
+    width: 52px;
+    height: 52px;
+    padding: 0;
+}
+.af-large .af-plan-controls {
+    right: 20px;
+    bottom: 20px;
+    gap: 10px;
+}
+.af-large .af-view-switch .af-button {
+    font-size: 18px;
+}
+.af-large .af-level-switcher {
+    top: 20px;
+    left: calc(20px + var(--af-inset-left, 0px));
+    gap: 10px;
+}
+.af-large .af-level-list {
+    gap: 12px;
+}
+.af-large .af-level-list [role='group'] {
+    gap: 4px;
+}
+.af-large .af-level-group {
+    font-size: 15px;
+}
+.af-large .af-gesture-hint {
+    font-size: 24px;
+}
+.af-large .af-tooltip {
+    max-width: 360px;
+    padding: 10px 14px;
+}
+.af-large .af-tooltip span {
+    font-size: 16px;
+}
+.af-large .af-route-casing {
+    stroke-width: 14;
+}
+.af-large .af-route {
+    stroke-width: 8;
+}
+.af-large .af-pin-here {
+    width: 24px;
+    height: 24px;
+    border-width: 4px;
+    box-shadow: 0 0 0 9px color-mix(in srgb, var(--af-accent) 25%, transparent);
+}
+.af-large .af-pin-here span {
+    bottom: calc(100% + 14px);
+    padding: 4px 12px;
+    font-size: 18px;
+}
+.af-large .af-pin-to {
+    width: 36px;
+    height: 36px;
+}
+.af-large .af-inner-back {
+    top: 20px;
+    min-height: 52px;
+    padding: 10px 22px;
+}
+
+.af-large .af-place-card {
+    translate: -50% calc(-100% - 18px);
+    gap: 10px 12px;
+    max-width: 380px;
+    padding: 14px 16px;
+}
+.af-large .af-place-card .af-close {
+    min-width: 52px;
+    min-height: 52px;
+    margin: -10px -10px -10px 0;
+    font-size: 34px;
+}
+.af-large .af-route-panel {
+    bottom: 48px;
+    gap: 10px 12px;
+    max-width: min(640px, calc(100% - 32px));
+    padding: 14px 18px;
+}
+.af-large .af-place-card button:not(.af-close),
+.af-large .af-route-panel button,
+.af-large .af-route-panel select {
+    min-height: 52px;
+    padding: 10px 20px;
+    font: inherit;
+}
+.af-large .af-step-free {
+    gap: 12px;
+    min-height: 52px;
+}
+.af-large .af-step-free input {
+    width: 28px;
+    height: 28px;
+}
+.af-large .af-route-steps {
+    gap: 8px;
+    padding-left: 28px;
+}
+.af-large .af-route-change {
+    padding: 8px 16px;
+    font-size: 18px;
+    border-width: 3px;
+}

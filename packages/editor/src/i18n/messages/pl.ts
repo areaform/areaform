@@ -141,6 +141,32 @@ export const pl: EditorMessages = {
     'problem.stopMisaligned': '{{name}}: nie pokrywa się z przystankiem na poziomie niżej',
     'problem.zoneUnreachable':
         '{{name}}: odwiedzający tu nie dotrą, nie prowadzą tu żadne drzwi ani przejście',
+    'problem.innerSpaceUnpublished':
+        'Plan wewnątrz {{name}} nie jest opublikowany, więc odwiedzający nie zajrzą do środka',
+    'problem.innerSpaceMisfit':
+        'Plan wewnątrz {{name}} zmienił się i nie pasuje już do lokalu; sprawdź dopasowanie',
+    'problem.innerSpaceClosed':
+        'Odwiedzający nie wejdą do planu wewnątrz {{name}}: jego wejście nie styka się z żadnym przejściem; sprawdź dopasowanie',
+    'inside.title': 'Wnętrze',
+    'inside.hint':
+        'Inny plan pokazany w tym lokalu, np. własny plan sklepu: odwiedzający klikają lokal i wybierają Zobacz wnętrze',
+    'inside.paste': 'Wklej link do planu',
+    'inside.choose': 'Albo wybierz plan…',
+    'inside.make': 'Utwórz plan dla tego lokalu',
+    'inside.making': 'Tworzenie planu…',
+    'inside.makeFailed': 'Nie udało się utworzyć planu. Spróbuj ponownie.',
+    'inside.unpublished': 'Jeszcze nieopublikowany',
+    'inside.opened_one': '{{count}} odwiedzający zajrzał do środka w ostatnich {{days}} dniach',
+    'inside.opened_few': '{{count}} odwiedzających zajrzało do środka w ostatnich {{days}} dniach',
+    'inside.opened_many': '{{count}} odwiedzających zajrzało do środka w ostatnich {{days}} dniach',
+    'inside.opened_other':
+        '{{count}} odwiedzającego zajrzało do środka w ostatnich {{days}} dniach',
+    'inside.fit': 'Dopasuj do lokalu',
+    'inside.onItsOwn': 'Pokaż osobno',
+    'inside.remove': 'Usuń',
+    'inside.x': 'Dopasowanie X',
+    'inside.y': 'Dopasowanie Y',
+    'inside.turn': 'Obrót, stopnie',
 
     'props.selected': 'Zaznaczono: {{kind}}',
     'props.wall': 'Ściana',

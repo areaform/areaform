@@ -14,6 +14,22 @@ _Avoid_: Venue, Object, Site (a Site holds Spaces), Building, Project
 A set of Spaces placed together on a map — two exhibition centres across a city, a campus, the fields of one farm. Routes between Spaces belong to the Site. One building with several wings stays one Space with Level Groups.
 _Avoid_: Map (the base map under it), Campus, Atlas, Portfolio
 
+**Inner Space**:
+A Space shown inside a Zone of another Space — a shop's own plan inside a shopping centre's unit, named by the Zone's `innerSpace` and optionally fitted into it. It stays a Space of its own with its own Document and Publish; only the outer Space's owner names it.
+_Avoid_: Nested Space, Sub-space, Child Space, Tenant plan, Link
+
+**Unit**:
+A Zone a tenant occupies in a shopping centre (Zone Category `unit`), to let or let: the Zone an Inner Space is shown inside.
+_Avoid_: Shop (the business, not its Zone), Lot, Store
+
+**Through route**:
+One route from Here in a Space, through a fitted Inner Space's entrance, to a place inside it: the shop's ground floor merged into its unit for routing, with the step "Enter Volt". Without a Fit there is none; the route ends at the unit.
+_Avoid_: Nested route, Cross-space route, Site route (between the Spaces of a Site)
+
+**Fit**:
+Where an Inner Space's plan lies in its unit: turned by `rotation`, then moved by `x` and `y`. Both plans are in metres, so a Fit never scales. Without one, the Inner Space is shown on its own.
+_Avoid_: Transform, Placement, Alignment
+
 **Space Kind**:
 What sort of place a Space is (exhibition, office, store, warehouse, cafe, mall, flat, or client-defined). It only selects a Preset; it never changes how the core behaves.
 _Avoid_: Type, Category, Template
@@ -188,7 +204,7 @@ _Avoid_: Scroll animation, Camera script, Scripted tour (a tour is the Motion's)
 
 **Auto-resume**:
 Motion stopped by a touch of the plan starting again after some seconds of nobody touching it, while the plan is seen and no Plugin holds it (a route or a place card being read). Off unless the snippet asks for it; never after **Pause**. For a plan nobody reads for long, such as a Kiosk.
-_Avoid_: Autoplay, Idle mode, Attract mode (a Kiosk reset is a separate, later idea)
+_Avoid_: Autoplay, Idle mode, Attract mode (an **Idle reset** is a separate thing: the whole View back to its start)
 
 **Cooperative gestures**:
 A View on a scrolling page lets a plain wheel and a one-finger swipe scroll the page, and moves the plan only with ⌘/Ctrl + wheel, a pinch or two fingers. The opposite is greedy, where the plan takes every gesture.
@@ -228,6 +244,10 @@ _Avoid_: Device, Display, Station
 What a Kiosk shows while nobody touches it: the owner's slideshow or page; a touch opens the map.
 _Avoid_: Splash screen, Screensaver, Attract loop
 
+**Idle reset**:
+A View put back as it opened after some seconds of nobody using the page (`idleAfter`, `idle`, `reset()`): its first Level and view, no route, Here where it started, the camera's motion from the start. The host may ask "Still here?" first. For the next visitor at a Kiosk ([ADR-0032](docs/adr/0032-a-kiosks-building-blocks-idle-reset-and-large-controls.md)).
+_Avoid_: Timeout, Session end, Auto-resume (which only moves the camera again)
+
 ### Publishing
 
 **Revision**:
@@ -237,6 +257,14 @@ _Avoid_: Version in code and docs (that is the schema or library version), Snaps
 **Save version**:
 Keeping the saved Document as a Revision without showing it to visitors, with an optional name. A plan unchanged since a Revision adds nothing.
 _Avoid_: Save (saving happens on its own, a second after each change), Checkpoint
+
+**Invited editor**:
+Someone invited by e-mail to edit one Space without Publish, such as a shop's person on the plan a centre made for its unit. They edit it and Save version; the Space's owner publishes. The Space is "Shared with you" for them.
+_Avoid_: Guest, Collaborator, Member (a member belongs to the Organisation and may publish)
+
+**Waiting to publish**:
+A version an Invited editor saved, newer than what visitors see: the owner publishes it to approve it.
+_Avoid_: Pending, Draft (a Draft is the MCP's), Review
 
 **Publish**:
 Making the current Document the one visitors see, kept as a Revision unless one already has its content. Showing an earlier Revision again is also a Publish.

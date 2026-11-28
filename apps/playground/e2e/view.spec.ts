@@ -220,6 +220,29 @@ test('Wayfinding: Step-free takes the Lift instead of the stairs', async ({ page
     await expect(steps).toHaveText(['Take Main stairs down to Level 1']);
 });
 
+test('Wayfinding: the View’s reset clears the route and Step-free, back on Here’s Level', async ({
+    page,
+}) => {
+    test.slow();
+    // A Kiosk: back to how the plan opened 5 seconds after the last touch.
+    await open(page, '&here=lounge&idle=5');
+    await page.getByRole('button', { name: 'Level 1', exact: true }).click();
+    await clickAt(page, [7.5, 7.5]); // booth A-1 on Level 1
+    await page.locator('.af-place-card').getByRole('button', { name: 'Directions' }).click();
+    const stepFree = panel(page).getByRole('checkbox', { name: 'Step-free' });
+    await stepFree.check();
+    await expect(panel(page)).toContainText('Take Lift down to Level 1');
+
+    await expect(panel(page)).toBeHidden({ timeout: 10_000 });
+    await expect(page.locator('.af-place-card')).toBeHidden();
+    // Here's Level, the gallery, with its pin; the next route is not step-free unless asked.
+    await expect(page.locator('.af-pin-here')).toBeVisible();
+    await page.getByRole('button', { name: 'Level 1', exact: true }).click();
+    await clickAt(page, [7.5, 7.5]);
+    await page.locator('.af-place-card').getByRole('button', { name: 'Directions' }).click();
+    await expect(panel(page).getByRole('checkbox', { name: 'Step-free' })).not.toBeChecked();
+});
+
 test('Wayfinding: a route from the gallery goes down to Level 1, shown a Level at a time', async ({
     page,
 }) => {

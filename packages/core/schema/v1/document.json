@@ -274,6 +274,30 @@
                     "type": "boolean",
                     "description": "Visitors' routes go around the Zone, not through it."
                 },
+                "innerSpace": {
+                    "description": "Inner Space: another Space shown inside this Zone, such as a shop's own plan in a shopping centre's unit.",
+                    "type": "object",
+                    "required": ["space"],
+                    "properties": {
+                        "space": {
+                            "type": "string",
+                            "description": "The Space's id: a hosted `sp_…` id, or the host's own name for a plan it loads itself."
+                        },
+                        "fit": {
+                            "description": "Where the Inner Space lies in this one: its point p at rotate(p, rotation) + [x, y]. Both are in metres; absent, it is shown on its own.",
+                            "type": "object",
+                            "required": ["x", "y", "rotation"],
+                            "properties": {
+                                "x": { "type": "number" },
+                                "y": { "type": "number" },
+                                "rotation": {
+                                    "type": "number",
+                                    "description": "Radians, counter-clockwise."
+                                }
+                            }
+                        }
+                    }
+                },
                 "style": {
                     "type": "object",
                     "properties": {

@@ -4,6 +4,7 @@
     "entryPoints": [
         "src/index.ts",
         "src/react/index.ts",
+        "src/plugins/innerSpace.ts",
         "src/plugins/tooltip.ts",
         "src/plugins/wayfinding.ts"
     ],

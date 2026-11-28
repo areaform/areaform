@@ -7,7 +7,17 @@ import {
 } from '@areaform/core';
 import type { UnreachableZone } from '@areaform/wayfinding';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { problemLevel, problemText, type Problem } from '../document/problems.ts';
+import {
+    INNER_PLAN_SECONDS,
+    innerSpaceProblems,
+    type InnerSpaceSource,
+} from '../document/innerSpaces.ts';
+import {
+    problemLevel,
+    problemText,
+    type InnerSpaceProblem,
+    type Problem,
+} from '../document/problems.ts';
 import { useI18n } from './i18n.ts';
 
 /** Wait after the last change before checking again, so typing or a drag is checked once. */
@@ -18,13 +28,16 @@ const ROUTES_DELAY_MS = 800;
 const SHOWN = 100;
 
 /**
- * The plan's Problems: `core`'s Diagnostics, and the Zones visitors cannot reach (ADR-0017). The
- * route check imports `@areaform/wayfinding` on first use and redoes only the Levels that changed.
+ * The plan's Problems: `core`'s Diagnostics, the Zones visitors cannot reach (ADR-0017), and,
+ * with the host's `innerSpaces`, units whose Inner Space is not published or no longer fits
+ * (Inner Space, CONTEXT.md). The route check imports `@areaform/wayfinding` on first use and redoes only the
+ * Levels that changed; each Inner Space's plan is asked for once.
  */
 export function useProblems(
     doc: AreaformDocument,
     presets: Record<string, Preset> | undefined,
     enabled = true,
+    innerSpaces?: InnerSpaceSource,
 ): Problem[] {
     const [diagnostics, setDiagnostics] = useState<Problem[]>([]);
     const [unreachable, setUnreachable] = useState<UnreachableZone[]>([]);
@@ -68,7 +81,38 @@ export function useProblems(
         };
     }, [doc, enabled]);
 
-    return useMemo(() => [...diagnostics, ...unreachable], [diagnostics, unreachable]);
+    const [inner, setInner] = useState<InnerSpaceProblem[]>([]);
+    // Asked again now and then, as the host's cached plans expire: a shop publishes, or changes
+    // its plan, while the centre's Editor is open.
+    const [tick, setTick] = useState(0);
+    useEffect(() => {
+        if (!enabled || !innerSpaces) return;
+        const timer = setInterval(() => setTick((n) => n + 1), INNER_PLAN_SECONDS * 1000);
+        return () => clearInterval(timer);
+    }, [enabled, innerSpaces]);
+    useEffect(() => {
+        if (!enabled || !innerSpaces) return;
+        let cancelled = false;
+        const timer = setTimeout(async () => {
+            // Whether visitors get into each shop needs a navmesh: imported on first use, as above.
+            const wayfinding = await import('@areaform/wayfinding');
+            const found = await innerSpaceProblems(
+                doc,
+                (space) => innerSpaces.load(space),
+                (merged, level) => wayfinding.unreachableZonesOn(merged, level),
+            );
+            if (!cancelled) setInner(found);
+        }, DIAGNOSE_DELAY_MS);
+        return () => {
+            cancelled = true;
+            clearTimeout(timer);
+        };
+    }, [doc, enabled, innerSpaces, tick]);
+
+    return useMemo(
+        () => [...diagnostics, ...unreachable, ...(innerSpaces ? inner : [])],
+        [diagnostics, unreachable, inner, innerSpaces],
+    );
 }
 
 /** The Problems in the plan, each a button that shows its Element. */

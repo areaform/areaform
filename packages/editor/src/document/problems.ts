@@ -1,11 +1,27 @@
-// The Problems list: Diagnostics from `core` and Zones visitors cannot reach (ADR-0017), each as
-// a sentence about the Element it concerns.
-import { textIn, type AreaformDocument, type Diagnostic, type ElementRef } from '@areaform/core';
+// The Problems list: Diagnostics from `core`, Zones visitors cannot reach (ADR-0017) and units
+// whose Inner Space cannot be shown or no longer fits (Inner Space, CONTEXT.md), each as a sentence about the
+// Element it concerns.
+import {
+    textIn,
+    type AreaformDocument,
+    type Diagnostic,
+    type ElementRef,
+    type Id,
+} from '@areaform/core';
 import type { UnreachableZone } from '@areaform/wayfinding';
 import { categoryLabel, type Translator } from '../i18n/index.ts';
 
-/** Something in the plan to look at: a Diagnostic, or a Zone no route reaches. */
-export type Problem = Diagnostic | UnreachableZone;
+/**
+ * A unit whose Inner Space visitors cannot see, as it is not published (or gone), or whose plan
+ * changed and no longer fits the unit (Inner Space, CONTEXT.md).
+ */
+export interface InnerSpaceProblem {
+    code: 'inner-space-unpublished' | 'inner-space-misfit' | 'inner-space-closed';
+    ref: { kind: 'zone'; id: Id; levelId: Id };
+}
+
+/** Something in the plan to look at: a Diagnostic, a Zone no route reaches, or a unit's Inner Space. */
+export type Problem = Diagnostic | UnreachableZone | InnerSpaceProblem;
 
 const capitalised = (text: string) => text.charAt(0).toLocaleUpperCase() + text.slice(1);
 
@@ -75,6 +91,12 @@ export function problemText(doc: AreaformDocument, problem: Problem, i18n: Trans
             return i18n.t('problem.stopMisaligned', { name });
         case 'zone-unreachable':
             return i18n.t('problem.zoneUnreachable', { name });
+        case 'inner-space-unpublished':
+            return i18n.t('problem.innerSpaceUnpublished', { name });
+        case 'inner-space-misfit':
+            return i18n.t('problem.innerSpaceMisfit', { name });
+        case 'inner-space-closed':
+            return i18n.t('problem.innerSpaceClosed', { name });
     }
 }
 

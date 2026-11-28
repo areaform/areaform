@@ -42,6 +42,8 @@ const EVENTS: (keyof ViewEvents)[] = [
     'viewpoint',
     'zoneClick',
     'tourStep',
+    'idle',
+    'reset',
     'ready',
     'ready3d',
 ];

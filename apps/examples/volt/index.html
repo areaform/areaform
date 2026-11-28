@@ -1,0 +1,205 @@
+<!doctype html>
+<!--
+    Volt, a made-up electronics shop in Linden Square (ADR-0031), on its own site: the shop's own
+    plan, the demo Space `sp_demo-volt`, with buttons for its departments. The centre's site shows
+    the same plan inside the shop's unit, G06: drawn once, shown in both places. Made up, like the
+    rest of the example; kept out of search engines.
+-->
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Volt · an example site · Areaform</title>
+        <meta
+            name="description"
+            content="An example site: a made-up electronics shop's own plan, the same one its shopping centre shows inside the shop's unit."
+        />
+        <meta name="robots" content="noindex" />
+        <link rel="icon" href="https://areaform.app/favicon.svg" type="image/svg+xml" />
+        <style>
+            :root {
+                --paper: #f6f7f9;
+                --card: #ffffff;
+                --ink: #11151c;
+                --muted: #5b6372;
+                --line: rgb(17 21 28 / 0.12);
+                --volt: #2f5bea;
+                --sans:
+                    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
+                    sans-serif;
+            }
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                background: var(--paper);
+                color: var(--ink);
+                font: 400 16px / 1.5 var(--sans);
+            }
+            h1,
+            h2,
+            p {
+                margin: 0;
+            }
+            a {
+                color: inherit;
+            }
+            :focus-visible {
+                outline: 2px solid var(--volt);
+                outline-offset: 2px;
+            }
+            .example {
+                padding: 8px 20px;
+                background: #0b0c0e;
+                color: #dfe3e8;
+                font:
+                    400 13px / 1.4 system-ui,
+                    sans-serif;
+            }
+            .example a {
+                color: #fff;
+                text-underline-offset: 3px;
+            }
+            header {
+                display: flex;
+                align-items: baseline;
+                gap: 16px;
+                max-width: 1080px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .brand {
+                font-size: 26px;
+                font-weight: 800;
+                letter-spacing: -0.03em;
+                text-decoration: none;
+            }
+            .brand span {
+                color: var(--volt);
+            }
+            header p {
+                margin-left: auto;
+                color: var(--muted);
+                font-size: 14px;
+            }
+            main {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) 300px;
+                gap: 24px;
+                max-width: 1080px;
+                margin: 0 auto;
+                padding: 0 20px 48px;
+            }
+            .plan {
+                height: min(70vh, 620px);
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                overflow: hidden;
+                background: var(--card);
+            }
+            aside h1 {
+                font-size: 28px;
+                font-weight: 700;
+                letter-spacing: -0.02em;
+                line-height: 1.15;
+            }
+            aside > p {
+                margin-top: 10px;
+                color: var(--muted);
+            }
+            .departments {
+                display: grid;
+                gap: 8px;
+                margin: 20px 0 0;
+                padding: 0;
+                list-style: none;
+            }
+            .departments button {
+                width: 100%;
+                padding: 12px 14px;
+                font: inherit;
+                font-weight: 600;
+                text-align: left;
+                color: var(--ink);
+                background: var(--card);
+                border: 1px solid var(--line);
+                border-radius: 10px;
+                cursor: pointer;
+            }
+            .departments button:hover,
+            .departments button[aria-pressed='true'] {
+                border-color: var(--volt);
+                color: var(--volt);
+            }
+            .centre {
+                margin-top: 24px;
+                padding-top: 16px;
+                border-top: 1px solid var(--line);
+                color: var(--muted);
+                font-size: 14px;
+            }
+            .centre a {
+                color: var(--volt);
+                font-weight: 600;
+            }
+            @media (max-width: 800px) {
+                main {
+                    grid-template-columns: 1fr;
+                }
+                .plan {
+                    height: 60vh;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <p class="example">
+            An example site, made up, with a live plan by
+            <a href="https://areaform.app/">Areaform</a>. The same plan opens inside the shop on
+            <a href="/examples/linden-square/map/?to=unit-g06">Linden Square's map</a>.
+        </p>
+        <header>
+            <a class="brand" href="./">volt<span>.</span></a>
+            <p>Unit G06 · Linden Square, ground floor</p>
+        </header>
+        <main>
+            <div class="plan">
+                <div id="plan" data-areaform="sp_demo-volt" style="height: 100%"></div>
+            </div>
+            <aside>
+                <h1>Find it in our shop</h1>
+                <p>Phones by the door, the service desk at the back. Tap a department to see it.</p>
+                <ul class="departments">
+                    <li><button type="button" data-zone="phones">Phones</button></li>
+                    <li><button type="button" data-zone="laptops">Laptops</button></li>
+                    <li><button type="button" data-zone="watches">Watches</button></li>
+                    <li><button type="button" data-zone="audio">Audio</button></li>
+                    <li><button type="button" data-zone="service-desk">Service desk</button></li>
+                    <li><button type="button" data-zone="tills">Tills</button></li>
+                </ul>
+                <p class="centre">
+                    Coming to Linden Square? The centre's map shows the way to us, and our plan
+                    inside:
+                    <a href="/examples/linden-square/map/?to=unit-g06&amp;inside=watches"
+                        >the watches, from the centre's map</a
+                    >.
+                </p>
+            </aside>
+        </main>
+        <script src="https://cdn.areaform.app/v1/embed.js" async></script>
+        <script>
+            const plan = document.getElementById('plan');
+            const buttons = document.querySelectorAll('[data-zone]');
+            for (const button of buttons)
+                button.addEventListener('click', () => {
+                    if (!plan.areaform) return;
+                    for (const other of buttons) other.removeAttribute('aria-pressed');
+                    button.setAttribute('aria-pressed', 'true');
+                    void plan.areaform.showPlace(button.dataset.zone);
+                });
+        </script>
+    </body>
+</html>

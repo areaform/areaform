@@ -5,8 +5,19 @@ import type { ElementRef, Vec2 } from '@areaform/core';
 import type { FloorLine } from '@areaform/render-3d';
 import type { NavMesh, SpaceRoute } from '@areaform/wayfinding';
 import { isInside, placeOf } from '@areaform/wayfinding/place';
+import { cardButton, fillPlaceCard } from '../placeCard.ts';
 import type { ViewPlugin } from '../plugins.ts';
-import type { View } from '../view.ts';
+import type { View, ViewEvents } from '../view.ts';
+import {
+    onShopFloor,
+    routePlan,
+    sceneLevel as sceneLevelOf,
+    shownOn,
+    shownPoints as shownPointsOf,
+    throughOf,
+    throughPlace,
+    type Through,
+} from './through.ts';
 import { tooltipText } from './tooltip.ts';
 import {
     framed,
@@ -53,9 +64,28 @@ export interface WayfindingOptions {
     stepFree?: boolean;
 }
 
+/**
+ * The Wayfinding Plugin, with a handle for the host page: `show` opens a place as `to` does, e.g.
+ * from a Kiosk's shop buttons. Give each View its own: one given to several shows on the View
+ * that started it last.
+ */
+export interface WayfindingPlugin extends ViewPlugin {
+    /**
+     * Shows the Zone `zoneId` as a link with `to` does: with Here, the way to it at once, shown
+     * from its start; without, its Level with its card open. False when the plan has no such
+     * Zone, or the Plugin is not running yet.
+     */
+    show(zoneId: string): boolean;
+}
+
 /** Where a route goes, and what to call it. */
 interface Target extends PlanPoint {
     title: string;
+    /**
+     * The unit whose shop the place is in, by its Zone id, when the shop's plan is laid into it:
+     * a Through route from Here in the centre, in through the shop's entrance.
+     */
+    through?: string;
 }
 
 type Outcome = { kind: 'route'; route: SpaceRoute } | { kind: 'finding' } | { kind: 'none' };
@@ -79,11 +109,16 @@ const DOTS_3D: [number, number] = [0.1, 0.5];
 const BEHIND_HEIGHT = 0.1;
 
 /** The Wayfinding Plugin: `createView(container, { plugins: [wayfinding()] })`. */
-export function wayfinding(options: WayfindingOptions = {}): ViewPlugin {
-    return ({ view, overlay }) => {
-        let here: PlanPoint | null = parseHere(options.here, view.getDocument());
-        // Visitors stand inside the building: a Here outside it, from an old link, is asked again.
-        if (here && !isInside(view.getDocument(), here)) here = null;
+export function wayfinding(options: WayfindingOptions = {}): WayfindingPlugin {
+    /** The running Plugin's `show`, while it runs. */
+    let shown: ((zoneId: string) => boolean) | null = null;
+    const plugin: ViewPlugin = ({ view, overlay }) => {
+        /** Here as the options give it: visitors stand inside the building, so one outside is asked again. */
+        const startHere = (): PlanPoint | null => {
+            const point = parseHere(options.here, view.getDocument());
+            return point && isInside(view.getDocument(), point) ? point : null;
+        };
+        let here: PlanPoint | null = startHere();
         let target: Target | null = null;
         let outcome: Outcome | null = null;
         /** Waiting for the visitor to say where they are. */
@@ -95,8 +130,25 @@ export function wayfinding(options: WayfindingOptions = {}): ViewPlugin {
          * The place card: what was tapped and where; `refused` outside the building with no way
          * out, where it only says to pick a spot inside.
          */
-        let card: (Target & { zone: boolean; refused?: boolean }) | null = null;
+        let card: (Target & { zoneId?: string; refused?: boolean }) | null = null;
         let destroyed = false;
+        /** Units whose shop plan, laid in, the visitor went into, by the unit's Zone id. */
+        const throughs = new Map<string, Through>();
+        /** The unit the visitor is in, while a shop's plan laid into it is shown. */
+        let inShop: Through | null = null;
+        /** The Through the route's place is reached by, if any. */
+        const throughFor = (place: Target | null) =>
+            place?.through ? throughs.get(place.through) : undefined;
+        const onShown = (levelId: string) => shownOn(inShop, levelId, view.getLevelId());
+        const shownPoints = (leg: { levelId: string; points: Vec2[] }) =>
+            shownPointsOf(inShop, leg);
+        const sceneLevel = (levelId: string) => sceneLevelOf(inShop, levelId);
+        /**
+         * A place inside the shop shown, as the route goes to it: from Here in the centre when the
+         * place is on the shop's ground floor; upstairs, with the shop's own Here.
+         */
+        const throughTarget = (place: Target): Target =>
+            inShop && onShopFloor(inShop, place.levelId) ? throughPlace(inShop, place) : place;
 
         // --- The navmesh, built once per Level of the Document shown -------------------------
 
@@ -174,23 +226,13 @@ export function wayfinding(options: WayfindingOptions = {}): ViewPlugin {
 
         overlay.append(layer, changes, toPin, herePin, placeCard, panel);
 
-        const button = (text: string, onClick: () => void, className = '') => {
-            const b = document.createElement('button');
-            b.type = 'button';
-            b.className = className;
-            b.textContent = text;
-            b.addEventListener('click', (e) => {
-                e.stopPropagation();
-                onClick();
-            });
-            return b;
-        };
+        const button = cardButton;
         const t = () => view.getTranslator();
 
         // --- Drawing -------------------------------------------------------------------------
 
         const place = (el: HTMLElement, at: PlanPoint | null, fade = true) => {
-            const screen = at && at.levelId === view.getLevelId() ? view.toScreen(at.point) : null;
+            const screen = at && onShown(at.levelId) ? view.toScreen(at.point) : null;
             el.hidden = screen === null;
             if (screen) el.style.transform = `translate(${screen[0]}px, ${screen[1]}px)`;
             // In 3D, a pin behind a Wall fades, still there to tell where the place is; the place
@@ -219,8 +261,10 @@ export function wayfinding(options: WayfindingOptions = {}): ViewPlugin {
             // In 3D the route is in the scene (`drawScene`), where Walls in front of it hide it.
             const flat = view.getView() === '2d';
             const d = (flat ? (route?.legs ?? []) : [])
-                .filter((leg) => leg.levelId === view.getLevelId() && leg.points.length > 1)
-                .map((leg) => routePath(view, leg.points))
+                .filter((leg) => onShown(leg.levelId))
+                .map(shownPoints)
+                .filter((points) => points.length > 1)
+                .map((points) => routePath(view, points))
                 .join('');
             casing.setAttribute('d', d);
             line.setAttribute('d', d);
@@ -240,36 +284,46 @@ export function wayfinding(options: WayfindingOptions = {}): ViewPlugin {
                 placeCard.replaceChildren();
                 return;
             }
-            const title = document.createElement('strong');
-            title.textContent = card.title;
-            const close = button(
-                '×',
-                () => {
-                    card = null;
-                    draw();
-                },
-                'af-close',
-            );
-            close.setAttribute('aria-label', t().t('wayfinding.close'));
+            const fill = (body: Node[]) =>
+                fillPlaceCard(placeCard, {
+                    title: card!.title,
+                    body,
+                    closeLabel: t().t('placeCard.close'),
+                    onClose: () => {
+                        card = null;
+                        draw();
+                    },
+                });
             if (card.refused) {
                 const note = document.createElement('p');
                 note.textContent = t().t('wayfinding.pickInside');
-                placeCard.replaceChildren(title, note, close);
-                return;
+                return fill([note]);
             }
             const go = button(
-                t().t(card.zone ? 'wayfinding.directions' : 'wayfinding.directionsHere'),
+                t().t(card.zoneId ? 'wayfinding.directions' : 'wayfinding.directionsHere'),
                 () => {
                     const chosen = card!;
                     card = null;
                     target = { levelId: chosen.levelId, point: chosen.point, title: chosen.title };
-                    if (here) void findRoute();
+                    // Inside a shop laid into its unit, from Here in the centre: no need to ask.
+                    if (!here && inShop?.from) target = throughTarget(target);
+                    if (here || target.through) void findRoute();
                     else asking = true;
                     draw();
                 },
                 'af-primary',
             );
-            placeCard.replaceChildren(title, go, close);
+            // Other Plugins' buttons for a Zone, such as **See inside** for a unit with a shop's plan.
+            const more = card.zoneId
+                ? view.placeCard.buttons({ id: card.zoneId, levelId: card.levelId }).map((extra) =>
+                      button(extra.label, () => {
+                          card = null;
+                          draw();
+                          extra.run();
+                      }),
+                  )
+                : [];
+            fill([go, ...more]);
         };
 
         const drawPanel = () => {
@@ -318,8 +372,9 @@ export function wayfinding(options: WayfindingOptions = {}): ViewPlugin {
                           );
                 rows.push(text);
                 // Only a Space with Connections has steps to avoid.
-                if (view.getDocument().connections.length > 0) rows.push(stepFreeSwitch());
-                if (outcome.kind === 'route' && outcome.route.legs.length > 1)
+                if ((throughFor(target)?.doc ?? view.getDocument()).connections.length > 0)
+                    rows.push(stepFreeSwitch());
+                if (outcome.kind === 'route' && (outcome.route.legs.length > 1 || target?.through))
                     rows.push(stepList(outcome.route));
                 rows.push(
                     button(t().t('wayfinding.changeStart'), () => {
@@ -399,7 +454,7 @@ export function wayfinding(options: WayfindingOptions = {}): ViewPlugin {
             const route = outcome?.kind === 'route' ? outcome.route : null;
             if (!renderer || !route || view.getView() !== '2d') return;
             const levelId = view.getLevelId();
-            const points = route.legs.filter((l) => l.levelId === levelId).flatMap((l) => l.points);
+            const points = route.legs.filter((l) => onShown(l.levelId)).flatMap(shownPoints);
             if (here?.levelId === levelId) points.push(here.point);
             if (route.outside?.levelId === levelId) points.push(...route.outside.way);
             const box = view.element.getBoundingClientRect();
@@ -414,19 +469,36 @@ export function wayfinding(options: WayfindingOptions = {}): ViewPlugin {
         };
 
         const say = (ride: NonNullable<SpaceRoute['legs'][number]['ride']>) =>
-            rideText(view.getDocument(), ride, t(), view.getContentLanguage());
+            rideText(
+                throughFor(target)?.doc ?? view.getDocument(),
+                ride,
+                t(),
+                view.getContentLanguage(),
+            );
 
         /** Each change of Level, in order; a step shows the Level where it starts. */
         const stepList = (route: SpaceRoute) => {
             const list = document.createElement('ol');
             list.className = 'af-route-steps';
             list.setAttribute('aria-label', t().t('wayfinding.steps'));
+            const levels = new Set(view.getDocument().levels.map((l) => l.id));
             for (const leg of route.legs) {
                 if (!leg.ride) continue;
                 const item = document.createElement('li');
-                const go = button(say(leg.ride), () => goTo(leg.levelId));
-                if (leg.levelId === view.getLevelId()) go.setAttribute('aria-current', 'step');
-                item.append(go);
+                // Inside a shop, the centre's floors are not there to show: the step is only said.
+                if (levels.has(leg.levelId)) {
+                    const go = button(say(leg.ride), () => goTo(leg.levelId));
+                    if (leg.levelId === view.getLevelId()) go.setAttribute('aria-current', 'step');
+                    item.append(go);
+                } else item.textContent = say(leg.ride);
+                list.append(item);
+            }
+            // Into the shop at the end: "Enter Volt", the step the visitor is on once inside.
+            const via = throughFor(target);
+            if (via) {
+                const item = document.createElement('li');
+                item.textContent = t().t('wayfinding.enter', { name: via.name });
+                if (inShop === via) item.setAttribute('aria-current', 'step');
                 list.append(item);
             }
             return list;
@@ -478,8 +550,8 @@ export function wayfinding(options: WayfindingOptions = {}): ViewPlugin {
             };
             const edge = { ...strokeOf(casing), opacity: 1 };
             const lines: FloorLine[] = (route?.legs ?? []).map((leg) => ({
-                levelId: leg.levelId,
-                points: leg.points,
+                levelId: sceneLevel(leg.levelId),
+                points: shownPoints(leg),
                 ...strokeOf(line),
                 dash: DASH_3D,
                 casing: edge,
@@ -510,25 +582,40 @@ export function wayfinding(options: WayfindingOptions = {}): ViewPlugin {
 
         let asked = 0;
         const findRoute = async () => {
-            if (!here || !target) return;
+            // A Here picked inside the shop: the route stays in the shop's own plan.
+            let via = throughFor(target);
+            if (via && target && here && here.levelId === via.shopLevelId) {
+                target = { levelId: via.shopLevelId, point: target.point, title: target.title };
+                via = undefined;
+            }
+            // Into a shop laid into its unit: from Here in the centre, on the plan with the shop in.
+            const from = via ? (here ?? via.from) : here;
+            if (!from || !target) return;
             const ask = ++asked;
             outcome = { kind: 'finding' };
             draw();
-            const { from, to } = { from: here, to: target };
-            const doc = view.getDocument();
-            const [meshes, w] = await Promise.all([meshesFor(from.levelId, to.levelId), library()]);
+            const to = target;
+            const doc = via ? routePlan(via, view.getHomeDocument()) : view.getDocument();
+            const [meshes, w] = await Promise.all([
+                via ? new Map<string, NavMesh>() : meshesFor(from.levelId, to.levelId),
+                library(),
+            ]);
             if (destroyed || ask !== asked) return;
-            const route = w.findSpaceRoute(
-                doc,
-                from,
-                to,
-                (id) => meshes.get(id) ?? w.buildNavMesh(doc, id),
-                { stepFree },
-            );
+            const meshOf = (id: string) => {
+                const kept = meshes.get(id) ?? via?.meshes.get(id);
+                if (kept) return kept;
+                const built = w.buildNavMesh(doc, id, {
+                    ...(options.clearance !== undefined && { clearance: options.clearance }),
+                });
+                via?.meshes.set(id, built);
+                return built;
+            };
+            const route = w.findSpaceRoute(doc, from, to, meshOf, { stepFree });
             outcome = route ? { kind: 'route', route } : { kind: 'none' };
-            // A route over several Levels is shown from its start.
+            // A route over several Levels is shown from its start, unless the visitor is inside a
+            // shop, where only the shop's floor is there to show.
             const start = route?.legs[0]?.levelId;
-            if (start && start !== view.getLevelId()) view.setLevel(start);
+            if (!inShop && start && start !== view.getLevelId()) view.setLevel(start);
             draw();
             frame();
         };
@@ -573,7 +660,7 @@ export function wayfinding(options: WayfindingOptions = {}): ViewPlugin {
                       title:
                           titleOf({ kind: 'zone', id: zone.id, levelId }) ??
                           t().t('wayfinding.thisSpot'),
-                      zone: true,
+                      zoneId: zone.id,
                   }
                 : placeOf(view.getDocument(), { levelId, point }).kind === 'nowhere'
                   ? // Outside, with no way out drawn: no route could reach it.
@@ -581,10 +668,9 @@ export function wayfinding(options: WayfindingOptions = {}): ViewPlugin {
                         levelId,
                         point,
                         title: t().t('wayfinding.thisSpot'),
-                        zone: false,
                         refused: true,
                     }
-                  : { levelId, point, title: t().t('wayfinding.thisSpot'), zone: false };
+                  : { levelId, point, title: t().t('wayfinding.thisSpot') };
             draw();
         };
 
@@ -619,28 +705,100 @@ export function wayfinding(options: WayfindingOptions = {}): ViewPlugin {
         const resized = new ResizeObserver(() => position());
         resized.observe(overlay);
 
-        const opened = parseTo(options.to, view.getDocument());
-        if (here) {
-            // Opened from a QR code on another floor: show the floor the visitor stands on.
-            view.setLevel(here.levelId);
-            draw();
-        }
-        if (opened) {
+        /** No route, card or question: what a new place, or a reset, starts from. */
+        const forget = () => {
+            target = null;
+            outcome = null;
+            card = null;
+            asking = false;
+            refused = false;
+        };
+
+        /** Opens the place `zoneId` names, as a link with `to` does; false when there is none. */
+        const show = (zoneId: string | undefined) => {
+            const opened = parseTo(zoneId, view.getDocument());
+            if (!opened) return false;
             const { levelId, zone } = opened;
             const title =
                 titleOf({ kind: 'zone', id: zone.id, levelId }) ?? t().t('wayfinding.thisSpot');
-            if (here) {
+            forget();
+            if (!here && inShop?.from) {
+                // A department, from Here in the centre: in through the shop's entrance.
+                target = throughTarget({ levelId, point: zonePoint(zone), title });
+                void findRoute();
+            } else if (here) {
                 // A link to one shop from a known spot: the route at once, shown from its start.
                 target = { levelId, point: zonePoint(zone), title };
                 void findRoute();
             } else {
                 view.setLevel(levelId);
-                card = { levelId, point: zonePoint(zone), title, zone: true };
+                card = { levelId, point: zonePoint(zone), title, zoneId: zone.id };
                 draw();
             }
-        }
+            return true;
+        };
+
+        /** How the Plugin opens, and goes back to on the View's `reset`. */
+        const begin = () => {
+            here = startHere();
+            forget();
+            stepFree = options.stepFree ?? false;
+            // A route still being found is for the visitor before.
+            asked += 1;
+            // Opened from a QR code on another floor: show the floor the visitor stands on.
+            if (here) view.setLevel(here.levelId);
+            if (!show(options.to)) draw();
+        };
+        /**
+         * What each Space shown had, by its id: inside a shop's plan the visitor has no Here or
+         * route of the centre's, and back out they have them again (Inner Space, CONTEXT.md).
+         */
+        const spaces = new Map<string, { here: PlanPoint | null; target: Target | null }>();
+        let spaceId = view.getDocument().id;
+        const changeSpace = ({ doc, unit }: ViewEvents['spaceChange']) => {
+            // A route into a shop goes on in the centre once the visitor comes back out.
+            const carried = target?.through ? target : null;
+            spaces.set(spaceId, { here, target });
+            const homeHere = spaces.get(view.getHomeDocument().id)?.here ?? null;
+            spaceId = doc.id;
+            const kept = spaces.get(spaceId);
+            forget();
+            asked += 1;
+            // Inside a shop laid into its unit, a Through route can go in from the centre.
+            inShop = unit
+                ? throughOf(
+                      view.getHomeDocument(),
+                      unit,
+                      doc,
+                      view.getLevelId(),
+                      homeHere,
+                      view.getContentLanguage(),
+                  )
+                : null;
+            if (inShop) throughs.set(unit!.zoneId, inShop);
+            here = kept?.here ?? null;
+            target = (doc.id === view.getHomeDocument().id && carried) || (kept?.target ?? null);
+            if (target && (here || target.through)) void findRoute();
+            else draw();
+        };
+        offs.push(
+            view.on('reset', () => {
+                spaces.clear();
+                throughs.clear();
+                spaceId = view.getDocument().id;
+                begin();
+            }),
+            view.on('spaceChange', changeSpace),
+            // The card is this Plugin's: others' buttons go on it, drawn again when they change.
+            view.placeCard.host(() => {
+                if (card) draw();
+            }),
+        );
+        begin();
+        shown = (zoneId) => !destroyed && show(zoneId);
         return () => {
             destroyed = true;
+            shown = null;
             view.holdMotion('wayfinding', false);
             for (const off of offs) off();
             view.renderer3d()?.setLines([]);
@@ -654,4 +812,5 @@ export function wayfinding(options: WayfindingOptions = {}): ViewPlugin {
             panel.remove();
         };
     };
+    return Object.assign(plugin, { show: (zoneId: string) => shown?.(zoneId) ?? false });
 }

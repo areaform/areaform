@@ -31,6 +31,7 @@ import { createPlanControls, type PlanControls, type ViewMode } from './controls
 import { createTranslator, type Messages, type Translator } from './i18n/translator.ts';
 import { createLevelSwitcher, startingLevel, type LevelSwitcher } from './levelSwitcher.ts';
 import { createGestureHint } from './gestureHint.ts';
+import { createIdleTimer } from './idle.ts';
 import { createMotion, onInteraction, type Motion, type MotionState } from './motion.ts';
 import {
     camera3dOf2d,
@@ -39,6 +40,7 @@ import {
     type FlyToOptions,
     type LookAtOptions,
 } from './pageCameraCore.ts';
+import { createPlaceCard, type PlaceCard } from './placeCard.ts';
 import type { PluginSource, ViewPlugin } from './plugins.ts';
 import { rulersFor } from './units.ts';
 
@@ -95,6 +97,18 @@ export interface ViewOptions {
      * (`holdMotion`), such as Wayfinding showing a route.
      */
     motionResume?: number;
+    /**
+     * Seconds with nobody touching, clicking, typing or scrolling anywhere on the page, after
+     * which the View sends `idle`, at least 5; off by default. It counts from the first touch and
+     * sends once until the next. For a Kiosk: the host answers with `reset()`, perhaps after a
+     * "Still here?" notice of its own.
+     */
+    idleAfter?: number;
+    /**
+     * How big the View's buttons, cards and pins are: `normal` (default), or `large` for a touch
+     * screen read standing up, such as a Kiosk. The `af-large` class on the View's element.
+     */
+    controlSize?: ControlSize;
     /**
      * CSS pixels on the View's left that the host covers, e.g. with a card of text: the plan is
      * framed in the rest, the 3D camera turns around it, and the Level switcher and the badge
@@ -163,12 +177,37 @@ export interface ViewEvents {
     ready: Renderer;
     /** A 3D renderer is ready, each time 3D is shown. */
     ready3d: Renderer3D;
+    /** Nobody used the page for `idleAfter` seconds. */
+    idle: { seconds: number };
+    /** `reset()` put the View back as it opened; Plugins go back to their start too. */
+    reset: undefined;
+    /**
+     * Another Space is shown, an Inner Space a Plugin went into (`inner`), or the host's own again;
+     * `levelChange` follows. Plugins keep what belongs to each Space apart, such as a route.
+     */
+    spaceChange: { doc: AreaformDocument; inner: boolean; unit?: InnerUnit };
 }
+
+/**
+ * The unit an Inner Space is shown for: its Zone and Level on the host's plan, and whether the
+ * shop's plan is laid into it by a fit, so the two share coordinates and one route can go in.
+ */
+export interface InnerUnit {
+    zoneId: Id;
+    levelId: Id;
+    fitted: boolean;
+}
+
+/** How big the View's controls are: `large` for a touch screen read standing up. */
+export type ControlSize = 'normal' | 'large';
 
 export interface View {
     /** The View's root element, inside the container. */
     readonly element: HTMLElement;
+    /** The Document shown: the host's own, or an Inner Space's while a Plugin shows one. */
     getDocument(): AreaformDocument;
+    /** The host's own Document, the one `update` gives, even while an Inner Space is shown. */
+    getHomeDocument(): AreaformDocument;
     getLevelId(): Id;
     /** The view shown now. */
     getView(): ViewMode;
@@ -179,7 +218,16 @@ export interface View {
     /** The 2D renderer once ready, and the 3D one while 3D is shown. */
     renderer(): Renderer | null;
     renderer3d(): Renderer3D | null;
+    /** The host's own Document changed; shown at once, or once back from an Inner Space. */
     update(doc: AreaformDocument): void;
+    /**
+     * Shows another Space's Document in place of the host's own, an Inner Space (Inner Space, CONTEXT.md), on
+     * `levelId` or its starting Level; `null` shows the host's own again, on `levelId` or the
+     * Level it was on. Sends `spaceChange`. For a Plugin: the host's `update` still goes to its own.
+     */
+    showSpace(doc: AreaformDocument | null, levelId?: Id, unit?: InnerUnit): void;
+    /** Buttons other Plugins add to the place card, which Wayfinding shows (Inner Space, CONTEXT.md). */
+    readonly placeCard: PlaceCard;
     setLevel(levelId: Id): void;
     setView(view: ViewMode): void;
     setStyleResolver(resolver: StyleResolver | undefined): void;
@@ -199,6 +247,17 @@ export interface View {
      * as a route or a place card. The idle time counts again once nothing holds it.
      */
     holdMotion(reason: string, on: boolean): void;
+    /** Seconds with nobody using the page after which `idle` is sent, or off. */
+    setIdleAfter(seconds: number | undefined): void;
+    setControlSize(size: ControlSize): void;
+    /**
+     * Puts the View back as it opened, for the next visitor: its first Level and view, the
+     * highlight it was given, the plan fitted, and the camera's motion from the start, even after
+     * **Pause**, the host's own Space again when an Inner Space is shown. Then sends `reset`, on
+     * which Wayfinding clears the route and goes back to its Here. The host's own state, such as
+     * a search box, is the host's to clear.
+     */
+    reset(): void;
     /** CSS pixels on the View's left that the host covers, as the `inset` option. */
     setInset(left: number): void;
     setGrid(on: boolean): void;
@@ -294,6 +353,9 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
     const views = options.views ?? BOTH;
     let mode: ViewMode = views.includes(options.view ?? '2d') ? (options.view ?? '2d') : views[0]!;
     let camera3d = options.camera3d;
+    /** How the View opened, for `reset`. */
+    const startLevel = levelId;
+    const startHighlight = highlighted;
     let destroyed = false;
 
     const listeners = new Map<keyof ViewEvents, Set<(e: never) => void>>();
@@ -312,6 +374,9 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
     element.append(canvas2d, overlay);
     container.append(element);
     applyInset();
+    const applyControlSize = (size: ControlSize | undefined) =>
+        element.classList.toggle('af-large', size === 'large');
+    applyControlSize(options.controlSize);
 
     // Cooperative gestures: a hint when a gesture went to the page.
     const hint = createGestureHint(element, () => i18n);
@@ -458,6 +523,15 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
     // unless 2D is not one of its views; then it shows the 3D view's message.
     if (mode === '3d' && !canShow3d && views.includes('2d')) mode = '2d';
     if (mode === '3d') show3d();
+    const startMode = mode;
+
+    // --- Idle, for a Kiosk -----------------------------------------------------------------------
+
+    const idle = createIdleTimer(
+        element.ownerDocument,
+        (seconds) => emit('idle', { seconds }),
+        options.idleAfter,
+    );
 
     // --- Controls ------------------------------------------------------------------------------
 
@@ -654,9 +728,34 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
 
     const cleanups: (() => void)[] = [];
 
+    /** The host's own Document; `doc` is another while an Inner Space is shown. */
+    let home = doc;
+    /** The host's Level to come back to from an Inner Space. */
+    let homeLevel = levelId;
+    /** Shows `next` in both renderers, keeping the Level when it has it. */
+    const show = (next: AreaformDocument, level?: Id) => {
+        const fresh = next.id !== doc.id;
+        doc = next;
+        const shown = levelId;
+        if (level && doc.levels.some((l) => l.id === level)) levelId = level;
+        else if (!doc.levels.some((l) => l.id === levelId)) levelId = startingLevel(doc).id;
+        r2?.update(doc);
+        r2?.setLevel(levelId);
+        // Another Space is framed whole in 2D; the 3D camera stays, for whoever moved it there.
+        if (fresh) r2?.fitLevel();
+        r3?.update(doc);
+        r3?.setLevel(levelId);
+        followViewpoints();
+        redrawSwitcher();
+        return shown;
+    };
+    const placeCard = createPlaceCard();
+
     const api: View = {
         element,
+        placeCard,
         getDocument: () => doc,
+        getHomeDocument: () => home,
         getLevelId: () => levelId,
         getView: () => mode,
         getTranslator: () => i18n,
@@ -664,18 +763,21 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
         renderer: () => r2,
         renderer3d: () => r3,
         update(next) {
-            const fresh = next.id !== doc.id;
-            doc = next;
-            const shown = levelId;
-            if (!doc.levels.some((l) => l.id === levelId)) levelId = startingLevel(doc).id;
-            r2?.update(doc);
-            r2?.setLevel(levelId);
-            if (fresh) r2?.fitLevel();
-            r3?.update(doc);
-            r3?.setLevel(levelId);
-            followViewpoints();
-            redrawSwitcher();
+            const inside = doc !== home;
+            home = next;
+            // Inside an Inner Space the host's plan waits until the visitor comes back out.
+            if (inside) return;
+            const shown = show(next);
             // The Level shown is gone from the plan: another is shown, and the host is told.
+            if (levelId !== shown) emit('levelChange', levelId);
+        },
+        showSpace(next, level, unit) {
+            const inner = next !== null && next !== home;
+            if ((next ?? home) === doc) return;
+            stopPageMove();
+            if (inner && doc === home) homeLevel = levelId;
+            const shown = show(next ?? home, level ?? (inner ? undefined : homeLevel));
+            emit('spaceChange', { doc, inner, ...(inner && unit && { unit }) });
             if (levelId !== shown) emit('levelChange', levelId);
         },
         setLevel(id) {
@@ -760,6 +862,32 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
         },
         holdMotion(reason, on) {
             motion.hold(reason, on);
+        },
+        setIdleAfter(seconds) {
+            idle.set(seconds);
+        },
+        setControlSize(size) {
+            applyControlSize(size);
+        },
+        reset() {
+            if (destroyed) return;
+            // A flight or a `setProgress` the page started ends here.
+            stopPageMove();
+            pageMoves += 1;
+            progress = null;
+            camera3d = options.camera3d;
+            // A Kiosk always starts again on its own Space, not the shop a visitor went into.
+            api.showSpace(null, startLevel);
+            api.highlight(startHighlight);
+            api.setView(startMode);
+            if (levelId !== startLevel) api.setLevel(startLevel);
+            r2?.fitLevel();
+            if (r3) {
+                if (camera3d) r3.setCamera(camera3d);
+                else r3.fitLevel();
+            }
+            motion.reset();
+            emit('reset', undefined);
         },
         setInset(left) {
             if (left === inset) return;
@@ -905,6 +1033,7 @@ export function createView(container: HTMLElement, options: ViewOptions): View {
             destroyed = true;
             stopPageMove();
             unlistenPage();
+            idle.destroy();
             wake(false);
             for (const cleanup of cleanups.splice(0)) cleanup();
             hide3d();

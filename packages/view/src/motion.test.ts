@@ -328,6 +328,21 @@ describe('createMotion', () => {
             expect(states).toEqual(['still', 'moving', 'still', 'moving']);
         });
 
+        it('reset plays the tour from its first Viewpoint again, after Pause too', () => {
+            const { motion, renderer, tours, fire } = setUp({ motion: 'tour', next: 2 });
+            motion.setViewpoints(three);
+            motion.attach(renderer);
+            fire('pointerdown', { pointerType: 'mouse' });
+            motion.pause();
+            expect(motion.running()).toBe(false);
+
+            motion.reset();
+
+            expect(motion.running()).toBe(true);
+            expect(motion.paused()).toBe(false);
+            expect(tours.at(-1)).toBe('play A,B,C then 1');
+        });
+
         it('after a touch stopped the tour, Play goes on to the Viewpoint after the last it reached', () => {
             const { motion, renderer, tours, fire } = setUp({ motion: 'tour', next: 2 });
             motion.setViewpoints(three);

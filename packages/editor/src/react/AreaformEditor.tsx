@@ -74,6 +74,7 @@ import { ProblemsPanel, useProblems } from './ProblemsPanel.tsx';
 import { ViewpointsPanel } from './ViewpointsPanel.tsx';
 import { viewpointMarks } from '../document/viewpoints.ts';
 import { HerePrompt, type HereLink } from './HereValue.tsx';
+import { cachedInnerSpaces, type InnerSpaceSource } from '../document/innerSpaces.ts';
 import { fillingInResolver, fillingLanguage } from '../document/contentLanguages.ts';
 import { PagePanel } from './PagePanel.tsx';
 import { DEFAULT_FOLDED_SECTIONS, Section, type SidebarSection } from './SidebarSection.tsx';
@@ -162,6 +163,11 @@ export interface AreaformEditorProps extends ViewModeProps, LocaleProps {
      * for `?here=`), e.g. for a QR code; shown beside the value in **Here for visitors**.
      */
     hereLink?: HereLink | undefined;
+    /**
+     * Where a unit's Inner Space comes from (Inner Space, CONTEXT.md): its plan, a pasted link, the Spaces to
+     * choose and **Make a plan for this unit**. Without it, a Space's id is typed in.
+     */
+    innerSpaces?: InnerSpaceSource | undefined;
     /** Called with the selection whenever it changes. */
     onSelectionChange?: (selection: ElementRef[]) => void;
     /** Called when the active tool changes (toolbar, shortcut, or a tool ending itself). */
@@ -242,6 +248,7 @@ export function AreaformEditor({
     selection,
     problems: showProblems = true,
     hereLink,
+    innerSpaces,
     onSelectionChange,
     onToolChange,
     onLevelChange,
@@ -348,7 +355,9 @@ export function AreaformEditor({
         appliedSelection.current = wanted;
         controller.select(wanted.filter((ref) => 'levelId' in ref && ref.levelId === level.id));
     }, [controller, wanted, level.id, doc]);
-    const problems = useProblems(doc, presets, showProblems);
+    /** The host's Inner Spaces, each plan loaded once for a while for Inside and the Problems. */
+    const innerPlans = useMemo(() => innerSpaces && cachedInnerSpaces(innerSpaces), [innerSpaces]);
+    const problems = useProblems(doc, presets, showProblems, innerPlans);
     // Follows the tools listed, not the identity of the array.
     const toolList = tools?.join();
     useEffect(() => controller?.setTools(tools), [controller, toolList]);
@@ -617,6 +626,7 @@ export function AreaformEditor({
                                         presets={presets}
                                         filling={filling}
                                         hereLink={hereLink}
+                                        innerSpaces={innerPlans}
                                     />
                                 ) : (
                                     controller && (

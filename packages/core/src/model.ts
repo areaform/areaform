@@ -164,8 +164,31 @@ export interface Zone {
     restricted?: boolean;
     /** Walk-around Zone: visitors' routes go around it, not through it (ADR-0017). */
     walkAround?: boolean;
+    /**
+     * Inner Space: the Space shown inside this Zone, such as a shop's own plan in a shopping
+     * centre's unit (Inner Space, CONTEXT.md). Only the outer Space's owner names it.
+     */
+    innerSpace?: InnerSpaceRef;
     style?: { fill?: string; stroke?: string; opacity?: number };
     data?: Record<string, unknown>;
+}
+
+/** A Zone's Inner Space: which Space it is, and where its plan lies in the outer one. */
+export interface InnerSpaceRef {
+    /** The Space's id: a hosted `sp_…` id, or the host's own name for a plan it loads itself. */
+    space: string;
+    /** Where the Inner Space's coordinates lie in this Space's; absent, it is shown on its own. */
+    fit?: InnerSpaceFit;
+}
+
+/**
+ * Places an Inner Space's point `p` at `rotate(p, rotation) + [x, y]` in the outer Space: both are
+ * in metres, so there is no scale. `rotation` in radians, counter-clockwise.
+ */
+export interface InnerSpaceFit {
+    x: number;
+    y: number;
+    rotation: number;
 }
 
 export interface Obstacle {

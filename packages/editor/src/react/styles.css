@@ -895,3 +895,17 @@
     flex: 0 0 48px;
     width: 48px;
 }
+
+/* A unit's Inside (Inner Space, CONTEXT.md): the shop's plan, its state and what can be done with it, wrapping. */
+.af-props .af-inside {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 6px;
+    align-items: center;
+}
+
+.af-props .af-inside input,
+.af-props .af-inside select {
+    flex: 1 1 100%;
+    min-width: 0;
+}

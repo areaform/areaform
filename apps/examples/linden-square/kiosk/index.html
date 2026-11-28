@@ -1,0 +1,588 @@
+<!doctype html>
+<!--
+    The example centre's kiosk (docs/notes/kiosk.md): the touch screen by an entrance, built only
+    from what embed.js gives any page. A Welcome Screen until someone touches it; then the plan from
+    where the screen stands, with large controls, and big category buttons whose shops draw the way
+    (`element.areaform.showPlace`). After 60 seconds with nobody touching it, "Still here?" for 10
+    seconds, then back to the start (`areaform:idle`, cancelled, then `reset`). `?here=` picks the
+    screen (north, the default; `entrance-south`; `p1-lobby-west`) and `?idle=` a shorter idle time
+    to try it. Run it full screen, e.g. `chrome --kiosk <url>`. Made up, like the rest of the example;
+    kept out of search engines.
+-->
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+        />
+        <title>Kiosk · Linden Square · an example site · Areaform</title>
+        <meta
+            name="description"
+            content="An example site: a made-up shopping centre's touch screen by the entrance, with a welcome screen, shops by category and the way to each."
+        />
+        <meta name="robots" content="noindex" />
+        <!-- Added to an iPad's Home Screen, the kiosk opens full screen, without Safari's bars. -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-title" content="Linden Square" />
+        <link rel="icon" href="https://areaform.app/favicon.svg" type="image/svg+xml" />
+        <style>
+            :root {
+                --paper: #f4f3ef;
+                --card: #ffffff;
+                --ink: #1c2230;
+                --muted: #5d6270;
+                --line: rgb(28 34 48 / 0.13);
+                --accent: #22324f;
+                --leaf: #7f9c3c;
+                --sans:
+                    'Avenir Next', Avenir, ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+                    Roboto, sans-serif;
+            }
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                height: 100%;
+            }
+            body {
+                margin: 0;
+                overflow: hidden;
+                background: var(--paper);
+                color: var(--ink);
+                font: 400 20px / 1.4 var(--sans);
+                -webkit-font-smoothing: antialiased;
+                /* A kiosk is touched, never selected or dragged like a page. */
+                user-select: none;
+                -webkit-user-select: none;
+                -webkit-tap-highlight-color: transparent;
+                -webkit-touch-callout: none;
+                /* Scroll the list, but no pinch zoom of the page; the plan pinches itself. */
+                touch-action: pan-x pan-y;
+            }
+            h1,
+            h2,
+            p {
+                margin: 0;
+            }
+            button {
+                font: inherit;
+                color: inherit;
+            }
+            :focus-visible {
+                outline: 3px solid var(--accent);
+                outline-offset: 2px;
+            }
+
+            /* The screen: the plan, and the directory beside it, or under it on a portrait screen. */
+            .screen {
+                display: grid;
+                grid-template-columns: 1fr minmax(360px, 30%);
+                height: 100%;
+            }
+            .plan {
+                position: relative;
+                min-height: 0;
+                background: var(--card);
+            }
+            /* The plan's look in the centre's colours (the View's documented --af-* variables). */
+            .plan .af-view {
+                --af-accent: #22324f;
+            }
+            aside {
+                display: flex;
+                flex-direction: column;
+                min-height: 0;
+                border-left: 1px solid var(--line);
+            }
+            @media (orientation: portrait) {
+                .screen {
+                    grid-template-columns: 1fr;
+                    grid-template-rows: 60% 40%;
+                }
+                aside {
+                    border-left: 0;
+                    border-top: 1px solid var(--line);
+                }
+            }
+            .top {
+                padding: 24px 28px 20px;
+                border-bottom: 1px solid var(--line);
+            }
+            .brand {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                font-size: 28px;
+                font-weight: 500;
+            }
+            .mark {
+                width: 16px;
+                height: 16px;
+                border-radius: 0 50% 0 50%;
+                background: var(--leaf);
+                transform: rotate(45deg);
+            }
+            .here {
+                margin-top: 6px;
+                color: var(--muted);
+            }
+            .here strong {
+                color: var(--ink);
+                font-weight: 500;
+            }
+            .directory {
+                flex: 1;
+                min-height: 0;
+                overflow-y: auto;
+                padding: 24px 28px;
+                overscroll-behavior: contain;
+            }
+            .directory h2 {
+                margin-bottom: 16px;
+                font-size: 24px;
+                font-weight: 500;
+            }
+            .categories {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .category,
+            .shop,
+            .back {
+                min-height: 72px;
+                padding: 14px 18px;
+                border: 1px solid var(--line);
+                border-radius: 14px;
+                background: var(--card);
+                text-align: left;
+                cursor: pointer;
+            }
+            .category {
+                display: grid;
+                gap: 2px;
+                font-weight: 500;
+            }
+            .category span {
+                color: var(--muted);
+                font-size: 16px;
+                font-weight: 400;
+            }
+            .category:active,
+            .shop:active,
+            .back:active {
+                background: #e9e8e2;
+            }
+            .shops {
+                display: grid;
+                gap: 10px;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+            .shop {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 16px;
+                width: 100%;
+            }
+            .shop[aria-current='true'] {
+                border-color: var(--accent);
+                box-shadow: inset 5px 0 0 var(--accent);
+            }
+            .shop .floor {
+                color: var(--muted);
+                font-size: 16px;
+                white-space: nowrap;
+            }
+            .back {
+                min-height: 60px;
+                margin-bottom: 16px;
+                color: var(--muted);
+            }
+            .foot {
+                padding: 12px 28px;
+                border-top: 1px solid var(--line);
+                color: var(--muted);
+                font-size: 14px;
+            }
+            .foot a {
+                color: inherit;
+            }
+
+            /* The Welcome Screen: what the kiosk shows while nobody touches it. */
+            .welcome {
+                position: fixed;
+                inset: 0;
+                z-index: 10;
+                display: grid;
+                grid-template-rows: auto 1fr auto;
+                padding: 48px 56px;
+                background: var(--accent);
+                color: #fff;
+                cursor: pointer;
+            }
+            .welcome[hidden] {
+                display: none;
+            }
+            .welcome .brand {
+                font-size: 36px;
+            }
+            .slides {
+                display: grid;
+                align-content: center;
+                max-width: 1100px;
+            }
+            .slide {
+                grid-area: 1 / 1;
+                opacity: 0;
+                transition: opacity 600ms ease;
+            }
+            .slide.on {
+                opacity: 1;
+            }
+            .slide p:first-child {
+                color: #c5d39a;
+                font-size: 24px;
+            }
+            .slide h2 {
+                margin-top: 12px;
+                font-size: clamp(44px, 6vw, 88px);
+                font-weight: 500;
+                line-height: 1.05;
+                letter-spacing: -0.02em;
+            }
+            .touch {
+                justify-self: center;
+                padding: 22px 44px;
+                border: 2px solid rgb(255 255 255 / 0.6);
+                border-radius: 999px;
+                font-size: 30px;
+                animation: breathe 2.4s ease-in-out infinite;
+            }
+            @keyframes breathe {
+                50% {
+                    background: rgb(255 255 255 / 0.12);
+                }
+            }
+
+            /* Still here? A notice before the kiosk goes back to the start. */
+            .still {
+                position: fixed;
+                inset: 0;
+                z-index: 20;
+                display: grid;
+                place-items: center;
+                background: rgb(28 34 48 / 0.55);
+            }
+            .still[hidden] {
+                display: none;
+            }
+            .still div {
+                display: grid;
+                gap: 20px;
+                justify-items: center;
+                width: min(560px, calc(100% - 48px));
+                padding: 40px;
+                border-radius: 20px;
+                background: var(--card);
+                text-align: center;
+            }
+            .still h2 {
+                font-size: 36px;
+                font-weight: 500;
+            }
+            .still button {
+                min-height: 72px;
+                padding: 0 40px;
+                border: 0;
+                border-radius: 999px;
+                background: var(--accent);
+                color: #fff;
+                font-weight: 500;
+                cursor: pointer;
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .slide {
+                    transition: none;
+                }
+                .touch {
+                    animation: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="screen">
+            <!-- The Areaform snippet, as a kiosk asks for it: every gesture, large controls,
+                 Here where the screen stands, and an idle time -->
+            <div class="plan">
+                <div
+                    id="plan"
+                    data-areaform="sp_demo-mall"
+                    data-view="2d"
+                    data-gestures="greedy"
+                    data-control-size="large"
+                    data-here="entrance-north"
+                    data-idle-reset="60"
+                    style="height: 100%"
+                ></div>
+            </div>
+            <aside>
+                <div class="top">
+                    <p class="brand"><span class="mark" aria-hidden="true"></span>Linden Square</p>
+                    <p class="here" id="here"></p>
+                </div>
+                <div class="directory" id="directory"></div>
+                <p class="foot">
+                    An example kiosk.
+                    <a href="https://areaform.app/shopping-centres/"
+                        >Areaform for shopping centres</a
+                    >
+                </p>
+            </aside>
+        </div>
+
+        <div class="welcome" id="welcome" role="button" tabindex="0" aria-label="Touch to start">
+            <p class="brand"><span class="mark" aria-hidden="true"></span>Linden Square</p>
+            <div class="slides" id="slides">
+                <div class="slide on">
+                    <p>This weekend</p>
+                    <h2>Winter sale on the first floor, up to half off</h2>
+                </div>
+                <div class="slide">
+                    <p>Lumen Cinema</p>
+                    <h2>New films every Friday. Tickets at the door</h2>
+                </div>
+                <div class="slide">
+                    <p>Parking</p>
+                    <h2>Three hours free on P−1 with any purchase</h2>
+                </div>
+            </div>
+            <p class="touch">Touch to find your way</p>
+        </div>
+
+        <div class="still" id="still" hidden>
+            <div role="alertdialog" aria-labelledby="still-h" aria-describedby="still-p">
+                <h2 id="still-h">Still here?</h2>
+                <p id="still-p">The map starts over in <span id="count">10</span> seconds</p>
+                <button type="button" id="stay">I’m still here</button>
+            </div>
+        </div>
+
+        <script>
+            // The centre's shops by category, as on its map page: name, the Zone's id on the plan,
+            // the floor. A real kiosk would get these from the plan's categories (ADR-0018).
+            const CATEGORIES = [
+                [
+                    'Food & drink',
+                    [
+                        ['Greenway Market', 'greenway-market', 'Ground'],
+                        ['Coldharbour Coffee', 'unit-g03', 'Ground'],
+                        ['Kettle Bakery', 'unit-g08', 'Ground'],
+                        ['Saffron Bowl', 'unit-f04', 'First'],
+                        ['Nonna’s Pasta', 'unit-f05', 'First'],
+                    ],
+                ],
+                [
+                    'Fashion',
+                    [
+                        ['Hollis & Rowe', 'hollis-rowe', 'First'],
+                        ['Ashby Denim', 'unit-f01', 'First'],
+                        ['Marlow Shoes', 'unit-g04', 'Ground'],
+                        ['Northwind Outdoor', 'unit-g11', 'Ground'],
+                    ],
+                ],
+                [
+                    'Health & beauty',
+                    [
+                        ['Pell Pharmacy', 'unit-g02', 'Ground'],
+                        ['Tally Opticians', 'unit-g09', 'Ground'],
+                        ['Cut & Comb', 'unit-f09', 'First'],
+                    ],
+                ],
+                [
+                    'Home & books',
+                    [
+                        ['Moss & Stem', 'unit-g07', 'Ground'],
+                        ['Bramble Home', 'unit-f08', 'First'],
+                        ['Fernhill Books', 'unit-g01', 'Ground'],
+                        ['Quill Stationers', 'unit-g13', 'Ground'],
+                    ],
+                ],
+                [
+                    'Tech & kids',
+                    [
+                        ['Volt', 'unit-g06', 'Ground'],
+                        ['Little Ferns', 'unit-f03', 'First'],
+                    ],
+                ],
+                [
+                    'Cinema & toilets',
+                    [
+                        ['Lumen Cinema', 'cinema', 'First'],
+                        ['Toilets', 'wc-ground', 'Ground'],
+                    ],
+                ],
+            ];
+            // Where each of the centre's screens stands.
+            const SCREENS = {
+                'entrance-north': 'North entrance, Ground floor',
+                'entrance-south': 'South entrance, Ground floor',
+                'p1-lobby-west': 'P−1, by the lifts',
+            };
+            /** "Still here?" lasts this long before the kiosk starts over, seconds. */
+            const NOTICE = 10;
+
+            const params = new URLSearchParams(location.search);
+            const plan = document.getElementById('plan');
+            // Set before embed.js reads the snippet: which screen this is, and a shorter idle time.
+            const here = SCREENS[params.get('here')] ? params.get('here') : 'entrance-north';
+            plan.dataset.here = here;
+            if (Number(params.get('idle')) >= 5) plan.dataset.idleReset = params.get('idle');
+            document.getElementById('here').innerHTML = 'You are at <strong></strong>';
+            document.querySelector('#here strong').textContent = SCREENS[here];
+
+            /** The plan's handle, once embed.js has drawn it. */
+            const areaform = () => plan.areaform;
+
+            // --- The directory: categories, then one category's shops ---------------------------
+
+            const directory = document.getElementById('directory');
+            let category = null;
+            let shown = null;
+            const button = (className, onClick, ...children) => {
+                const b = document.createElement('button');
+                b.type = 'button';
+                b.className = className;
+                b.append(...children);
+                b.addEventListener('click', onClick);
+                return b;
+            };
+            const text = (tag, value) => {
+                const el = document.createElement(tag);
+                el.textContent = value;
+                return el;
+            };
+            const draw = () => {
+                const title = text('h2', category ? category[0] : 'Find a shop');
+                if (!category) {
+                    const grid = document.createElement('div');
+                    grid.className = 'categories';
+                    for (const entry of CATEGORIES)
+                        grid.append(
+                            button(
+                                'category',
+                                () => pick(entry),
+                                entry[0],
+                                text('span', `${entry[1].length} places`),
+                            ),
+                        );
+                    return directory.replaceChildren(title, grid);
+                }
+                const list = document.createElement('ul');
+                list.className = 'shops';
+                for (const [name, id, floor] of category[1]) {
+                    const item = document.createElement('li');
+                    const shop = button(
+                        'shop',
+                        () => go(id),
+                        text('span', name),
+                        text('span', `${floor} floor`),
+                    );
+                    shop.lastChild.className = 'floor';
+                    if (id === shown) shop.setAttribute('aria-current', 'true');
+                    item.append(shop);
+                    list.append(item);
+                }
+                const back = button('back', () => pick(null), '← All categories');
+                directory.replaceChildren(back, title, list);
+            };
+            /** A category: its shops listed, and drawn in the highlight colour on the plan. */
+            const pick = (entry) => {
+                category = entry;
+                shown = null;
+                areaform()?.highlight(entry ? entry[1].map(([, id]) => id) : []);
+                draw();
+                directory.scrollTop = 0;
+            };
+            /** A shop: the way to it from this screen. */
+            const go = async (id) => {
+                shown = id;
+                draw();
+                await areaform()?.showPlace(id);
+            };
+            draw();
+
+            // --- The Welcome Screen, and starting over ------------------------------------------
+
+            const welcome = document.getElementById('welcome');
+            const slides = [...document.querySelectorAll('.slide')];
+            let slide = 0;
+            setInterval(() => {
+                if (welcome.hidden) return;
+                slides[slide].classList.remove('on');
+                slide = (slide + 1) % slides.length;
+                slides[slide].classList.add('on');
+            }, 6000);
+            welcome.addEventListener('click', () => (welcome.hidden = true));
+            welcome.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') welcome.hidden = true;
+            });
+
+            const still = document.getElementById('still');
+            const count = document.getElementById('count');
+            let countdown = null;
+            const keep = () => {
+                clearInterval(countdown);
+                countdown = null;
+                still.hidden = true;
+            };
+            /** Back to the start for the next visitor: the plan, the directory, the Welcome Screen. */
+            const startOver = () => {
+                keep();
+                areaform()?.reset();
+                category = null;
+                shown = null;
+                draw();
+                welcome.hidden = false;
+            };
+            // Nobody touched the screen for the idle time: ask first, instead of the plan's own reset.
+            plan.addEventListener('areaform:idle', (e) => {
+                e.preventDefault();
+                if (!welcome.hidden) return;
+                let left = NOTICE;
+                count.textContent = String(left);
+                still.hidden = false;
+                countdown = setInterval(() => {
+                    left -= 1;
+                    count.textContent = String(left);
+                    if (left <= 0) startOver();
+                }, 1000);
+            });
+            // Any touch, key or wheel answers "Still here?", as the plan counts its idle time from each.
+            for (const type of ['pointerdown', 'keydown', 'wheel'])
+                document.addEventListener(type, () => countdown && keep(), true);
+            document.getElementById('stay').addEventListener('click', keep);
+
+            // --- Touch only ---------------------------------------------------------------------
+
+            // A long press opens no menu. iPad Safari pinch-zooms the page despite
+            // `user-scalable=no`, so its gesture events are stopped too, except on the plan.
+            document.addEventListener('contextmenu', (e) => e.preventDefault());
+            for (const type of ['gesturestart', 'gesturechange'])
+                document.addEventListener(
+                    type,
+                    (e) => plan.contains(e.target) || e.preventDefault(),
+                    { passive: false },
+                );
+        </script>
+        <script src="https://cdn.areaform.app/v1/embed.js" async></script>
+    </body>
+</html>

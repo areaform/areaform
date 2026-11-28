@@ -18,6 +18,7 @@
     "exports": {
         ".": "./src/index.ts",
         "./react": "./src/react/index.ts",
+        "./plugins/innerSpace": "./src/plugins/innerSpace.ts",
         "./plugins/tooltip": "./src/plugins/tooltip.ts",
         "./plugins/wayfinding": "./src/plugins/wayfinding.ts",
         "./styles.css": "./src/styles.css"
@@ -36,6 +37,10 @@
             "./react": {
                 "types": "./dist/react/index.d.ts",
                 "default": "./dist/react/index.js"
+            },
+            "./plugins/innerSpace": {
+                "types": "./dist/plugins/innerSpace.d.ts",
+                "default": "./dist/plugins/innerSpace.js"
             },
             "./plugins/tooltip": {
                 "types": "./dist/plugins/tooltip.d.ts",
